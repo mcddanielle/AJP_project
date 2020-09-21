@@ -1,0 +1,451 @@
+\documentclass[prb,preprint]{revtex4} 
+% The line above defines the type of LaTeX document.
+% Note that AJP uses the same style as Phys. Rev. B (prb).
+
+% The % character begins a comment, which continues to the end of the line.
+
+\usepackage{amsmath}  % needed for \tfrac, \bmatrix, etc.
+\usepackage{amsfonts} % needed for bold Greek, Fraktur, and blackboard bold
+\usepackage{graphicx} % needed for figures
+
+\begin{document}
+
+% Be sure to use the \title, \author, \affiliation, and \abstract macros
+% to format your title page.  Don't use lower-level macros to  manually
+% adjust the fonts and centering.
+
+\title{Molecular dynamics simulation of synchronization in driven particles}
+% In a long title you can use \\ to force a line break at a certain location.
+
+\author{Tiare Guerrero}
+\email{guer9330@pacificu.edu} % optional
+%\altaffiliation[permanent address: ]{101 Main Street, 
+%  Anytown, USA} % optional second address
+% If there were a second author at the same address, we would put another 
+% \author{} statement here.  Don't combine multiple authors in a single
+% \author statement.
+\affiliation{Department of Physics, Pacific University, Forest Grove, OR 97116}
+% Please provide a full mailing address here.
+
+\author{Danielle McDermott}
+\email{mcdermott@pacific.edu}
+\affiliation{Department of Physics, Pacific University, Forest Grove, OR 97116}
+
+% See the REVTeX documentation for more examples of author and affiliation lists.
+
+\date{\today}
+
+\begin{abstract}
+Synchronization is one of the most diverse fundamental physical phenomena. Synchronization has been studied for over three centuries, from Huygens pendulum clocks to the rhythmic beats of the flapping wings in a flock of birds. It is a goal of physicists to discover synchronization in different forms and learn how to control the phenomenon that occurs when weakly coupled competing oscillators adjust rhythms to match each other. A synchronization phenomenon that the physics community is particularly interested in is dynamic phase locking, which occurs when naturally oscillating motions are driven by an external modulation \cite{juniper}. Another interest of ours is to study the transition from ordered, synchronized dynamics, to disordered, chaotic dynamics. Chaotic dynamics is the irregular, unpredictable time evolution of nonlinear systems and occurs in mechanical oscillators \cite{chaos}. Here, we analyze the microscopic dynamics of phase locking in a colloidal model system using molecular dynamics (MD).
+\end{abstract}
+% AJP requires an abstract for all regular article submissions.
+% Abstracts are optional for submissions to the "Notes and Discussions" section.
+
+\maketitle % title page is now complete
+
+
+\section{Introduction} % Section titles are automatically converted to all-caps.
+% Section numbering is automatic.
+
+\LaTeX\ is typesetting software that is widely used by mathematicians
+and physicists because it is so good at typesetting equations. It is 
+also completely programmable, so it can be configured to produce 
+documents with almost any desired formatting, and to automatically
+number equations, figures, endnotes, and so on.
+
+To prepare manuscripts for the American Journal of Physics (AJP), 
+you should use the REV\TeX\ 4.1 format for Physical Review B
+preprints, as indicated in the \texttt{documentclass} line at the top 
+of this article's source file.  (If you're already familiar with 
+\LaTeX\ and have used other \LaTeX\ formats, please resist the 
+temptation to use them, or to otherwise override REV\TeX's formatting 
+conventions, in manuscripts that you prepare for AJP.)
+
+This sample article is intended as a tutorial, template, and reference for 
+AJP authors, illustrating most of the \LaTeX\ and REV\TeX\ features that 
+authors will need.  For a more comprehensive introduction to \LaTeX, 
+numerous books and online references are available.\cite{latexsite, 
+wikibook, latexbook}  Documentation for the REV\TeX\ package 
+can be found on the APS web site.\cite{revtex}
+
+\LaTeX\ is free software, available for Unix/Linux, Mac OS X, and Windows
+operating systems. For downloading and installation instructions, follow
+the links from the \LaTeX\ web site.\cite{latexsite} It is most
+convenient\cite{cloudLaTeX} to install a ``complete \TeX\ distribution,'' 
+which will include \LaTeX, the underlying \TeX\ engine, macro packages 
+such as REV\TeX, a large collection of fonts, and GUI tools for editing 
+and viewing your documents.  To test your installation, try to process
+this sample article.
+
+
+\section{Molecular Dynamics Model}
+
+The simulations use overdamped dynamics with Euler's method in a classical two-dimensional model for particles confined to a periodic potential. With only a few particles in two-dimensions, the simulation runs quickly, making this an appropriate model for undergraduates to explore. Particles interact by the Yukawa potential. A single particle has the equation of motion 
+\begin{center}
+$\eta \vec{v_i} = \vec{F}_{landscape,i} + \sum_{j}^{} \vec{F}_{ij} + \vec{F}_{Drive}(t)$.\\ 
+\end{center}
+This includes the force of the landscape, inter-particle interactions $\vec{F}_{ij} = - \nabla V(\vec{r}_{ij})$, and a driving force $\vec{F}_{Drive}(t) = [F_{DC} + F_{AC} \sin(\omega t)] \hat{y}$, where $\omega = 2 \pi f$. The landscape is a sine function that is position dependent and calculate the landscape force on the particle directly from its location. The driving force does add energy into the system, and some of it is lost. The damping comes from the viscous fluid providing a nonconservative force.
+
+Overdamped dynamics is a common assumption in models of colloid particles. This is an assumption that the suspending fluid is highly viscous and exerts a damping force on the particles equivalent to a linear drag force $F_{drag} = - \eta v$ and the acceleration of the particle is zero. The equation of motion we include makes both assumptions and is rearranged to reflect that. The equation of motion is not integrated for the velocity, instead it provides a direct calculation of the velocity.  
+
+In this model the Verlet method is equivalent to the Euler method.  Euler's method is then used to calculate the position. Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method. It is a nice opportunity to teach an extension of a method they know. 
+
+
+\section{MD Simulations}
+
+\subsection{Single particle system}  % In subsection headings, only the first word is capitalized.
+
+We used our model to generate a system, Fig. 1a), where the particle hops between troughs in the energy landscape. In the attached movie, Figure1.mp4, we apply a constant $F_{AC}$ with frequency $f$ then slowly increase $F_{DC}$  to achieve a variety of modes. A mode is a periodic pattern of hops with a constant average particle velocity, $\bar{v}_{y}$ over a range of driving forces $F_{DC}$. In the velocity-force plot in Fig. 1b) $\bar{v}_{y}$ is increasing non-uniformly, with steps, indicating mode locking. A related experiment \cite{juniper} revealed the microscopic dynamics of mode locking by driving colloids across a periodic landscape generated by optical tweezers.
+
+\begin{center}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.25]{single}
+\caption{\textbf{(a)} The particle is driven with a constant $F_{AC}$ and $f$ through a periodic potential landscape where blue are minima and red are maxima in the potential. \textbf{(b)} An average particle velocity in the y-direction $\bar{v}_{y}$ as a function of the driving force $F_{DC}$. In the animation the magenta dot represents the $\bar{v}_{y}$ at which the particle in Fig. 1a) is moving.}
+\end{figure}
+\end{center}
+
+\subsection{Multi-particle system}
+
+We also simulated a twenty particle system confined to a narrow channel, as shown in Fig. 2a). The interparticle forces of neighboring particles cause the system to form a buckled chain when the system is annealed. When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen AC drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
+
+\begin{center}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.40]{twenty}
+\caption{\textbf{(a)} The orange particle is driven with a constant $F_{AC}$ and $f$ through 19 particles, colored green, confined by a quasi one-dimensional channel. The landscape is colored as in Fig. 1. \textbf{(b)} $\bar{v}_{y}$ versus $F_{DC}$, where $\bar{v}_{y}$ is the average particle velocity of the driven particle in the y-direction.}
+\end{figure}
+\end{center}
+
+\subsection{Kinked system}
+
+For a bulleted list, just use \texttt{itemize} instead of \texttt{enumerate}:
+\begin{itemize}
+\item Across a resistor, $\Delta V = \pm IR$.
+\item Across a capacitor, $\Delta V = \pm Q/C$.
+\item Across an inductor, $\Delta V = \pm L(dI/dt)$.
+\end{itemize}
+
+
+\section{Quasi-periodic substrate}
+\label{DispEqSection}	% You can label sections for reference
+
+When an equation is important and/or tall and/or complicated, you should 
+display it on a line by itself, with a number. To do this, you put 
+\verb/\begin{equation}/ before the equation and \verb/\end{equation}/ 
+after it, as in     % Note: never put a blank line before an equation.
+\begin{equation}
+\int_0^\infty \! \frac{x^3}{e^x - 1} \, dx = 6\sum_{k=1}^\infty \frac1{k^4} = 
+    6\left(\frac{\pi^4}{90}\right) = \frac{\pi^4}{15}.
+\end{equation}
+% Don't put a blank line after the equation unless you're starting a new paragraph.
+This example also shows how to make the sum and integral symbols, big parentheses, 
+% Don't use \left and \right for small parentheses; you'll get too much space around them.
+and built-up fractions.  (Don't put built-up fractions in a 
+non-displayed equation, because there won't be enough vertical space in 
+AJP's final, single-spaced paragraphs.  Use the slashed form, $x^3/(e^x-1)$, 
+instead.)
+
+If you want to refer to an equation elsewhere in your manuscript, you can 
+give it a label.  For example, in the equation
+\begin{equation}
+\label{deriv}
+\frac{\Delta x}{\Delta t} \mathop{\longrightarrow}_{\Delta t\rightarrow0} \frac{dx}{dt} 
+ = \lim_{\Delta t\rightarrow0} \frac{\Delta x}{\Delta t}
+\end{equation}
+we've inserted \verb/\label{deriv}/ to label this equation 
+\texttt{deriv}.\cite{labelnames}  To refer to 
+Eq.~(\ref{deriv}), we then type \verb/\ref{deriv}/.\cite{footnotes}  Notice 
+that AJP's style conventions also require you to put the equation number in 
+parentheses when you refer to it, and to abbreviate ``Eq.''\ unless it's at 
+the beginning of a sentence.
+
+Some equations require more complicated layouts. In the equation
+\begin{equation}
+E_n = (n + \tfrac12)\hbar, \quad \textrm{where}\  n = 0, 1, 2, \ldots,
+\end{equation}
+we've used \verb/\quad/ to leave a wide space and \verb/\textrm/ to put ``where'' 
+in plain Roman type.  To create a matrix or column vector, as in
+\begin{equation}
+\begin{bmatrix}
+	t' \\
+	x' \\
+\end{bmatrix}
+=
+\begin{pmatrix}
+	 \gamma & -\beta\gamma \\
+	-\beta\gamma & \gamma \\
+\end{pmatrix}
+\begin{bmatrix}
+	t \\
+	x \\
+\end{bmatrix},
+\end{equation}
+you can use the \texttt{pmatrix} and/or \texttt{bmatrix} environment, 
+for matrices delimited by parentheses and/or brackets.  There's also
+a plain \texttt{matrix} environment that omits the delimiters.
+In this and other examples of \LaTeX\ tables and arrays, the \verb/&/ 
+character serves as a ``tab'' to separate columns, while the \verb/\\/ 
+control sequence marks the end of a row.
+
+For a list of related equations, with nicely lined-up equals signs, 
+use the \texttt{eqnarray} environment:
+\begin{eqnarray}
+\oint \vec B \cdot d\vec\ell & = & -\frac{d\Phi_E}{dt} ; \\
+\oint \vec E \cdot d\vec\ell & = & \mu_0\epsilon_0\frac{d\Phi_B}{dt} + \mu_0 I.
+\end{eqnarray}
+You can also use \texttt{eqnarray} to make a multi-line equation, for example,
+\begin{eqnarray}
+\mathcal{Z} 
+& = & 1 + e^{-(\epsilon-\mu)/kT} + e^{-2(\epsilon-\mu)/kT} + \cdots \nonumber \\
+& = & 1 + e^{-(\epsilon-\mu)/kT} + (e^{-(\epsilon-\mu)/kT})^2 + \cdots \nonumber \\
+& = & \frac{1}{1 - e^{-(\epsilon-\mu)/kT}}.
+\end{eqnarray}
+Here the first column of the second and third lines is empty.  Note that you 
+can use \verb/\nonumber/ within any line to suppress the generation of
+an equation number; just be sure that each multi-line equation has at least 
+one number.
+
+Another commonly used structure is the \texttt{cases} environment, as in
+\begin{equation}
+m(T) =
+\begin{cases}
+	0 & T > T_c \, , \\
+	\bigl(1 - [\sinh 2 \beta J]^{-4} \bigr)^{1/8} & T < T_c \, .
+\end{cases}
+\end{equation}
+
+At AJP we require that you put correct punctuation before and after every
+displayed equation, treating each equation as part of a correctly punctuated
+English sentence.\cite{mermin} The preceding examples illustrate good
+equation punctuation.
+
+
+\section{Associated problems}
+
+\LaTeX\ can import figures via the \verb/\includegraphics/ macro.
+For AJP, you should embed this in the \texttt{figure} environment, which 
+can place the figure in various locations.  This environment also lets 
+you add a caption (which AJP requires) and an optional label for referring 
+to the figure from elsewhere.  See Fig.~\ref{gasbulbdata} for an example.
+
+\begin{figure}[h!]
+% The bracketed code determines the figure's placement:  "h" stands for 
+% "here", telling LaTeX to put the figure as close to the current location 
+% as possible.  The ! overrides LaTeX's tendency to try to find a location 
+% that it thinks is better.  But don't agonize over the exact figure placement 
+% in your submitted manuscript.  For your initial submission, just make sure 
+% each figure is reasonably close to where it's first referenced.
+\centering
+\includegraphics{GasBulbData.eps}
+\caption{Pressure as a function of temperature for a fixed volume of air.  
+The three data sets are for three different amounts of air in the container. 
+For an ideal gas, the pressure would go to zero at $-273^\circ$C.  (Notice
+that this is a vector graphic, so it can be viewed at any scale without
+seeing pixels.)}
+\label{gasbulbdata}
+\end{figure}
+% When an AJP manuscript is conditionally accepted for publication, we
+% will request an editable copy of the manuscript in which the figures 
+% themselves have been removed, and all figure captions have been moved
+% to the end.  You should then comment-out the \includegraphics line
+% and move the entire \begin{figure} ... \end{figure} block to the end
+% of the source file, just before \end{document}.
+
+Most \LaTeX\ implementations can import a variety of graphics formats.
+For graphs and line drawings you should use vector (i.e., resolution-independent)
+graphics saved in encapsulated PostScript (.eps) or portable document
+format (.pdf).  Most good graphics software systems can save to one 
+or both of these formats.  Please don't use a rasterized graphics format
+(such as .jpg or .png or .tiff) for graphs or line drawings.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=5in]{ThreeSunsets.jpg}
+% Notice the width specification.  Photographs should normally have a
+% resolution of approximately 300 pixels per inch when printed, that is,
+% a total width of about 1000 pixels for a photo to be printed one column
+% wide.  Note also that this included photo is in .jpg format even though 
+% a .tiff version should be submitted for final production.
+\caption{Three overlaid sequences of photos of the setting sun, taken
+near the December solstice (left), September equinox (center), and
+June solstice (right), all from the same location at 41$^\circ$ north
+latitude. The time interval between images in each sequence is approximately
+four minutes.}
+\label{sunsets}
+\end{figure}
+
+For photographs and other images that are \textit{inherently} made 
+of pixels (that is, rasters or bitmaps), \LaTeX\ can 
+(usually) handle the .jpg and .png formats as well as .eps and .pdf.  
+Figure~\ref{sunsets} is a .jpg example. For final production, however, 
+AJP prefers that raster images be in .tiff format.  Most \LaTeX\ systems 
+can't import .tiff images, so we recommend using .png or .jpg with \LaTeX\ 
+for your initial submission, while saving a higher-quality .tiff version 
+to submit as a separate file after your manuscript is conditionally accepted
+for publication.
+
+Please refer to the AJP editor's web site\cite{editorsite} for more details 
+on AJP's requirements for figure preparation.
+
+
+\section{Conclusion}
+
+We hope this article will help you prepare beautifully typeset
+manuscripts for the American Journal of Physics.  Good typesetting requires
+considerable attention to detail, but this effort will pay off by making your
+manuscript easier and more enjoyable to read.  Your colleagues, reviewers, 
+and editors will be grateful for your effort.
+
+Of course, we encourage you to put as much care into the \textit{content} 
+of your manuscript as you put into its form.  The AIP Style 
+Manual\cite{AIPstylemanual} is an indispensable reference on good physics 
+writing, covering everything from planning and organization to standard 
+spellings and abbreviations.
+
+Most important of all, please familiarize yourself with the AJP Statement
+of Editorial Policy,\cite{editorsite} which describes the types of manuscripts 
+that AJP publishes and the audience for which AJP authors are expected to write.
+You wouldn't want to put all that care into preparing a manuscript for AJP,
+only to find that AJP is the wrong journal for your manuscript.
+
+We look forward to receiving your submission to AJP.
+
+
+\begin{acknowledgments}
+
+We gratefully acknowledge Harvey Gould and Jan Tobochnik, who created an earlier 
+AJP \LaTeX\ sample article that inspired this one.  This work was supported by the 
+American Association of Physics Teachers.
+
+\end{acknowledgments}
+
+
+\begin{thebibliography}{99}
+% The numeral (here 99) in curly braces is nominally the number of entries in
+% the bibliography. It's supposed to affect the amount of space around the
+% numerical labels, so only the number of digits should matter--and even that
+% seems to make no discernible difference.
+
+\bibitem{juniper} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
+
+\bibitem{latexsite} \LaTeX\ Project Web Site, \url{<http://www.latex-project.org/>}.
+
+\bibitem{wikibook} \textit{\LaTeX} (Wikibook), \url{<http://en.wikibooks.org/wiki/LaTeX/>}.
+
+\bibitem{latexbook}Helmut Kopka and Patrick W. Daly, \textit{A Guide to
+\LaTeX}, 4th edition (Addison-Wesley, Boston, 2004).
+
+\bibitem{revtex} REV\TeX\ 4 Home Page, \url{<https://authors.aps.org/revtex4/>}.
+
+\bibitem{cloudLaTeX} On the other hand, you can avoid the installation process
+entirely by using a cloud-based \LaTeX\ processor such as ShareLaTeX,
+\url{<https://www.sharelatex.com/>}, or write\LaTeX, \url{<https://www.writelatex.com/>}.
+
+\bibitem{nevermindlogic} In typography, aesthetics often takes precedence over logic.
+
+\bibitem{FontEncodingComment} Please don't try to handle foreign characters 
+and accents with the \texttt{inputenc} and \texttt{fontenc} packages, which 
+are incompatible with AJP's editing process.
+
+\bibitem{wikimathpage} See the Mathematics chapter of Ref.~\onlinecite{wikibook}
+for an excellent overview of math symbols and equations, with examples.
+
+\bibitem{labelnames} Thinking up a good label name takes a moment, but 
+it's worth the trouble; we strongly advise against using labels like 
+\texttt{eq2}, which become extremely confusing after you decide to add 
+another equation before Eq.~(\ref{deriv}).
+
+\bibitem{footnotes} You need to process a file twice to get the counters correct.
+
+\bibitem{mermin} N. David Mermin, ``What's wrong with these equations?,'' 
+Phys. Today \textbf{42} (10), 9--11 (1989).  
+% Note that the issue number (10) in this citation is required, because
+% each issue of Physics Today starts over with page 1.  Also note the use of
+% an en-dash (--), not a hyphen (-), for the page range.
+
+\bibitem{editorsite} American Journal of Physics Editor's Web Site, 
+\url{<http://ajp.dickinson.edu>}.
+
+\bibitem{feynman} Richard P. Feynman, Robert B. Leighton, and Matthew Sands, 
+\textit{The Feynman Lectures on Physics, Vol.\ 1} (Addison-Wesley, 1964), p.~3-10.
+% Note that this book is paginated by chapter; "3-10" is a single page reference
+% that uses a hyphen, not a range of pages that would us an en-dash (--).
+
+\bibitem{noBIBTeX} Many \LaTeX\ users manage their bibliographic data with 
+a tool called BIB\TeX.  Unfortunately, AJP cannot accept BIB\TeX\ files; all 
+bibliographic references must be incorporated into the manuscript file
+as shown here, at least when you send an editable file for production.
+
+\bibitem{dyson} Freeman J. Dyson, ``Feynman's proof of the Maxwell equations,''
+Am. J. Phys. \textbf{58} (3), 209--211.  
+% The issue number (3) in this citation is optional, because AJP's pagination 
+% is by volume.
+
+\bibitem{examplevolume} M. R. Flannery, ``Elastic scattering,'' in 
+\textit{Atomic, Molecular, and Optical Physics Handbook}, edited by
+G. W. F. Drake (AIP Press, New York, 1996), p.~520.
+
+\bibitem{AIPstylemanual} \textit{AIP Style Manual}, 4th edition (American 
+Institute of Physics, New York, 1990). Available online at 
+\url{<http://www.aip.org/pubservs/style/4thed/toc.html>}. Although parts of 
+it have been made out of date by advancing technology, most of this manual 
+is still as useful as ever. Just be sure to follow AJP's specific rules
+whenever they conflict with those in the manual.
+
+\end{thebibliography}
+
+% If your manuscript is conditionally accepted, the editors will ask you to
+% submit your editable LaTeX source file.  Before doing so, you should move
+% all tables and figure captions to the end, as shown below.  Tables come 
+% first, followed by figure captions (with figure inclusions commented-out).
+% Figures should be submitted as separate files, collected with the
+% LaTeX file into a single .zip archive.
+
+%\newpage   % Start a new page for tables
+
+%\begin{table}[h!]
+%\centering
+%\caption{Elementary bosons}
+%\begin{ruledtabular}
+%\begin{tabular}{l c c c c p{5cm}}
+%Name & Symbol & Mass (GeV/$c^2$) & Spin & Discovered & Interacts with \\
+%\hline
+%Photon & $\gamma$ & \ \ 0 & 1 & 1905 & Electrically charged particles \\
+%Gluons & $g$ & \ \ 0 & 1 & 1978 & Strongly interacting particles (quarks and gluons) \\
+%Weak charged bosons & $W^\pm$ & \ 82 & 1 & 1983 & Quarks, leptons, $W^\pm$, $Z^0$, $\gamma$ \\
+%Weak neutral boson & $Z^0$ & \ 91 & 1 & 1983 & Quarks, leptons, $W^\pm$, $Z^0$ \\
+%Higgs boson & $H$ & 126 & 0 & 2012 & Massive particles (according to theory) \\
+%\end{tabular}
+%\end{ruledtabular}
+%\label{bosons}
+%\end{table}
+
+%\newpage   % Start a new page for figure captions
+
+%\section*{Figure captions}
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics{GasBulbData.eps}   % This line stays commented-out
+%\caption{Pressure as a function of temperature for a fixed volume of air.  
+%The three data sets are for three different amounts of air in the container. 
+%For an ideal gas, the pressure would go to zero at $-273^\circ$C.  (Notice
+%that this is a vector graphic, so it can be viewed at any scale without
+%seeing pixels.)}
+
+%\label{gasbulbdata}
+%\end{figure}
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[width=5in]{ThreeSunsets.jpg}   % This line stays commented-out
+%\caption{Three overlaid sequences of photos of the setting sun, taken
+%near the December solstice (left), September equinox (center), and
+%June solstice (right), all from the same location at 41$^\circ$ north
+%latitude. The time interval between images in each sequence is approximately
+%four minutes.}
+%\label{sunsets}
+%\end{figure}
+
+\end{document}
