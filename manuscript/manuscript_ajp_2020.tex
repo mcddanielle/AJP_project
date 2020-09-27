@@ -42,7 +42,8 @@
   
   %What problem did you study and why is it important?
   We study synchronization of interacting particles
-  driven by an externally applied force while confined to a narrow channel. 
+  confined to a narrow channel 
+  driven by an externally applied force.  
   %What methods did you use?
   With
   numerical simulations, we control the particle interactions,
@@ -90,15 +91,83 @@
 
 \maketitle % title page is now complete
 
+\section{Introduction} %
+%
 
-\section{Introduction} % Section titles are automatically converted to all-caps.
-% Section numbering is automatic.
+%Outline
+%describe types of physical systems 
+Numerical simulations of confined, driven particles
+can describe a diverse variety of physical phenomena.
+Particles which interact over long distances
+include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more detail and references]
+Particles which interact over short distances include
+bubble arrays/emulsions [more systems and references].
 
-Synchronization is one of the most diverse fundamental physical phenomena. Synchronization has been studied for over three centuries, from Huygens pendulum clocks to the rhythmic beats of the flapping wings in a flock of birds. It is a goal of physicists to discover synchronization in different forms and learn how to control the phenomenon that occurs when weakly coupled competing oscillators adjust rhythms to match each other. A synchronization phenomenon that the physics community is particularly interested in is dynamic phase locking, which occurs when naturally oscillating motions are driven by an external modulation \cite{juniper2015}. Another interest of ours is to study the transition from ordered, synchronized dynamics, to disordered, chaotic dynamics. Chaotic dynamics is the irregular, unpredictable time evolution of nonlinear systems and occurs in mechanical oscillators \cite{chaos}. Here, we analyze the microscopic dynamics of phase locking in a colloidal model system using molecular dynamics (MD).
+Narrow channels studies are useful to provide insights 
+of how particles move through geometries
+such as wires, microchannels, and biological systems such as neuron axons and capillaries [more detail and references].
+Stabilized charged particles form patterns
+due to the interplay of the confining environment
+and particle interactions.
+Many such systems execute local oscillations
+about stable points [elaborate].
+%
+An applied external force
+increases the diversity of behaviors,
+and can cause particles to flow in
+a variety of non-linear complex behaviors
+including
+synchronized, aperiod, or chaotic dynamical patterns.
+%
+The presence of a modulating surface
+can modify these patterns in a variety of ways,
+changing the onset of dynamical flows,
+and the overall flow patterns.
 
+Colloidal particles trapped in light fields have proven
+a particularly useful medium for studying these behaviors.%cite 
+The relatively large size of the colloids
+and ease in control has lead to a rich array of 
+experimental results. %THIS IS A TERRIBLE SENTENCE.
+Such studies are considered model systems
+for experimental systems relatively hard to access and visualize,
+such as cold atoms or electron gases. %ELABORATE AND CITE
+
+
+Synchronization has been studied for over three centuries,
+and is observed in different forms
+from Huygens pendulum clocks
+to the rhythmic beats of the flapping wings in a flock of birds.
+Controlling
+synchronization phenomena in weakly coupled oscillators
+can be achieved with an external driving force
+that causes the syncing of natural oscillation frequencies,
+dynamic phase locking \cite{juniper2015}.
+[useful and interesting because?]
+
+Disordered chaotic dynamics are also possible,
+where irregular, unpredictable time evolution of
+nonlinear systems and occurs in mechanical oscillators \cite{chaos}.
+
+In the following paper we describe
+our molecular dynamics model in Section~\ref{sec:MD},
+including various particle interactions and confining environments.
+In Section~\ref{sec:sync} we
+demonstrate how uniform environments and applied forces
+and create synchronized flow patterns.
+We present these results using standard tools of non-linear oscillators
+such phase diagrams.
+We modify the environment and applied forces
+and show aperiodic, or nearly periodic flow behaviors
+in Section~\ref{sec:quasiperiod}.
+Finally we explore the transition to chaos in 
+in Section~\ref{sec:chaos}.
+
+
+%Here we model the microscopic dynamics of phase locking in a colloidal model system using molecular dynamics (MD).
 
 \section{Molecular Dynamics Model}
-
+\label{sec:MD}
 The simulations use overdamped dynamics with Euler's method in a classical two-dimensional model for particles confined to a periodic potential. With only a few particles in two-dimensions, the simulation runs quickly, making this an appropriate model for undergraduates to explore.
 
 Particles interact by the Yukawa potential.
@@ -113,7 +182,7 @@ Overdamped dynamics is a common assumption in models of colloid particles. This 
 
 In this model the Verlet method is equivalent to the Euler method.  Euler's method is then used to calculate the position. Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method. It is a nice opportunity to teach an extension of a method they know. 
 
-\section{MD Simulations}
+%\section{MD Simulations}
 
 \subsection{Single particle system}  % In subsection headings, only the first word is capitalized.
 
@@ -127,9 +196,10 @@ We used our model to generate a system, Fig. 1a), where the particle hops betwee
 \end{figure}
 \end{center}
 
-\subsection{Multi-particle system}
+\subsection{Synchronization in multi-particle systems}
+\label{sec:sync}
 
-We also simulated a twenty particle system confined to a narrow channel, as shown in Fig. 2a). The interparticle forces of neighboring particles cause the system to form a buckled chain when the system is annealed. When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen AC drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
+We simulated a twenty particle system confined to a narrow channel, as shown in Fig. 2a). The interparticle forces of neighboring particles cause the system to form a buckled chain when the system is annealed. When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen AC drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
 
 \begin{center}
 \begin{figure}[h!]
@@ -146,10 +216,10 @@ We also simulated a twenty particle system confined to a narrow channel, as show
 
 
 \section{Quasiperiodic substrate}
-\label{DispEqSection}	% You can label sections for reference
+\label{sec:quasiperiod}	% You can label sections for reference
 
-
-
+\section{Chaotic dynamics}
+\label{sec:chaos}	% You can label sections for reference
 
 \section{Associated problems}
 
