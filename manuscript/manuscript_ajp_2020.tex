@@ -74,7 +74,9 @@
   opportunties
   to reproduce our results and propose
   new numerical experiments.
-
+  With only a few particles in two-dimensions,
+  the simulation runs quickly,
+  making this an appropriate model for undergraduates to explore.
 
   %Hew to this recipe (MMRC) witlessly
   %1. M—Give the motivation and context
@@ -97,18 +99,22 @@
 %Outline
 %describe types of physical systems 
 Numerical simulations of confined, driven particles
-can describe a diverse variety of physical phenomena.
+can be used to model a diverse variety of physical phenomena.
 Particles which interact over long distances
 include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more detail and references]
 Particles which interact over short distances include
 bubble arrays/emulsions [more systems and references].
 
-Narrow channels studies are useful to provide insights 
-of how particles move through geometries
-such as wires, microchannels, and biological systems such as neuron axons and capillaries [more detail and references].
+Particles in confined geometries behave differently than free particles.
 Stabilized charged particles form patterns
 due to the interplay of the confining environment
 and particle interactions.
+Narrow channels studies are useful to provide insights 
+of how particles move through systems 
+such as wires and fluid microchannels.
+Biological systems such as
+neuron axons and capillaries can also be studied
+with these models [more detail and references].
 Many such systems execute local oscillations
 about stable points [elaborate].
 %
@@ -168,23 +174,76 @@ in Section~\ref{sec:chaos}.
 
 \section{Molecular Dynamics Model}
 \label{sec:MD}
-The simulations use overdamped dynamics with Euler's method in a classical two-dimensional model for particles confined to a periodic potential. With only a few particles in two-dimensions, the simulation runs quickly, making this an appropriate model for undergraduates to explore.
+We use a classical two-dimensional model for 
+studying particle dynamics. 
+Particles are confined in a two-dimensional (2D) 
+simulation of area $A = L \times L$ where $L=36.5$.
+An individual particle has
+position $\vec{r}_i = x_i \hat{i} + y_i \hat{j}$.
+We use periodic boundary conditions
+such that a particle leaving the edges of the system is mapped
+back to a position within the simulation 
+by the rules $x_i+L=x_i$ and $y_i+L=y_i$.
 
-Particles interact by the Yukawa potential.
+Particles are subject to external driving forces
+$F_{Drive}(t)$
+that change as a function of time.
+We create several model light fields,
+creating a landscape of potential minima and maxima
+that modify the local force on a particle as a function of position
+$\vec{F}_{landscape,i} = \vec{F}_{landscape}(\vec{r}_i)$
+These landscape potential are static,
+with fixed minima and maxima
+that are periodic or quasi-periodic,
+as described in Sec.~\ref{sec:results}.
 
+We model particle interactions with
+the Yukawa potential $\vec{F}_{ij} = \nabla V_{ij}(r_{ij})$,
+\begin{equation}
+V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
+\end{equation}
+where $r_{ij} = |\vec{r}_i - \vec{r}_j|$.
+This is a
+screened Coulomb potential
+$E_0=2$ scales strength of repulsion
+where $E_0 = k q_1 q_2$  [CHECK scaling/units].
+$\kappa = 1/R_0$ is the screening parameter,
+that screening accounts for the lengthscale at
+which many particle
+interactions and local environment
+that reduces the interaction range of individual particles.
+We fix $R_0$ to be unity in our simulation units.
+
+Particle dynamics are
+modeled with an overdamped
+equation of motion
+integrated with the Verlet method.
 A single particle has the equation of motion 
-\begin{center}
-$\eta \vec{v_i} = \vec{F}_{landscape,i} + \sum_{j}^{} \vec{F}_{ij} + \vec{F}_{Drive}(t)$.\\ 
-\end{center}
-This includes the force of the landscape, inter-particle interactions $\vec{F}_{ij} = - \nabla V(\vec{r}_{ij})$, and a driving force $\vec{F}_{Drive}(t) = [F_{DC} + F_{AC} \sin(\omega t)] \hat{y}$, where $\omega = 2 \pi f$. The landscape is a sine function that is position dependent and calculate the landscape force on the particle directly from its location. The driving force does add energy into the system, and some of it is lost. The damping comes from the viscous fluid providing a nonconservative force.
+\begin{equation}
+\eta \vec{v_i} = \vec{F}_{landscape,i} + \sum_{i \neq j}^{N} \vec{F}_{ij} + \vec{F}_{Drive}(t).
+\end{equation}
+where $\eta = 1$.
+Since $\vec{a}$ is zero,
+the Verlet method simplifies to 
+the Euler method
+$\vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t)$.
+
+ 
+
+The driving force $\vec{F}_{Drive}(t) = [F_{DC} + F_{AC} \sin(\omega t)] \hat{y}$, where frequency is defined as $\omega = 2 \pi f$.
+We modify $f$ and observe the change in dynamics.
+The landscape is a sine function that is position dependent and calculate the landscape force on the particle directly from its location. The driving force does add energy into the system, and some of it is lost. The damping comes from the viscous fluid providing a nonconservative force.
 
 Overdamped dynamics is a common assumption in models of colloid particles. This is an assumption that the suspending fluid is highly viscous and exerts a damping force on the particles equivalent to a linear drag force $F_{drag} = - \eta v$ and the acceleration of the particle is zero. The equation of motion we include makes both assumptions and is rearranged to reflect that. The equation of motion is not integrated for the velocity, instead it provides a direct calculation of the velocity.  
 
 In this model the Verlet method is equivalent to the Euler method.  Euler's method is then used to calculate the position. Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method. It is a nice opportunity to teach an extension of a method they know. 
 
-%\section{MD Simulations}
+\section{Results}
+\label{sec:results}
 
-\subsection{Single particle system}  % In subsection headings, only the first word is capitalized.
+\subsection{Single particle system}
+% In subsection headings, only the first word is capitalized.
+\label{sec:one}
 
 We used our model to generate a system, Fig. 1a), where the particle hops between troughs in the energy landscape. In the attached movie, Figure1.mp4, we apply a constant $F_{AC}$ with frequency $f$ then slowly increase $F_{DC}$  to achieve a variety of modes. A mode is a periodic pattern of hops with a constant average particle velocity, $\bar{v}_{y}$ over a range of driving forces $F_{DC}$. In the velocity-force plot in Fig. 1b) $\bar{v}_{y}$ is increasing non-uniformly, with steps, indicating mode locking. A related experiment \cite{juniper2015} revealed the microscopic dynamics of mode locking by driving colloids across a periodic landscape generated by optical tweezers.
 
@@ -210,7 +269,7 @@ We simulated a twenty particle system confined to a narrow channel, as shown in 
 \end{center}
 
 \subsection{Kinked system}
-\label{DispEqSection}	% You can label sections for reference
+\label{sec:static}	% You can label sections for reference
 
 
 
