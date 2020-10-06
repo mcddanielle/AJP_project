@@ -179,35 +179,65 @@ studying particle dynamics.
 Particles are confined in a two-dimensional (2D) 
 simulation of area $A = L \times L$ where $L=36.5$.
 An individual particle has
-position $\vec{r}_i = x_i \hat{i} + y_i \hat{j}$.
+position $\vec{r}_i = x_i \hat{x} + y_i \hat{y}$.
 We use periodic boundary conditions
 such that a particle leaving the edges of the system is mapped
 back to a position within the simulation 
 by the rules $x_i+L=x_i$ and $y_i+L=y_i$.
 
-Particles are subject to external driving forces
-$F_{Drive}(t)$
-that change as a function of time.
-We create several model light fields,
-creating a landscape of potential minima and maxima
-that modify the local force on a particle as a function of position
-$\vec{F}_{landscape,i} = \vec{F}_{landscape}(\vec{r}_i)$
-These landscape potential are static,
-with fixed minima and maxima
-that are periodic or quasi-periodic,
-as described in Sec.~\ref{sec:results}.
-
-We model particle interactions with
-the Yukawa potential $\vec{F}_{ij} = \nabla V_{ij}(r_{ij})$,
+Particles are subject an external time-dependent driving force
+$\vec{F}_{D}(t)$
+applied parallel to the y-direction.
+We model this force as
 \begin{equation}
-V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
+\vec{F}_{D}(t) = [F_{DC} + F_{AC} \sin(\omega t)] \hat{y},
 \end{equation}
-where $r_{ij} = |\vec{r}_i - \vec{r}_j|$.
-This is a
-screened Coulomb potential
-$E_0=2$ scales strength of repulsion
-where $E_0 = k q_1 q_2$  [CHECK scaling/units].
-$\kappa = 1/R_0$ is the screening parameter,
+with modifiable parameters including
+a constant component $F_{DC}$,
+and a time dependent component with amplitude $F_{AC}$
+and frequency $\omega = 2 \pi f$.
+The frequency is scaled in time units,
+where [finish].
+ We demonstrate how a single particle (Sec.~\ref{sec:one})
+ and many particles
+ move (Sec.~\ref{sec:twenty})
+ in response to this applied force in a variety of light fields.
+ In Sec.~\ref{sec:kink} we set $F_{DC}$
+ to zero and track the motion
+ of a high density area of a particle chain
+ (i.e. kink dynamics).
+ %The driving force does add energy into the system, and some of it is lost.
+
+ We create several model light fields,
+ creating a landscape of potential minima and maxima
+ that modify the local force on a particle as a function of position
+ $\vec{F}_{l,i} = \vec{F}_{l}(\vec{r}_i)$
+ These landscape potential $V(\vec{r}) $are static,
+ generating a conservative force $\vec{F}_l= -\nabla V_l(\vec{r})$
+ with fixed minima and maxima
+ that are periodic or quasi-periodic,
+ as described in Sec.~\ref{sec:results}.
+ One example of a periodic light field is
+ that used in Sec.~\ref{sec:kink}
+ where 
+ \begin{equation}
+   V_l = V_0 \cos{(N_p \pi y / L)}
+ \end{equation}
+ where $N_p$ are the number of troughs in the landscape,
+ and $V_0$ is an adjustable parameter
+ to set the depth of the troughs.
+ 
+ We model particle interactions with
+ the Yukawa potential $\vec{F}_{ij} = \nabla V_{ij}(r_{ij})$,
+ \begin{equation}
+   V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
+ \end{equation}
+ where $r_{ij} = |\vec{r}_i - \vec{r}_j|$.
+ This is a
+ screened Coulomb potential
+ $E_0=2$ scales strength of repulsion
+ where $E_0 = k q_1 q_2$  [CHECK scaling/units].
+ $\kappa = 1/R_0$ is the screening parameter,
 that screening accounts for the lengthscale at
 which many particle
 interactions and local environment
@@ -218,25 +248,32 @@ Particle dynamics are
 modeled with an overdamped
 equation of motion
 integrated with the Verlet method.
+Overdamped dynamics is a common assumption in models of colloidal particles.
+This is an assumption that the suspending fluid is highly viscous
+and exerts a damping force on the particles equivalent
+to a linear drag force.
+%
+The damping comes from a viscous fluid model
+providing a nonconservative force,
+modeled as a linear friction $F_{drag} = -\eta \vec{v}_i$
+sufficient so that
+the acceleration of the particle is zero. 
+
+The equation of motion we include makes both assumptions and is rearranged to reflect that. The equation of motion is not integrated for the velocity, instead it provides a direct calculation of the velocity.
+
 A single particle has the equation of motion 
 \begin{equation}
-\eta \vec{v_i} = \vec{F}_{landscape,i} + \sum_{i \neq j}^{N} \vec{F}_{ij} + \vec{F}_{Drive}(t).
+\eta \vec{v}_i = \vec{F}_{l,i} + \sum_{i \neq j}^{N} \vec{F}_{ij} + \vec{F}_{D}(t).
 \end{equation}
 where $\eta = 1$.
 Since $\vec{a}$ is zero,
 the Verlet method simplifies to 
 the Euler method
 $\vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t)$.
-
  
 
-The driving force $\vec{F}_{Drive}(t) = [F_{DC} + F_{AC} \sin(\omega t)] \hat{y}$, where frequency is defined as $\omega = 2 \pi f$.
-We modify $f$ and observe the change in dynamics.
-The landscape is a sine function that is position dependent and calculate the landscape force on the particle directly from its location. The driving force does add energy into the system, and some of it is lost. The damping comes from the viscous fluid providing a nonconservative force.
+In this model the Verlet method is equivalent to the Euler method.  Euler's method is then used to calculate the position. %Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method.
 
-Overdamped dynamics is a common assumption in models of colloid particles. This is an assumption that the suspending fluid is highly viscous and exerts a damping force on the particles equivalent to a linear drag force $F_{drag} = - \eta v$ and the acceleration of the particle is zero. The equation of motion we include makes both assumptions and is rearranged to reflect that. The equation of motion is not integrated for the velocity, instead it provides a direct calculation of the velocity.  
-
-In this model the Verlet method is equivalent to the Euler method.  Euler's method is then used to calculate the position. Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method. It is a nice opportunity to teach an extension of a method they know. 
 
 \section{Results}
 \label{sec:results}
