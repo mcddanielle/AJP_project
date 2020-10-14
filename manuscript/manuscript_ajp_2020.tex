@@ -175,10 +175,10 @@ in Section~\ref{sec:chaos}.
 \section{Molecular Dynamics Model}
 \label{sec:MD}
 We use a classical two-dimensional model for 
-studying particle dynamics. 
+studying the dynamics of $N$ interacting particles. 
 Particles are confined in a two-dimensional (2D) 
 simulation of area $A = L \times L$ where $L=36.5$.
-An individual particle has
+An individual particle $i$ has
 position $\vec{r}_i = x_i \hat{x} + y_i \hat{y}$.
 We use periodic boundary conditions
 such that a particle leaving the edges of the system is mapped
@@ -211,8 +211,8 @@ where [finish].
  We create several model light fields,
  creating a landscape of potential minima and maxima
  that modify the local force on a particle as a function of position
- $\vec{F}_{l,i} = \vec{F}_{l}(\vec{r}_i)$
- These landscape potential $V(\vec{r}) $are static,
+ $\vec{F}_{l,i} = \vec{F}_{l}(\vec{r}_i).$
+ The landscape potential $V(\vec{r}) $ are static,
  generating a conservative force $\vec{F}_l= -\nabla V_l(\vec{r})$
  with fixed minima and maxima
  that are periodic or quasi-periodic,
@@ -228,7 +228,7 @@ where [finish].
  to set the depth of the troughs.
  
  We model particle interactions with
- the Yukawa potential $\vec{F}_{ij} = \nabla V_{ij}(r_{ij})$,
+ the Yukawa potential $\vec{F}_{ij} = -\nabla V_{ij}(r_{ij})$,
  \begin{equation}
    V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
  \end{equation}
@@ -244,35 +244,39 @@ interactions and local environment
 that reduces the interaction range of individual particles.
 We fix $R_0$ to be unity in our simulation units.
 
-Particle dynamics are
-modeled with an overdamped
+We model the 
+particle dynamics 
+with an overdamped
 equation of motion
 integrated with the Verlet method.
-Overdamped dynamics is a common assumption in models of colloidal particles.
-This is an assumption that the suspending fluid is highly viscous
+Here 
+the suspending fluid is highly viscous
 and exerts a damping force on the particles equivalent
 to a linear drag force.
-%
+%Overdamped dynamics is a common assumption in models of colloidal particles.
+%This is an assumption that 
 The damping comes from a viscous fluid model
 providing a nonconservative force,
 modeled as a linear friction $F_{drag} = -\eta \vec{v}_i$
 sufficient so that
 the acceleration of the particle is zero. 
 
-The equation of motion we include makes both assumptions and is rearranged to reflect that. The equation of motion is not integrated for the velocity, instead it provides a direct calculation of the velocity.
-
 A single particle has the equation of motion 
 \begin{equation}
 \eta \vec{v}_i = \vec{F}_{l,i} + \sum_{i \neq j}^{N} \vec{F}_{ij} + \vec{F}_{D}(t).
 \end{equation}
 where $\eta = 1$.
+The equation of motion provides a direct calculation of the velocity
+of an individual particle from its location in in space.
 Since $\vec{a}$ is zero,
 the Verlet method simplifies to 
-the Euler method
-$\vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t)$.
- 
+the Euler method,
+which is used to calculate the position. %Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method.
+\begin{equation}
+\vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t).
+\end{equation} 
 
-In this model the Verlet method is equivalent to the Euler method.  Euler's method is then used to calculate the position. %Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method.
+
 
 
 \section{Results}
@@ -307,7 +311,9 @@ We simulated a twenty particle system confined to a narrow channel, as shown in 
 
 \subsection{Kinked system}
 \label{sec:static}	% You can label sections for reference
-
+We confine $N$ particles to $N-1$ troughs to create a
+local high density region.
+$F_{DC}/F_{AC} = 1$ [CHECK!]
 
 
 
