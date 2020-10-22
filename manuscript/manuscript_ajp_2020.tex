@@ -45,16 +45,18 @@
   confined to a narrow channel 
   driven by an externally applied force.  
   %What methods did you use?
-  With
-  numerical simulations, we control the particle interactions,
+  Using 
+  numerical simulations
+  we control the particle interactions,
   external force and particle environment
   in order to mimick experimental studies of driven colloidal particles
   confined by light-fields.
-  We use molecular dynamics simulations to model the particle dynamics,
+  The molecular dynamics simulations
+  model the particle dynamics 
   using overdamped equations of motion suitable for a viscous suspension
   of microscopic particles.
   %What were your principal results?
-  We study 
+  We observe
   particle synchronization under a variety of conditions,
   including static and dynamic patterns formed on
   periodic and quasiperiod substrates,
@@ -95,16 +97,18 @@
 
 \section{Introduction} %
 %
-
 %Outline
-%describe types of physical systems 
+%-----------------------------------------------------------
+%describe types of physical systems - particle types
 Numerical simulations of confined, driven particles
-can be used to model a diverse variety of physical phenomena.
+can be used to model a variety of physical phenomena.
 Particles which interact over long distances
 include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more detail and references]
 Particles which interact over short distances include
 bubble arrays/emulsions [more systems and references].
 
+%-----------------------------------------------
+%environments
 Particles in confined geometries behave differently than free particles.
 Stabilized charged particles form patterns
 due to the interplay of the confining environment
@@ -117,7 +121,8 @@ neuron axons and capillaries can also be studied
 with these models [more detail and references].
 Many such systems execute local oscillations
 about stable points [elaborate].
-%
+%----------------------------------------------------------
+%external forces
 An applied external force
 increases the diversity of behaviors,
 and can cause particles to flow in
@@ -130,6 +135,8 @@ can modify these patterns in a variety of ways,
 changing the onset of dynamical flows,
 and the overall flow patterns.
 
+%-------------------------------------------------------------
+%experimental - colloids specifically
 Colloidal particles trapped in light fields have proven
 a particularly useful medium for studying these behaviors.%cite 
 The relatively large size of the colloids
@@ -139,7 +146,8 @@ Such studies are considered model systems
 for experimental systems relatively hard to access and visualize,
 such as cold atoms or electron gases. %ELABORATE AND CITE
 
-
+%------------------------------------------------------------------
+%synchronization
 Synchronization has been studied for over three centuries,
 and is observed in different forms
 from Huygens pendulum clocks
@@ -151,10 +159,16 @@ that causes the syncing of natural oscillation frequencies,
 dynamic phase locking \cite{juniper2015}.
 [useful and interesting because?]
 
+%---------------------------------------------------------------
+%kinks and nanofriction
+
+%-----------------------------------------------------------------
+%transition from synchronized to chaotic
 Disordered chaotic dynamics are also possible,
 where irregular, unpredictable time evolution of
 nonlinear systems and occurs in mechanical oscillators \cite{chaos}.
 
+%paper outline
 In the following paper we describe
 our molecular dynamics model in Section~\ref{sec:MD},
 including various particle interactions and confining environments.
@@ -162,13 +176,12 @@ In Section~\ref{sec:sync} we
 demonstrate how uniform environments and applied forces
 and create synchronized flow patterns.
 We present these results using standard tools of non-linear oscillators
-such phase diagrams.
+such phase diagrams of particle velocity vs. position.
 We modify the environment and applied forces
 and show aperiodic, or nearly periodic flow behaviors
 in Section~\ref{sec:quasiperiod}.
 Finally we explore the transition to chaos in 
 in Section~\ref{sec:chaos}.
-
 
 %Here we model the microscopic dynamics of phase locking in a colloidal model system using molecular dynamics (MD).
 
@@ -180,7 +193,8 @@ Particles are confined in a two-dimensional (2D)
 simulation of area $A = L \times L$ where $L=36.5$.
 An individual particle $i$ has
 position $\vec{r}_i = x_i \hat{x} + y_i \hat{y}$.
-We use periodic boundary conditions
+Particles are subject to
+periodic boundary conditions
 such that a particle leaving the edges of the system is mapped
 back to a position within the simulation 
 by the rules $x_i+L=x_i$ and $y_i+L=y_i$.
