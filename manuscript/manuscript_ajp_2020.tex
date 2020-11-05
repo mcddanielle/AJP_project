@@ -60,9 +60,10 @@
   particle synchronization under a variety of conditions,
   including static and dynamic patterns formed on
   periodic and quasiperiod substrates,
-  kink propagation on these surfaces,
-  and the limits of applied force that
-  cause the particles to transition to chaotic behavior.
+  high density kink propagation.
+  We note 
+  the limits of applied force that
+  cause the dynamics to transition to chaotic behavior.
   %What conclusions have you drawn from these results?
   We demonstrate the transition from
   trapped to sliding dynamics in
@@ -107,6 +108,42 @@ include colloids, magnetic beads, superconducting vortices, dusty plasmas, elect
 Particles which interact over short distances include
 bubble arrays/emulsions [more systems and references].
 
+%------------------------------------------------------------------
+%synchronization
+Synchronization is a universal phenomena. 
+Christiaan Huygens is credited with its discovery
+with his 1665 observation of
+in-phase oscillation of pendulum clocks \cite{Pikovsky2003}.  
+Huygens explanation
+that the clocks vibrations are coupled through the supporting
+wall has since been rigorously demonstrated by 20th century
+researchers \cite{Ramirez2016}.
+Examples of synchronization occur
+in many naturally oscillating systems,
+from fireflies syncing with a pulsed LED \cite{},
+to simultaneous flapping of birds wings \cite{},
+to neuronal firing cardiac muscle \cite{} and brain tissue \cite{}.
+
+%phase locking
+Dynamical mode locking is a controlled 
+synchronization phenomena in 
+which an external driving force
+causes the syncing of natural oscillation frequencies
+in
+weakly coupled oscillators.
+Mode locking is often observed in quantum electronic
+devices such as Josephson junctions \cite{}
+and phase-locked loops \cite{}.
+Instead of ohmic current-voltage (IV) relationships,
+such devices exhibit stepped regions
+such as Shapiro steps \cite{} [explain].
+
+Recently studies of colloidal particles confined
+in optical traps have
+been used to examine the microscopic dynamics
+of mode-locking when subject to external driving force \cite{juniper2015}.
+
+
 %-----------------------------------------------
 %environments
 Particles in confined geometries behave differently than free particles.
@@ -115,7 +152,7 @@ due to the interplay of the confining environment
 and particle interactions.
 Narrow channels studies are useful to provide insights 
 of how particles move through systems 
-such as wires and fluid microchannels.
+such as wires and microchannels.
 Biological systems such as
 neuron axons and capillaries can also be studied
 with these models [more detail and references].
@@ -138,7 +175,7 @@ and the overall flow patterns.
 %-------------------------------------------------------------
 %experimental - colloids specifically
 Colloidal particles trapped in light fields have proven
-a particularly useful medium for studying these behaviors.%cite 
+a particularly useful medium for studying these behaviors.  %cite 
 The relatively large size of the colloids
 and ease in control has lead to a rich array of 
 experimental results. %THIS IS A TERRIBLE SENTENCE.
@@ -146,18 +183,6 @@ Such studies are considered model systems
 for experimental systems relatively hard to access and visualize,
 such as cold atoms or electron gases. %ELABORATE AND CITE
 
-%------------------------------------------------------------------
-%synchronization
-Synchronization has been studied for over three centuries,
-and is observed in different forms
-from Huygens pendulum clocks
-to the rhythmic beats of the flapping wings in a flock of birds.
-Controlling
-synchronization phenomena in weakly coupled oscillators
-can be achieved with an external driving force
-that causes the syncing of natural oscillation frequencies,
-dynamic phase locking \cite{juniper2015}.
-[useful and interesting because?]
 
 %---------------------------------------------------------------
 %kinks and nanofriction
@@ -206,40 +231,6 @@ We model this force as
 \begin{equation}
 \vec{F}_{D}(t) = [F_{DC} + F_{AC} \sin(\omega t)] \hat{y},
 \end{equation}
-
-\begin{equation}
-\vec{F}_{D}(t) = [F_{DC} + F_{AC} \sin(2 \pi f t)] \hat{y} 
-\end{equation}
-
-\begin{equation}
-F_{DC} = 0.01
-\end{equation}
-
-\begin{equation}
-F_{AC} = 0.2 
-\end{equation}
-
-\begin{equation}
-f = 0.01 
-\end{equation}
-
-\begin{equation}
-\bar{v}_y = n \lambda f
-\end{equation}
-
-\begin{equation}
-\bar{v}_y = \lambda f
-\end{equation}
-
-\begin{equation}
-\lambda = S_Y / 20
-\end{equation}
-
-\begin{equation}
-F_{p} = 0.1
-\end{equation}
-
-
 with modifiable parameters including
 a constant component $F_{DC}$,
 and a time dependent component with amplitude $F_{AC}$
@@ -556,3 +547,35 @@ We acknowledge Harvey Gould and Jan Tobochnik, who supported our development of 
 %\end{figure}
 
 \end{document}
+
+\begin{equation}
+\vec{F}_{D}(t) = [F_{DC} + F_{AC} \sin(2 \pi f t)] \hat{y} 
+\end{equation}
+
+\begin{equation}
+F_{DC} = 0.01
+\end{equation}
+
+\begin{equation}
+F_{AC} = 0.2 
+\end{equation}
+
+\begin{equation}
+f = 0.01 
+\end{equation}
+
+\begin{equation}
+\bar{v}_y = n \lambda f
+\end{equation}
+
+\begin{equation}
+\bar{v}_y = \lambda f
+\end{equation}
+
+\begin{equation}
+\lambda = S_Y / 20
+\end{equation}
+
+\begin{equation}
+F_{p} = 0.1
+\end{equation}
