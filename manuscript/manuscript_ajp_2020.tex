@@ -7,6 +7,7 @@
 \usepackage{amsmath}  % needed for \tfrac, \bmatrix, etc.
 \usepackage{amsfonts} % needed for bold Greek, Fraktur, and blackboard bold
 \usepackage{graphicx} % needed for figures
+\usepackage{pythontex}
 
 \begin{document}
 
@@ -59,11 +60,9 @@
   We observe
   particle synchronization under a variety of conditions,
   including static and dynamic patterns formed on
-  periodic and quasiperiod substrates,
-  high density kink propagation.
-  We note 
-  the limits of applied force that
-  cause the dynamics to transition to chaotic behavior.
+  periodic and quasiperiod substrates
+  and the propagation of 
+  high density kinks.
   %What conclusions have you drawn from these results?
   We demonstrate the transition from
   trapped to sliding dynamics in
@@ -71,6 +70,9 @@
   from that of a periodic landscape by [TBD],
   and that kinks of high density propagate
   [more/less ?  ] when [what?].
+  We also explore 
+  the limits of applied force that
+  cause the dynamics to transition to chaotic behavior.
   We include sample code
   and exercises for students
   that include 
@@ -212,7 +214,9 @@ including synchronized motion of a single confined particle
 driven across a periodic landscape in 
 Section~\ref{sec:one} and
 multiple interacting particles
-in Section~\ref{sec:sync}.
+in Section~\ref{sec:sync},
+including stationary propagation of high density kinks
+in Sec.~\ref{sec:kink}.
 %we
 %demonstrate how uniform environments and applied forces
 %and create synchronized flow patterns.
@@ -221,9 +225,9 @@ such phase diagrams of particle velocity versus position.
 In Section~\ref{sec:quasiperiod},
 we show how an aperiodic landscape modifies the particle dynamics.
 Finally we explore the transition to chaotic dynamics in 
-in Section~\ref{sec:chaos}.
-Our conclusions
-are in Section~\ref{sec:conclusion}. 
+Section~\ref{sec:chaos}
+and conclude 
+in Section~\ref{sec:conclusion}. 
 In each section
 we suggest exercises for interested students,
 and summarize our suggestions in Section~\ref{sec:problems}.
@@ -260,7 +264,7 @@ The frequency is scaled in time units,
 where [finish].
  We demonstrate how a single particle (Sec.~\ref{sec:one})
  and many particles
- move (Sec.~\ref{sec:twenty})
+ move (Sec.~\ref{sec:sync})
  in response to this applied force in a variety of light fields.
  In Sec.~\ref{sec:kink} we set $F_{DC}$
  to zero and track the motion
@@ -281,18 +285,18 @@ where [finish].
  %that used in Sec.~\ref{sec:one}
  where 
  \begin{equation}
-   V_l = V_0 \cos{(N_p \pi y / L)}
+   V_l(y) = V_0 \cos{(N_p \pi y / L)}
  \end{equation}
  where $N_p$ are the number of troughs in the landscape,
  and $V_0$ is an adjustable parameter
  to set the depth of the troughs.
 
  In multi-particle simulations, we confine
- the particles along the x-direction with a
+ the particles along the $x-$direction with a
  quasi-one-dimensional geometry
  using a periodic function.
  \begin{equation}
-   V_{q1D} = V_0 \cos{(\pi x / L)}
+   V_{q1D}(x) = V_0 \cos{(\pi x / L)}
  \end{equation}.
  %%We could also use a Gaussian function.
  
@@ -313,6 +317,16 @@ interactions and local environment
 that reduces the interaction range of individual particles.
 We fix $R_0$ to be unity in our simulation units.
 
+The simulation is controlled by a $for()$ loop
+which runs from an intial to maximum $time$ integer.
+Each time step represents a simulation time of $\Delta t=0.001$.
+At each timestep
+we evaluate the net force on each particle as a function of its position
+$\vec{r}_i(t)$
+and then use the equation of motion to move particles
+to an updated position
+$\vec{r}_i(t+\Delta t)$.
+%
 We model the 
 particle dynamics 
 with an overdamped
@@ -326,10 +340,12 @@ to a linear drag force.
 %This is an assumption that 
 The damping comes from a viscous fluid model
 providing a nonconservative force,
-modeled as a linear friction $F_{drag} = -\eta \vec{v}_i$
+modeled as a linear friction $\vec{F}_{drag} = -\eta \vec{v}_i$
 sufficient so that
 the acceleration of the particle is zero.
-[This model is encountered in Ch. 2 of Taylor's Classical Mechanics....]
+Such a model is appropriate when the particles
+are small and the viscosity is high [finish... reference...]
+%[This model is encountered in Ch. 2 of Taylor's Classical Mechanics....]
 
 A single particle has the equation of motion 
 \begin{equation}
@@ -341,10 +357,11 @@ of an individual particle from its location.
 Since we model the acceleration $\vec{a}$ as zero,
 the Verlet method simplifies to 
 the Euler method,
-which is used to calculate the position. %Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method.
+which is used to calculate the position at subsequent time steps.
+%Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method.
 \begin{equation}
 \vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t).
-\end{equation} 
+\end{equation}
 
 
 
@@ -356,10 +373,11 @@ which is used to calculate the position. %Most undergraduate students learn the 
 % In subsection headings, only the first word is capitalized.
 \label{sec:one}
 
-We place a single particle in a periodic landscape 
+We place a single particle in a periodic landscape with
+corrugations along the y-direction 
 \begin{equation}
   \label{eq:landscape}
-  V_l = V_{0x} \cos{(\pi x/L)} + V_{0y} \cos{(N_p \pi y / L)} 
+  V_l(y) = V_{0y} \cos{(N_p \pi y / L)} 
 \end{equation}
 where $N_p=20$ are the number of troughs in the landscape,
 and $V_{0x}=2$ and $V_{0x}=2$.
@@ -374,10 +392,10 @@ for a grid of values $(x_n,y_n)$.
 %is included in the supplementary material,
 
 
-
 We apply an external applied force, 
 with 
-a constant $F_{AC}$ with frequency $\omega$ then slowly increase $F_{DC}$.
+a constant $F_{AC}$ with frequency $\omega = 2\pi f$
+then slowly increase $F_{DC}$.
 The particle hops between troughs in the energy landscape
 when the superposition of $F_{AC}$ and $F_{DC}$ is large enough
 to overcome the barrier height.
@@ -388,7 +406,14 @@ with a constant average particle velocity, $\bar{v}_{y}$
 over a range of driving forces $F_{DC}$.
 We illustrate mode-locking in 
 the velocity-force plot in Fig.~\ref{fig:1}(b).
-Here $\bar{v}_{y}$ is increasing in non-uniform steps.
+Here $\bar{v}_{y}$ is increasing in non-uniform steps,
+with a quantized height of
+$\bar{v}_{y} = n \lambda f$,
+where $n$ is an integer,
+$\lambda = S_Y/N_p = 36.5/20 = 1.825$ is the spatial period, or wavelength
+of the landscape,
+and $f = 0.01$ cycles per time unit.
+
 Our simulations reproduce results presented in 
 Juniper {\it et al.} \cite{juniper2015}
 which demonstrated
@@ -397,8 +422,10 @@ experiments of
 driven colloids on a
 optical periodic landscape.
 
-We show the dynamics 
-in the attached movie, Figure1.mp4.
+We illustrate the hopping pattern in Fig.~\ref{fig:1}(c)
+and 
+show the dynamics 
+in supplementary materials \cite{supp1}.
 
 
 
@@ -414,7 +441,33 @@ in the attached movie, Figure1.mp4.
 \subsection{Synchronization in multi-particle systems}
 \label{sec:sync}
 
-We simulated a twenty particle system confined to a narrow channel, as shown in Fig. 2a). The interparticle forces of neighboring particles cause the system to form a buckled chain when the system is annealed. When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen AC drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
+We simulated a twenty particle system confined to a narrow channel, as shown in Fig. 2a).  We create the confining channel with a sinusoidal function
+with a single period.
+\begin{equation}
+  \label{eq:channel}
+  V_l(x) = V_{0x} \cos{(\pi x/L)}
+\end{equation}
+where the trough heights is larger  $V_{0x}$,
+and the associated force
+\begin{equation}
+\vec{F}=-\nabla V(x) = -\frac{dV}{dx} \hat{x} = - \frac{V_{0x} \pi}{L} \sin{(\pi x/L)} \hat{x}
+\end{equation}
+restores particles to the center of a long narrow region of the simulation.
+This is shown in Fig.~\ref{fig:2}(a)
+where red regions are high potential
+and blue regions are low potential.
+
+The initial configuration of the system is shown i
+Fig.~\ref{fig:2}(a).  
+We annealed the system into a ground-state configuration
+by raising the system to a high temperature $T$,
+and slowly lowering the temperature in steps of $dT=-0.01$
+until the particles form a buckled chain due to the
+competition between particle repulsion and channel confinement.
+
+The interparticle forces of neighboring particles cause the system to form a buckled chain when the system is annealed.
+
+When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen AC drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
 
 \begin{center}
 \begin{figure}[h!]
@@ -425,7 +478,7 @@ We simulated a twenty particle system confined to a narrow channel, as shown in 
 \end{center}
 
 \subsection{Kinked system}
-\label{sec:static}	% You can label sections for reference
+\label{sec:kink}	% You can label sections for reference
 We confine $N$ particles to $N-1$ troughs to create a
 local high density region.
 $F_{DC}/F_{AC} = 1$ [CHECK!]
@@ -446,7 +499,6 @@ $F_{DC}/F_{AC} = 1$ [CHECK!]
 \label{sec:conclusion}	% You can label sections for reference
 
 
-
 \begin{acknowledgments}
 
   We acknowledge Harvey Gould and Jan Tobochnik, who supported our development of this article.
@@ -465,6 +517,8 @@ $F_{DC}/F_{AC} = 1$ [CHECK!]
 % seems to make no discernible difference.
 
 \bibitem{juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
+
+\bibitem{supp1} See Figure1.mp4 in appropriate %\url{}
 
 %\bibitem{latexsite} \LaTeX\ Project Web Site, \url{<http://www.latex-project.org/>}.
 
@@ -583,7 +637,7 @@ $F_{DC}/F_{AC} = 1$ [CHECK!]
 %four minutes.}
 %\label{sunsets}
 %\end{figure}
-
+      
 \end{document}
 
 \begin{equation}
@@ -617,3 +671,57 @@ f = 0.01
 \begin{equation}
 F_{p} = 0.1
 \end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Supplementary Materials}
+
+\subsection{Gridded Contour Plot of landscape}
+%code is located in
+%~/pymodules/animation_code/channel_colloid_movie_maker.py
+
+%\begin{pyverbatim}
+##########################################################
+#ADD CONTOUR PLOT
+##########################################################
+def add_contour(ax,L,N,corrugated = True):
+    '''
+    Hardwired to color in the quasi1D potential to contain 
+    the particles in a trough.  
+    Can also add the washboard/corrugated substrate.
+
+    Required Arguments
+
+    Optional Arguments:
+
+    corrugated (default = True)  
+    Adds the washboard in the y-direction.  
+    Hardwired for a single parameter set.    
+    '''
+
+    a_p = L/N
+
+    #assuming Tiare's trough system, so we won't want to cover the entire range
+    X = np.arange(0, L/2.0, 0.1)
+    Y = np.arange(0, L, 0.1)
+    X, Y = np.meshgrid(X, Y)
+
+    Z_mag = 2.0 # set by what "looks good"
+    Z = Z_mag*np.sin(2*np.pi*X/L)
+    if corrugated == True:
+        Z += np.sin(2*np.pi*(Y+1.75)/a_p) 
+
+    cmap=cm.coolwarm_r
+
+    #alphs is the degree of transparency, again, set by what looks good.
+    cset = ax.contourf(X, Y, Z, cmap=cmap,alpha=0.25)
+
+    #ax1.set_xlim(15,20)
+    #ax1.set_ylim(15,20)
+
+    #ax1.set_xlabel(r"$X$")
+    #ax1.set_ylabel(r"$y$",rotation='horizontal',ha='right')
+
+    #ax1.set_xticks([])
+    #ax1.set_yticks([])
+    return
+ %   \end{pyverbatim}
