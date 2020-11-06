@@ -433,7 +433,7 @@ in supplementary materials \cite{supp1}.
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.25]{single}
-\caption{\textbf{(a)} The particle is driven with a constant $F_{AC}$ and $f$ through a periodic potential landscape where blue are minima and red are maxima in the potential. \textbf{(b)} An average particle velocity in the y-direction $\bar{v}_{y}$ as a function of the driving force $F_{DC}$. In the animation the magenta dot represents the $\bar{v}_{y}$ at which the particle in Fig. 1a) is moving.}
+\caption{\textbf{(a)} The particle is driven with a constant amplitude $F_{AC}$ and frequency $\omega$ through a periodic spatial potential landscape.  The landscape is represented with a colormap where blue are minima and red are maxima in the potential. \textbf{(b)} An average particle velocity in the y-direction $\bar{v}_{y}$ as a function of a constant driving force $F_{DC}$. In the animation available in Ref.~\cite{supp1} the magenta dot represents the average velocity of the particle $\bar{v}_{y}$ at which the particle in Fig. 1(a) is moving.}
 \label{fig:1}
 \end{figure}
 \end{center}
@@ -453,19 +453,25 @@ and the associated force
 \vec{F}=-\nabla V(x) = -\frac{dV}{dx} \hat{x} = - \frac{V_{0x} \pi}{L} \sin{(\pi x/L)} \hat{x}
 \end{equation}
 restores particles to the center of a long narrow region of the simulation.
-This is shown in Fig.~\ref{fig:2}(a)
+The landscape is illustrated in Fig.~\ref{fig:2}(a)
 where red regions are high potential
 and blue regions are low potential.
 
-The initial configuration of the system is shown i
+The initial configuration of the system is shown in 
 Fig.~\ref{fig:2}(a).  
 We annealed the system into a ground-state configuration
 by raising the system to a high temperature $T$,
 and slowly lowering the temperature in steps of $dT=-0.01$
-until the particles form a buckled chain due to the
+until the particles form a buckled chain in the low region of the channel
+due to the
 competition between particle repulsion and channel confinement.
-
-The interparticle forces of neighboring particles cause the system to form a buckled chain when the system is annealed.
+The interparticle forces between neighboring particles
+cause the system to form a buckled chain. % when the system is annealed.
+The molecular dynamics of simulated annealing
+is described in Ref.~\ref{},
+and presented simulations begin with particle configurations
+that result from the annealing process,
+as listed in Appendix [ref] and available in supplementary material.
 
 When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen AC drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
 
@@ -473,7 +479,8 @@ When a single particle is driven, the neighboring particles act similarly to a p
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.40]{twenty}
-\caption{\textbf{(a)} The orange particle is driven with a constant $F_{AC}$ and $f$ through 19 particles, colored green, confined by a quasi one-dimensional channel. The landscape is colored as in Fig. 1. \textbf{(b)} $\bar{v}_{y}$ versus $F_{DC}$, where $\bar{v}_{y}$ is the average particle velocity of the driven particle in the y-direction.}
+\caption{\textbf{(a)} A single particle (colored orange - mark in some manner for non-color views) is driven with a constant amplitude $F_{AC}$ and frequency $\omega$ through 19 neighboring particles (colored green - mark differently) confined by a quasi one-dimensional channel. The landscape is colored as in Fig.~\ref{fig1}(a). \textbf{(b)} Average $\bar{v}_{y}$ versus $F_{DC}$, where $\bar{v}_{y}$ is the average particle velocity of the driven particle in the y-direction.}
+\label{fig:2}
 \end{figure}
 \end{center}
 
