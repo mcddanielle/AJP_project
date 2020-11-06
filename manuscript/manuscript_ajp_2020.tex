@@ -183,6 +183,11 @@ Such studies are considered model systems
 for experimental systems relatively hard to access and visualize,
 such as cold atoms or electron gases. %ELABORATE AND CITE
 
+%another confinement technique:
+Acoustic tweezers and surface acoustic wave (SAW) \cite{}
+%confines single cells and particles with lower energy than light / lasers
+%%X. Ding, J. Shi, S.-C. S. Lin, S. Yazdi, B. Kiraly and T. J. Huang, “Tunable patterning of microparticles and cells using standing surface acoustic waves” Lab Chip, 2012, 12, 2491– 2497.
+%%%Acousto-optically generated potential energy landscapes: Potential mapping using colloids under flow Michael P. N. Juniper,1,∗ Rut Besseling,2 Dirk G. A. L. Aarts,1 and Roel P. A. Dullens1
 
 %---------------------------------------------------------------
 %kinks and nanofriction
@@ -193,20 +198,36 @@ Disordered chaotic dynamics are also possible,
 where irregular, unpredictable time evolution of
 nonlinear systems and occurs in mechanical oscillators \cite{chaos}.
 
+%----------------------------------------------------------------------------
 %paper outline
 In the following paper we describe
-our molecular dynamics model in Section~\ref{sec:MD},
-including various particle interactions and confining environments.
-In Section~\ref{sec:sync} we
-demonstrate how uniform environments and applied forces
-and create synchronized flow patterns.
+our molecular dynamics model in Section~\ref{sec:MD}.
+%including various  and confining environments.
+We include code to simulate
+and visualize the dynamics in this section
+and supplementary material.
+In Section~\ref{sec:results} we summarize
+our results,
+including synchronized motion of a single confined particle
+driven across a periodic landscape in 
+Section~\ref{sec:one} and
+multiple interacting particles
+in Section~\ref{sec:sync}.
+%we
+%demonstrate how uniform environments and applied forces
+%and create synchronized flow patterns.
 We present these results using standard tools of non-linear oscillators
-such phase diagrams of particle velocity vs. position.
-We modify the environment and applied forces
-and show aperiodic, or nearly periodic flow behaviors
-in Section~\ref{sec:quasiperiod}.
-Finally we explore the transition to chaos in 
+such phase diagrams of particle velocity versus position.
+In Section~\ref{sec:quasiperiod},
+we show how an aperiodic landscape modifies the particle dynamics.
+Finally we explore the transition to chaotic dynamics in 
 in Section~\ref{sec:chaos}.
+Our conclusions
+are in Section~\ref{sec:conclusion}. 
+In each section
+we suggest exercises for interested students,
+and summarize our suggestions in Section~\ref{sec:problems}.
+
 
 %Here we model the microscopic dynamics of phase locking in a colloidal model system using molecular dynamics (MD).
 
@@ -255,14 +276,7 @@ where [finish].
  generating a conservative force $\vec{F}_l= -\nabla V_l(\vec{r})$
  with fixed minima and maxima
  that are periodic or quasi-periodic,
- as described in Sec.~\ref{sec:results}.
- In every simulation, we confine
- the particles to a quasi-one-dimensional geometry
- using 
- \begin{equation}
-   V_{q1D} = V_0 \cos{(\pi x / L)}
- \end{equation}.
- 
+ as described in Sec.~\ref{sec:results}. 
  One example of a periodic light field is
  %that used in Sec.~\ref{sec:one}
  where 
@@ -272,6 +286,15 @@ where [finish].
  where $N_p$ are the number of troughs in the landscape,
  and $V_0$ is an adjustable parameter
  to set the depth of the troughs.
+
+ In multi-particle simulations, we confine
+ the particles along the x-direction with a
+ quasi-one-dimensional geometry
+ using a periodic function.
+ \begin{equation}
+   V_{q1D} = V_0 \cos{(\pi x / L)}
+ \end{equation}.
+ %%We could also use a Gaussian function.
  
  We model particle interactions with
  the Yukawa potential $\vec{F}_{ij} = -\nabla V_{ij}(r_{ij})$,
@@ -333,14 +356,25 @@ which is used to calculate the position. %Most undergraduate students learn the 
 % In subsection headings, only the first word is capitalized.
 \label{sec:one}
 
-We place a single particle in a periodic light field is
+We place a single particle in a periodic landscape 
 \begin{equation}
+  \label{eq:landscape}
   V_l = V_{0x} \cos{(\pi x/L)} + V_{0y} \cos{(N_p \pi y / L)} 
 \end{equation}
 where $N_p=20$ are the number of troughs in the landscape,
 and $V_{0x}=2$ and $V_{0x}=2$.
 This is illustrated in Fig.~\ref{fig:1}(a) where
 the red regions show local maxima and the blue local minima.
+The code for generating
+a two dimensional colored plot
+of the potential landscape
+is calculated by evaluating
+the analytic function in Eq.~\ref{eq:landscape}
+for a grid of values $(x_n,y_n)$.
+%is included in the supplementary material,
+
+
+
 We apply an external applied force, 
 with 
 a constant $F_{AC}$ with frequency $\omega$ then slowly increase $F_{DC}$.
@@ -405,17 +439,21 @@ $F_{DC}/F_{AC} = 1$ [CHECK!]
 \label{sec:chaos}	% You can label sections for reference
 
 \section{Associated problems}
-
+\label{sec:problems}	% You can label sections for reference
 
 
 \section{Conclusion}
-
+\label{sec:conclusion}	% You can label sections for reference
 
 
 
 \begin{acknowledgments}
 
-We acknowledge Harvey Gould and Jan Tobochnik, who supported our development of this article.  We acknowledge funding from the M.J. Murdock Charitable Trust and the Pacific PRISM program.
+  We acknowledge Harvey Gould and Jan Tobochnik, who supported our development of this article.
+  Charles and Cynthia Reichhardt advised 
+  the project and provided the molecular dynamics code.
+  We acknowledge funding from the M.J. Murdock Charitable Trust
+  and the Pacific Research Institute for Science and Mathematics (PRISM).
 
 \end{acknowledgments}
 
