@@ -101,41 +101,35 @@
 \section{Introduction} %
 %
 %Outline
-%-----------------------------------------------------------
-%describe types of physical systems - particle types
-Numerical simulations of confined, driven particles
-can be used to model a variety of physical phenomena.
-Particles which interact over long distances
-include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more detail and references]
-Particles which interact over short distances include
-bubble arrays/emulsions [more systems and references].
-
 %------------------------------------------------------------------
-%synchronization
-Synchronization is a universal phenomena. 
-Christiaan Huygens is credited with its discovery
-with his 1665 observation of
-in-phase oscillation of pendulum clocks \cite{Pikovsky2003}.  
-Huygens explanation
-that the clocks vibrations are coupled through the supporting
-wall has since been rigorously demonstrated by 20th century
-researchers \cite{Ramirez2016}.
+%synchronization = widest audience possible
+Synchronization is a universal phenomena
+that can be modeled with numerical studies of confined,
+driven particles.
+Christiaan Huygens 1665 observation of
+in-phase oscillation of pendulum clocks \cite{Pikovsky2003}
+[has been adapted into many useful technologies...]
+%Huygens explanation
+%that the clocks vibrations are coupled through the supporting
+%wall has since been rigorously demonstrated by 20th century
+%researchers \cite{Ramirez2016}.
 Examples of synchronization occur
 in many naturally oscillating systems,
-from fireflies syncing with a pulsed LED \cite{},
+from fireflies signaling in time with a with a pulsed LED \cite{},
 to simultaneous flapping of birds wings \cite{},
-to neuronal firing cardiac muscle \cite{} and brain tissue \cite{}.
+to neuronal firing in cardiac muscle \cite{} and brain tissue \cite{}.
 
 %phase locking
 Dynamical mode locking is a controlled 
 synchronization phenomena in 
 which an external driving force
-causes the syncing of natural oscillation frequencies
-in
-weakly coupled oscillators.
+causes
+%the natural oscillation frequencies
+%in
+weakly coupled oscillators to come into phase.
 Mode locking is often observed in quantum electronic
 devices such as Josephson junctions \cite{}
-and phase-locked loops \cite{}.
+and phase-locked current loops \cite{}.
 Instead of ohmic current-voltage (IV) relationships,
 such devices exhibit stepped regions
 such as Shapiro steps \cite{} [explain].
@@ -200,6 +194,15 @@ Disordered chaotic dynamics are also possible,
 where irregular, unpredictable time evolution of
 nonlinear systems and occurs in mechanical oscillators \cite{chaos}.
 
+%-----------------------------------------------------------
+%describe types of physical systems - particle types
+Numerical simulations of confined, driven particles
+can be used to model a variety of physical phenomena.
+Particles which interact over long distances
+include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more detail and references]
+Particles which interact over short distances include
+bubble arrays/emulsions [more systems and references].
+
 %----------------------------------------------------------------------------
 %paper outline
 In the following paper we describe
@@ -230,7 +233,7 @@ and conclude
 in Section~\ref{sec:conclusion}. 
 In each section
 we suggest exercises for interested students,
-and summarize our suggestions in Section~\ref{sec:problems}.
+as summarized in Section~\ref{sec:problems}.
 
 
 %Here we model the microscopic dynamics of phase locking in a colloidal model system using molecular dynamics (MD).
@@ -240,7 +243,8 @@ and summarize our suggestions in Section~\ref{sec:problems}.
 We use a classical two-dimensional model for 
 studying the dynamics of $N$ interacting particles. 
 Particles are confined in a two-dimensional (2D) 
-simulation of area $A = L \times L$ where $L=36.5$.
+simulation of area $A = L \times L$ where $L=36.5 a_0$
+where $a_0$ is a dimensionless unit of length.
 An individual particle $i$ has
 position $\vec{r}_i = x_i \hat{x} + y_i \hat{y}$.
 Particles are subject to
@@ -248,6 +252,7 @@ periodic boundary conditions
 such that a particle leaving the edges of the system is mapped
 back to a position within the simulation 
 by the rules $x_i+L=x_i$ and $y_i+L=y_i$.
+We summarize unit units of our simulated variables in Table ~\ref{tab:1}.
 
 \begin{table}[h!]
 \centering
@@ -256,11 +261,14 @@ by the rules $x_i+L=x_i$ and $y_i+L=y_i$.
 \begin{tabular}{c c p{5cm}}
 Quantity & Unit \\
 \hline
-time &  \\
-length &  \\
+time &  $\eta / E_0$ \\
+length &  $a_0$ \\
 velocity &  \\
-force & \\
-electric potential & \\
+force & $E_0 / a_0$\\
+electric potential & V(r_{ij} = q^2 E_0/r_{ij}), $E_0 = Z^*^2/()4\pi \epsilon \epsilon_0 a_0$ \\
+charge/dimensionless interaction strength $q$ \\
+effective colloidal charge & $Z^*$ \\
+solvent dielectic constant & $\epsilon$ \\
 \end{tabular}
 \end{ruledtabular}
 \label{tab:1}

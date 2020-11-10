@@ -7,6 +7,7 @@
 \usepackage{amsmath}  % needed for \tfrac, \bmatrix, etc.
 \usepackage{amsfonts} % needed for bold Greek, Fraktur, and blackboard bold
 \usepackage{graphicx} % needed for figures
+\usepackage{pythontex}
 
 \begin{document}
 
@@ -32,291 +33,503 @@
 \affiliation{Department of Physics, Pacific University, Forest Grove, OR 97116}
 
 % See the REVTeX documentation for more examples of author and affiliation lists.
-
 \date{\today}
 
 \begin{abstract}
-Synchronization is one of the most diverse fundamental physical phenomena. Synchronization has been studied for over three centuries, from Huygens pendulum clocks to the rhythmic beats of the flapping wings in a flock of birds. It is a goal of physicists to discover synchronization in different forms and learn how to control the phenomenon that occurs when weakly coupled competing oscillators adjust rhythms to match each other. A synchronization phenomenon that the physics community is particularly interested in is dynamic phase locking, which occurs when naturally oscillating motions are driven by an external modulation \cite{juniper}. Another interest of ours is to study the transition from ordered, synchronized dynamics, to disordered, chaotic dynamics. Chaotic dynamics is the irregular, unpredictable time evolution of nonlinear systems and occurs in mechanical oscillators \cite{chaos}. Here, we analyze the microscopic dynamics of phase locking in a colloidal model system using molecular dynamics (MD).
+
+  %DM editorial - too many ``we'' statements, not enough emphasize on importance.
+  %more detail on the methods?
+  %will need to rewrite results/conclusions as we shape the manuscript.
+  
+  %What problem did you study and why is it important?
+  We study synchronization of interacting particles
+  confined to a narrow channel 
+  driven by an externally applied force.  
+  %What methods did you use?
+  Using 
+  numerical simulations
+  we control the particle interactions,
+  external force and particle environment
+  in order to mimick experimental studies of driven colloidal particles
+  confined by light-fields.
+  The molecular dynamics simulations
+  model the particle dynamics 
+  using overdamped equations of motion suitable for a viscous suspension
+  of microscopic particles.
+  %What were your principal results?
+  We observe
+  particle synchronization under a variety of conditions,
+  including static and dynamic patterns formed on
+  periodic and quasiperiod substrates
+  and the propagation of 
+  high density kinks.
+  %What conclusions have you drawn from these results?
+  We demonstrate the transition from
+  trapped to sliding dynamics in
+  quasiperiodic landscapes differs
+  from that of a periodic landscape by [TBD],
+  and that kinks of high density propagate
+  [more/less ?  ] when [what?].
+  We also explore 
+  the limits of applied force that
+  cause the dynamics to transition to chaotic behavior.
+  We include sample code
+  and exercises for students
+  that include 
+  opportunties
+  to reproduce our results and propose
+  new numerical experiments.
+  With only a few particles in two-dimensions,
+  the simulation runs quickly,
+  making this an appropriate model for undergraduates to explore.
+
+  %Hew to this recipe (MMRC) witlessly
+  %1. M—Give the motivation and context
+  %2. M—Explain what you did in sufficient
+  %detail so the audience knows if your work
+  %is relevant and applicable to his or hers
+  %3. R—Emphasize your key results
+  %4. C—Tell the reader what you think the
+  %results mean
+  
 \end{abstract}
 % AJP requires an abstract for all regular article submissions.
 % Abstracts are optional for submissions to the "Notes and Discussions" section.
 
 \maketitle % title page is now complete
 
+\section{Introduction} %
+%
+%Outline
+%-----------------------------------------------------------
+%describe types of physical systems - particle types
+Numerical simulations of confined, driven particles
+can be used to model a variety of physical phenomena.
+Particles which interact over long distances
+include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more detail and references]
+Particles which interact over short distances include
+bubble arrays/emulsions [more systems and references].
 
-\section{Introduction} % Section titles are automatically converted to all-caps.
-% Section numbering is automatic.
+%------------------------------------------------------------------
+%synchronization
+Synchronization is a universal phenomena. 
+Christiaan Huygens is credited with its discovery
+with his 1665 observation of
+in-phase oscillation of pendulum clocks \cite{Pikovsky2003}.  
+Huygens explanation
+that the clocks vibrations are coupled through the supporting
+wall has since been rigorously demonstrated by 20th century
+researchers \cite{Ramirez2016}.
+Examples of synchronization occur
+in many naturally oscillating systems,
+from fireflies syncing with a pulsed LED \cite{},
+to simultaneous flapping of birds wings \cite{},
+to neuronal firing cardiac muscle \cite{} and brain tissue \cite{}.
 
-\LaTeX\ is typesetting software that is widely used by mathematicians
-and physicists because it is so good at typesetting equations. It is 
-also completely programmable, so it can be configured to produce 
-documents with almost any desired formatting, and to automatically
-number equations, figures, endnotes, and so on.
+%phase locking
+Dynamical mode locking is a controlled 
+synchronization phenomena in 
+which an external driving force
+causes the syncing of natural oscillation frequencies
+in
+weakly coupled oscillators.
+Mode locking is often observed in quantum electronic
+devices such as Josephson junctions \cite{}
+and phase-locked loops \cite{}.
+Instead of ohmic current-voltage (IV) relationships,
+such devices exhibit stepped regions
+such as Shapiro steps \cite{} [explain].
 
-To prepare manuscripts for the American Journal of Physics (AJP), 
-you should use the REV\TeX\ 4.1 format for Physical Review B
-preprints, as indicated in the \texttt{documentclass} line at the top 
-of this article's source file.  (If you're already familiar with 
-\LaTeX\ and have used other \LaTeX\ formats, please resist the 
-temptation to use them, or to otherwise override REV\TeX's formatting 
-conventions, in manuscripts that you prepare for AJP.)
+Recently studies of colloidal particles confined
+in optical traps have
+been used to examine the microscopic dynamics
+of mode-locking when subject to external driving force \cite{juniper2015}.
 
-This sample article is intended as a tutorial, template, and reference for 
-AJP authors, illustrating most of the \LaTeX\ and REV\TeX\ features that 
-authors will need.  For a more comprehensive introduction to \LaTeX, 
-numerous books and online references are available.\cite{latexsite, 
-wikibook, latexbook}  Documentation for the REV\TeX\ package 
-can be found on the APS web site.\cite{revtex}
 
-\LaTeX\ is free software, available for Unix/Linux, Mac OS X, and Windows
-operating systems. For downloading and installation instructions, follow
-the links from the \LaTeX\ web site.\cite{latexsite} It is most
-convenient\cite{cloudLaTeX} to install a ``complete \TeX\ distribution,'' 
-which will include \LaTeX, the underlying \TeX\ engine, macro packages 
-such as REV\TeX, a large collection of fonts, and GUI tools for editing 
-and viewing your documents.  To test your installation, try to process
-this sample article.
+%-----------------------------------------------
+%environments
+Particles in confined geometries behave differently than free particles.
+Stabilized charged particles form patterns
+due to the interplay of the confining environment
+and particle interactions.
+Narrow channels studies are useful to provide insights 
+of how particles move through systems 
+such as wires and microchannels.
+Biological systems such as
+neuron axons and capillaries can also be studied
+with these models [more detail and references].
+Many such systems execute local oscillations
+about stable points [elaborate].
+%----------------------------------------------------------
+%external forces
+An applied external force
+increases the diversity of behaviors,
+and can cause particles to flow in
+a variety of non-linear complex behaviors
+including
+synchronized, aperiod, or chaotic dynamical patterns.
+%
+The presence of a modulating surface
+can modify these patterns in a variety of ways,
+changing the onset of dynamical flows,
+and the overall flow patterns.
 
+%-------------------------------------------------------------
+%experimental - colloids specifically
+Colloidal particles trapped in light fields have proven
+a particularly useful medium for studying these behaviors.  %cite 
+The relatively large size of the colloids
+and ease in control has lead to a rich array of 
+experimental results. %THIS IS A TERRIBLE SENTENCE.
+Such studies are considered model systems
+for experimental systems relatively hard to access and visualize,
+such as cold atoms or electron gases. %ELABORATE AND CITE
+
+%another confinement technique:
+Acoustic tweezers and surface acoustic wave (SAW) \cite{}
+%confines single cells and particles with lower energy than light / lasers
+%%X. Ding, J. Shi, S.-C. S. Lin, S. Yazdi, B. Kiraly and T. J. Huang, “Tunable patterning of microparticles and cells using standing surface acoustic waves” Lab Chip, 2012, 12, 2491– 2497.
+%%%Acousto-optically generated potential energy landscapes: Potential mapping using colloids under flow Michael P. N. Juniper,1,∗ Rut Besseling,2 Dirk G. A. L. Aarts,1 and Roel P. A. Dullens1
+
+%---------------------------------------------------------------
+%kinks and nanofriction
+
+%-----------------------------------------------------------------
+%transition from synchronized to chaotic
+Disordered chaotic dynamics are also possible,
+where irregular, unpredictable time evolution of
+nonlinear systems and occurs in mechanical oscillators \cite{chaos}.
+
+%----------------------------------------------------------------------------
+%paper outline
+In the following paper we describe
+our molecular dynamics model in Section~\ref{sec:MD}.
+%including various  and confining environments.
+We include code to simulate
+and visualize the dynamics in this section
+and supplementary material.
+In Section~\ref{sec:results} we summarize
+our results,
+including synchronized motion of a single confined particle
+driven across a periodic landscape in 
+Section~\ref{sec:one} and
+multiple interacting particles
+in Section~\ref{sec:sync},
+including stationary propagation of high density kinks
+in Sec.~\ref{sec:kink}.
+%we
+%demonstrate how uniform environments and applied forces
+%and create synchronized flow patterns.
+We present these results using standard tools of non-linear oscillators
+such phase diagrams of particle velocity versus position.
+In Section~\ref{sec:quasiperiod},
+we show how an aperiodic landscape modifies the particle dynamics.
+Finally we explore the transition to chaotic dynamics in 
+Section~\ref{sec:chaos}
+and conclude 
+in Section~\ref{sec:conclusion}. 
+In each section
+we suggest exercises for interested students,
+and summarize our suggestions in Section~\ref{sec:problems}.
+
+
+%Here we model the microscopic dynamics of phase locking in a colloidal model system using molecular dynamics (MD).
 
 \section{Molecular Dynamics Model}
+\label{sec:MD}
+We use a classical two-dimensional model for 
+studying the dynamics of $N$ interacting particles. 
+Particles are confined in a two-dimensional (2D) 
+simulation of area $A = L \times L$ where $L=36.5$.
+An individual particle $i$ has
+position $\vec{r}_i = x_i \hat{x} + y_i \hat{y}$.
+Particles are subject to
+periodic boundary conditions
+such that a particle leaving the edges of the system is mapped
+back to a position within the simulation 
+by the rules $x_i+L=x_i$ and $y_i+L=y_i$.
 
-The simulations use overdamped dynamics with Euler's method in a classical two-dimensional model for particles confined to a periodic potential. With only a few particles in two-dimensions, the simulation runs quickly, making this an appropriate model for undergraduates to explore. Particles interact by the Yukawa potential. A single particle has the equation of motion 
-\begin{center}
-$\eta \vec{v_i} = \vec{F}_{landscape,i} + \sum_{j}^{} \vec{F}_{ij} + \vec{F}_{Drive}(t)$.\\ 
-\end{center}
-This includes the force of the landscape, inter-particle interactions $\vec{F}_{ij} = - \nabla V(\vec{r}_{ij})$, and a driving force $\vec{F}_{Drive}(t) = [F_{DC} + F_{AC} \sin(\omega t)] \hat{y}$, where $\omega = 2 \pi f$. The landscape is a sine function that is position dependent and calculate the landscape force on the particle directly from its location. The driving force does add energy into the system, and some of it is lost. The damping comes from the viscous fluid providing a nonconservative force.
+\begin{table}[h!]
+\centering
+\caption{Simulation units defined in the code.}
+\begin{ruledtabular}
+\begin{tabular}{c c p{5cm}}
+Quantity & Unit \\
+\hline
+time &  \\
+length &  \\
+velocity &  \\
+force & \\
+electric potential & \\
+\end{tabular}
+\end{ruledtabular}
+\label{tab:1}
+\end{table}
 
-Overdamped dynamics is a common assumption in models of colloid particles. This is an assumption that the suspending fluid is highly viscous and exerts a damping force on the particles equivalent to a linear drag force $F_{drag} = - \eta v$ and the acceleration of the particle is zero. The equation of motion we include makes both assumptions and is rearranged to reflect that. The equation of motion is not integrated for the velocity, instead it provides a direct calculation of the velocity.  
+Particles are subject an external time-dependent driving force
+$\vec{F}_{D}(t)$
+applied parallel to the y-direction.
+We model this force as
+\begin{equation}
+\vec{F}_{D}(t) = [F_{DC} + F_{AC} \sin(\omega t)] \hat{y},
+\end{equation}
+with modifiable parameters including
+a constant component $F_{DC}$,
+and a time dependent component with amplitude $F_{AC}$
+and frequency $\omega = 2 \pi f$.
+The frequency is scaled in time units,
+where [finish].
+ We demonstrate how a single particle (Sec.~\ref{sec:one})
+ and many particles
+ move (Sec.~\ref{sec:sync})
+ in response to this applied force in a variety of light fields.
+ In Sec.~\ref{sec:kink} we set $F_{DC}$
+ to zero and track the motion
+ of a high density area of a particle chain
+ (i.e. kink dynamics).
+ %The driving force does add energy into the system, and some of it is lost.
 
-In this model the Verlet method is equivalent to the Euler method.  Euler's method is then used to calculate the position. Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method. It is a nice opportunity to teach an extension of a method they know. 
+ We create several model light fields,
+ creating a landscape of potential minima and maxima
+ that modify the local force on a particle as a function of position
+ $\vec{F}_{l,i} = \vec{F}_{l}(\vec{r}_i).$
+ The landscape potential $V(\vec{r}) $ are static,
+ generating a conservative force $\vec{F}_l= -\nabla V_l(\vec{r})$
+ with fixed minima and maxima
+ that are periodic or quasi-periodic,
+ as described in Sec.~\ref{sec:results}. 
+ One example of a periodic light field is
+ %that used in Sec.~\ref{sec:one}
+ where 
+ \begin{equation}
+   V_l(y) = V_0 \cos{(N_p \pi y / L)}
+ \end{equation}
+ where $N_p$ are the number of troughs in the landscape,
+ and $V_0$ is an adjustable parameter
+ to set the depth of the troughs.
+
+ In multi-particle simulations, we confine
+ the particles along the $x-$direction with a
+ quasi-one-dimensional geometry
+ using a periodic function.
+ \begin{equation}
+   V_{q1D}(x) = V_0 \cos{(\pi x / L)}
+ \end{equation}.
+ %%We could also use a Gaussian function.
+ 
+ We model particle interactions with
+ the Yukawa potential $\vec{F}_{ij} = -\nabla V_{ij}(r_{ij})$,
+ \begin{equation}
+   V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
+ \end{equation}
+ where $r_{ij} = |\vec{r}_i - \vec{r}_j|$.
+ This is a
+ screened Coulomb potential
+ $E_0=2$ scales strength of repulsion
+ where $E_0 = k q_1 q_2$  [CHECK scaling/units].
+ $\kappa = 1/R_0$ is the screening parameter 
+that accounts for the lengthscale at
+which many particle
+interactions and local environment
+that reduces the interaction range of individual particles.
+We fix $R_0$ to be unity in our simulation units.
+
+The simulation is controlled by a $for()$ loop
+which runs from an intial to maximum $time$ integer.
+Each time step represents a simulation time of $\Delta t=0.001$.
+At each timestep
+we evaluate the net force on each particle as a function of its position
+$\vec{r}_i(t)$
+and then use the equation of motion to move particles
+to an updated position
+$\vec{r}_i(t+\Delta t)$.
+%
+We model the 
+particle dynamics 
+with an overdamped
+equation of motion
+integrated with the Verlet method.
+Here 
+the suspending fluid is highly viscous
+and exerts a damping force on the particles equivalent
+to a linear drag force.
+%Overdamped dynamics is a common assumption in models of colloidal particles.
+%This is an assumption that 
+The damping comes from a viscous fluid model
+providing a nonconservative force,
+modeled as a linear friction $\vec{F}_{drag} = -\eta \vec{v}_i$
+sufficient so that
+the acceleration of the particle is zero.
+Such a model is appropriate when the particles
+are small and the viscosity is high [finish... reference...]
+%[This model is encountered in Ch. 2 of Taylor's Classical Mechanics....]
+
+A single particle has the equation of motion 
+\begin{equation}
+\eta \vec{v}_i = \vec{F}_{l,i} + \sum_{i \neq j}^{N} \vec{F}_{ij} + \vec{F}_{D}(t).
+\end{equation}
+where $\eta = 1$.
+The equation of motion provides a direct calculation of the velocity
+of an individual particle from its location.
+Since we model the acceleration $\vec{a}$ as zero,
+the Verlet method simplifies to 
+the Euler method,
+which is used to calculate the position at subsequent time steps.
+%Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method.
+\begin{equation}
+\vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t).
+\end{equation}
 
 
-\section{MD Simulations}
 
-\subsection{Single particle system}  % In subsection headings, only the first word is capitalized.
 
-We used our model to generate a system, Fig. 1a), where the particle hops between troughs in the energy landscape. In the attached movie, Figure1.mp4, we apply a constant $F_{AC}$ with frequency $f$ then slowly increase $F_{DC}$  to achieve a variety of modes. A mode is a periodic pattern of hops with a constant average particle velocity, $\bar{v}_{y}$ over a range of driving forces $F_{DC}$. In the velocity-force plot in Fig. 1b) $\bar{v}_{y}$ is increasing non-uniformly, with steps, indicating mode locking. A related experiment \cite{juniper} revealed the microscopic dynamics of mode locking by driving colloids across a periodic landscape generated by optical tweezers.
+\section{Results}
+\label{sec:results}
+
+\subsection{Single particle system}
+% In subsection headings, only the first word is capitalized.
+\label{sec:one}
+
+We place a single particle in a periodic landscape with
+corrugations along the y-direction 
+\begin{equation}
+  \label{eq:landscape}
+  V_l(y) = V_{0y} \cos{(N_p \pi y / L)} 
+\end{equation}
+where $N_p=20$ are the number of troughs in the landscape,
+and $V_{0x}=2$ and $V_{0x}=2$.
+This is illustrated in Fig.~\ref{fig:1}(a) where
+the red regions show local maxima and the blue local minima.
+The code for generating
+a two dimensional colored plot
+of the potential landscape
+is calculated by evaluating
+the analytic function in Eq.~\ref{eq:landscape}
+for a grid of values $(x_n,y_n)$.
+%is included in the supplementary material,
+
+
+We apply an external applied force, 
+with 
+a constant $F_{AC}$ with frequency $\omega = 2\pi f$
+then slowly increase $F_{DC}$.
+The particle hops between troughs in the energy landscape
+when the superposition of $F_{AC}$ and $F_{DC}$ is large enough
+to overcome the barrier height.
+By modifying $F_{DC}$ we 
+achieve a variety of oscillation modes.
+A mode is a periodic pattern of hops
+with a constant average particle velocity, $\bar{v}_{y}$
+over a range of driving forces $F_{DC}$.
+We illustrate mode-locking in 
+the velocity-force plot in Fig.~\ref{fig:1}(b).
+Here $\bar{v}_{y}$ is increasing in non-uniform steps,
+with a quantized height of
+$\bar{v}_{y} = n \lambda f$,
+where $n$ is an integer,
+$\lambda = S_Y/N_p = 36.5/20 = 1.825$ is the spatial period, or wavelength
+of the landscape,
+and $f = 0.01$ cycles per time unit.
+
+Our simulations reproduce results presented in 
+Juniper {\it et al.} \cite{juniper2015}
+which demonstrated
+mode locking in
+experiments of 
+driven colloids on a
+optical periodic landscape.
+
+We illustrate the hopping pattern in Fig.~\ref{fig:1}(c)
+and 
+show the dynamics 
+in supplementary materials \cite{supp1}.
+
+
 
 \begin{center}
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.25]{single}
-\caption{\textbf{(a)} The particle is driven with a constant $F_{AC}$ and $f$ through a periodic potential landscape where blue are minima and red are maxima in the potential. \textbf{(b)} An average particle velocity in the y-direction $\bar{v}_{y}$ as a function of the driving force $F_{DC}$. In the animation the magenta dot represents the $\bar{v}_{y}$ at which the particle in Fig. 1a) is moving.}
+\caption{\textbf{(a)} The particle is driven with a constant amplitude $F_{AC}$ and frequency $\omega$ through a periodic spatial potential landscape.  The landscape is represented with a colormap where blue are minima and red are maxima in the potential. \textbf{(b)} An average particle velocity in the y-direction $\bar{v}_{y}$ as a function of a constant driving force $F_{DC}$. In the animation available in Ref.~\cite{supp1} the magenta dot represents the average velocity of the particle $\bar{v}_{y}$ at which the particle in Fig. 1(a) is moving.}
+\label{fig:1}
 \end{figure}
 \end{center}
 
-\subsection{Multi-particle system}
+\subsection{Synchronization in multi-particle systems}
+\label{sec:sync}
 
-We also simulated a twenty particle system confined to a narrow channel, as shown in Fig. 2a). The interparticle forces of neighboring particles cause the system to form a buckled chain when the system is annealed. When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen AC drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
+We simulated a twenty particle system confined to a narrow channel, as shown in Fig. 2a).  We create the confining channel with a sinusoidal function
+with a single period.
+\begin{equation}
+  \label{eq:channel}
+  V_l(x) = V_{0x} \cos{(\pi x/L)}
+\end{equation}
+where the trough heights is larger  $V_{0x}$,
+and the associated force
+\begin{equation}
+\vec{F}=-\nabla V(x) = -\frac{dV}{dx} \hat{x} = - \frac{V_{0x} \pi}{L} \sin{(\pi x/L)} \hat{x}
+\end{equation}
+restores particles to the center of a long narrow region of the simulation.
+The landscape is illustrated in Fig.~\ref{fig:2}(a)
+where red regions are high potential
+and blue regions are low potential.
+
+The initial configuration of the system is shown in 
+Fig.~\ref{fig:2}(a).  
+We annealed the system into a ground-state configuration
+by raising the system to a high temperature $T$,
+and slowly lowering the temperature in steps of $dT=-0.01$
+until the particles form a buckled chain in the low region of the channel
+due to the
+competition between particle repulsion and channel confinement.
+The interparticle forces between neighboring particles
+cause the system to form a buckled chain. % when the system is annealed.
+The molecular dynamics of simulated annealing
+is described in Ref.~\ref{},
+and presented simulations begin with particle configurations
+that result from the annealing process,
+as listed in Appendix [ref] and available in supplementary material.
+
+When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen AC drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
 
 \begin{center}
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.40]{twenty}
-\caption{\textbf{(a)} The orange particle is driven with a constant $F_{AC}$ and $f$ through 19 particles, colored green, confined by a quasi one-dimensional channel. The landscape is colored as in Fig. 1. \textbf{(b)} $\bar{v}_{y}$ versus $F_{DC}$, where $\bar{v}_{y}$ is the average particle velocity of the driven particle in the y-direction.}
+\caption{\textbf{(a)} A single particle (colored orange - mark in some manner for non-color views) is driven with a constant amplitude $F_{AC}$ and frequency $\omega$ through 19 neighboring particles (colored green - mark differently) confined by a quasi one-dimensional channel. The landscape is colored as in Fig.~\ref{fig1}(a). \textbf{(b)} Average $\bar{v}_{y}$ versus $F_{DC}$, where $\bar{v}_{y}$ is the average particle velocity of the driven particle in the y-direction.}
+\label{fig:2}
 \end{figure}
 \end{center}
 
 \subsection{Kinked system}
-
-For a bulleted list, just use \texttt{itemize} instead of \texttt{enumerate}:
-\begin{itemize}
-\item Across a resistor, $\Delta V = \pm IR$.
-\item Across a capacitor, $\Delta V = \pm Q/C$.
-\item Across an inductor, $\Delta V = \pm L(dI/dt)$.
-\end{itemize}
+\label{sec:kink}	% You can label sections for reference
+We confine $N$ particles to $N-1$ troughs to create a
+local high density region.
+$F_{DC}/F_{AC} = 1$ [CHECK!]
 
 
-\section{Quasi-periodic substrate}
-\label{DispEqSection}	% You can label sections for reference
 
-When an equation is important and/or tall and/or complicated, you should 
-display it on a line by itself, with a number. To do this, you put 
-\verb/\begin{equation}/ before the equation and \verb/\end{equation}/ 
-after it, as in     % Note: never put a blank line before an equation.
-\begin{equation}
-\int_0^\infty \! \frac{x^3}{e^x - 1} \, dx = 6\sum_{k=1}^\infty \frac1{k^4} = 
-    6\left(\frac{\pi^4}{90}\right) = \frac{\pi^4}{15}.
-\end{equation}
-% Don't put a blank line after the equation unless you're starting a new paragraph.
-This example also shows how to make the sum and integral symbols, big parentheses, 
-% Don't use \left and \right for small parentheses; you'll get too much space around them.
-and built-up fractions.  (Don't put built-up fractions in a 
-non-displayed equation, because there won't be enough vertical space in 
-AJP's final, single-spaced paragraphs.  Use the slashed form, $x^3/(e^x-1)$, 
-instead.)
+\section{Quasiperiodic substrate}
+\label{sec:quasiperiod}	% You can label sections for reference
 
-If you want to refer to an equation elsewhere in your manuscript, you can 
-give it a label.  For example, in the equation
-\begin{equation}
-\label{deriv}
-\frac{\Delta x}{\Delta t} \mathop{\longrightarrow}_{\Delta t\rightarrow0} \frac{dx}{dt} 
- = \lim_{\Delta t\rightarrow0} \frac{\Delta x}{\Delta t}
-\end{equation}
-we've inserted \verb/\label{deriv}/ to label this equation 
-\texttt{deriv}.\cite{labelnames}  To refer to 
-Eq.~(\ref{deriv}), we then type \verb/\ref{deriv}/.\cite{footnotes}  Notice 
-that AJP's style conventions also require you to put the equation number in 
-parentheses when you refer to it, and to abbreviate ``Eq.''\ unless it's at 
-the beginning of a sentence.
-
-Some equations require more complicated layouts. In the equation
-\begin{equation}
-E_n = (n + \tfrac12)\hbar, \quad \textrm{where}\  n = 0, 1, 2, \ldots,
-\end{equation}
-we've used \verb/\quad/ to leave a wide space and \verb/\textrm/ to put ``where'' 
-in plain Roman type.  To create a matrix or column vector, as in
-\begin{equation}
-\begin{bmatrix}
-	t' \\
-	x' \\
-\end{bmatrix}
-=
-\begin{pmatrix}
-	 \gamma & -\beta\gamma \\
-	-\beta\gamma & \gamma \\
-\end{pmatrix}
-\begin{bmatrix}
-	t \\
-	x \\
-\end{bmatrix},
-\end{equation}
-you can use the \texttt{pmatrix} and/or \texttt{bmatrix} environment, 
-for matrices delimited by parentheses and/or brackets.  There's also
-a plain \texttt{matrix} environment that omits the delimiters.
-In this and other examples of \LaTeX\ tables and arrays, the \verb/&/ 
-character serves as a ``tab'' to separate columns, while the \verb/\\/ 
-control sequence marks the end of a row.
-
-For a list of related equations, with nicely lined-up equals signs, 
-use the \texttt{eqnarray} environment:
-\begin{eqnarray}
-\oint \vec B \cdot d\vec\ell & = & -\frac{d\Phi_E}{dt} ; \\
-\oint \vec E \cdot d\vec\ell & = & \mu_0\epsilon_0\frac{d\Phi_B}{dt} + \mu_0 I.
-\end{eqnarray}
-You can also use \texttt{eqnarray} to make a multi-line equation, for example,
-\begin{eqnarray}
-\mathcal{Z} 
-& = & 1 + e^{-(\epsilon-\mu)/kT} + e^{-2(\epsilon-\mu)/kT} + \cdots \nonumber \\
-& = & 1 + e^{-(\epsilon-\mu)/kT} + (e^{-(\epsilon-\mu)/kT})^2 + \cdots \nonumber \\
-& = & \frac{1}{1 - e^{-(\epsilon-\mu)/kT}}.
-\end{eqnarray}
-Here the first column of the second and third lines is empty.  Note that you 
-can use \verb/\nonumber/ within any line to suppress the generation of
-an equation number; just be sure that each multi-line equation has at least 
-one number.
-
-Another commonly used structure is the \texttt{cases} environment, as in
-\begin{equation}
-m(T) =
-\begin{cases}
-	0 & T > T_c \, , \\
-	\bigl(1 - [\sinh 2 \beta J]^{-4} \bigr)^{1/8} & T < T_c \, .
-\end{cases}
-\end{equation}
-
-At AJP we require that you put correct punctuation before and after every
-displayed equation, treating each equation as part of a correctly punctuated
-English sentence.\cite{mermin} The preceding examples illustrate good
-equation punctuation.
-
+\section{Chaotic dynamics}
+\label{sec:chaos}	% You can label sections for reference
 
 \section{Associated problems}
-
-\LaTeX\ can import figures via the \verb/\includegraphics/ macro.
-For AJP, you should embed this in the \texttt{figure} environment, which 
-can place the figure in various locations.  This environment also lets 
-you add a caption (which AJP requires) and an optional label for referring 
-to the figure from elsewhere.  See Fig.~\ref{gasbulbdata} for an example.
-
-\begin{figure}[h!]
-% The bracketed code determines the figure's placement:  "h" stands for 
-% "here", telling LaTeX to put the figure as close to the current location 
-% as possible.  The ! overrides LaTeX's tendency to try to find a location 
-% that it thinks is better.  But don't agonize over the exact figure placement 
-% in your submitted manuscript.  For your initial submission, just make sure 
-% each figure is reasonably close to where it's first referenced.
-\centering
-\includegraphics{GasBulbData.eps}
-\caption{Pressure as a function of temperature for a fixed volume of air.  
-The three data sets are for three different amounts of air in the container. 
-For an ideal gas, the pressure would go to zero at $-273^\circ$C.  (Notice
-that this is a vector graphic, so it can be viewed at any scale without
-seeing pixels.)}
-\label{gasbulbdata}
-\end{figure}
-% When an AJP manuscript is conditionally accepted for publication, we
-% will request an editable copy of the manuscript in which the figures 
-% themselves have been removed, and all figure captions have been moved
-% to the end.  You should then comment-out the \includegraphics line
-% and move the entire \begin{figure} ... \end{figure} block to the end
-% of the source file, just before \end{document}.
-
-Most \LaTeX\ implementations can import a variety of graphics formats.
-For graphs and line drawings you should use vector (i.e., resolution-independent)
-graphics saved in encapsulated PostScript (.eps) or portable document
-format (.pdf).  Most good graphics software systems can save to one 
-or both of these formats.  Please don't use a rasterized graphics format
-(such as .jpg or .png or .tiff) for graphs or line drawings.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=5in]{ThreeSunsets.jpg}
-% Notice the width specification.  Photographs should normally have a
-% resolution of approximately 300 pixels per inch when printed, that is,
-% a total width of about 1000 pixels for a photo to be printed one column
-% wide.  Note also that this included photo is in .jpg format even though 
-% a .tiff version should be submitted for final production.
-\caption{Three overlaid sequences of photos of the setting sun, taken
-near the December solstice (left), September equinox (center), and
-June solstice (right), all from the same location at 41$^\circ$ north
-latitude. The time interval between images in each sequence is approximately
-four minutes.}
-\label{sunsets}
-\end{figure}
-
-For photographs and other images that are \textit{inherently} made 
-of pixels (that is, rasters or bitmaps), \LaTeX\ can 
-(usually) handle the .jpg and .png formats as well as .eps and .pdf.  
-Figure~\ref{sunsets} is a .jpg example. For final production, however, 
-AJP prefers that raster images be in .tiff format.  Most \LaTeX\ systems 
-can't import .tiff images, so we recommend using .png or .jpg with \LaTeX\ 
-for your initial submission, while saving a higher-quality .tiff version 
-to submit as a separate file after your manuscript is conditionally accepted
-for publication.
-
-Please refer to the AJP editor's web site\cite{editorsite} for more details 
-on AJP's requirements for figure preparation.
+\label{sec:problems}	% You can label sections for reference
 
 
 \section{Conclusion}
-
-We hope this article will help you prepare beautifully typeset
-manuscripts for the American Journal of Physics.  Good typesetting requires
-considerable attention to detail, but this effort will pay off by making your
-manuscript easier and more enjoyable to read.  Your colleagues, reviewers, 
-and editors will be grateful for your effort.
-
-Of course, we encourage you to put as much care into the \textit{content} 
-of your manuscript as you put into its form.  The AIP Style 
-Manual\cite{AIPstylemanual} is an indispensable reference on good physics 
-writing, covering everything from planning and organization to standard 
-spellings and abbreviations.
-
-Most important of all, please familiarize yourself with the AJP Statement
-of Editorial Policy,\cite{editorsite} which describes the types of manuscripts 
-that AJP publishes and the audience for which AJP authors are expected to write.
-You wouldn't want to put all that care into preparing a manuscript for AJP,
-only to find that AJP is the wrong journal for your manuscript.
-
-We look forward to receiving your submission to AJP.
+\label{sec:conclusion}	% You can label sections for reference
 
 
 \begin{acknowledgments}
 
-We gratefully acknowledge Harvey Gould and Jan Tobochnik, who created an earlier 
-AJP \LaTeX\ sample article that inspired this one.  This work was supported by the 
-American Association of Physics Teachers.
+  We acknowledge Harvey Gould and Jan Tobochnik, who supported our development of this article.
+  Charles and Cynthia Reichhardt advised 
+  the project and provided the molecular dynamics code.
+  We acknowledge funding from the M.J. Murdock Charitable Trust
+  and the Pacific Research Institute for Science and Mathematics (PRISM).
 
 \end{acknowledgments}
 
@@ -327,71 +540,72 @@ American Association of Physics Teachers.
 % numerical labels, so only the number of digits should matter--and even that
 % seems to make no discernible difference.
 
-\bibitem{juniper} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
+\bibitem{juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
 
-\bibitem{latexsite} \LaTeX\ Project Web Site, \url{<http://www.latex-project.org/>}.
+\bibitem{supp1} See Figure1.mp4 in appropriate %\url{}
 
-\bibitem{wikibook} \textit{\LaTeX} (Wikibook), \url{<http://en.wikibooks.org/wiki/LaTeX/>}.
+%\bibitem{latexsite} \LaTeX\ Project Web Site, \url{<http://www.latex-project.org/>}.
 
-\bibitem{latexbook}Helmut Kopka and Patrick W. Daly, \textit{A Guide to
-\LaTeX}, 4th edition (Addison-Wesley, Boston, 2004).
+%\bibitem{wikibook} \textit{\LaTeX} (Wikibook), \url{<http://en.wikibooks.org/wiki/LaTeX/>}.
 
-\bibitem{revtex} REV\TeX\ 4 Home Page, \url{<https://authors.aps.org/revtex4/>}.
+%\bibitem{latexbook}Helmut Kopka and Patrick W. Daly, \textit{A Guide to
+%\LaTeX}, 4th edition (Addison-Wesley, Boston, 2004).
 
-\bibitem{cloudLaTeX} On the other hand, you can avoid the installation process
-entirely by using a cloud-based \LaTeX\ processor such as ShareLaTeX,
-\url{<https://www.sharelatex.com/>}, or write\LaTeX, \url{<https://www.writelatex.com/>}.
+%\bibitem{revtex} REV\TeX\ 4 Home Page, \url{<https://authors.aps.org/revtex4/>}.
 
-\bibitem{nevermindlogic} In typography, aesthetics often takes precedence over logic.
+%\bibitem{cloudLaTeX} On the other hand, you can avoid the installation process
+%entirely by using a cloud-based \LaTeX\ processor such as ShareLaTeX,
+%\url{<https://www.sharelatex.com/>}, or write\LaTeX, \url{<https://www.writelatex.com/>}.
 
-\bibitem{FontEncodingComment} Please don't try to handle foreign characters 
-and accents with the \texttt{inputenc} and \texttt{fontenc} packages, which 
-are incompatible with AJP's editing process.
+%\bibitem{nevermindlogic} In typography, aesthetics often takes precedence over logic.
 
-\bibitem{wikimathpage} See the Mathematics chapter of Ref.~\onlinecite{wikibook}
-for an excellent overview of math symbols and equations, with examples.
+%\bibitem{FontEncodingComment} Please don't try to handle foreign characters 
+%and accents with the \texttt{inputenc} and \texttt{fontenc} packages, which 
+%are incompatible with AJP's editing process.
 
-\bibitem{labelnames} Thinking up a good label name takes a moment, but 
-it's worth the trouble; we strongly advise against using labels like 
-\texttt{eq2}, which become extremely confusing after you decide to add 
-another equation before Eq.~(\ref{deriv}).
+%\bibitem{wikimathpage} See the Mathematics chapter of Ref.~\onlinecite{wikibook} for an excellent overview of math symbols and equations, with examples.
 
-\bibitem{footnotes} You need to process a file twice to get the counters correct.
+%\bibitem{labelnames} Thinking up a good label name takes a moment, but 
+%it's worth the trouble; we strongly advise against using labels like 
+%\texttt{eq2}, which become extremely confusing after you decide to add 
+%another equation before Eq.~(\ref{deriv}).
 
-\bibitem{mermin} N. David Mermin, ``What's wrong with these equations?,'' 
-Phys. Today \textbf{42} (10), 9--11 (1989).  
+%\bibitem{footnotes} You need to process a file twice to get the counters correct.
+
+%\bibitem{mermin} N. David Mermin, ``What's wrong with these equations?,'' 
+%Phys. Today \textbf{42} (10), 9--11 (1989).  
 % Note that the issue number (10) in this citation is required, because
 % each issue of Physics Today starts over with page 1.  Also note the use of
 % an en-dash (--), not a hyphen (-), for the page range.
 
-\bibitem{editorsite} American Journal of Physics Editor's Web Site, 
-\url{<http://ajp.dickinson.edu>}.
+%\bibitem{editorsite} American Journal of Physics Editor's Web Site, 
+%\url{<http://ajp.dickinson.edu>}.
 
-\bibitem{feynman} Richard P. Feynman, Robert B. Leighton, and Matthew Sands, 
-\textit{The Feynman Lectures on Physics, Vol.\ 1} (Addison-Wesley, 1964), p.~3-10.
+%\bibitem{feynman} Richard P. Feynman, Robert B. Leighton, and Matthew Sands, 
+%\textit{The Feynman Lectures on Physics, Vol.\ 1} (Addison-Wesley, 1964), p.~3-10.
 % Note that this book is paginated by chapter; "3-10" is a single page reference
 % that uses a hyphen, not a range of pages that would us an en-dash (--).
 
-\bibitem{noBIBTeX} Many \LaTeX\ users manage their bibliographic data with 
-a tool called BIB\TeX.  Unfortunately, AJP cannot accept BIB\TeX\ files; all 
-bibliographic references must be incorporated into the manuscript file
-as shown here, at least when you send an editable file for production.
+%\bibitem{noBIBTeX} Many \LaTeX\ users manage their bibliographic data with 
+%a tool called BIB\TeX.  Unfortunately, AJP cannot accept BIB\TeX\ files; all 
+%bibliographic references must be incorporated into the manuscript file
+%as shown here, at least when you send an editable file for production.
 
-\bibitem{dyson} Freeman J. Dyson, ``Feynman's proof of the Maxwell equations,''
-Am. J. Phys. \textbf{58} (3), 209--211.  
+%\bibitem{dyson} Freeman J. Dyson, ``Feynman's proof of the Maxwell equations,''
+%Am. J. Phys. \textbf{58} (3), 209--211.  
 % The issue number (3) in this citation is optional, because AJP's pagination 
 % is by volume.
 
-\bibitem{examplevolume} M. R. Flannery, ``Elastic scattering,'' in 
-\textit{Atomic, Molecular, and Optical Physics Handbook}, edited by
-G. W. F. Drake (AIP Press, New York, 1996), p.~520.
+%\bibitem{examplevolume} M. R. Flannery, ``Elastic scattering,'' in 
+%\textit{Atomic, Molecular, and Optical Physics Handbook}, edited by
+%G. W. F. Drake (AIP Press, New York, 1996), p.~520.
 
-\bibitem{AIPstylemanual} \textit{AIP Style Manual}, 4th edition (American 
-Institute of Physics, New York, 1990). Available online at 
-\url{<http://www.aip.org/pubservs/style/4thed/toc.html>}. Although parts of 
-it have been made out of date by advancing technology, most of this manual 
-is still as useful as ever. Just be sure to follow AJP's specific rules
-whenever they conflict with those in the manual.
+%\bibitem{AIPstylemanual} \textit{AIP Style Manual}, 4th edition (American 
+%Institute of Physics, New York, 1990). Available online at 
+%\url{<http://www.aip.org/pubservs/style/4thed/toc.html>}. Although parts of 
+%it have been made out of date by advancing technology, most of this manual 
+%is still as useful as ever. Just be sure to follow AJP's specific rules
+%whenever they conflict with those in the manual.
 
 \end{thebibliography}
 
@@ -447,5 +661,91 @@ whenever they conflict with those in the manual.
 %four minutes.}
 %\label{sunsets}
 %\end{figure}
-
+      
 \end{document}
+
+\begin{equation}
+\vec{F}_{D}(t) = [F_{DC} + F_{AC} \sin(2 \pi f t)] \hat{y} 
+\end{equation}
+
+\begin{equation}
+F_{DC} = 0.01
+\end{equation}
+
+\begin{equation}
+F_{AC} = 0.2 
+\end{equation}
+
+\begin{equation}
+f = 0.01 
+\end{equation}
+
+\begin{equation}
+\bar{v}_y = n \lambda f
+\end{equation}
+
+\begin{equation}
+\bar{v}_y = \lambda f
+\end{equation}
+
+\begin{equation}
+\lambda = S_Y / 20
+\end{equation}
+
+\begin{equation}
+F_{p} = 0.1
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Supplementary Materials}
+
+\subsection{Gridded Contour Plot of landscape}
+%code is located in
+%~/pymodules/animation_code/channel_colloid_movie_maker.py
+
+%\begin{pyverbatim}
+##########################################################
+#ADD CONTOUR PLOT
+##########################################################
+def add_contour(ax,L,N,corrugated = True):
+    '''
+    Hardwired to color in the quasi1D potential to contain 
+    the particles in a trough.  
+    Can also add the washboard/corrugated substrate.
+
+    Required Arguments
+
+    Optional Arguments:
+
+    corrugated (default = True)  
+    Adds the washboard in the y-direction.  
+    Hardwired for a single parameter set.    
+    '''
+
+    a_p = L/N
+
+    #assuming Tiare's trough system, so we won't want to cover the entire range
+    X = np.arange(0, L/2.0, 0.1)
+    Y = np.arange(0, L, 0.1)
+    X, Y = np.meshgrid(X, Y)
+
+    Z_mag = 2.0 # set by what "looks good"
+    Z = Z_mag*np.sin(2*np.pi*X/L)
+    if corrugated == True:
+        Z += np.sin(2*np.pi*(Y+1.75)/a_p) 
+
+    cmap=cm.coolwarm_r
+
+    #alphs is the degree of transparency, again, set by what looks good.
+    cset = ax.contourf(X, Y, Z, cmap=cmap,alpha=0.25)
+
+    #ax1.set_xlim(15,20)
+    #ax1.set_ylim(15,20)
+
+    #ax1.set_xlabel(r"$X$")
+    #ax1.set_ylabel(r"$y$",rotation='horizontal',ha='right')
+
+    #ax1.set_xticks([])
+    #ax1.set_yticks([])
+    return
+ %   \end{pyverbatim}
