@@ -371,7 +371,7 @@ Such a model is appropriate when the particles
 are small and the viscosity is high [finish... reference...]
 %[This model is encountered in Ch. 2 of Taylor's Classical Mechanics....]
 
-A single particle has the equation of motion 
+A particle has the equation of motion 
 \begin{equation}
 \eta \vec{v}_i = \vec{F}_{l,i} + \sum_{i \neq j}^{N} \vec{F}_{ij} + \vec{F}_{D}(t).
 \end{equation}
@@ -404,14 +404,14 @@ which is used to calculate the position at subsequent time steps.
 % In subsection headings, only the first word is capitalized.
 \label{sec:one}
 
-We place a single particle in a periodic landscape with
-corrugations along the y-direction 
+We place a single particle in a periodic landscape 
+along the y-direction 
 \begin{equation}
   \label{eq:landscape}
   V_l(y) = V_{0y} \cos{(N_p \pi y / L)} 
 \end{equation}
-where $N_p=20$ are the number of troughs in the landscape,
-and $V_{0y}=0.2$.
+with $N_p=20$ troughs in the landscape.
+%and $V_{0y}=0.2$.
 This is illustrated in Fig.~\ref{fig:1}(a) where
 the red (blue) regions show local maxima (minima).
 The code for generating
@@ -421,19 +421,63 @@ is calculated by evaluating
 the analytic function in Eq.~\ref{eq:landscape}
 for a grid of values $(x_n,y_n)$.
 %is included in the supplementary material,
-
+The numerical implementation of the landscape 
+is calculated with
+\begin{equation}
+  \label{eq:landscape}
+  F_y(y) = F_{0y} \sin{(N_p \pi y / L)} 
+\end{equation}
+where $F_{0y} = 0.1$.
+We drive the particle with
+$F_{AC}=0.2$, $F_{DC}=0.01$, and $f=0.01$ cycles per time unit.
+The particle hops between troughs in the energy landscape
+when the superposition of $F_{AC}$ and $F_{DC}$ is large enough
+to overcome the barrier height of the landscape troughs.
+In Fig.~\ref{fig:0}(a)
+we plot the applied driving force
+and in (b) 
+we show the position of the particle
+as a function of time.
+The initial position is near $y=0$
+and the initial driving force is minimum
+$F_D(t=0) = F_{DC}$.
+Over the time period $T/2 = 50$ time units
+the particle moves
+in the positive y-direction
+while $F_{D}(t) > 0 $
+through three
+substrate troughs, reaching a maximum of $y/\lambda = 3$.
+When $F_{D}(t) < 0 $
+the particle moves in the negative y-direction
+reaching a minimum position
+of $y/\lambda = 1$
+over the period $T = 1/f = 100$.
+The average velocity $\bar{v}_y$ is the average displacement $\lambda$ over the period $T = 1/f$, $\bar{v}_y = \lambda f$.
 
 %single DC case with figure
+%dc_current 0.01
+%ac_current 0.2
+%ac_frequency 0.0001
+%fp_y 0.1
+\begin{center}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.25]{position}
+\caption{The position as a function of time of a single driven particle
+  normalized by the period of the substrate $\lambda$.
+  }
+\label{fig:0}
+\end{figure}
+\end{center}
+
 
 %increased DC
 We apply an external applied force, 
 with 
 a constant $F_{AC}$ with frequency $\omega = 2\pi f$
 then slowly increase $F_{DC}$
-at a rate of [].
-The particle hops between troughs in the energy landscape
-when the superposition of $F_{AC}$ and $F_{DC}$ is large enough
-to overcome the barrier height.
+at a rate of $\Delta F_{DC} = 0.001$ every $\Delta t = 4000$ integer timesteps
+or $40$ time units.
 By modifying $F_{DC}$ we 
 achieve a variety of oscillation modes.
 A mode is a periodic pattern of hops
