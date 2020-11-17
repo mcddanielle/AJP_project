@@ -342,20 +342,24 @@ that reduces the interaction range of individual particles.
 We fix $R_0$ to be unity in our simulation units.
 
 The simulation is controlled by a $for()$ loop
-which runs from an intial to maximum $time$ integer.
-Each time step represents a simulation time of $\Delta t=0.001$.
+which runs from an initial to maximum $time$ integer.
+Each integer timestep
+represents a simulation time of $\Delta t=0.001$.
 At each timestep
 we evaluate the net force on each particle as a function of its position
 $\vec{r}_i(t)$
-and then use the equation of motion to move particles
+and then integrate
+the equation of motion to move particles
 to an updated position
 $\vec{r}_i(t+\Delta t)$.
 %
-We model the 
+The integration is simple
+because 
+we model the 
 particle dynamics 
 with an overdamped
-equation of motion
-integrated with the Verlet method.
+equation of motion.
+%integrated with the Verlet method.
 Here 
 the suspending fluid is highly viscous
 and exerts a damping force on the particles equivalent
@@ -369,7 +373,8 @@ sufficient so that
 the acceleration of the particle is zero.
 Such a model is appropriate when the particles
 are small and the viscosity is high [finish... reference...]
-%[This model is encountered in Ch. 2 of Taylor's Classical Mechanics....]
+This model is encountered in standard texts,
+for instance Ch. 2 of Taylor's Classical Mechanics.
 
 A particle has the equation of motion 
 \begin{equation}
@@ -404,7 +409,7 @@ which is used to calculate the position at subsequent time steps.
 % In subsection headings, only the first word is capitalized.
 \label{sec:one}
 
-We place a single particle in a periodic landscape 
+We drive a single particle across a periodic landscape 
 along the y-direction 
 \begin{equation}
   \label{eq:landscape}
@@ -430,18 +435,22 @@ is calculated with
 where $F_{0y} = 0.1$.
 We drive the particle with
 $F_{AC}=0.2$, $F_{DC}=0.01$, and $f=0.01$ cycles per time unit.
-The particle hops between troughs in the energy landscape
-when the superposition of $F_{AC}$ and $F_{DC}$ is large enough
-to overcome the barrier height of the landscape troughs.
+When the superposition of $F_{AC}$ and $F_{DC}$ is large enough
+to overcome the barrier height of the landscape troughs,
+the particle hops between troughs in the energy landscape.
+In Fig.~\ref{fig:0} we
+show the relationship between the applied force and particle
+position.
 In Fig.~\ref{fig:0}(a)
 we plot the applied driving force
-and in (b) 
+as a function of time
+and in Fig.~\ref{fig:0}(b) 
 we show the position of the particle
 as a function of time.
 The initial position is near $y=0$
 and the initial driving force is minimum
 $F_D(t=0) = F_{DC}$.
-Over the time period $T/2 = 50$ time units
+Over the time period $T/2 = 50$ %time units
 the particle moves
 in the positive y-direction
 while $F_{D}(t) > 0 $
@@ -452,7 +461,15 @@ the particle moves in the negative y-direction
 reaching a minimum position
 of $y/\lambda = 1$
 over the period $T = 1/f = 100$.
-The average velocity $\bar{v}_y$ is the average displacement $\lambda$ over the period $T = 1/f$, $\bar{v}_y = \lambda f$.
+The average velocity $\bar{v}_y$
+is the average displacement $\Delta y = y(t_0+T) - y(t_0)$
+over the period of the driving force.
+In Fig. ~\ref{fig:0}
+the displacement is a single wavelength
+of the substrate $y(t_0+T) - y(t_0) = \lambda$.
+Thus the average velocity 
+is $\bar{v}_y = \lambda f$, where $T = 1/f$.
+
 
 %single DC case with figure
 %dc_current 0.01
@@ -470,7 +487,12 @@ The average velocity $\bar{v}_y$ is the average displacement $\lambda$ over the 
 \end{figure}
 \end{center}
 
-
+The hopping pattern of the driven particle is periodic,
+and could be achieved with a variety of
+driving forces.  %, as we will demonstrate in Fig.~\ref{fig:1}
+In Fig.~\ref{fig:1}
+we show the result increasing the 
+force to the particle as a function of time.  
 %increased DC
 We apply an external applied force, 
 with 
@@ -478,6 +500,9 @@ a constant $F_{AC}$ with frequency $\omega = 2\pi f$
 then slowly increase $F_{DC}$
 at a rate of $\Delta F_{DC} = 0.001$ every $\Delta t = 4000$ integer timesteps
 or $40$ time units.
+%this seems fast, but it is slow enough to estimate
+%the velocity accurately.
+%this is not be so for a multiple particle system!
 By modifying $F_{DC}$ we 
 achieve a variety of oscillation modes.
 A mode is a periodic pattern of hops
@@ -501,7 +526,7 @@ experiments of
 driven colloids on a
 optical periodic landscape.
 
-We illustrate the hopping pattern in Fig.~\ref{fig:1}(c)
+We illustrate the hopping pattern in Fig.~\ref{fig:1}(b)
 and 
 show the dynamics 
 in supplementary materials \cite{supp1}.
