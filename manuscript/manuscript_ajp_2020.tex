@@ -49,20 +49,22 @@
   Using 
   numerical simulations
   we control the particle interactions,
-  external force and environment
+  external force and confining environment
   in order to mimick experimental studies of driven colloidal particles
   confined by light-fields.
   The molecular dynamics simulations
-  model the particle dynamics 
-  using overdamped equations of motion suitable for a viscous suspension
-  of microscopic particles.
+  %model the particle dynamics 
+  use overdamped equations of motion suitable for a viscous suspension
+  of microscopic particles
+  to model the dynamics.
   %What were your principal results?
   We observe
   particle synchronization under a variety of conditions,
   including static and dynamic patterns formed on
   periodic and quasiperiod substrates
   and the propagation of 
-  high density kinks.
+  high density regions of particles,
+  or kinks.
   %What conclusions have you drawn from these results?
   We demonstrate the transition from
   trapped to sliding dynamics in
@@ -75,7 +77,8 @@
   cause the dynamics to transition to chaotic behavior.
   We include sample code
   and exercises for students
-  that include 
+  %that include
+  with 
   opportunties
   to reproduce our results and propose
   new numerical experiments.
@@ -112,9 +115,10 @@ Examples of synchronization occur
 in many naturally oscillating systems,
 from Huygens 1665 observation of
 in-phase oscillation of pendulum clocks \cite{Pikovsky2003},
-to fireflies signaling in time with a with a pulsed LED \cite{},
-to simultaneous flapping of birds wings \cite{},
-to neuronal firing in cardiac muscle \cite{} and brain tissue \cite{}.
+to fireflies signaling in time with a pulsed light emitting diode \cite{},
+to coordinated flapping of birds wings \cite{},
+to simultaneous neuronal firing in cardiac muscle \cite{}
+and brain tissue \cite{}.
 
 %phase locking
 Dynamical mode locking is a controlled 
@@ -127,22 +131,27 @@ weakly coupled oscillators to come into phase.
 Mode locking is often observed in quantum electronic
 devices such as Josephson junctions \cite{}
 and phase-locked current loops \cite{}.
-Instead of ohmic current-voltage (IV) relationships,
+Instead of ohmic current-voltage (I-V) relationships,
 such devices exhibit stepped regions
 such as Shapiro steps \cite{} [explain].
 
-Recently studies of colloidal particles confined
-in optical traps have
+Recent experiments of colloidal particles confined
+in optical traps
+subject to external driving forces 
+have
 been used to examine the microscopic dynamics
-of mode-locking when subject to external driving force \cite{juniper2015}.
-[this is important because...]
+of mode-locking \cite{juniper2015}.
 %experimental - colloids specifically
-Colloidal particles trapped in light fields have proven
+Colloidal particles trapped in light fields are %have proven
 a particularly useful medium for studying complex dynamical behaviors.  %cite 
-The relatively large size of the colloids
-and ease in control has lead to a rich array of 
-experimental results. %THIS IS A TERRIBLE SENTENCE.
-Such studies are considered model systems
+The relatively large size of the colloids (micrometers)
+makes colloids easy to control and image,
+and the interaction forces between colloids can be modified
+by tuning the chemistry of the suspending fluid or surface ligands
+of the colloidal particles \cite{Grier2003}.
+This ease in control of colloids has lead to a rich array of 
+experimental results  
+considered models
 for experimental systems relatively hard to access and visualize,
 such as cold atoms or electron gases. %ELABORATE AND CITE
 
@@ -175,10 +184,10 @@ and the overall flow patterns.
 %
 
 %external forces
-It is often useful to study the
+The
 dynamics of particles subject to 
-an applied external force,
-for instance the flow of charges in a conductor,
+an applied external force apply to many physical systems.
+For instance the flow of charges in a conductor,
 or cells responding to a chemical gradient.
 The external force 
 increases the diversity of dynamical behaviors,
@@ -192,6 +201,10 @@ nonlinear systems and occurs in mechanical oscillators \cite{chaos}.
 
 %-------------------------------------------------------------
 
+Numerical modeling of colloids can provide mechanistic insight
+that can be difficult to achieve in experimental conditions
+where Brownian motion and other sources of noise dominate.
+[elaborate]
 
 %another confinement technique:
 %Acoustic tweezers and surface acoustic wave (SAW) \cite{}
@@ -231,7 +244,7 @@ in Sec.~\ref{sec:kink}.
 %demonstrate how uniform environments and applied forces
 %and create synchronized flow patterns.
 We present these results using standard tools of non-linear oscillators
-such phase diagrams of particle velocity versus position.
+such phase diagrams of velocity versus position.
 In Section~\ref{sec:quasiperiod},
 we show how an aperiodic landscape modifies the particle dynamics.
 Finally we explore the transition to chaotic dynamics in 
@@ -261,6 +274,34 @@ back to a position within the simulation
 by $x_i+L=x_i$ and $y_i+L=y_i$.
 We summarize the units of the simulated variables in Table ~\ref{tab:1}.
 
+We model particle interaction forces
+$\vec{F}_{ij} = -\nabla V_{ij}(r_{ij})$ 
+with
+the Yukawa potential energy 
+\begin{equation}
+  V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
+\end{equation}
+where particle $i$ and $j$ are distance
+$r_{ij} = |\vec{r}_i - \vec{r}_j|$ apart.
+This 
+screened Coulomb potential
+%$E_0=2$ scales strength of repulsion
+is scaled in terms of energy unit $E_0$
+defined in Table ~\ref{tab:1}.
+%$ = k q_1 q_2$. %[CHECK scaling/units].
+$\kappa = 1/R_0$ is the screening parameter 
+that describe the lengthscale at
+which particles interact.
+We fix $R_0$ to be $a_0$.
+In experiments charge screening is observed
+due to ions in the suspending fluid and
+the charges of surrounding particles
+which
+reduces the interaction range of individual particles.
+This allows the numerical models to run more efficiently
+since particles do not need to interact over long range.
+[explain particle in cell models].
+
 \begin{table}[h!]
 \centering
 \caption{Simulation units defined in the code.}
@@ -269,15 +310,15 @@ We summarize the units of the simulated variables in Table ~\ref{tab:1}.
 Quantity & Unit \\
 \hline
 length &  $a_0$ \\
-viscosity/damping constant & $\eta$ \\
+%electric potential & $V(r_{ij}) = E_0/r_{ij}$ \\
+energy & $E_0 = q^2{Z^*}^2/4\pi \epsilon \epsilon_0 a_0$ \\
 dimensionless interaction strength & $q$ \\
 effective colloidal charge & $Z^*$ \\
-solvent dielectic constant & $\epsilon$ \\
-time &  $\eta / E_0$ \\
-velocity &  $\eta E_0 / a_0$ \\
+solvent dielectic constant & $\epsilon \epsilon_0$\\
 force & $E_0 / a_0$\\
-electric potential & $V(r_{ij}) = q^2 E_0/r_{ij}$ \\
-energy & $E_0 = {Z^*}^2/4\pi \epsilon \epsilon_0 a_0$ \\
+viscosity/damping constant & $\eta$ \\
+time &  $\eta / E_0$ \\
+velocity &  $ E_0 / \eta a_0$ \\
 \end{tabular}
 \end{ruledtabular}
 \label{tab:1}
@@ -297,14 +338,16 @@ and frequency $\omega = 2 \pi f$.
 %The frequency is scaled in time units,
 %where [finish].
 
- We model several enviroments
+We use several model enviroments to confine the particles,
+again assuming the confining force arises from a potential function 
  %creating a landscape of potential minima and maxima
  %that modify the force on a particle as a function of position
  $\vec{F}_{l}(\vec{r}) = -\nabla V_l(\vec{r}).$
  The landscape potential $V(\vec{r}) $ are static 
  with fixed minima and maxima
  that are periodic or quasi-periodic,
- as described in Sec.~\ref{sec:results}. 
+ as described in Sec.~\ref{sec:results}.
+ 
  One example of a periodic landscape is
  %that used in Sec.~\ref{sec:one}
  where 
@@ -324,22 +367,7 @@ and frequency $\omega = 2 \pi f$.
  \end{equation}.
  %%We could also use a Gaussian function.
  
- We model particle interactions with
- the Yukawa potential $\vec{F}_{ij} = -\nabla V_{ij}(r_{ij})$,
- \begin{equation}
-   V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
- \end{equation}
- where $r_{ij} = |\vec{r}_i - \vec{r}_j|$.
- This is a
- screened Coulomb potential
- $E_0=2$ scales strength of repulsion
- where $E_0 = k q_1 q_2$  [CHECK scaling/units].
- $\kappa = 1/R_0$ is the screening parameter 
-that accounts for the lengthscale at
-which many particle
-interactions and local environment
-that reduces the interaction range of individual particles.
-We fix $R_0$ to be unity in our simulation units.
+ 
 
 The simulation is controlled by a $for()$ loop
 which runs from an initial to maximum $time$ integer.
@@ -488,11 +516,15 @@ is $\bar{v}_y = \lambda f$, where $T = 1/f$.
 \end{center}
 
 The hopping pattern of the driven particle is periodic,
-and could be achieved with a variety of
+and could be achieved over a range of
 driving forces.  %, as we will demonstrate in Fig.~\ref{fig:1}
-In Fig.~\ref{fig:1}
-we show the result increasing the 
-force to the particle as a function of time.  
+We explore the ranges of periodic hopping patterns
+by increasing $F_{DC}$ as a function of time,
+as shown in 
+%
+Fig.~\ref{fig:1}.
+%we show the result increasing the 
+%force to the particle as a function of time.  
 %increased DC
 We apply an external applied force, 
 with 
