@@ -639,6 +639,59 @@ $F_{DC}/F_{AC} = 1$ [CHECK!]
 \section{Conclusion}
 \label{sec:conclusion}	% You can label sections for reference
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Supplementary Materials}
+
+\subsection{Gridded Contour Plot of landscape}
+%code is located in
+%~/pymodules/animation_code/channel_colloid_movie_maker.py
+
+\begin{verbatim}
+##########################################################
+#ADD CONTOUR PLOT
+##########################################################
+def add_contour(ax,L,N,corrugated = True):
+    '''
+    Hardwired to color in the quasi1D potential to contain 
+    the particles in a trough.  
+    Can also add the washboard/corrugated substrate.
+
+    Required Arguments
+
+    Optional Arguments:
+
+    corrugated (default = True)  
+    Adds the washboard in the y-direction.  
+    Hardwired for a single parameter set.    
+    '''
+
+    a_p = L/N
+
+    #assuming Tiare's trough system, so we won't want to cover the entire range
+    X = np.arange(0, L/2.0, 0.1)
+    Y = np.arange(0, L, 0.1)
+    X, Y = np.meshgrid(X, Y)
+
+    Z_mag = 2.0 # set by what "looks good"
+    Z = Z_mag*np.sin(2*np.pi*X/L)
+    if corrugated == True:
+        Z += np.sin(2*np.pi*(Y+1.75)/a_p) 
+
+    cmap=cm.coolwarm_r
+
+    #alphs is the degree of transparency, again, set by what looks good.
+    cset = ax.contourf(X, Y, Z, cmap=cmap,alpha=0.25)
+
+    #ax1.set_xlim(15,20)
+    #ax1.set_ylim(15,20)
+
+    #ax1.set_xlabel(r"$X$")
+    #ax1.set_ylabel(r"$y$",rotation='horizontal',ha='right')
+
+    #ax1.set_xticks([])
+    #ax1.set_yticks([])
+    return
+\end{verbatim}
 
 \begin{acknowledgments}
 
@@ -823,7 +876,7 @@ F_{p} = 0.1
 %code is located in
 %~/pymodules/animation_code/channel_colloid_movie_maker.py
 
-%\begin{pyverbatim}
+\begin{verbatim}
 ##########################################################
 #ADD CONTOUR PLOT
 ##########################################################
@@ -868,4 +921,4 @@ def add_contour(ax,L,N,corrugated = True):
     #ax1.set_xticks([])
     #ax1.set_yticks([])
     return
- %   \end{pyverbatim}
+\end{verbatim}
