@@ -3,7 +3,6 @@
 % Note that AJP uses the same style as Phys. Rev. B (prb).
 
 % The % character begins a comment, which continues to the end of the line.
-
 \usepackage{amsmath}  % needed for \tfrac, \bmatrix, etc.
 \usepackage{amsfonts} % needed for bold Greek, Fraktur, and blackboard bold
 \usepackage{graphicx} % needed for figures
@@ -272,35 +271,7 @@ periodic boundary conditions
 such that a particle leaving the edges of the system is mapped
 back to a position within the simulation 
 by $x_i+L=x_i$ and $y_i+L=y_i$.
-We summarize the units of the simulated variables in Table ~\ref{tab:1}.
-
-We model particle interaction forces
-$\vec{F}_{ij} = -\nabla V_{ij}(r_{ij})$ 
-with
-the Yukawa potential energy 
-\begin{equation}
-  V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
-\end{equation}
-where particle $i$ and $j$ are distance
-$r_{ij} = |\vec{r}_i - \vec{r}_j|$ apart.
-This 
-screened Coulomb potential
-%$E_0=2$ scales strength of repulsion
-is scaled in terms of energy unit $E_0$
-defined in Table ~\ref{tab:1}.
-%$ = k q_1 q_2$. %[CHECK scaling/units].
-$\kappa = 1/R_0$ is the screening parameter 
-that describe the lengthscale at
-which particles interact.
-We fix $R_0$ to be $a_0$.
-In experiments charge screening is observed
-due to ions in the suspending fluid and
-the charges of surrounding particles
-which
-reduces the interaction range of individual particles.
-This allows the numerical models to run more efficiently
-since particles do not need to interact over long range.
-[explain particle in cell models].
+The units of the simulated variables are in Table ~\ref{tab:1}.
 
 \begin{table}[h!]
 \centering
@@ -324,6 +295,36 @@ velocity &  $ E_0 / \eta a_0$ \\
 \label{tab:1}
 \end{table}
 
+We model particle interaction forces
+$\vec{F}_{ij} = -\nabla V_{ij}(r_{ij})$ 
+with
+the Yukawa potential energy 
+\begin{equation}
+  V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
+\end{equation}
+where particle $i$ and $j$ are distance
+$r_{ij} = |\vec{r}_i - \vec{r}_j|$ apart.
+This 
+screened Coulomb potential
+%$E_0=2$ scales strength of repulsion
+is scaled in terms of energy unit $E_0$
+defined in Table ~\ref{tab:1}.
+%$ = k q_1 q_2$. %[CHECK scaling/units].
+$\kappa = 1/R_0$ is the screening parameter 
+that describes the lengthscale at
+which particles interact.
+We fix $R_0$ to be $a_0$.
+In experiments charge screening is observed
+due to ions in the suspending fluid and
+the charges of surrounding particles
+which
+reduces the interaction range of individual particles. % \cite{}.
+Because the particles interact over short ranges, 
+the numerical models can be run efficiency
+using a neighbor list algorithm
+determined using a cell method.
+[explain!]
+
 Particles are subject an external time-dependent driving force
 $\vec{F}_{D}(t)$
 applied parallel to the y-direction.
@@ -339,7 +340,7 @@ and frequency $\omega = 2 \pi f$.
 %where [finish].
 
 We use several model enviroments to confine the particles,
-again assuming the confining force arises from a potential function 
+assuming the confining force arises from a potential function 
  %creating a landscape of potential minima and maxima
  %that modify the force on a particle as a function of position
  $\vec{F}_{l}(\vec{r}) = -\nabla V_l(\vec{r}).$
@@ -347,26 +348,30 @@ again assuming the confining force arises from a potential function
  with fixed minima and maxima
  that are periodic or quasi-periodic,
  as described in Sec.~\ref{sec:results}.
- 
- One example of a periodic landscape is
- %that used in Sec.~\ref{sec:one}
- where 
- \begin{equation}
-   V_l(y) = V_0 \cos{(N_p \pi y / L)}
- \end{equation}
- where $N_p$ are the number of periods,
- and $V_0$ is an adjustable parameter
- to set the depth of the troughs.
-
+% 
+% One example of a periodic landscape is
+%% %that used in Sec.~\ref{sec:one}
+% where 
+% \begin{equation}
+%   V_l(y) = V_0 \cos{(N_p \pi y / L)}
+% \end{equation}
+% where $N_p$ are the number of periods,
+% and $V_0$ is an adjustable parameter
+% to set the depth of the troughs.
+%
  In multi-particle simulations, we confine
- the particles along the $x-$direction with a
- quasi-one-dimensional geometry
- using a periodic function.
+ the particles along the $x-$direction 
+ using a periodic function 
  \begin{equation}
    V_{q1D}(x) = V_0 \cos{(\pi x / L)}
  \end{equation}.
  %%We could also use a Gaussian function.
- 
+ This channel potential keeps the particles
+ interacting at short range confined primarily to motion
+ along the y-direction
+ but allows for some lateral motion of particles.
+ This is sometimes referred to as a
+ quasi-one-dimensional geometry.
  
 
 The simulation is controlled by a $for()$ loop
@@ -388,10 +393,9 @@ particle dynamics
 with an overdamped
 equation of motion.
 %integrated with the Verlet method.
-Here 
-the suspending fluid is highly viscous
-and exerts a damping force on the particles equivalent
-to a linear drag force.
+%The suspending fluid is highly viscous
+%and exerts a damping force on the particles equivalent
+%to a linear drag force.
 %Overdamped dynamics is a common assumption in models of colloidal particles.
 %This is an assumption that 
 The damping comes from a viscous fluid model
@@ -401,8 +405,11 @@ sufficient so that
 the acceleration of the particle is zero.
 Such a model is appropriate when the particles
 are small and the viscosity is high [finish... reference...]
-This model is encountered in standard texts,
-for instance Ch. 2 of Taylor's Classical Mechanics.
+This model should be familiar to readers
+modeling Milliken's oil drops
+in a standard classical mechanics text \cite{Taylor2005}.
+%This model is encountered in standard texts,
+%for instance Ch. 2 of Taylor's Classical Mechanics.
 
 A particle has the equation of motion 
 \begin{equation}
@@ -412,7 +419,7 @@ where $\eta = 1$.
 The equation of motion provides a direct calculation of the velocity
 of an individual particle from its location in the simulation
 with respect to other particles $j$.
-Since we model the acceleration as zero,
+Since the acceleration as zero,
 the Verlet method simplifies to 
 the Euler method,
 which is used to calculate the position at subsequent time steps.
@@ -516,8 +523,7 @@ is $\bar{v}_y = \lambda f$, where $T = 1/f$.
 \end{center}
 
 The hopping pattern of the driven particle is periodic,
-and could be achieved over a range of
-driving forces.  %, as we will demonstrate in Fig.~\ref{fig:1}
+and could be achieved over a range of $F_{DC}$.  %, as we will demonstrate in Fig.~\ref{fig:1}
 We explore the ranges of periodic hopping patterns
 by increasing $F_{DC}$ as a function of time,
 as shown in 
