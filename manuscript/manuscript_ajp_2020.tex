@@ -114,15 +114,33 @@ driven particles.
 %Christiaan Huygens 
 %[has been adapted into many useful technologies...]
 Examples of synchronization occur
-in many natural periodic systems,
-from Huygens 1665 observation of
-in-phase oscillation of pendulum clocks \cite{Pikovsky2003},
-to fireflies signaling in time with a pulsed light emitting diode \cite{},
+in many biological systems with periodic behavior,
+from fireflies signaling in time with a pulsed light emitting diode \cite{},
 to coordinated flapping of birds wings \cite{},
-to simultaneous neuronal firing in cardiac muscle \cite{}
+to simultaneous firing of neurons in cardiac muscle \cite{}
 and brain tissue \cite{}.
 
+Huygens 1665 observation of
+in-phase oscillation of pendulum clocks \cite{Pikovsky2003},
+to
+
+
 %phase locking
+
+Either coupled oscillators or a single particle on a corrugated
+potential with an applied AC drive.
+
+Relationship between substrate period and intrinsic velocity
+with phase locking caused by AC force modulates drive
+where the particle velocity is constant even though the applied
+DC force is increased.
+
+Particles - velocity-force curves
+Josephson Junctions - voltage-current curves
+
+what distinguishes a Shapiro step?
+where else are they witnessed?
+
 Dynamical mode locking is a controlled 
 synchronization phenomena in 
 which an external driving force
@@ -278,7 +296,7 @@ The units of the simulated variables are in Table ~\ref{tab:1}.
 
 \begin{table}[h!]
 \centering
-\caption{Simulation units defined in the code.}
+\caption{Simulation units.}
 \begin{ruledtabular}
 \begin{tabular}{c c p{5cm}}
 Quantity & Unit \\
@@ -299,11 +317,11 @@ velocity &  $ E_0 / \eta a_0$ \\
 \end{table}
 
 We model particle interaction forces
-$\vec{F}_{ij} = -\nabla V_{ij}(r_{ij})$ 
+$\vec{F}_{ij} = -\nabla U_{ij}(r_{ij})$ 
 with
 the Yukawa potential energy 
 \begin{equation}
-  V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
+  U_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
 \end{equation}
 where particle $i$ and $j$ are distance
 $r_{ij} = |\vec{r}_i - \vec{r}_j|$ apart.
@@ -366,15 +384,18 @@ assuming the confining force arises from a potential function
  the particles along the $x-$direction 
  using a periodic function 
  \begin{equation}
-   V_{q1D}(x) = V_0 \cos{(\pi x / L)}
+   U_{q1D}(x) = U_0 \cos{(\pi x / L)}
  \end{equation}.
  %%We could also use a Gaussian function.
- This channel potential keeps the particles
- interacting at short range confined primarily to motion
+ This 
+ quasi-one-dimensional geometry
+ confines the particles
+ primarily to move 
  along the y-direction
  but allows for some lateral motion of particles.
- This is sometimes referred to as a
- quasi-one-dimensional geometry.
+ Otherwise the repulsive interaction between
+ particles would cause them to spread throughout the system.
+
  
 
 The simulation is controlled by a $for()$ loop
@@ -723,6 +744,8 @@ def add_contour(ax,L,N,corrugated = True):
 % seems to make no discernible difference.
 
 \bibitem{Pikovsky2003} A. Pikovsky, M. Rosenblum, and J. Kurths, {\it Synchronization: A Universal Concept in Nonlinear Sciences} (Cambridge Univ. Press, Cambridge, 2003).
+
+  \bibitem{} Reichhardt, C., & Reichhardt, C. J. O. (2015). Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Physical Review B - Condensed Matter and Materials Physics, 92(22). https://doi.org/10.1103/PhysRevB.92.224432
   
 \bibitem{juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
 
