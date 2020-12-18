@@ -1,4 +1,5 @@
-\documentclass[prb,preprint]{revtex4} 
+%\documentclass[prb,preprint]{revtex4} 
+\documentclass[twocolumn,preprintnumbers,amsmath,amssymb,aps,prx]{revtex4}
 % The line above defines the type of LaTeX document.
 % Note that AJP uses the same style as Phys. Rev. B (prb).
 
@@ -35,48 +36,40 @@
 \date{\today}
 
 \begin{abstract}
-
-  %DM editorial - too many ``we'' statements, not enough emphasize on importance.
-  %more detail on the methods?
-  %will need to rewrite results/conclusions as we shape the manuscript.
-  
   %What problem did you study and why is it important?
-  We study synchronization of interacting particles, 
-  where the particles are 
-  confined to a narrow channel
-  and 
-  driven by an external applied force.  
-  %What methods did you use?
-  Our
-  numerical simulations
-  mimick experimental studies of driven colloidal particles
-  confined by light-fields.
-  Much like experiments on colloids, 
-  we control the particle interactions,
-  external force and confining environment.
-  We assume the particles move through
-  a viscous liquid,
-  so we model the dynamics of each particle
-  with 
-  overdamped equations of motion.
-  %What were your principal results?
-  We observe
-  particle synchronization under a variety of conditions,
-  including static and dynamic patterns formed on
-  periodic and quasiperiod substrates
-  and the propagation of 
-  high density regions of particles,
-  or kinks.
-  %What conclusions have you drawn from these results?
-  We demonstrate the transition from
-  trapped to sliding dynamics in
-  quasiperiodic landscapes differs
-  from that of a periodic landscape by [TBD],
-  and that kinks of high density propagate
-  [more/less ?  ] when [what?].
-  We also explore 
-  the limits of applied force that
-  cause the dynamics to transition to chaotic behavior.
+  We discuss a
+  numerical model
+  of particles
+  confined to a narrow channel 
+  driven
+  across a washboard potential energy landscape.
+  The model 
+  exhibits
+  synchronization effects that provide insight
+  to the behavior of 
+  many experimental systems of
+  interest to condensed matter physics 
+  including 
+  magnetically driven colloidal particles
+  confined by light-fields, 
+  voltage driven superconducting vortices
+  confined in a Josephson junction,
+  and ac and dc driven
+  charge and spin density waves.
+  We present the basics
+  of the molecular dynamics simulations
+  for particles moving through
+  a viscous liquid.
+  %so we model the dynamics of each particle
+  %with 
+  %overdamped equations of motion.
+  We demonstrate how to visualize
+  the system
+  and measure hallmarks of synchronization, 
+  Shapiro steps,
+  that exhibit non-Ohmic step-like behavior 
+  in the 
+  the particle velocity as a function of applied driving force.
   We include sample code
   and exercises for students
   %that include
@@ -109,26 +102,53 @@
 %------------------------------------------------------------------
 %synchronization = widest audience possible
 Synchronization is a universal phenomena
-that can be modeled with numerical studies of confined 
-driven particles.
+where individual oscillators adjust rhythm due
+to an external stimuli \cite{Pikovsky2003}.
 %Christiaan Huygens 
 %[has been adapted into many useful technologies...]
-Examples of synchronization occur
-in many biological systems with periodic behavior,
-from fireflies signaling in time with a pulsed light emitting diode \cite{},
-to coordinated flapping of birds wings \cite{},
-to simultaneous firing of neurons in cardiac muscle \cite{}
-and brain tissue \cite{}.
+Huygens' 1665 experiments on
+the 
+motions of two pendula on wall-mounted clocks,
+demonstrated the tendency of 
+two periodic oscillators in close
+proximity to swing in time, i.e. to synchronize \cite{Bennett2002}.
+Physical synchronous behavior are observed
+in many everyday systems
+such as the
+coupled flickering candle flames \cite{Okamoto2016} 
+and metronomes \cite{Jia2015}.
+Biological systems benefit from cooperative
+synchronzation.
+Birds coordinate
+flapping of wings in order to optimize energy use during flight \cite{Portugal2014},
+frogs communicate by croaking patterns dictated by location \cite{Aihara2014},
+and humans synchronize clapping in time with music \cite{Tranchant2016}.
 
-Huygens 1665 observation of
-in-phase oscillation of pendulum clocks \cite{Pikovsky2003},
-to
+to simultaneous firing of neurons in cardiac muscle \cite{}
+and brain tissue (i.e. brain waves) \cite{}.
+
+Such systems can be driven to form new synchronized patterns,
+for instance
+firefly [swarms] signal in time with a pulsed light emitting diode \cite{},
+[more examples]
+Driven coupled oscillations are sufficiently
+broad and useful to be the subject of computational modeling.
 
 
 %phase locking
 
-Either coupled oscillators or a single particle on a corrugated
-potential with an applied AC drive.
+Synchronization can be modeled with numerical studies of confined 
+driven particles.
+Studies modeling synchronized behaviors
+can be performed with
+coupled oscillators []
+An alternative method is to
+study the dynamics of a single particle
+confined in a periodic 
+potential landscape subject
+to with an applied driving force with constant or direct (DC)
+and alterating (AC)
+components.
 
 Relationship between substrate period and intrinsic velocity
 with phase locking caused by AC force modulates drive
@@ -538,7 +558,7 @@ is $\bar{v}_y = \lambda f$, where $T = 1/f$.
 \begin{center}
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.25]{position}
+\includegraphics[width=\columnwidth]{position}
 \caption{The position as a function of time of a single driven particle
   normalized by the period of the substrate $\lambda$.
   }
@@ -744,8 +764,20 @@ def add_contour(ax,L,N,corrugated = True):
 % seems to make no discernible difference.
 
 \bibitem{Pikovsky2003} A. Pikovsky, M. Rosenblum, and J. Kurths, {\it Synchronization: A Universal Concept in Nonlinear Sciences} (Cambridge Univ. Press, Cambridge, 2003).
+  
+\bibitem{Bennett2002} M. Bennett, M.F. Schatz, H. Rockwood, and K. Wiesenfeld, Huygen's clocks, Proc. Roy. Soc. A {\bf 458}, 563 (2002).
+  
+\bibitem{Okamoto2016} K. Okamoto, A. Kijima, Y. Umeno, and H. Shima. Synchronization in flickering of three-coupled candle flames. Sci Rep {\bf 6}, 36145 (2016)
 
-%  \bibitem{} Reichhardt, C., & Reichhardt, C. J. O. (2015). Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Physical Review B - Condensed Matter and Materials Physics, 92(22). https://doi.org/10.1103/PhysRevB.92.224432
+\bibitem{Jia2015}  J. Jia, Z. Song, W. Liu, J. Kurths, and Xiao, J. Experimental study of the triplet synchronization of coupled nonidentical mechanical metronomes. Sci. Rep. {\bf 5}, 17008 (2015).
+
+\bibitem{Portugal2014} S. Portugal, T. Hubel, J. Fritz, S. Heese, D. Trobe, B. Voelkl, S. Hailes, A. M. Wilson and J. R. Usherwood.  Upwash exploitation and downwash avoidance by flap phasing in ibis formation flight. Nature {\bf 505}, 399 (2014).
+
+  \bibitem{Aihara2014} I. Aihara, T. Mizumoto, T. Otsuka, H. Awano, K. Nagira, H. G. Okuno and K. Aihara. Spatio-Temporal Dynamics in Collective Frog Choruses Examined by Mathematical Modeling and Field Observations. Sci Rep {\bf 4}, 3891 (2014). 
+  
+    %  \bibitem{} Reichhardt, C., & Reichhardt, C. J. O. (2015). Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Physical Review B - Condensed Matter and Materials Physics, 92(22). https://doi.org/10.1103/PhysRevB.92.224432
+
+    \bibitem{Tranchant2016} P. Tranchant, D. T. Vuvan, and I. Peretz, Keeping the Beat: A Large Sample Study of Bouncing and Clapping to Music. PLoS ONE 11(7): e0160178. (2016).
   
 \bibitem{juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
 
