@@ -102,30 +102,79 @@
 %------------------------------------------------------------------
 %synchronization = widest audience possible
 Synchronization is a universal phenomena
-where individual oscillators adjust rhythm due
+in which individual oscillators adjust rhythm due
 to an external stimuli \cite{Pikovsky2003}.
 %Christiaan Huygens 
 %[has been adapted into many useful technologies...]
-Huygens' 1665 experiments on
+Synchronization was first reported in the scientific literature
+when in 1665 
+Huygens' experiments on
 the 
-motions of two pendula on wall-mounted clocks,
+motions of two pendula on wall-mounted clocks 
 demonstrated the tendency of 
 two periodic oscillators in close
-proximity to swing in time, i.e. to synchronize \cite{Bennett2002}.
-Physical synchronous behavior are observed
+proximity to swing in time, i.e. to synchronize,
+due to interactions through the wall \cite{Bennett2002}.
+Synchronous behaviors are observed
 in many everyday systems
 such as the
-coupled flickering candle flames \cite{Okamoto2016} 
-and metronomes \cite{Jia2015}.
+flickering candle flames coupled by temperature fluctuations \cite{Okamoto2016} 
+and metronomes coupled through the the supporting table \cite{Jia2015}.
 Biological systems benefit from cooperative
-synchronzation.
-Birds coordinate
+synchronzation such as when 
+birds coordinate
 flapping of wings in order to optimize energy use during flight \cite{Portugal2014},
 frogs communicate by croaking patterns dictated by location \cite{Aihara2014},
 and humans synchronize clapping in time with music \cite{Tranchant2016}.
 At a cellular level, 
 neurons simultaneously fire in cardiac muscle \cite{MartinHall1999}
-and brain tissue  \cite{Singer1999}.
+and brain tissue \cite{Singer1999}.
+
+Synchronization is also referred to as 
+phase-locking or mode-locking.
+%phase locking
+Dynamical systems %with multiple frequencies
+exhibit phase-locking 
+when oscillators with different frequencies couple
+so the frequency ratio or mode 
+is an integer number \cite{Bak1986} .
+This can be demonstrated
+with Lissajous figures, i.e. parametric graphs of two periodic functions
+which make looped patterns determined by the mode, % frequency ratio,
+first reported in 1857 \cite{Lissajous1857}
+and easily generated with a computer code 
+or oscilloscope \cite{Tong1997}. 
+%with a frequency generator,
+%where two combined frequencies at perpendicular orientations 
+
+Synchronization is often achieved via external forcing.
+Examples of synchronization via external forcing include
+pushing a child on a swing or
+using a pacemaker (an electrical generator)
+that pulses to regulate a heart beat.
+This kind of 
+dynamical mode locking
+is often observed in quantum electronic
+devices such as Josephson junctions \cite{Josephson1962,Josephson1965}
+i.e. phase-locked current loops \cite{} 
+which exhibit phase locking via
+stepped regions in current-voltage (I-V) 
+instead of ohmic relationships.
+Also known as Shapiro steps \cite{Shapiro1963},
+these steps have been observed broadly in 
+velocity-force curves and voltage-current curves
+as indicators of phase locking \cite{Golubov2004}.
+
+Recent work with atomic systems such as Bose-Einstein condensates \cite{Zhang2020}
+
+Synchronization has many important
+technological applications
+and is often studied with simplified computational models.
+%mini review of synchronization in electronics
+%careful - the following is all simulations
+Recent studies demonstrate
+that coupled electronic oscillators can be
+programmed for use as microcontrollers for robotic locomotion \cite{Dutta2019}.
 
 %Given the prevalence of synchronization,
 %it is the subject of many computational models.
@@ -136,9 +185,7 @@ a washboard shaped potential energy landscape.
 We chose this model for its
 relevance to condensed matter systems
 
-%phase locking
-The hallmark of phase locking is
-that the ratio of frequencies is an integer number \cite{Bak1986}
+
 
 Studies modeling synchronized behaviors
 can be performed with
@@ -156,32 +203,14 @@ with phase locking caused by AC force modulates drive
 where the particle velocity is constant even though the applied
 DC force is increased.
 
-Particles - velocity-force curves
-Josephson Junctions - voltage-current curves
 
-what distinguishes a Shapiro step?
-where else are they witnessed?
 
-Dynamical mode locking is a controlled 
-synchronization phenomena in 
-which an external driving force
-causes
-%the natural oscillation frequencies
-%in
-weakly coupled oscillators to come into phase.
-Mode locking is often observed in quantum electronic
-devices such as Josephson junctions \cite{}
-and phase-locked current loops \cite{}.
-Instead of ohmic current-voltage (I-V) relationships,
-such devices exhibit stepped regions
-such as Shapiro steps \cite{} [explain].
-
-Recent experiments of colloidal particles confined
+Recent experiments of particles confined
 in optical traps
 subject to external driving forces 
 have
 been used to examine the microscopic dynamics
-of mode-locking \cite{juniper2015}.
+of mode-locking in colloids \cite{juniper2015} and ions \cite{Bushev2013}.
 %experimental - colloids specifically
 Colloidal particles trapped in light fields are %have proven
 a particularly useful medium for studying complex dynamical behaviors.  %cite 
@@ -762,8 +791,11 @@ def add_contour(ax,L,N,corrugated = True):
 % The numeral (here 99) in curly braces is nominally the number of entries in
 % the bibliography. It's supposed to affect the amount of space around the
 % numerical labels, so only the number of digits should matter--and even that
-% seems to make no discernible difference.
+  % seems to make no discernible difference.
 
+  %useful quick ref
+  %http://www.scholarpedia.org/article/Synchronization
+  
   %intro to oscillators
 \bibitem{Pikovsky2003} A. Pikovsky, M. Rosenblum, and J. Kurths, {\it Synchronization: A Universal Concept in Nonlinear Sciences} (Cambridge Univ. Press, Cambridge, 2003).
   
@@ -785,13 +817,36 @@ def add_contour(ax,L,N,corrugated = True):
 
   \bibitem{Singer1999} W. Singer. Striving for coherence. Nature, {\bf 397} 391, 1999.
 
+    %technological applications
+    \bibitem{Dutta2019} Dutta, S., Parihar, A., Khanna, A. et al. Programmable coupled oscillators for synchronized locomotion. Nat Commun {\bf 10}, 3299 (2019).
+    
     %condensed matter intro
     \bibitem{Bak1986} P. Bak. The Devil's Staircase. Physics Today {\bf 39}, 12, 38 (1986).
-    %reichhardt review
+
+    \bibitem{Lissajous1857} J. A. Lissajous.  "Mémoire sur l'Etude optique des mouvements vibratoires,"  Annales de chimie et de physique, 3rd series, 51 (1857) 147-232
+
+    \bibitem{Tong1997} E. Y. C. Tong, Lissajous figures The Physics Teacher {\bf 35}, 491 (1997).
+
+    \bibitem{Josephson1962} B. D. Josephson, Phys. Letters {\bf 16}, 25 (1962). 
+    \bibitem{Josephson1965} B. D. Josephson, Advan. Phys. {\bf 14}, 419 (1965).
+
+    \bibitem{Stewart1968}  W. C. Stewart CURRENT‐VOLTAGE CHARACTERISTICS OF JOSEPHSON JUNCTIONS Appl. Phys. Lett. 12, 277 (1968).
+      
+    \bibitem{Shapiro1963} S. Shapiro, Josephson currents in superconducting tunneling: the effect of microwaves and other observations, Phys. Rev. Lett. 11, 80 (1963).
+
+    \bibitem{Golubov2004} A. A. Golubov, M. Yu. Kupriyanov, and E. Il’ichev. The current-phase relation in Josephson junctions, Rev. Mod. Phys. {\bf 76}, 411 (2004).
+
+      quote: Phase engineering techniques are used to control the dynamics of long-bosonic Josephson-junction arrays built by linearly coupling Bose-Einstein condensates.
+    \bibitem{Zhang2020} Dengling Zhang, Haibo Qiu, and Antonio Muñoz Mateo, Unlocked-relative-phase states in arrays of Bose-Einstein condensates, Phys. Rev. A {\bf 101}, 063623 (2020).
+
+      %reichhardt review
+      %C. Reichhardt and C. J. Olson Reichhardt, “Depinning and nonequilibrium dynamic phases of particle assemblies driven over random and ordered substrates: a review,” Rep. Prog. Phys. 80, 026501 (2017).
 
     %  \bibitem{} Reichhardt, C., & Reichhardt, C. J. O. (2015). Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Physical Review B - Condensed Matter and Materials Physics, 92(22). https://doi.org/10.1103/PhysRevB.92.224432
       
-\bibitem{juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
+    \bibitem{juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
+
+    \bibitem{Bushev2013} P. Bushev, G. Hétet, L. Slodička, D. Rotter, M. A. Wilson, F. Schmidt-Kaler, J. Eschner, and R. Blatt, Shot-Noise-Limited Monitoring and Phase Locking of the Motion of a Single Trapped Ion, Phys. Rev. Lett. {\bf 110}, 133602 (2013).
 
 \bibitem{supp1} See Figure1.mp4 in appropriate %\url{}
 
