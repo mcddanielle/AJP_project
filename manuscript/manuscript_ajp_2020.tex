@@ -25,7 +25,7 @@
 % If there were a second author at the same address, we would put another 
 % \author{} statement here.  Don't combine multiple authors in a single
 % \author statement.
-\affiliation{Department of Physics, Pacific University, Forest Grove, OR 97116}
+%\affiliation{Department of Physics, Pacific University, Forest Grove, OR 97116}
 % Please provide a full mailing address here.
 
 \author{Danielle McDermott}
@@ -47,28 +47,31 @@
   exhibits
   synchronization effects that provide insight
   to the behavior of 
-  many experimental systems of
-  interest to condensed matter physics 
+  experimental systems 
+  %interest to condensed matter physics 
   including 
   magnetically driven colloidal particles
-  confined by light-fields, 
-  voltage driven superconducting vortices
-  confined in a Josephson junction,
-  and ac and dc driven
-  charge and spin density waves.
+  confined by light-fields.
+  %and
+  %atoms on surfaces.
+  %voltage driven superconducting vortices
+  %confined in a Josephson junction,
+  %and ac and dc driven
+  %charge and spin density waves.
   We present the basics
   of the molecular dynamics simulations
   for particles moving through
-  a viscous liquid.
+  a viscous liquid
+  applied to single and multiple particle systems.
   %so we model the dynamics of each particle
   %with 
   %overdamped equations of motion.
-  We demonstrate how to visualize
-  the system
-  and measure hallmarks of synchronization, 
-  Shapiro steps,
-  that exhibit non-Ohmic step-like behavior 
-  in the 
+  We demonstrate how to 
+  visualize
+  the system with
+  animations of the particle motion 
+  and detect synchronization using
+  measurements of
   the particle velocity as a function of applied driving force.
   We include sample code
   and exercises for students
@@ -102,20 +105,10 @@
 %------------------------------------------------------------------
 %synchronization = widest audience possible
 Synchronization is a universal phenomena
-in which individual oscillators adjust rhythm due
-to an external stimuli \cite{Pikovsky2003}.
-%Christiaan Huygens 
-%[has been adapted into many useful technologies...]
-Synchronization was first reported in the scientific literature
-when in 1665 
-Huygens' experiments on
-the 
-motions of two pendula on wall-mounted clocks 
-demonstrated the tendency of 
-two periodic oscillators in close
-proximity to swing in time, i.e. to synchronize,
-due to interactions through the wall \cite{Bennett2002}.
-Synchronous behaviors are observed
+in which individual oscillators adjust frequency due
+to interaction or an external stimulus \cite{Pikovsky2003}.
+Synchronous behaviors where oscillators move in-phase (i.e. in time)
+are observed
 in many everyday systems
 such as the
 flickering candle flames coupled by temperature fluctuations \cite{Okamoto2016} 
@@ -124,14 +117,26 @@ Biological systems benefit from cooperative
 synchronzation such as when 
 birds coordinate
 flapping of wings in order to optimize energy use during flight \cite{Portugal2014},
-frogs communicate by croaking patterns dictated by location \cite{Aihara2014},
+frogs communicate by croaking patterns modulated by location \cite{Aihara2014},
 and humans synchronize clapping in time with music \cite{Tranchant2016}.
 At a cellular level, 
 neurons simultaneously fire in cardiac muscle \cite{MartinHall1999}
 and brain tissue \cite{Singer1999}.
 
-Synchronization is also referred to as 
-phase-locking or mode-locking.
+%Christiaan Huygens 
+%[has been adapted into many useful technologies...]
+A particular form of 
+synchronization is phase-locking,
+which first appeared in the scientific literature
+with 
+Huygens' 1665 experiments on
+the 
+motions of two pendula on wall-mounted clocks.
+Huygens demonstrated the tendency of 
+two periodic oscillators in close
+proximity to swing in time %, i.e. to synchronize,
+due to interactions through the wall 
+no matter the original phase of the clocks \cite{Bennett2002}.
 %phase locking
 Dynamical systems %with multiple frequencies
 exhibit phase-locking 
@@ -147,76 +152,82 @@ or oscilloscope \cite{Tong1997}.
 %with a frequency generator,
 %where two combined frequencies at perpendicular orientations 
 
-Synchronization is often achieved via external forcing.
-Examples of synchronization via external forcing include
-pushing a child on a swing or
-using a pacemaker (an electrical generator)
-that pulses to regulate a heart beat.
-This kind of 
-dynamical mode locking
-is often observed in quantum electronic
-devices such as Josephson junctions \cite{Josephson1962,Josephson1965}
-i.e. phase-locked current loops \cite{} 
-which exhibit phase locking via
-stepped regions in current-voltage (I-V) 
-instead of ohmic relationships.
-Also known as Shapiro steps \cite{Shapiro1963},
-these steps have been observed broadly in 
-velocity-force curves and voltage-current curves
-as indicators of phase locking \cite{Golubov2004}.
+Synchronization is often achieved via external forcing
+such as when
+%single particle oscillators
+pushing a child on a swing at the high point on her path, or
+using pacemaker (an electrical generator)
+pulses to regulate a heart beat.
+%multiple particle oscillators
+[Fireflies and pulsed LED].
 
-Recent work with atomic systems such as Bose-Einstein condensates \cite{Zhang2020}
-
-Synchronization has many important
+Dynamical mode locking 
+has many important
 technological applications
 and is often studied with simplified computational models.
+These studies can be performed
+with coupled oscillators \cite{Kuramoto193?}
+or with a single particle driven across a periodic potential landscape \cite{}.
+%Single particle models avoid many-body effects
+%while offering insight.
+
+%Oscillators ordered into chains or lattices.
+Synchronization 
+is %often
+observed
+in quantum electronic
+devices such as Josephson junctions \cite{Josephson1962,Josephson1965}
+i.e. two superconductors sandwiching an insulating layer.
+When subject to an external voltage,
+Cooper pairs in the superconducting materials
+tunnel through the insulating layer.
+Phase-locking is observed as 
+%phase-locked current loops \cite{} 
+stepped regions in current-voltage (I-V) relationship in these devices,
+where a constant current results from a range of voltages
+due to the quantized nature of the tunneling probability [NOT QUITE RIGHT...].
+%instead of ohmic relationships.
+Known as Shapiro steps \cite{Shapiro1963},
+these indicators of phase locking 
+have been observed broadly in a variety of systems
+either in 
+velocity-force curves and voltage-current curves \cite{Golubov2004}.
+Shapiro steps
+are hallmarks of
+non-Ohmic behavior in voltage-current curves,
+where these steps are generated
+by the tendency of the response of a system
+to be flat across a range of applied driving forces or voltages,
+which can be probed with applied AC forces.
+
+%  atoms on surfaces.
+%  voltage driven superconducting vortices
+%  confined in a Josephson junction,
+%  and ac and dc driven
+%  charge and spin density waves.
+%
+%
 %mini review of synchronization in electronics
 %careful - the following is all simulations
-Recent studies demonstrate
-that coupled electronic oscillators can be
-programmed for use as microcontrollers for robotic locomotion \cite{Dutta2019}.
-
-%Given the prevalence of synchronization,
-%it is the subject of many computational models.
-Here we focus numerical studies 
-of the synchronized dynamics
-of confined particles driven over
-a washboard shaped potential energy landscape. 
-We chose this model for its
-relevance to condensed matter systems
-
-
-
-Studies modeling synchronized behaviors
-can be performed with
-coupled oscillators []
-An alternative method is to
-study the dynamics of a single particle
-confined in a periodic 
-potential landscape subject
-to with an applied driving force with constant or direct (DC)
-and alterating (AC)
-components.
-
-Relationship between substrate period and intrinsic velocity
-with phase locking caused by AC force modulates drive
-where the particle velocity is constant even though the applied
-DC force is increased.
-
-
+%Recent studies demonstrate
+%that coupled electronic oscillators can be
+%programmed for use as microcontrollers for robotic locomotion \cite{Dutta2019}.
 
 Recent experiments of particles confined
 in optical traps
 subject to external driving forces 
 have
 been used to examine the microscopic dynamics
-of mode-locking in colloids \cite{juniper2015} and ions \cite{Bushev2013}.
+of mode-locking in colloids interacting via magnetic dipole
+or electrostatic interactions
+in experiment \cite{Juniper2015, Lutz2004} and
+simulation \cite{Herrera-Velarde2007, Herrera-Velarde2008}.
 %experimental - colloids specifically
 Colloidal particles trapped in light fields are %have proven
-a particularly useful medium for studying complex dynamical behaviors.  %cite 
-The relatively large size of the colloids (micrometers)
-makes colloids easy to control and image,
-and the interaction forces between colloids can be modified
+a particularly useful medium for studying complex dynamical behaviors.  %cite
+Colloid particles are micron-sized,
+a relatively large size to control and image.
+The interaction forces between colloids can be modified
 by tuning the chemistry of the suspending fluid or surface ligands
 of the colloidal particles \cite{Grier2003}.
 This ease in control of colloids has lead to a rich array of 
@@ -224,6 +235,7 @@ experimental results
 considered models
 for experimental systems relatively hard to access and visualize,
 such as cold atoms or electron gases. %ELABORATE AND CITE
+%Recent work with atomic systems such as Bose-Einstein condensates \cite{Zhang2020}
 
 %-----------------------------------------------------------
 %particle interaction types
@@ -267,7 +279,7 @@ that may be
 synchronized.
 Disordered chaotic dynamics are also possible,
 where irregular, unpredictable time evolution of
-nonlinear systems and occurs in mechanical oscillators \cite{chaos}.
+nonlinear systems occurs in mechanical oscillators \cite{chaos}.
 
 %-------------------------------------------------------------
 
@@ -275,6 +287,21 @@ Numerical modeling of colloids can provide mechanistic insight
 that can be difficult to achieve in experimental conditions
 where Brownian motion and other sources of noise dominate.
 [elaborate]
+
+%Given the prevalence of synchronization,
+%it is the subject of many computational models.
+Here we focus numerical studies 
+of the synchronized dynamics
+of confined particles driven over
+a washboard shaped potential energy landscape. 
+We chose this model for its
+relevance to condensed matter systems
+and ease of simulation.
+%We examine
+The period of the substrate
+can be used to control the
+intrinsic velocity of the driven particle.
+
 
 %another confinement technique:
 %Acoustic tweezers and surface acoustic wave (SAW) \cite{}
@@ -315,6 +342,8 @@ in Sec.~\ref{sec:kink}.
 %and create synchronized flow patterns.
 We present these results using standard tools of non-linear oscillators
 such phase diagrams of velocity versus position.
+%PHASE DIAGRAMS SHOWNING COUPLING, OR QUASIPERIODIC COUPLING
+%INDICATE COOPERATIVE MOTION IN THE Q1D SUBSTRATE
 In Section~\ref{sec:quasiperiod},
 we show how an aperiodic landscape modifies the particle dynamics.
 Finally we explore the transition to chaotic dynamics in 
@@ -524,6 +553,7 @@ along the y-direction
   \label{eq:landscape}
   V_l(y) = V_{0y} \cos{(N_p \pi y / L)} 
 \end{equation}
+%v is the standard I note for substrates
 with $N_p=20$ troughs in the landscape.
 %and $V_{0y}=0.2$.
 This is illustrated in Fig.~\ref{fig:1}(a) where
@@ -631,7 +661,7 @@ of the landscape,
 and $f = 0.01$ cycles per time unit.
 
 Our simulations reproduce results presented in 
-Juniper {\it et al.} \cite{juniper2015}
+Juniper {\it et al.} \cite{Juniper2015}
 which demonstrated
 mode locking in
 experiments of 
@@ -715,6 +745,19 @@ $F_{DC}/F_{AC} = 1$ [CHECK!]
 \section{Associated problems}
 \label{sec:problems}	% You can label sections for reference
 
+\begin{enumerate}
+\item Kuramoto model = overdamped interacting rotors/oscillators are used to model coupled oscillator systems - no substrate or external drive so far as I can see - this seems baked into the oscillator properties/interactions
+%D. Métivier, L. Wetzel, and S. Gupta
+%Onset of synchronization in networks of second-order Kuramoto oscillators with delayed coupling: Exact results and application to phase-locked loops
+%PHYSICAL REVIEW RESEARCH 2, 023183 (2020)
+
+\item Brownian motion without fluid dynamics using  Ermak's algorithm
+
+\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are neglible
+
+  \item The Fokker-Planck Equation
+  
+\end{enumerate}
 
 \section{Conclusion}
 \label{sec:conclusion}	% You can label sections for reference
@@ -805,6 +848,14 @@ def add_contour(ax,L,N,corrugated = True):
 
 \bibitem{Jia2015}  J. Jia, Z. Song, W. Liu, J. Kurths, and Xiao, J. Experimental study of the triplet synchronization of coupled nonidentical mechanical metronomes. Sci. Rep. {\bf 5}, 17008 (2015).
 
+%  Coupling between two singing wineglasses
+%Tal Arane, Ana K. R. Musalem and Moti Fridman
+%American Journal of Physics 77, 1066 (2009); https://doi.org/10.1119/1.3119175
+
+%Synchronization of a thermoacoustic oscillator by an external sound source
+%G. Penelet and T. Biwa
+%American Journal of Physics 81, 290 (2013); https://doi.org/10.1119/1.4776189
+  
   %biological examples
   
 \bibitem{Portugal2014} S. Portugal, T. Hubel, J. Fritz, S. Heese, D. Trobe, B. Voelkl, S. Hailes, A. M. Wilson and J. R. Usherwood.  Upwash exploitation and downwash avoidance by flap phasing in ibis formation flight. Nature {\bf 505}, 399 (2014).
@@ -844,9 +895,15 @@ def add_contour(ax,L,N,corrugated = True):
 
     %  \bibitem{} Reichhardt, C., & Reichhardt, C. J. O. (2015). Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Physical Review B - Condensed Matter and Materials Physics, 92(22). https://doi.org/10.1103/PhysRevB.92.224432
       
-    \bibitem{juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
+    \bibitem{Juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
 
-    \bibitem{Bushev2013} P. Bushev, G. Hétet, L. Slodička, D. Rotter, M. A. Wilson, F. Schmidt-Kaler, J. Eschner, and R. Blatt, Shot-Noise-Limited Monitoring and Phase Locking of the Motion of a Single Trapped Ion, Phys. Rev. Lett. {\bf 110}, 133602 (2013).
+    \bibitem{Herrera-Velarde2008} S. Herrera-Velarde and R. Castañeda-Priego, Superparamagnetic colloids confined in narrow corrugated substrates, PHYSICAL REVIEW E {\bf 77}, 041407 (2008).
+
+    \bibitem{Herrera-Velarde2007} S. Herrera-Velarde and R. Castañeda-Priego, J. Phys.: Condens. Matter 19, 226215 (2007).
+
+%      Lutz et al. 关11,12兴 created 1D circular channels by means of scanning optical tweezers in order to avoid the presence of lateral confinement walls
+    \bibitem{Lutz2004} C. Lutz, M. Kollmann, and C. Bechinger, Phys. Rev. Lett. {\bf 93}, 026001 (2004); C. Lutz, M. Kollmann, C. Bechinger, and P. Leiderer, J. Phys.: Condens. Matter {\bf 16}, S4075 (2004).
+
 
 \bibitem{supp1} See Figure1.mp4 in appropriate %\url{}
 
