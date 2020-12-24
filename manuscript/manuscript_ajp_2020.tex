@@ -111,14 +111,15 @@ Synchronous behaviors where oscillators move in-phase (i.e. in time)
 are observed
 in many everyday systems
 such as the
-flickering candle flames coupled by temperature fluctuations \cite{Okamoto2016} 
-and metronomes coupled through the the supporting table \cite{Jia2015}.
+flickering candle flames coupled by temperature fluctuations \cite{Okamoto2016},
+vibrations of singing wineglasses \cite{Arane2009}, 
+and metronomes coupled through a supporting platform \cite{Jia2015}.
 Biological systems benefit from cooperative
-synchronzation such as when 
-birds coordinate
-flapping of wings in order to optimize energy use during flight \cite{Portugal2014},
-frogs communicate by croaking patterns modulated by location \cite{Aihara2014},
-and humans synchronize clapping in time with music \cite{Tranchant2016}.
+synchronzation such as 
+birds coordinating wing flaps
+to optimize energy use during flight \cite{Portugal2014},
+frogs alternating croaking patterns \cite{Aihara2014},
+and humans synchronizing clapping in time with music \cite{Tranchant2016}.
 At a cellular level, 
 neurons simultaneously fire in cardiac muscle \cite{MartinHall1999}
 and brain tissue \cite{Singer1999}.
@@ -126,85 +127,112 @@ and brain tissue \cite{Singer1999}.
 %Christiaan Huygens 
 %[has been adapted into many useful technologies...]
 A particular form of 
-synchronization is phase-locking,
+synchronization is phase-locking or mode-locking,
 which first appeared in the scientific literature
 with 
 Huygens' 1665 experiments on
 the 
 motions of two pendula on wall-mounted clocks.
-Huygens demonstrated the tendency of 
-two periodic oscillators in close
-proximity to swing in time %, i.e. to synchronize,
-due to interactions through the wall 
+Huygens demonstrated the tendency of
+the pendula 
+%two periodic oscillators in close proximity
+to swing in time %, i.e. to synchronize,
+due to interactions through the wall,  
 no matter the original phase of the clocks \cite{Bennett2002}.
 %phase locking
 Dynamical systems %with multiple frequencies
 exhibit phase-locking 
-when oscillators with different frequencies couple
+when oscillators with different rhythms couple
 so the frequency ratio or mode 
-is an integer number \cite{Bak1986} .
-This can be demonstrated
-with Lissajous figures, i.e. parametric graphs of two periodic functions
-which make looped patterns determined by the mode, % frequency ratio,
+is an integer number \cite{Bak1986}.
+%Dynamical mode locking
+The phenomena 
+is often studied with simplified computational models
+and can be visualized with %demonstrated
+with phase plots or Lissajous figures.
+A mode-locked system is confined to 
+a closed loop in a 
+parametric space showing the relationship between two periodic functions
+with patterns determined by the mode, % frequency ratio,
 first reported in 1857 \cite{Lissajous1857}
 and easily generated with a computer code 
 or oscilloscope \cite{Tong1997}. 
 %with a frequency generator,
-%where two combined frequencies at perpendicular orientations 
+%where two combined frequencies at perpendicular orientations
+({\it Could these for Fig. 1})
 
-Synchronization is often achieved via external forcing
-such as when
+External forcing can cause or regulate 
+synchronization. % is often achieved via external forcing
+%such as when
 %single particle oscillators
-pushing a child on a swing at the high point on her path, or
+For instance 
+%pushing a child on a swing at the high point on her path, or
 using pacemaker (an electrical generator)
-pulses to regulate a heart beat.
-%multiple particle oscillators
-[Fireflies and pulsed LED].
-
-Dynamical mode locking 
-has many important
-technological applications
-and is often studied with simplified computational models.
-These studies can be performed
-with coupled oscillators \cite{Kuramoto193?}
-or with a single particle driven across a periodic potential landscape \cite{}.
+pulses to regulate a heart beat
+or using a pulsed light to control the pattern of flashing
+fireflies \cite{Agrawal2013}.
+These dynamical drive studies can be performed
+on coupled oscillators %\cite{Kuramoto193?}
+or a single particle driven across a periodic potential landscape.
+A single particle particle oscillator
+within a potential well is 
+much like a skateboarder in a half-pipe.  % \cite{}.
 %Single particle models avoid many-body effects
 %while offering insight.
+The applied driving force can be constant (dc) or sinusoidal (ac).
+With a pure 
+dc drive the landscape modulates 
+the average particle velocity.
+An ac drive creates mode-locking,
+where the average particle velocity
+is fixed for a range of dc drive forces \cite{Reichhardt2015}.
 
 %Oscillators ordered into chains or lattices.
-Synchronization 
+%has many important
+%technological applications
+Dynamical mode-locking
 is %often
 observed
 in quantum electronic
-devices such as Josephson junctions \cite{Josephson1962,Josephson1965}
-i.e. two superconductors sandwiching an insulating layer.
+devices such as Josephson junctions \cite{Josephson1962,Josephson1965}.
+A single junction contains 
+two superconductoring layers which sandwich an insulating layer.
 When subject to an external voltage,
 Cooper pairs in the superconducting materials
 tunnel through the insulating layer.
 Phase-locking is observed as 
 %phase-locked current loops \cite{} 
 stepped regions in current-voltage (I-V) relationship in these devices,
-where a constant current results from a range of voltages
-due to the quantized nature of the tunneling probability [NOT QUITE RIGHT...].
+where voltage is the analog of external driving force
+and current is that of particle velocity.
+%where a constant current results from a range of voltages
+%due to the quantized nature of the tunneling probability [NOT QUITE RIGHT...].
 %instead of ohmic relationships.
-Known as Shapiro steps \cite{Shapiro1963},
-these indicators of phase locking 
-have been observed broadly in a variety of systems
-either in 
-velocity-force curves and voltage-current curves \cite{Golubov2004}.
-Shapiro steps
-are hallmarks of
+Known as Shapiro steps, % \cite{},
+these phase locked currents  
+have been observed due to applied ac voltages in 
+single Josephson junctions \cite{Shapiro1963, Golubov2004} and
+coupled arrays of junctions \cite{Benz1990}.
+%either in 
+%velocity-force curves and voltage-current curves \cite{Golubov2004}.
+Shapiro steps vary in width depending on the strength of the
+applied AC forces,
+and are observed in a variety of systems
+displaying
+%are hallmarks of
 non-Ohmic behavior in voltage-current curves,
-where these steps are generated
-by the tendency of the response of a system
-to be flat across a range of applied driving forces or voltages,
-which can be probed with applied AC forces.
+including
+ac and dc driven
+charge and spin density waves.
 
+%where these steps are generated
+%by the tendency of the response of a system
+%to be flat across a range of applied driving forces or voltages,
+%which can be probed with
 %  atoms on surfaces.
 %  voltage driven superconducting vortices
 %  confined in a Josephson junction,
-%  and ac and dc driven
-%  charge and spin density waves.
+
 %
 %
 %mini review of synchronization in electronics
@@ -213,36 +241,37 @@ which can be probed with applied AC forces.
 %that coupled electronic oscillators can be
 %programmed for use as microcontrollers for robotic locomotion \cite{Dutta2019}.
 
-Recent experiments of particles confined
+Experiments of colloid particles confined
 in optical traps
 subject to external driving forces 
 have
 been used to examine the microscopic dynamics
-of mode-locking in colloids interacting via magnetic dipole
-or electrostatic interactions
-in experiment \cite{Juniper2015, Lutz2004} and
-simulation \cite{Herrera-Velarde2007, Herrera-Velarde2008}.
+of mode-locking,
+which cannot be easily imaged in electronics.
 %experimental - colloids specifically
 Colloidal particles trapped in light fields are %have proven
-a particularly useful medium for studying complex dynamical behaviors.  %cite
+a useful medium for studying complex dynamical behaviors.  %cite
 Colloid particles are micron-sized,
 a relatively large size to control and image.
 The interaction forces between colloids can be modified
 by tuning the chemistry of the suspending fluid or surface ligands
-of the colloidal particles \cite{Grier2003}.
-This ease in control of colloids has lead to a rich array of 
-experimental results  
-considered models
-for experimental systems relatively hard to access and visualize,
-such as cold atoms or electron gases. %ELABORATE AND CITE
+of the colloidal particles.
+Because colloids are easy to control and study, 
+they are used as experimental models
+for systems relatively hard to access and visualize,
+such as cold atoms or electron gases \cite{Grier2003}. %ELABORATE AND CITE
 %Recent work with atomic systems such as Bose-Einstein condensates \cite{Zhang2020}
-
+Mode-locking 
+in colloids has been acheived in systems interacting via magnetic dipoles 
+or electric forces 
+in experiment \cite{Juniper2015, Lutz2004} and
+simulation \cite{Herrera-Velarde2007, Herrera-Velarde2008}.
 %-----------------------------------------------------------
 %particle interaction types
-Particles which interact over long distances
-include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more detail and references]
-Particles which interact over short distances include
-bubble arrays/emulsions [more systems and references].
+%Particles which interact over long distances
+%include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [mor%e detail and references]
+%Particles which interact over short distances include
+%bubble arrays/emulsions [more systems and references].
 
 %-----------------------------------------------
 %environments
@@ -322,7 +351,8 @@ numerical simulations of confined, driven particles
 to model a variety of physical phenomena.
 %----------------------------------------------------------------------------
 %paper outline
-In the following paper we describe
+%In the following paper
+We describe
 our molecular dynamics model in Section~\ref{sec:MD}.
 %including various  and confining environments.
 We include code to simulate
@@ -846,11 +876,9 @@ def add_contour(ax,L,N,corrugated = True):
   
 \bibitem{Okamoto2016} K. Okamoto, A. Kijima, Y. Umeno, and H. Shima. Synchronization in flickering of three-coupled candle flames. Sci Rep {\bf 6}, 36145 (2016)
 
+\bibitem{Arane2009} T. Arane, A. K. R. Musalem and M. Fridman, Coupling between two singing wineglasses, Am. J. Phys. {\bf 77}, 1066 (2009). %; https://doi.org/10.1119/1.3119175
+  
 \bibitem{Jia2015}  J. Jia, Z. Song, W. Liu, J. Kurths, and Xiao, J. Experimental study of the triplet synchronization of coupled nonidentical mechanical metronomes. Sci. Rep. {\bf 5}, 17008 (2015).
-
-%  Coupling between two singing wineglasses
-%Tal Arane, Ana K. R. Musalem and Moti Fridman
-%American Journal of Physics 77, 1066 (2009); https://doi.org/10.1119/1.3119175
 
 %Synchronization of a thermoacoustic oscillator by an external sound source
 %G. Penelet and T. Biwa
@@ -876,7 +904,9 @@ def add_contour(ax,L,N,corrugated = True):
 
     \bibitem{Lissajous1857} J. A. Lissajous.  "Mémoire sur l'Etude optique des mouvements vibratoires,"  Annales de chimie et de physique, 3rd series, 51 (1857) 147-232
 
-    \bibitem{Tong1997} E. Y. C. Tong, Lissajous figures The Physics Teacher {\bf 35}, 491 (1997).
+    \bibitem{Tong1997} E. Y. C. Tong, Lissajous figures, The Physics Teacher {\bf 35}, 491 (1997).
+
+    \bibitem{Agrawal2013} D. K. Agrawal, J. Woodhouse, and A. A. Seshia, Physical Review Letters {\bf 111}, 084101 (2013).
 
     \bibitem{Josephson1962} B. D. Josephson, Phys. Letters {\bf 16}, 25 (1962). 
     \bibitem{Josephson1965} B. D. Josephson, Advan. Phys. {\bf 14}, 419 (1965).
@@ -884,6 +914,9 @@ def add_contour(ax,L,N,corrugated = True):
     \bibitem{Stewart1968}  W. C. Stewart CURRENT‐VOLTAGE CHARACTERISTICS OF JOSEPHSON JUNCTIONS Appl. Phys. Lett. 12, 277 (1968).
       
     \bibitem{Shapiro1963} S. Shapiro, Josephson currents in superconducting tunneling: the effect of microwaves and other observations, Phys. Rev. Lett. 11, 80 (1963).
+
+    \bibitem{Benz1990}  S. P. Benz, M. S. Rzchowski, M. Tinkham, and C. J. Lobb, Fractional giant Shapiro steps and spatially correlated phase motion in 2D Josephson arrays, Phys. Rev. Lett. 64, 693 (1990); D. Dom´ınguez and J. V. Jos´e, Giant Shapiro steps with screening currents, Phys. Rev. Lett. 69,
+514 (1992).
 
     \bibitem{Golubov2004} A. A. Golubov, M. Yu. Kupriyanov, and E. Il’ichev. The current-phase relation in Josephson junctions, Rev. Mod. Phys. {\bf 76}, 411 (2004).
 
@@ -893,7 +926,7 @@ def add_contour(ax,L,N,corrugated = True):
       %reichhardt review
       %C. Reichhardt and C. J. Olson Reichhardt, “Depinning and nonequilibrium dynamic phases of particle assemblies driven over random and ordered substrates: a review,” Rep. Prog. Phys. 80, 026501 (2017).
 
-    %  \bibitem{} Reichhardt, C., & Reichhardt, C. J. O. (2015). Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Physical Review B - Condensed Matter and Materials Physics, 92(22). https://doi.org/10.1103/PhysRevB.92.224432
+    \bibitem{Reichhardt2015} C. Reichhardt, and C. J. O. Reichhardt,  Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Phys. Rev. B {\bf 92}, (22). (2015).
       
     \bibitem{Juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
 
@@ -901,6 +934,8 @@ def add_contour(ax,L,N,corrugated = True):
 
     \bibitem{Herrera-Velarde2007} S. Herrera-Velarde and R. Castañeda-Priego, J. Phys.: Condens. Matter 19, 226215 (2007).
 
+      \bibitem{Grier2003} D. G. Grier, A revolution in optical manipulation. Nature {\bf 424}, 810–816 (2003).
+      
 %      Lutz et al. 关11,12兴 created 1D circular channels by means of scanning optical tweezers in order to avoid the presence of lateral confinement walls
     \bibitem{Lutz2004} C. Lutz, M. Kollmann, and C. Bechinger, Phys. Rev. Lett. {\bf 93}, 026001 (2004); C. Lutz, M. Kollmann, C. Bechinger, and P. Leiderer, J. Phys.: Condens. Matter {\bf 16}, S4075 (2004).
 
