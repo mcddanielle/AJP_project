@@ -266,6 +266,7 @@ in colloids has been acheived in systems interacting via magnetic dipoles
 or electric forces 
 in experiment \cite{Juniper2015, Lutz2004} and
 simulation \cite{Herrera-Velarde2007, Herrera-Velarde2008}.
+
 %-----------------------------------------------------------
 %particle interaction types
 %Particles which interact over long distances
@@ -277,79 +278,73 @@ simulation \cite{Herrera-Velarde2007, Herrera-Velarde2008}.
 %environments
 Particles in confined geometries behave differently than free particles.
 Stabilized charged particles form patterns
-due to the interplay of the confining environment
+due to the interplay of the confining landscape 
 and particle interactions.
 Narrow channels studies are useful to provide insights 
 of how particles move through systems 
-such as wires and microchannels.
-Biological systems such as
-neuron axons and capillaries can also be studied
-with these models [more detail and references].
-Many such systems execute local oscillations
-about stable points [elaborate].
+such as charge carries in quantum wires \cite{Tarucha1995} and
+slime molds in microchannels \cite{Gholami2015}.
+%Biological systems such as
+%neuron axons and capillaries can also be studied
+%with these models [more detail and references].
+%Many such systems execute local oscillations
+%about stable points [elaborate].
 %----------------------------------------------------------
-The presence of a modulating surface
-can modify these patterns in a variety of ways,
-changing the onset of dynamical flows,
-and the overall flow patterns.
+%The presence of a modulating surface
+%can modify these patterns in a variety of ways,
+%changing the onset of dynamical flows,
+%and the overall flow patterns.
 %
-
 %external forces
-The
-dynamics of particles subject to 
-an applied external force apply to many physical systems.
-For instance the flow of charges in a conductor,
-or cells responding to a chemical gradient.
-The external force 
-increases the diversity of dynamical behaviors,
-and can cause particles to flow in
-a variety of non-linear complex patterns
-that may be 
-synchronized.
-Disordered chaotic dynamics are also possible,
-where irregular, unpredictable time evolution of
-nonlinear systems occurs in mechanical oscillators \cite{chaos}.
-
+%The
+%dynamics of particles subject to 
+%an applied external force apply to many physical systems.
+%For instance the flow of charges in a conductor,
+%or cells responding to a chemical gradient.
+%The external force 
+%increases the diversity of dynamical behaviors,
+%and can cause particles to flow in
+%a variety of non-linear complex patterns
+%that may be 
+%synchronized.
+%Disordered chaotic dynamics are also possible,
+%where irregular, unpredictable time evolution of
+%nonlinear systems occurs in mechanical oscillators \cite{chaos}.
 %-------------------------------------------------------------
 
-Numerical modeling of colloids can provide mechanistic insight
-that can be difficult to achieve in experimental conditions
-where Brownian motion and other sources of noise dominate.
-[elaborate]
+
 
 %Given the prevalence of synchronization,
 %it is the subject of many computational models.
 Here we focus numerical studies 
 of the synchronized dynamics
 of confined particles driven over
-a washboard shaped potential energy landscape. 
+a washboard shaped potential energy landscape.
 We chose this model for its
 relevance to condensed matter systems
 and ease of simulation.
+Numerical modeling of colloids can provide mechanistic insight
+that can be difficult to achieve in experimental conditions
+where Brownian motion and other sources of noise dominate.
 %We examine
 The period of the substrate
 can be used to control the
-intrinsic velocity of the driven particle.
+intrinsic velocity of the dc driven particle,
+and the applied ac drive can
+create Shapiro steps in the force-velocity relationship.
 
-
-%another confinement technique:
-%Acoustic tweezers and surface acoustic wave (SAW) \cite{}
-%confines single cells and particles with lower energy than light / lasers
-%%X. Ding, J. Shi, S.-C. S. Lin, S. Yazdi, B. Kiraly and T. J. Huang, “Tunable patterning of microparticles and cells using standing surface acoustic waves” Lab Chip, 2012, 12, 2491– 2497.
-%%%Acousto-optically generated potential energy landscapes: Potential mapping using colloids under flow Michael P. N. Juniper,1,∗ Rut Besseling,2 Dirk G. A. L. Aarts,1 and Roel P. A. Dullens1
 
 %---------------------------------------------------------------
 %kinks and nanofriction
 
 %-----------------------------------------------------------------
 %transition from synchronized to chaotic
-
 %describe types of physical systems - particle types
-In this work,
-we perform 
-numerical simulations of confined, driven particles
-to model a variety of physical phenomena.
-%----------------------------------------------------------------------------
+%%In this work,
+%we perform 
+%numerical simulations of confined, driven particles
+%to model a variety of physical phenomena.
+%-----------------------------------------------------------------------
 %paper outline
 %In the following paper
 We describe
@@ -358,8 +353,9 @@ our molecular dynamics model in Section~\ref{sec:MD}.
 We include code to simulate
 and visualize the dynamics in this section
 and supplementary material.
-In Section~\ref{sec:results} we summarize
-our results,
+We summarize
+our results 
+in Section~\ref{sec:results} 
 including synchronized motion of a single confined particle
 driven across a periodic landscape in 
 Section~\ref{sec:one} and
@@ -939,6 +935,9 @@ def add_contour(ax,L,N,corrugated = True):
 %      Lutz et al. 关11,12兴 created 1D circular channels by means of scanning optical tweezers in order to avoid the presence of lateral confinement walls
     \bibitem{Lutz2004} C. Lutz, M. Kollmann, and C. Bechinger, Phys. Rev. Lett. {\bf 93}, 026001 (2004); C. Lutz, M. Kollmann, C. Bechinger, and P. Leiderer, J. Phys.: Condens. Matter {\bf 16}, S4075 (2004).
 
+    \bibitem{Tarucha1995}  Tarucha, S.; Honda, T.; Saku, T. Solid State Commun. 1995, 94, 413.
+
+    \bibitem{Gholami2015} A. Gholami, O. Steinbock, V. Zykov, and E. Bodenschatz, Flow-Driven Waves and Phase-Locked Self-Organization in Quasi-One-Dimensional Colonies of Dictyostelium discoideum, Phys. Rev. Lett. {\bf 114}, 018103 (2015).
 
 \bibitem{supp1} See Figure1.mp4 in appropriate %\url{}
 
@@ -1147,3 +1146,9 @@ def add_contour(ax,L,N,corrugated = True):
     #ax1.set_yticks([])
     return
 \end{verbatim}
+
+%another confinement technique:
+%Acoustic tweezers and surface acoustic wave (SAW) \cite{}
+%confines single cells and particles with lower energy than light / lasers
+%%X. Ding, J. Shi, S.-C. S. Lin, S. Yazdi, B. Kiraly and T. J. Huang, “Tunable patterning of microparticles and cells using standing surface acoustic waves” Lab Chip, 2012, 12, 2491– 2497.
+%%%Acousto-optically generated potential energy landscapes: Potential mapping using colloids under flow Michael P. N. Juniper,1,∗ Rut Besseling,2 Dirk G. A. L. Aarts,1 and Roel P. A. Dullens1
