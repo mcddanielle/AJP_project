@@ -351,7 +351,7 @@ We describe
 our molecular dynamics model in Section~\ref{sec:MD}.
 %including various  and confining environments.
 We include code to simulate
-and visualize the dynamics in this section
+and visualize the landscape and dynamics in this section
 and supplementary material.
 We summarize
 our results 
@@ -370,12 +370,12 @@ We present these results using standard tools of non-linear oscillators
 such phase diagrams of velocity versus position.
 %PHASE DIAGRAMS SHOWNING COUPLING, OR QUASIPERIODIC COUPLING
 %INDICATE COOPERATIVE MOTION IN THE Q1D SUBSTRATE
-In Section~\ref{sec:quasiperiod},
-we show how an aperiodic landscape modifies the particle dynamics.
-Finally we explore the transition to chaotic dynamics in 
-Section~\ref{sec:chaos}
-and conclude 
-in Section~\ref{sec:conclusion}. 
+%In Section~\ref{sec:quasiperiod},
+%we show how an aperiodic landscape modifies the particle dynamics.
+%Finally we explore the transition to chaotic dynamics in 
+%Section~\ref{sec:chaos}
+%and conclude 
+%in Section~\ref{sec:conclusion}. 
 In each section
 we suggest exercises for interested students,
 as summarized in Section~\ref{sec:problems}.
@@ -533,7 +533,8 @@ modeled as a linear friction $\vec{F}_{drag} = -\eta \vec{v}_i$
 sufficient so that
 the acceleration of the particle is zero.
 Such a model is appropriate when the particles
-are small and the viscosity is high [finish... reference...]
+are small and the viscosity of the suspending medium is high.
+% [finish... reference...]
 This model should be familiar to readers
 modeling Milliken's oil drops
 in a standard classical mechanics text \cite{Taylor2005}.
@@ -939,6 +940,13 @@ def add_contour(ax,L,N,corrugated = True):
 
     \bibitem{Gholami2015} A. Gholami, O. Steinbock, V. Zykov, and E. Bodenschatz, Flow-Driven Waves and Phase-Locked Self-Organization in Quasi-One-Dimensional Colonies of Dictyostelium discoideum, Phys. Rev. Lett. {\bf 114}, 018103 (2015).
 
+      %Molecular dynamics references
+
+    \bibitem{Frenkel2001} D. Frenkel and B. Smit, Understanding Molecular Simulation: From Algorithms to Applications (Academic Press, London, 2001).
+    \bibitem{Allen2020} Allen and Tildsley, The Computer Simulation of Liquids. 
+
+      \bibitem{Taylor2005} J. Taylor,  Classical mechanics. University Science Books (2005).
+      
 \bibitem{supp1} See Figure1.mp4 in appropriate %\url{}
 
 %\bibitem{latexsite} \LaTeX\ Project Web Site, \url{<http://www.latex-project.org/>}.
