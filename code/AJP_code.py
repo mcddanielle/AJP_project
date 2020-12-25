@@ -15,14 +15,20 @@ def landscape_potential(V0,y,period):
     '''but what is the landscape force?
     '''
     
-    return V0*np.cos(2*np.pi*y/period)
+    return V0*np.sin(2*np.pi*y/period)
 
 ###################################################################
 def external_drive(F_AC,F_DC,frequency,time):
     '''
     '''
+
+    F_ext = F_DC + F_AC*np.sin(2*np.pi*frequency*time) #
+
+    #if time % 1000:
+    #    print(time,F_ext)
     
-    return F_DC + F_AC*np.sin(2*np.pi*frequency*time)
+    return F_ext
+
 
 ####################################################################
 def ramp_dc_force(F_DC,time,drop,F_DC_incr):
@@ -36,22 +42,22 @@ def ramp_dc_force(F_DC,time,drop,F_DC_incr):
     return F_DC
 
 #####################################################################
-def md_step(y, vy, dt, time, F_DC):
+def md_step(y, dt, time, F_DC):
     '''
     '''
 
     F_AC = 0.2
     #F_DC = 0.005 #5 #increment slowly
     period = 1.825
-    V0 = 0.1*2*np.pi/period
-    frequency = 0.0001
+    V0 = 0.1 #*2*np.pi/period
+    frequency = 0.01
     SX = 36.5
     SY = 36.5
     
     #integrate the equation of motion \eta v = F^net (eta=1)
 
-    #substrate
-    vy += landscape_potential(V0,y,period)
+    #reset vy for every timestep!  
+    vy = landscape_potential(V0,y,period)
 
     #driving force
     vy += external_drive(F_AC,F_DC,frequency,time)
@@ -60,6 +66,8 @@ def md_step(y, vy, dt, time, F_DC):
     y += vy*dt
     if y > SY:
         y -= SY
+    elif y < 0:
+        y += SY
     
     return y, vy
 
@@ -75,7 +83,7 @@ if __name__ == "__main__":
     period = 1.825
 
     F_DC = 0
-    F_DC_incr = 0.001
+    F_DC_incr = 0.0 #01
     drop = 4000
     
     #integer time steps
@@ -96,10 +104,11 @@ if __name__ == "__main__":
             #print(F_DC)
 
         #apply the force calculations for the current position/time
-        y, vy = md_step(y, vy, dt, time, F_DC)
+        #note vy is not necessary 
+        y, vy = md_step(y, dt, time, F_DC)
 
         if int_time % writemovietime == 0:
-            print(int_time)
+            #print(int_time)
             #update the data
             i = int(int_time/writemovietime)
             y_data[i] = y
@@ -113,4 +122,6 @@ if __name__ == "__main__":
     #plot the data
     plt.plot(time_data,y_data/period,'o--') #,markevery=100)
     #plt.xlim(155,157)
+    plt.xlabel("time")
+    plt.ylabel(r"y/$\lambda$")
     plt.savefig("AJP.png")
