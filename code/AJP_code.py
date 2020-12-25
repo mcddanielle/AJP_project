@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 ##################################################################
 def landscape_potential(V0,y,period):
-    '''
+    '''but what is the landscape force?
     '''
     
     return V0*np.cos(2*np.pi*y/period)
@@ -24,16 +24,29 @@ def external_drive(F_AC,F_DC,frequency,time):
     
     return F_DC + F_AC*np.sin(2*np.pi*frequency*time)
 
+####################################################################
+def ramp_dc_force(F_DC,time,drop,F_DC_incr):
+    '''
+    '''
+    F_DC_max = 0.5
+    
+    if time % drop == 0 and F_DC < F_DC_max:
+        F_DC += F_DC_incr
+
+    return F_DC
+
 #####################################################################
-def md_step(y, vy, dt, time):
+def md_step(y, vy, dt, time, F_DC):
     '''
     '''
 
-    F_AC = 0.05
-    F_DC = 0.05
-    V0 = 0.5
-    period = 1.0
-    frequency = 0.1
+    F_AC = 0.2
+    #F_DC = 0.005 #5 #increment slowly
+    period = 1.825
+    V0 = 0.1*2*np.pi/period
+    frequency = 0.0001
+    SX = 36.5
+    SY = 36.5
     
     #integrate the equation of motion \eta v = F^net (eta=1)
 
@@ -45,6 +58,8 @@ def md_step(y, vy, dt, time):
 
     #calculate the new position
     y += vy*dt
+    if y > SY:
+        y -= SY
     
     return y, vy
 
@@ -53,33 +68,49 @@ def md_step(y, vy, dt, time):
 if __name__ == "__main__":
 
     #define the constants (parameters and initial conditions)
-    dt = 0.01 #hmm... not as in manuscript... single particle in a smoothly varying environment
+    dt = 0.001 #
     y = 0
     vy = 0
     time = 0.0
+    period = 1.825
 
+    F_DC = 0
+    F_DC_incr = 0.001
+    drop = 4000
+    
     #integer time steps
-    maxtime=100
-
+    maxtime=200000
+    writemovietime=1000
+    
     #define arrays to hold data as a function of time
-    y_data = np.zeros(maxtime)
-    vy_data = np.zeros(maxtime)
-    time_data = np.zeros(maxtime)
+    array_length = int(maxtime/writemovietime)
+    y_data = np.zeros(array_length)
+    vy_data = np.zeros(array_length)
+    time_data = np.zeros(array_length)
 
     #loop through the integer time steps in the simulation
     for int_time in range(0,maxtime):
 
-        #apply the force calculations for the current position/time
-        y, vy = md_step(y, vy, dt, time)
+        if int_time > 0: 
+            F_DC = ramp_dc_force(F_DC,int_time,drop,F_DC_incr)
+            #print(F_DC)
 
-        #update the data
-        y_data[int_time] = y
-        vy_data[int_time] = vy
-        time_data[int_time] = time
+        #apply the force calculations for the current position/time
+        y, vy = md_step(y, vy, dt, time, F_DC)
+
+        if int_time % writemovietime == 0:
+            print(int_time)
+            #update the data
+            i = int(int_time/writemovietime)
+            y_data[i] = y
+            vy_data[i] = vy
+            time_data[i] = time
 
         #update the time (simulation units)
         time += dt
 
 
-    plt.plot(time_data,y_data)
+    #plot the data
+    plt.plot(time_data,y_data/period,'o--') #,markevery=100)
+    #plt.xlim(155,157)
     plt.savefig("AJP.png")
