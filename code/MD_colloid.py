@@ -1,6 +1,11 @@
+#!/usr/bin/env python3
+
+
 #################################################################
 '''
+Supplementary Material for
 Molecular dynamics simulation of synchronization in driven particles
+American Journal of Physics
 
 Danielle McDermott
 Tiare Guerrero
@@ -64,6 +69,8 @@ def md_step(y, dt, time, F_DC):
 
     #calculate the new position
     y += vy*dt
+
+    #check periodic boundary conditions
     if y > SY:
         y -= SY
     elif y < 0:
