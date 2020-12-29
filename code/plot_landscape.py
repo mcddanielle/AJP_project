@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
     #configure and save the image
     fig.tight_layout(pad=0.5) #h_pad=-0.5,w_pad=1.0,pad=0.5)
-    image_test_name = "landscape.png"
+    image_test_name = "landscape.pdf"
     plt.savefig(image_test_name)
 
     #sys.exit()
