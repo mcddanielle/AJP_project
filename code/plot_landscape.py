@@ -103,7 +103,7 @@ if __name__ == "__main__":
 
     #place single particle on plot
     xp=Sx*0.25
-    yp=Sy*0.41
+    yp=Sy*0.59
     Z_mag=0.1
     zp=Z_mag*np.cos(2*np.pi*yp/(Sy/n_corr))
 
@@ -112,14 +112,14 @@ if __name__ == "__main__":
 
     #slope = dy/dz, dz=1, zf-zp=Z_mag, yf-yp=slope
     zf=zp-Z_mag/1.8+0.02
-    yf=yp-slope*Z_mag/1.8+0.6
+    yf=yp - slope*Z_mag/1.8 - 0.6
     
 
     scatter1=ax1.scatter(xp,yp,edgecolor='k',s=200)
     scatter2=ax2.scatter(zp,yp,edgecolor='k',s=200)
 
-    ax2.annotate("", xytext=(zp, yp), xy=(zf, yf), arrowprops=dict(facecolor='black', shrink=0.05)) #arrowstyle="<-",
-    ax2.annotate(r" $\vec{F}^{landscape}$", xy=(0+0.02, Sy/2-1), ha='center', va='center') 
+    ax2.annotate("", xytext=(zp, yp), xy=(zf, yf), arrowprops=dict(facecolor='black', shrink=0.05,color='magenta')) #arrowstyle="<-",
+    ax2.annotate(r"$\mathrm{\vec{F}^{l}}$", xy=(0+0.02, Sy/2), ha='center', va='center',color='magenta') 
 
     #add annotation showing period
     ax2.annotate(r'$\lambda$', xy=(-0.9*Z_mag,2*Sy/3), ha='center', va='center')
@@ -134,7 +134,8 @@ if __name__ == "__main__":
                  xycoords='data', textcoords='data',
                  arrowprops={'arrowstyle': '<|-|>','color':"red"})
     
-    ax1.annotate(r" $\vec{F}^{landscape}$", xytext=(xp, yp+4), xy=(xp, yp), arrowprops=dict(facecolor='black', arrowstyle="<-"),ha="center")
+    ax1.annotate(r"$\mathrm{\vec{F}^{l}}$", xytext=(xp, yp-6), xy=(xp, yp), arrowprops=dict(color='magenta', arrowstyle="<-"),ha="center")
+    ax1.annotate(r"$\mathrm{\vec{F}^{D}}$", xytext=(xp, yp+8), xy=(xp, yp), arrowprops=dict(color='gray', arrowstyle="<-"),ha="center")
 
     ax1.text(0.03,0.94,"(a)",transform = ax1.transAxes)
     ax2.text(0.03,0.94,"(b)",transform = ax2.transAxes)
