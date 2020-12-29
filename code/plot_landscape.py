@@ -9,17 +9,14 @@ import matplotlib.cm as cm
 
 import matplotlib.gridspec as gridspec
 
-from mpl_toolkits.mplot3d import Axes3D
-#import mpl_toolkits.mplot3d.Axes3D as Axes3D
-
 
 #set default font of plot
-plt.rc('font', size=20)
+plt.rc('font', size=24)
 
 ##########################################################
 #ADD CONTOUR PLOT
 ##########################################################
-def add_contour(ax,L,N,corrugated = True):
+def add_contour(ax,ax2,L,N): 
     '''
     Hardwired to color in the quasi1D potential to contain 
     the particles in a trough.  
@@ -29,16 +26,9 @@ def add_contour(ax,L,N,corrugated = True):
 
     Optional Arguments:
 
-    corrugated (default = True)  
     Adds the washboard in the y-direction.  
     Hardwired for a single parameter set.    
     '''
-
-    #set up plot of 1 row, 3 columns to make the first plot smaller
-    gs=gridspec.GridSpec(1,3)
-    
-    ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
-    ax2 = fig.add_subplot(gs[0,1:], projection='3d')  #scatter plot of particles
 
     a_p = L/N
 
@@ -49,62 +39,42 @@ def add_contour(ax,L,N,corrugated = True):
 
     Z_mag = 0.1 # set by what "looks good"
 
-    #create a narrow confining channel for 2D systems
+    #create a narrow confining channel for multiparticle 2D systems
     if 0:
         Z = Z_mag*np.cos(2*np.pi*X/L)
     
         #create washboard
-    elif corrugated == True:
-        Z = Z_mag*np.cos(2*np.pi*(Y)/a_p) 
 
+    Z = Z_mag*np.cos(2*np.pi*(Y)/a_p) 
+
+    #blue are minima, red are maxima
     cmap=cm.coolwarm #_r
 
-    #alphs is the degree of transparency, again, set by what looks good.
+    #alpha is the degree of transparency, again, set by what looks good.
 
-    #if 0:
-    cset = ax1.contourf(X, Y, Z, cmap=cmap,alpha=0.5)
-    #else:
-    cset = ax2.plot_surface(X,Y,Z,rstride=1,cstride=1,linewidth=0,cmap=cmap,alpha=0.5)
+    cset = ax.contourf(X, Y, Z, cmap=cmap,alpha=0.5)
 
-    #setboxaspect doesn't work in my version of matplotlib
-    #ax2.set_box_aspect((np.ptp(X), np.ptp(Y), np.ptp(Z)))  # aspect ratio is 1:1:1 in data space
+    ax2.plot(Z,Y)
+    ax2.set_xlabel(r"U(y)",labelpad=-20)
+    #ax2.set_ylabel(r"y",rotation='horizontal',ha='right')
 
-    #the following doesn't seem to work at all
-    ax2.auto_scale_xyz([0,L/2], [0, L], [-Z_mag, Z_mag])
+    ax.set_xlim(0, L/2)
+    ax.set_ylim(0, L)
 
-    
-    ax2.set_zticks([])
-    #if stripes:
+    ax.set_xlabel(r"x",labelpad=-20)
+    ax.set_ylabel(r"y",rotation='horizontal',ha='right')
 
-    ax2.w_xaxis.set_pane_color((1.0,1.0,1.0,1.0))
-    ax2.w_yaxis.set_pane_color((1.0,1.0,1.0,1.0))
-    ax2.w_zaxis.set_pane_color((1.0,1.0,1.0,1.0))
+    ax.set_xticks([0,L/2])
+    ax.set_yticks([0,L])
 
-    ax2.set_xlim(-1, L/2)
-    ax2.set_ylim(-1, L)
-    ax2.set_zlim(-2*Z_mag, 2*Z_mag)
+    ax.set_xticklabels(['0','L/2'])
+    ax.set_yticklabels(['0','L'])
 
-    ax1.set_xlim(0, L/2)
-    ax1.set_ylim(0, L)
-    #ax.view_init(35, 60)
-    #ax.dist = 12
-
-    #ax1.set_xlim(15,20)
-    #ax1.set_ylim(15,20)
-
-    for ax in [ax1,ax2]:
-        ax.set_xlabel(r"X")
-        ax.set_ylabel(r"Y",rotation='horizontal',ha='right')
-
-        ax.set_xticks([0,L/2])
-        ax.set_yticks([0,L])
-
-        ax.set_xticklabels(['0','L/2'])
-        ax.set_yticklabels(['0','L'])
-
-    #ax1.set_xticks([])
-    #ax1.set_yticks([])
-    return ax1, ax2
+    #ax2.set_xlim(-Z_mag*1.2,Z_mag*1.2)
+    ax2.set_xticks([-Z_mag,Z_mag])
+    ax2.set_xticklabels([r'-U$_0$','U$_0$'])
+    ax2.set_yticks([])
+    return 
 
 ################################################################
 ################################################################
@@ -117,36 +87,51 @@ if __name__ == "__main__":
     Sy=36.5
 
 
-    fig = plt.figure(figsize=(12,6))
-    '''
-    if 1:
-        #ax1 = fig.add_subplot(121)
-        #ax2 = fig.add_subplot(122, projection='3d')
-        ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
-        ax2 = fig.add_subplot(gs[0,1:], projection='3d')  #scatter plot of particles
-    else:
-        ax1 = Axes3D(fig)
-    '''
-    
-    #set up landscape
-    n_corr = 4  #number of periods
-    corr = True
-    ax1, ax2 = add_contour(fig,Sy,n_corr,corrugated = corr)
+    fig = plt.figure(figsize=(8,6))
 
-    #fig2 = plt.figure()
-    #ax2 = Axes3D(fig2)
+    #set up plot of 1 row, 3 columns to make the first plot smaller
+    gs=gridspec.GridSpec(1,2)
+    
+    ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
+    ax2 = fig.add_subplot(gs[0,1],sharey=ax1)  #scatter plot of particles
+    
+    #set up and plot landscape
+    n_corr = 3  #number of periods
+
+    add_contour(ax1,ax2,Sy,n_corr) #,corrugated = corr)
 
     #place single particle on plot
     xp=Sx*0.25
-    yp=Sy*0.5
-    scatter1=ax1.scatter(xp,yp,edgecolor='k',s=50)
+    yp=Sy*0.41
+    Z_mag=0.1
+    zp=Z_mag*np.cos(2*np.pi*yp/(Sy/n_corr))
+
+    #slope at zp,yp:
+    slope = -Z_mag*2*np.pi/(Sy/n_corr)*np.sin(2*np.pi*yp/(Sy/n_corr))
+
+    #slope = dy/dz, dz=1, zf-zp=Z_mag, yf-yp=slope
+    zf=zp-Z_mag/1.8+0.02
+    yf=yp-slope*Z_mag/1.8+0.6
+    
+
+    scatter1=ax1.scatter(xp,yp,edgecolor='k',s=200)
+    scatter2=ax2.scatter(zp,yp,edgecolor='k',s=200)
+
+    ax2.annotate(r" $\vec{F}^{landscape}$", xytext=(zp, yp+0.5), xy=(zf, yf), arrowprops=dict(facecolor='black', shrink=0.05)) #arrowstyle="<-",
+
+    ax1.annotate(r" $\vec{F}^{landscape}$", xytext=(xp, yp+4), xy=(xp, yp), arrowprops=dict(facecolor='black', arrowstyle="<-"),ha="center")
+
+    ax1.text(0.05,0.95,"(a)",transform = ax1.transAxes)
+    ax2.text(0.05,0.95,"(b)",transform = ax2.transAxes)
+    
+    #plot the "side view" of the potential
 
     #add arrow for driving force
 
     #annotate variables on plot
 
     #configure and save the image
-    fig.tight_layout() #h_pad=-0.5,w_pad=1.0,pad=0.5)
+    fig.tight_layout(pad=0.0) #h_pad=-0.5,w_pad=1.0,pad=0.5)
     image_test_name = "landscape.png"
     plt.savefig(image_test_name)
 
