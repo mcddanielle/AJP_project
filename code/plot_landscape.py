@@ -118,8 +118,8 @@ if __name__ == "__main__":
     scatter1=ax1.scatter(xp,yp,edgecolor='k',s=200)
     scatter2=ax2.scatter(zp,yp,edgecolor='k',s=200)
 
-    ax2.annotate("", xytext=(zp, yp), xy=(zf, yf), arrowprops=dict(facecolor='black', shrink=0.05,color='magenta')) #arrowstyle="<-",
-    ax2.annotate(r"$\mathrm{\vec{F}^{l}}$", xy=(0+0.02, Sy/2), ha='center', va='center',color='magenta') 
+    ax2.annotate("", xytext=(zp, yp), xy=(zf, yf), arrowprops=dict(shrink=0.05,color='magenta')) #arrowstyle="<-",
+    ax2.annotate(r"$\mathrm{\vec{F}^{\ell}}$", xy=(0+0.02, Sy/2), ha='center', va='center',color='magenta') 
 
     #add annotation showing period
     ax2.annotate(r'$\lambda$', xy=(-0.9*Z_mag,2*Sy/3), ha='center', va='center')
@@ -134,8 +134,11 @@ if __name__ == "__main__":
                  xycoords='data', textcoords='data',
                  arrowprops={'arrowstyle': '<|-|>','color':"red"})
     
-    ax1.annotate(r"$\mathrm{\vec{F}^{l}}$", xytext=(xp, yp-6), xy=(xp, yp), arrowprops=dict(color='magenta', arrowstyle="<-"),ha="center")
-    ax1.annotate(r"$\mathrm{\vec{F}^{D}}$", xytext=(xp, yp+8), xy=(xp, yp), arrowprops=dict(color='gray', arrowstyle="<-"),ha="center")
+    ax1.annotate("", xy=(xp, yp-6), xytext=(xp, yp), arrowprops=dict(color='magenta', shrink=0.05),ha="center")
+    ax1.annotate(r"$\mathrm{\vec{F}^{\ell}}$", xy=(xp+1, yp-6),ha="left",va="center")
+    
+    ax1.annotate("", xy=(xp, yp+8), xytext=(xp, yp), arrowprops=dict(color='gray', shrink=0.05), ha="center")
+    ax1.annotate(r"$\mathrm{\vec{F}^{D}(t)}$",  xy=(xp+1, yp+8),ha="left")
 
     ax1.text(0.03,0.94,"(a)",transform = ax1.transAxes)
     ax2.text(0.03,0.94,"(b)",transform = ax2.transAxes)
