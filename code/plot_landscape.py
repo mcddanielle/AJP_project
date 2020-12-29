@@ -63,6 +63,7 @@ def add_contour(ax,ax2,L,N):
 
     ax.set_xlabel(r"x",labelpad=-20)
     ax.set_ylabel(r"y",rotation='horizontal',ha='right',labelpad=-15)
+    ax2.set_ylabel(r"y",rotation='horizontal',ha='right',labelpad=-15)
 
     ax.set_xticks([0,L/2])
     ax.set_yticks([0,L])
@@ -117,14 +118,21 @@ if __name__ == "__main__":
     scatter1=ax1.scatter(xp,yp,edgecolor='k',s=200)
     scatter2=ax2.scatter(zp,yp,edgecolor='k',s=200)
 
-    ax2.annotate(r" $\vec{F}^{landscape}$", xytext=(zp, yp+0.5), xy=(zf, yf), arrowprops=dict(facecolor='black', shrink=0.05)) #arrowstyle="<-",
+    ax2.annotate("", xytext=(zp, yp), xy=(zf, yf), arrowprops=dict(facecolor='black', shrink=0.05)) #arrowstyle="<-",
+    ax2.annotate(r" $\vec{F}^{landscape}$", xy=(0+0.02, Sy/2-1), ha='center', va='center') 
 
-    #add period
-    ax2.annotate('r$\lambda = L/N_p$', xy=(5, 1.5), ha='center', va='center')
-    ax2.annotate('', xy=(4, 1), xytext=(6, 1),
+    #add annotation showing period
+    ax2.annotate(r'$\lambda$', xy=(-0.9*Z_mag,2*Sy/3), ha='center', va='center')
+    ax2.annotate('', xy=(-1.01*Z_mag,2*Sy/3-Sy/6),
+                 xytext=(-1.01*Z_mag,2*Sy/3+Sy/6),
                  xycoords='data', textcoords='data',
-                 arrowprops={'arrowstyle': '|-|'})
+                 arrowprops={'arrowstyle': '<|-|>','color':"red"})
 
+    ax1.annotate(r'$\lambda$', xy=(2,2*Sy/3), ha='center', va='center')
+    ax1.annotate('', xy=(0.5,2*Sy/3-Sy/6),
+                 xytext=(0.5,2*Sy/3+Sy/6),
+                 xycoords='data', textcoords='data',
+                 arrowprops={'arrowstyle': '<|-|>','color':"red"})
     
     ax1.annotate(r" $\vec{F}^{landscape}$", xytext=(xp, yp+4), xy=(xp, yp), arrowprops=dict(facecolor='black', arrowstyle="<-"),ha="center")
 
