@@ -119,6 +119,13 @@ if __name__ == "__main__":
 
     ax2.annotate(r" $\vec{F}^{landscape}$", xytext=(zp, yp+0.5), xy=(zf, yf), arrowprops=dict(facecolor='black', shrink=0.05)) #arrowstyle="<-",
 
+    #add period
+    ax2.annotate('r$\lambda = L/N_p$', xy=(5, 1.5), ha='center', va='center')
+    ax2.annotate('', xy=(4, 1), xytext=(6, 1),
+                 xycoords='data', textcoords='data',
+                 arrowprops={'arrowstyle': '|-|'})
+
+    
     ax1.annotate(r" $\vec{F}^{landscape}$", xytext=(xp, yp+4), xy=(xp, yp), arrowprops=dict(facecolor='black', arrowstyle="<-"),ha="center")
 
     ax1.text(0.03,0.94,"(a)",transform = ax1.transAxes)
