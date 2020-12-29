@@ -369,29 +369,32 @@ create Shapiro steps in the force-velocity relationship.
 %paper outline
 %In the following paper
 We describe
-our molecular dynamics model in Section~\ref{sec:MD}
-In this section, we restrict our discussion to a single particle,
-and include additional information
-for multiple particles in Section~\ref{sec:sync}.
+our molecular dynamics model for a single particle in Section~\ref{sec:MD}.
+%In this section, we restrict our discussion to a single particle,
+%and include additional information
+%for multiple particles in Section~\ref{sec:sync}.
 %including various  and confining environments.
 We summarize
 our results 
 in Section~\ref{sec:results} 
 including synchronized motion of a single confined particle
 driven across a periodic landscape in 
-Section~\ref{sec:one} and
-multiple interacting particles
-in Section~\ref{sec:sync},
-including stationary propagation of high density kinks
-in Sec.~\ref{sec:kink}.
-We include code to simulate
-and visualize the landscape and dynamics in this section
-and supplementary material.
+Section~\ref{sec:one}.
+In Section~\ref{sec:sync}
+we 
+extend the model to include multiple particles,
+and show how confined 
+interacting particles respond to the same applied driving force.
+%including stationary propagation of high density kinks
+%in Sec.~\ref{sec:kink}.
+%We include code to simulate
+%and visualize the landscape and dynamics in this section
+%and supplementary material.
 %we
 %demonstrate how uniform environments and applied forces
 %and create synchronized flow patterns.
-We present these results using standard tools of non-linear oscillators
-such phase diagrams of velocity versus position.
+%We present these results using standard tools of non-linear oscillators
+%such phase diagrams of velocity versus position.
 %PHASE DIAGRAMS SHOWING COUPLING, OR QUASI-PERIODIC COUPLING
 %INDICATE COOPERATIVE MOTION IN THE Q1D SUBSTRATE
 %In Section~\ref{sec:quasiperiod},
@@ -400,36 +403,88 @@ such phase diagrams of velocity versus position.
 %Section~\ref{sec:chaos}
 %and conclude 
 %in Section~\ref{sec:conclusion}. 
-In each section
-we suggest exercises for interested students,
-as summarized in Section~\ref{sec:problems}.
+We conclude with
+exercises for interested students 
+in Section~\ref{sec:problems}.
 
 
 %Here we model the microscopic dynamics of phase locking in a colloidal model syestem using molecular dynamics (MD).
 
 \section{Molecular Dynamics Simulation}
 \label{sec:MD}
-In this section we describe the dynamics of the particles
-using the model forces
-and the motion using an modified form of Newton's second law
-suitable for microscopic particles in a suspending fluid.
+
+\begin{center}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\columnwidth]{landscape.pdf}
+\caption{
+  Schematic of the simulation
+  of a single particle
+  driven across a washboard potential
+  energy landscape.
+  (a) View of the $x-y$ plane. %of the simulation
+  The time-dependent applied driving force $\vec{F}^D$
+  is parallel to the y-axis.
+  The force due to the landscape %$\vec{F}^l$
+  is calculated due to the gradient of the potential
+  energy 
+  $\vec{F}^l = -\nabla U(\vec{r})$.
+  (b) The potential energy function
+  along the y-axis $U_l(y)$
+  with period $\lambda = L/N_p$
+  where the number of periods is $N_p = 3$.
+  }
+\label{fig:landscape0}
+\end{figure}
+\end{center}
 
 We use a classical two-dimensional model for 
-studying the dynamics of $N$ interacting particles.
+studying the dynamics of $N$ interacting particles,
+using the net force on each particle to calculate
+its trajectory.
 Particles are confined in a two-dimensional (2D) 
 simulation of area $A = L \times L$ where $L=36.5 a_0$
 where $a_0$ is a dimensionless unit of length.
 An individual particle $i$ has
 position $\vec{r}_i = x_i \hat{x} + y_i \hat{y}$
-and velocity $\vec{v}_i = d\vec{r}_i/dt$.  
-Particles are subject to
+and velocity $\vec{v}_i = d\vec{r}_i/dt$.
+The edges of the system are treated with
 periodic boundary conditions
 such that a particle leaving the edge of the system is mapped
 back to a position within the simulation 
 by the transformation $x_i+L \rightarrow x_i$ and $y_i+L \rightarrow y_i$.
 %and particles interact across PBC.
+We show a schematic of the system in Fig.~\ref{fig:0}
 
-Particles are subject an external time-dependent driving force
+We confine the particles using a position dependent 
+potential energy function, called a landscape or substrate.
+The confining force %arises from a potential function 
+ %creating a landscape of potential minima and maxima
+%that modify the force on a particle as a function of position
+is calculated as 
+ $\vec{F}^{l}_i(\vec{r}_i) = -\nabla U_l(\vec{r}_i)$.
+ %The landscape potential energy $U(\vec{r})$ is static 
+ %with fixed minima and maxima
+ %that are periodic or quasi-periodic,
+ %as described in Sec.~\ref{sec:results}.
+% 
+The periodic landscape is modulated in the y-direction as
+%% %that used in Sec.~\ref{sec:one}
+% where 
+ \begin{equation}
+   U(y) = U_0 \cos{(N_p \pi y / L)}
+     \label{eq:ysubstrate}
+\end{equation}
+ where $N_p$ are the number of periods,
+ % $L$ is the period length,
+ and $U_0$ is an adjustable parameter
+ to set the depth of the troughs.
+ We define the substrate strength to be
+ the maximum force the substrate can exert on a particle 
+ $A_p = 2\pi U_0/L$.
+ %
+
+ Particles are subject an external time-dependent driving force
 $\vec{F}_{D}(t)$
 applied parallel to the y-direction.
 We model this force as
@@ -449,34 +504,6 @@ we slowly increase
 $F^{DC}$ from zero
 to avoid transient effects.
 
-We confine the particles using a position dependent 
-potential energy function, called a landscape or substrate.
-The confining force %arises from a potential function 
- %creating a landscape of potential minima and maxima
-%that modify the force on a particle as a function of position
-is calculated as 
- $\vec{F}^{l}_i(\vec{r}_i) = -\nabla U_l(\vec{r}_i)$.
- %The landscape potential energy $U(\vec{r})$ is static 
- %with fixed minima and maxima
- %that are periodic or quasi-periodic,
- %as described in Sec.~\ref{sec:results}.
-% 
-The periodic landscape is modulated in the y-direction as
-%% %that used in Sec.~\ref{sec:one}
-% where 
- \begin{equation}
-   U_{washboard}(y) = U_0 \cos{(N_p \pi y / L)}
-     \label{eq:ysubstrate}
-\end{equation}
- where $N_p$ are the number of periods,
- % $L$ is the period length,
- and $U_0$ is an adjustable parameter
- to set the depth of the troughs.
- We define the substrate strength to be
- the force 
- $A_p = 2\pi U_0/L$.
- %
-
 %because 
 We model the 
 particle dynamics 
@@ -488,7 +515,7 @@ equation of motion.
 %to a linear drag force.
 %Overdamped dynamics is a common assumption in models of colloidal particles.
 %This is an assumption that
-The term ``overdamped'' or critically damped indicates
+The term `overdamped or critically damped indicates
 that an oscillator cannot undergo periodic
 undulations due to some external force. %such as
 %suspension in a viscous fluid \cite{}.
@@ -564,15 +591,16 @@ The units of the simulated variables are summarized in Table ~\ref{tab:1}.
 Quantity & Unit \\
 \hline
 length &  $a_0$ \\
+energy & $E_0$ \\
 %electric potential & $V(r_{ij}) = E_0/r_{ij}$ \\
-energy & $E_0 = q^2{Z^*}^2/4\pi \epsilon \epsilon_0 a_0$ \\
-dimensionless interaction strength & $q$ \\
-effective colloidal charge & $Z^*$ \\
-solvent dielectric constant & $\epsilon \epsilon_0$\\
+%energy & $E_0 = q^2{Z^*}^2/4\pi \epsilon \epsilon_0 a_0$ \\
+%dimensionless interaction strength & $q$ \\
+%effective colloidal charge & $Z^*$ \\
+%solvent dielectric constant & $\epsilon \epsilon_0$\\
 force & $E_0 / a_0$\\
 viscosity/damping constant & $\eta$ \\
 time &  $\eta / E_0$ \\
-velocity &  $ E_0 / \eta a_0$ \\
+velocity &  $ (E_0 / \eta) a_0$ \\
 \end{tabular}
 \end{ruledtabular}
 \label{tab:1}
