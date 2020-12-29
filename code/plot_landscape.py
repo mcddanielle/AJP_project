@@ -62,7 +62,7 @@ def add_contour(ax,ax2,L,N):
     ax.set_ylim(0, L)
 
     ax.set_xlabel(r"x",labelpad=-20)
-    ax.set_ylabel(r"y",rotation='horizontal',ha='right')
+    ax.set_ylabel(r"y",rotation='horizontal',ha='right',labelpad=-15)
 
     ax.set_xticks([0,L/2])
     ax.set_yticks([0,L])
@@ -73,7 +73,7 @@ def add_contour(ax,ax2,L,N):
     #ax2.set_xlim(-Z_mag*1.2,Z_mag*1.2)
     ax2.set_xticks([-Z_mag,Z_mag])
     ax2.set_xticklabels([r'-U$_0$','U$_0$'])
-    ax2.set_yticks([])
+    #ax2.set_yticks([])
     return 
 
 ################################################################
@@ -121,8 +121,8 @@ if __name__ == "__main__":
 
     ax1.annotate(r" $\vec{F}^{landscape}$", xytext=(xp, yp+4), xy=(xp, yp), arrowprops=dict(facecolor='black', arrowstyle="<-"),ha="center")
 
-    ax1.text(0.05,0.95,"(a)",transform = ax1.transAxes)
-    ax2.text(0.05,0.95,"(b)",transform = ax2.transAxes)
+    ax1.text(0.03,0.94,"(a)",transform = ax1.transAxes)
+    ax2.text(0.03,0.94,"(b)",transform = ax2.transAxes)
     
     #plot the "side view" of the potential
 
@@ -131,7 +131,7 @@ if __name__ == "__main__":
     #annotate variables on plot
 
     #configure and save the image
-    fig.tight_layout(pad=0.0) #h_pad=-0.5,w_pad=1.0,pad=0.5)
+    fig.tight_layout(pad=0.5) #h_pad=-0.5,w_pad=1.0,pad=0.5)
     image_test_name = "landscape.png"
     plt.savefig(image_test_name)
 
