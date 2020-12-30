@@ -41,13 +41,8 @@
   %confined to a narrow channel 
   driven
   across a washboard potential energy landscape
-  exhibit a variety of synchronization effects
-  in
-  experimental systems 
-  %interest to condensed matter physics 
-  including 
-  magnetically driven colloidal particles
-  confined by light-fields.
+  exhibit a variety of synchronization effects.
+  %in
   %  Numerical model
   We discuss a simple
   numerical model that
@@ -65,6 +60,13 @@
   molecular dynamics simulations
   for particles moving through
   a viscous liquid.
+  This model reproduces behaviors observed
+  in experimental systems 
+  of interest to condensed matter physics 
+  including 
+  magnetically driven colloidal particles
+  confined by light-fields.
+  %
   %applied to single and multiple particle systems.
   %so we model the dynamics of each particle
   %with 
@@ -75,33 +77,23 @@
   numerical representations of the landscape
   and
   animations of the particle motion.
-  Our results show a variety of systems that
-  synchronize 
+  Our results show a variety of synchronization effects 
+  in single and multi-particle systems, 
   %and detect synchronization using
   %measurements of
+  which we characterize with
+  plots of 
   particle velocity as a function of applied driving force,
-  and characterize these behaviors
-  with force-velocity curves and phase diagrams.
-  We include sample code
-  and exercises for students
-  %that include
-  with 
-  opportunities
-  to reproduce our results and propose
-  new numerical experiments.
+  and phase diagrams of position versus velocity.
+  %We include sample code
+  %and exercises for students
+  %with 
+  %opportunities
+  %to reproduce our results and propose
+  %new numerical experiments.
   %With only a few particles in two-dimensions,
   %the simulation runs quickly,
-  %making this an appropriate model for undergraduates to explore.
-
-  %Hew to this recipe (MMRC) witlessly
-  %1. M—Give the motivation and context
-  %2. M—Explain what you did in sufficient
-  %detail so the audience knows if your work
-  %is relevant and applicable to his or hers
-  %3. R—Emphasize your key results
-  %4. C—Tell the reader what you think the
-  %results mean
-  
+  %making this an appropriate model for undergraduates to explore.  
 \end{abstract}
 % AJP requires an abstract for all regular article submissions.
 % Abstracts are optional for submissions to the "Notes and Discussions" section.
@@ -264,44 +256,95 @@ charge and spin density waves.
 \section{Colloidal Models}
 \label{sec:colloids}
 
-Experiments with colloid particles,
-such as plastic beads suspended in
-highly de-ionized water \cite{},
-are useful model systems
-to understand complex behaviors.
-%silica spheres in organic solvents
-%magnetic spheres?
+Complex dynamics can be studied with
+colloid particles with experiments and simulation.
+In experiment, colloids are typically spheres of 
+plastic suspended in
+highly de-ionized water or silica in suspended in organic solvent.
+%experimental - colloids specifically
+The spheres are a few microns in size
+and move at rates of microns per second,
+so a system can be imaged
+with a traditional optical camera
+due to the large size and slow speed of the particles.
+Individual colloids exhibit 
+Brownian motion,
+where particles change direction in a seemly random fashion
+due to unseen 
+collisions 
+with particles comprising the suspending fluid \cite{}.
+Brownian motion is a temperature dependent
+phenomena affecting quantum mechanically small systems. \cite{}
+[elaborate].
+
+Due to the relative ease of
+manipulation and imagining, 
+colloids are used as experimental models
+for systems relatively hard to access and visualize. 
+%SAME SENTENCE TWICE
+Collections of colloids can
+be used to study the properties of solids and liquids
+%comprised of smaller particles
+%such as atoms \cite{} or electrons \cite{}
+or more exotic systems 
+such as cold atoms or electron gases \cite{Grier2003}.  
+The interaction forces between colloids can be controlled 
+by altering the chemistry of the suspending fluid
+or surface ligands of the particles.
+Thus colloids can 
+be modified to mimic different
+systems such as hard spheres interacting via contact forces \cite{},
+dipole interactions \cite{},
+and long range electrostatic interactions \cite{}.
+
+Light is a
+tool for manipulating the colloidal environment.
+A single laser beam can be used to create an optical trap,
+which uses 
+photon radiation pressure to
+control colloid motions.
+A circular optical trap is designed so the center is
+a local energy minimum where 
+a colloid in the beam center is subject to a
+uniform distribution of photon bombardment. %, making 
+Colloids at a trap edge
+experience a net force
+due to the uneven 
+distribution of photon collisions on its surface.
+Depending on the shape of the trap and location of the particle in the trap,
+the radiation pressure either pushes colloids toward the local minima
+or ejects it from the trap.
+A single optically trapped colloid executing Brownian motion
+is a useful probe of microscopic forces,
+and has been studied in detail in Ref.~\cite{Volpe2013}.
+
+
+Complex environments can be
+engineered with light by %, typically made 
+using diffraction gratings to create a patterned
+potential energy landscape 
+with one or more laser beams \cite{}.
 %
+
 Experiments of colloid particles confined
-in optical traps
+in optical traps arrays or patterns 
 subject to external driving forces 
 have
 been used to examine the microscopic dynamics
-of individual particles during mode-locking,
-which cannot be easily imaged in electronics.
-%experimental - colloids specifically
-Colloidal particles trapped in light fields are %have proven
-a useful medium for studying complex dynamical behaviors  %cite
-due to their 
-relatively large size of microns,
-making them relatively simple 
-to control and image.
-Additionally colloids can mimic different
-systems since 
-the interaction forces between colloids can be modified
-by tuning the chemistry of the suspending fluid or surface ligands
-of the particles.
-Because colloids are easy to control and study, 
-they are used as experimental models
-for systems relatively hard to access and visualize,
-such as cold atoms or electron gases \cite{Grier2003}. %ELABORATE AND CITE
+of individual particles during mode-locking \cite{Juniper2015}.
+This produced step-by-step diagrams
+of particle dynamics that cannot be 
+imaged in electronic systems such as Josephson junctions.
 %Recent work with atomic systems such as Bose-Einstein condensates \cite{Zhang2020}
-Mode-locking 
-in colloids has been achieved in systems interacting via magnetic dipoles 
-or electric forces 
-in experiment \cite{Juniper2015, Lutz2004} and
-simulation \cite{Herrera-Velarde2007, Herrera-Velarde2008}.
-
+Thus the study of
+mode-locking is a useful problem
+of complex quantum mechanical systems.
+Mode-locked 
+colloid dynamics have been achieved in 
+experiments \cite{Juniper2015, Lutz2004} and
+simulations \cite{Herrera-Velarde2007, Herrera-Velarde2008} 
+for a variety of interaction types such as 
+magnetic dipoles and electric forces.
 %-----------------------------------------------------------
 %particle interaction types
 %Particles which interact over long distances
@@ -333,7 +376,9 @@ simulation \cite{Herrera-Velarde2007, Herrera-Velarde2008}.
 %nonlinear systems occurs in mechanical oscillators \cite{chaos}.
 %-------------------------------------------------------------
 
-
+Numerical modeling of colloids can provide mechanistic insight
+that can be difficult to achieve in experimental conditions
+where Brownian motion and other sources of noise dominate.
 
 %Given the prevalence of synchronization,
 %it is the subject of many computational models.
@@ -344,9 +389,6 @@ a washboard shaped potential energy landscape.
 We chose this model for its
 relevance to condensed matter systems
 and ease of simulation.
-Numerical modeling of colloids can provide mechanistic insight
-that can be difficult to achieve in experimental conditions
-where Brownian motion and other sources of noise dominate.
 %We examine
 The period of the substrate
 can be used to control the
@@ -376,7 +418,7 @@ our molecular dynamics model for a single particle in Section~\ref{sec:MD}.
 %including various  and confining environments.
 We summarize
 our results 
-in Section~\ref{sec:results} 
+%in Section~\ref{sec:results} 
 including synchronized motion of a single confined particle
 driven across a periodic landscape in 
 Section~\ref{sec:one}.
@@ -413,32 +455,7 @@ in Section~\ref{sec:problems}.
 \section{Molecular Dynamics Simulation}
 \label{sec:MD}
 
-\begin{center}
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\columnwidth]{landscape.pdf}
-\caption{
-  Schematic of the simulation
-  of a single particle
-  driven across a washboard potential
-  energy landscape.
-  (a) View of the $x-y$ plane. %of the simulation
-  The time-dependent applied driving force $\vec{F}^D$
-  is parallel to the y-axis.
-  The force due to the landscape %$\vec{F}^l$
-  is calculated due to the gradient of the potential
-  energy 
-  $\vec{F}^l = -\nabla U(\vec{r})$.
-  (b) The potential energy function
-  along the y-axis $U_l(y)$
-  with period $\lambda = L/N_p$
-  where the number of periods is $N_p = 3$.
-  }
-\label{fig:landscape0}
-\end{figure}
-\end{center}
-
-We use a classical two-dimensional model for 
+We use a classical model for 
 studying the dynamics of $N$ interacting particles,
 using the net force on each particle to calculate
 its trajectory.
@@ -454,7 +471,7 @@ such that a particle leaving the edge of the system is mapped
 back to a position within the simulation 
 by the transformation $x_i+L \rightarrow x_i$ and $y_i+L \rightarrow y_i$.
 %and particles interact across PBC.
-We show a schematic of the system in Fig.~\ref{fig:0}
+We show a schematic of the system in Fig.~\ref{fig:landscape0}(a).
 
 We confine the particles using a position dependent 
 potential energy function, called a landscape or substrate.
@@ -468,7 +485,8 @@ is calculated as
  %that are periodic or quasi-periodic,
  %as described in Sec.~\ref{sec:results}.
 % 
-The periodic landscape is modulated in the y-direction as
+The landscape is modulated in the y-direction
+with the periodic function 
 %% %that used in Sec.~\ref{sec:one}
 % where 
  \begin{equation}
@@ -478,12 +496,59 @@ The periodic landscape is modulated in the y-direction as
  where $N_p$ are the number of periods,
  % $L$ is the period length,
  and $U_0$ is an adjustable parameter
- to set the depth of the troughs.
- We define the substrate strength to be
- the maximum force the substrate can exert on a particle 
- $A_p = 2\pi U_0/L$.
+ to set the depth of the minima
+ with simulation units of energy $E_0 = 1$. 
+ %We define the substrate strength to be
+ %the maximum force the substrate can exert on a particle 
+ %$A_p = 2\pi U_0/L$.
  %
+ We plot this function in 
+ Fig.~\ref{fig:landscape0}
+ we use $N_p = 3$ to illustrate the features of
+ Eq.~\ref{eq:ysubstrate}.
+ In Fig.~\ref{fig:landscape0}(a) we show 
+ the $x-y$ plane with a contour plot
+ of the the 2D potential energy landscape,
+ where 
+ the maxima are colored red and the minima colored blue.
+ In Fig.~\ref{fig:landscape0}(b) we plot the function
+ $U(y)$ to illustrate how the magnitude
+ $\vec{F}^{l}_i$ is calculated from particle position in the $y-$direction.
+ 
+\begin{center}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\columnwidth]{landscape.pdf}
+\caption{
+  Schematic of the simulation
+  of a single particle
+  driven across a washboard potential
+  energy landscape.
+  The period of the landscape, $\lambda = L/N_p$ 
+  where $N_p = 3$, is marked in red.
+  The force due to the landscape %$\vec{F}^l$
+  is calculated from the gradient of the potential
+  energy 
+  $\vec{F}^l = -\nabla U(\vec{r})$.
+  (a) View of the $x-y$ plane. %of the simulation
+  The time-dependent applied driving force $\vec{F}^D$
+  is parallel to the y-axis.
+  The landscape is shown with a contour plot,
+  with maxima in the potential energy marked in red
+  and minima marked in blue.
+  A particle is shown in the region between minima and maxima
+  subject to competing forces due to the landscape and applied driving force.
+  (b) The potential energy function
+  along the y-axis $U_l(y)$,
+  The particle in (a) is shown at the same $y-$position,
+  where the magnitude of force $\vec{F}^l$ is calculated as the slope of this function,
+  directed along the $y-$direction in panel (a).
+  }
+\label{fig:landscape0}
+\end{figure}
+\end{center}
 
+ 
  Particles are subject an external time-dependent driving force
 $\vec{F}_{D}(t)$
 applied parallel to the y-direction.
@@ -496,8 +561,10 @@ with modifiable parameters including
 a constant component $F^{DC}$,
 and a time dependent component with amplitude $F^{AC}$
 and frequency $\omega = 2 \pi f$.
-%The frequency is scaled in time units,
-%where [finish].
+We illustrate this force in Fig.~\ref{fig:landscape0}(a)
+in the positive $y-$direction.
+%but it may 
+%be zero or negative depending the the parameters and time.
 When $F^{DC}$ is non-zero,  
 %In several simulations
 we slowly increase 
@@ -515,48 +582,46 @@ equation of motion.
 %to a linear drag force.
 %Overdamped dynamics is a common assumption in models of colloidal particles.
 %This is an assumption that
-The term `overdamped or critically damped indicates
+The term overdamped or critically damped indicates
 that an oscillator cannot undergo periodic
 undulations due to some external force. %such as
 %suspension in a viscous fluid \cite{}.
 In our colloidal model we assume
 the damping comes from the viscosity of the fluid,
 where a sphere of radius $0.5 \mu m$ has a Reynolds number
-of $R \approx 10^{-6}$, indicating that linear drag dominates its motion.
+of $R \approx 10^{-6}$, indicating that linear drag dominates
+the particle motion.
 See Section~\ref{sec:problems} Exercise~\ref{ex:reynolds} for more information
 about the Reynold's number.
-We model this
+In the overdamped model the
+linear friction produced by this 
 nonconservative force,
-with the linear friction $\vec{F}_{drag} = -\eta \vec{v}_i$
+$\vec{F}_{drag} = -\eta \vec{v}_i$ is 
 sufficient so that
 the acceleration of the particle is zero.
 Such a model is appropriate when the particles
 are small and the viscosity of the suspending medium is high.
-% [finish... discussion of Reynolds number]
-This model should be familiar to readers
-modeling Millikan's oil drops
-in a standard classical mechanics text \cite{Taylor2005}.
-%This model is encountered in standard texts,
-%for instance Ch. 2 of Taylor's Classical Mechanics.
-%more precise: 6\pi \eta a \vec{v}
+
 
 Newton's second law for an individual particle
 $m \vec{a}_i = \sum \vec{F}$ is simplified
 by the assumption $\vec{a}_i$ is zero in overdamped model.
 %Newton's second law can be rearranged %for the velocity
 %to
-The equation of motion for an isolated particle 
+The equation of motion for an isolated particle is
+%solved for velocity 
 \begin{equation}
   \eta \vec{v}_i = \vec{F}^l_{i} + \vec{F}^{D}(t).
     \label{eq:motion}
 \end{equation}
-where the viscosity coefficient $\eta = 1$.
+with the viscosity coefficient $\eta = 1$,
+which we describe in more detail in Exercise~\ref{ex:reynolds}.
 In Section~\ref{sec:problems} Exercise~\ref{ex:n2l}
 we invite the reader to confirm this result.
+
 The equation of motion provides a direct calculation of the velocity
 of an individual particle from its location $\vec{r}_i$ %in the simulation
-with respect to other particles $j$.
-
+and the simulation time.
 The molecular dynamics simulation is controlled by a $for()$ loop
  which runs from an initial to maximum integer number of time steps $t_i$.
 Each integer time step interval $t_{i+1}-t_i$
@@ -571,16 +636,21 @@ to an updated position
 $\vec{r}_i(t+\Delta t)$.
 %
 Since the acceleration as zero,
-[more background here - do the students necessarily know the Verlet method?  no]
-the Verlet method simplifies to 
-the Euler method,
-which is used to calculate the position at subsequent time steps.
-%Most undergraduate students learn the Euler method in Computational Physics and Differential Equations, but don't encounter the Verlet method.
+the integration of the equation of motion
+is performed via 
+the Euler method 
 \begin{equation}
-  \vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t).
+  \vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t)
     \label{eq:euler}
 \end{equation}
-
+for a small time step $\Delta t$.
+In Section~\ref{sec:problems} Exercise~\ref{ex:euler}
+we elaborate on
+the numerical methods for 
+solving differential equations,
+and demonstrate how the Verlet method
+simplifies to the Euler method when $\vec{a}=0$.
+%
 The units of the simulated variables are summarized in Table ~\ref{tab:1}.
 
 \begin{table}[h!]
@@ -590,102 +660,113 @@ The units of the simulated variables are summarized in Table ~\ref{tab:1}.
 \begin{tabular}{c c p{5cm}}
 Quantity & Unit \\
 \hline
-length &  $a_0$ \\
-energy & $E_0$ \\
+length &  $a_0 = 1$ \\
+energy & $E_0 = 1$ \\
 %electric potential & $V(r_{ij}) = E_0/r_{ij}$ \\
 %energy & $E_0 = q^2{Z^*}^2/4\pi \epsilon \epsilon_0 a_0$ \\
 %dimensionless interaction strength & $q$ \\
 %effective colloidal charge & $Z^*$ \\
 %solvent dielectric constant & $\epsilon \epsilon_0$\\
 force & $E_0 / a_0$\\
-viscosity/damping constant & $\eta$ \\
-time &  $\eta / E_0$ \\
-velocity &  $ (E_0 / \eta) a_0$ \\
+viscosity coefficient & $\eta = 1$ \\
+velocity &  $ E_0 / (\eta a_0) $ \\
+time &  $(\eta / E_0) {a_0}^2$ \\
 \end{tabular}
 \end{ruledtabular}
 \label{tab:1}
 \end{table}
 
 
-\section{Results}
-\label{sec:results}
- We demonstrate how a single particle (Sec.~\ref{sec:one})
- and many particles
- move (Sec.~\ref{sec:sync})
- in response to this applied force in a variety of environments.
- In Sec.~\ref{sec:kink} we set $F^{DC}$
- to zero and track the motion
- of a high density area of a particle chain
- (i.e. kink dynamics).
+%\section{Results}
+%\label{sec:results}
+% We demonstrate how a single particle (Sec.~\ref{sec:one})
+% and many particles
+% move (Sec.~\ref{sec:sync})
+% in response to this applied force in a variety of environments.
+% In Sec.~\ref{sec:kink} we set $F^{DC}$
+% to zero and track the motion
+% of a high density area of a particle chain
+% (i.e. kink dynamics).
  %The driving force does add energy into the system, and some of it is lost.
 %
-\subsection{Single particle system}
+\section{Mode-locking of a single particle}
 % In subsection headings, only the first word is capitalized.
 \label{sec:one}
 
 We drive a single particle across a periodic landscape 
-along the y-direction 
-\begin{equation}
-  \label{eq:landscape_potential}
-  U_l(y) = U_{0y} \cos{(N_p \pi y / L)} 
-\end{equation}
-with $N_p=20$ troughs in the landscape
-and landscape period $\lambda = L/N_p = 1.825 a_0$.
+along the y-direction described in Eq.~\ref{eq:ysubstrate}
+%\begin{equation}
+%  \label{eq:landscape_potential}
+%  U_l(y) = U_{0y} \cos{(N_p \pi y / L)} 
+%\end{equation}
+with $N_p=20$ %troughs in the landscape
+and landscape period $\lambda = 1.825 a_0$.
 %({\it redundant, just refer back to eq. in Model?})
 %and $V_{0y}=0.2$.
-This is illustrated in Fig.~\ref{fig:1}(a) where
-the red (blue) regions show local maxima (minima).
-The code for generating
-a two dimensional colored plot
-of the potential landscape
-is calculated by evaluating
-the analytic function in Eq.~\ref{eq:landscape}
-for a grid of values $(x_n,y_n)$.
-%is included in the supplementary material,
+%This is illustrated in Fig.~\ref{fig:1}(a) where
+%the red (blue) regions show local maxima (minima).
+%
 The numerical implementation of the landscape 
 is calculated with
 \begin{equation}
   \label{eq:force}
-  F_y(y) = A_{p} \sin{(N_p \pi y / L)} 
+  F^l_y(y) = -A_{p} \sin{(N_p \pi y / L)} 
 \end{equation}
-where $A_{p} = 0.1$.
+where the force is scaled with parameter $A_{p} = 0.1$
+in simulation units for force. % $E_0/a_0$.
 
-Because we are performing molecular dynamics
-for a single particle on a smooth potential energy landscape,
-we use a large simulation time step of 
-$\Delta t = 0.01$.
-In Sec.~\ref{sec:sync},
-we decrease the time step
-to treat multiple particle interactions.
+%%HMMM... HAVE YOU INTRODUCED A PHASE SHIFT?
 
-We drive the particle with
-$F^{AC}=0.2$, $F^{DC}=0.01$, and $f=0.01$ cycles per time unit.
-When the superposition of $F^{AC}$ and $F^{DC}$ is large enough
-to overcome the barrier height of the landscape troughs,
-the particle hops between troughs in the energy landscape.
 In Fig.~\ref{fig:0} we
 show the relationship between the applied force and particle
 position.
 In Fig.~\ref{fig:0}(a)
-we plot the applied driving force
-as a function of time
-and in Fig.~\ref{fig:0}(b) 
-we show the position of the particle
+we plot the applied driving force defined in Eq.~\ref{eq:drive}
 as a function of time.
-The initial position is near $y=0$
-and the initial driving force is minimum
-$F_D(t=0) = F^{DC}$.
-Over the time period $T/2 = 50$ %time units
+The time independent constants are 
+$F^{AC}=0.2$, $F^{DC}=0.01$, and $f=0.01$ cycles per time unit.
+The time period of the driving force is
+$T = 1/f = 100$,
+with the initial driving force at is minimum value 
+$F^D(0) = F^{DC}$. 
+
+In Fig.~\ref{fig:0}(b) 
+we show the $y-$position of the particle
+as a function of time,
+where we 
+normalize $y$ by the spatial period of the washboard as
+$y/\lambda$.
+The initial particle position is $y=0$,
+where the landscape force is minimum $F^l = 0$.
+Subsequent substrate 
+%CHECK!!! I THINK THIS IS WRONG!!!
+%BY NOT INCLUDING THE SIGN YOU'VE DEFINED IT BACKWARDS!!!!!
+%AND LOCATED THE INITIAL POSITION OF THE PARTICLE
+%AT A LOCAL MAXIMA!!!!!
+%The substrate maxima are located at integer multiples of $y/\lambda = 0, 1, 2 $ 
+%and
+minima are located at integer multiples $y/\lambda = 1/2, 3/2, 5/2, $ {\it et cetera}.
+%This is apparent in the spacing of $y/\lambda$ in time,
+%where the visual gaps between positions in Fig.~\ref{fig:0}(b) 
+%at half integer multiples $y/\lambda = 1/2, 3/2, 5/2$ indicate regions the particle was moving slowly.
+%measure/plot velocity?
+
+When $F^D(t) > A_p$, a particle can 
+overcome the barrier height of the landscape troughs,
+and 
+the particle hops between minima in the energy landscape.
+In Fig.~\ref{fig:0} we demonstrate this relationship,
+where over half of a driving period ($T = 50$) %time units
+while $F_{D}(t) > 0 $ 
 the particle moves
 in the positive y-direction
-while $F_{D}(t) > 0 $
 through three
 substrate troughs, reaching a maximum of $y/\lambda = 3$.
 When $F_{D}(t) < 0 $
 the particle moves in the negative y-direction
 reaching a minimum position
 of $y/\lambda = 1$
-over the period $T = 1/f = 100$.
+over the total period $T = 100$.
 The average velocity $\bar{v}_y$
 is the average displacement $\Delta y = y(t_0+T) - y(t_0)$
 over the period of the driving force.
@@ -937,8 +1018,13 @@ Reynold's number $R = D v \rho / \eta$
 where $\rho$ is the fluid density and $v$ the particle's speed.
 When $R$ is small, the quadratic and higher order drag terms
 may be ignored in favor of the linear drag term.
-A typical $v$ in experiment is on the order of $v \sim 1 \mu /s$,
+A velocity $v$ in experiment is on the order of $v \sim 1 \mu /s$,
 thus $R \approx 10^-6$.
+
+This model should be familiar to readers
+of a standard classical mechanics text, such as Ref.~\cite{Taylor2005}
+when studying 
+models Millikan's oil drops.
 \label{ex:reynolds}
 
 \item Newton's second law states that the sum of forces on a particle is proportional to the acceleration of the particle.
@@ -949,6 +1035,36 @@ thus $R \approx 10^-6$.
   Demonstrate that Eq.~\ref{eq:motion} is obtained from Newton's second law.
   \label{ex:n2l}
 
+\item
+  Generally when solving differential equations,
+  the Euler method is effective for solving linear equations,
+  such as the one-dimensional 
+  $f(y) = df/dy$ 
+  but not higher order methods.
+
+  The Verlet method simplifies to
+
+  %FOLLOW UP WITH THIS!
+  Because we are performing molecular dynamics
+  for a single particle on a smooth potential energy landscape,
+  we use a large simulation time step of 
+  $\Delta t = 0.01$.
+  In Sec.~\ref{sec:sync},
+  we decrease the time step
+  to treat multiple particle interactions.
+
+  \label{ex:euler}
+
+\item Drawing the contour
+
+  The code for generating
+a two dimensional colored plot
+of the potential landscape
+is calculated by evaluating
+the analytic function in Eq.~\ref{eq:landscape}
+for a grid of values $(x_n,y_n)$.
+%is included in the supplementary material,
+  
 \item Kuramoto model = overdamped interacting rotors/oscillators are used to model coupled oscillator systems - no substrate or external drive so far as I can see - this seems baked into the oscillator properties/interactions
 %D. Métivier, L. Wetzel, and S. Gupta
 %Onset of synchronization in networks of second-order Kuramoto oscillators with delayed coupling: Exact results and application to phase-locked loops
@@ -1121,7 +1237,9 @@ def add_contour(ax,L,N,corrugated = True):
     \bibitem{Herrera-Velarde2007} S. Herrera-Velarde and R. Castañeda-Priego, J. Phys.: Condens. Matter 19, 226215 (2007).
 
       \bibitem{Grier2003} D. G. Grier, A revolution in optical manipulation. Nature {\bf 424}, 810 (2003).
-      
+
+      \bibitem{Volpe2013} G. Volpe and G. Volpe, Simulation of a Brownian particle in an optical trap, Am. J. Phys. 81 (3), March 2013
+        
 %Lutz  created 1D circular channels by means of scanning optical tweezers in order to avoid the presence of lateral confinement walls
     \bibitem{Lutz2004} C. Lutz, M. Kollmann, and C. Bechinger, Phys. Rev. Lett. {\bf 93}, 026001 (2004); C. Lutz, M. Kollmann, C. Bechinger, and P. Leiderer, J. Phys.: Condens. Matter {\bf 16}, S4075 (2004).
 
