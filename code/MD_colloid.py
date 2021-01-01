@@ -129,9 +129,10 @@ if __name__ == "__main__":
     #loop through the integer time steps in the simulation
     for int_time in range(0,maxtime):
 
-        if int_time > 0 and F_DC < F_DC_max: 
+        if int_time > 0 and abs(F_DC - F_DC_max) > F_DC_incr: 
             F_DC = ramp_dc_force(F_DC,int_time,drop,F_DC_incr)
-            #print(F_DC)
+            print(F_DC)
+
 
         #apply the force calculations for the current position/time
         #note vy is not necessary 
