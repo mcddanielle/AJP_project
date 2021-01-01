@@ -164,7 +164,7 @@ if __name__ == "__main__":
     ax2 = fig.add_subplot(gs[1,0]) #,sharex=ax1)  #scatter plot of particles
     
     #plot the data
-    ax1.plot(time_data,FDC_data,label="F$_{DC}$")
+    ax1.plot(time_data,FDC_data,label="F$^{DC}$")
     ax1.plot(time_data,F_drive,label="F$^D$(t)",lw=5)
     ax1.legend(loc=4,fontsize=20,borderaxespad=0.1,frameon=0) #,labelspacing=0.2
     ax2.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
