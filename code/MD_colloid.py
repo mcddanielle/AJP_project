@@ -171,7 +171,7 @@ if __name__ == "__main__":
     #plt.xlim(155,157)
     ax2.set_xlabel("time")
     ax2.set_ylabel(r"y/$\lambda$")
-    ax1.set_ylabel(r"F$^D$(t)")
+    ax1.set_ylabel(r"F(t)")
 
     ax1.set_xticks([])
 
