@@ -166,7 +166,7 @@ if __name__ == "__main__":
     #plot the data
     ax1.plot(time_data,FDC_data,label="F$^{DC}$")
     ax1.plot(time_data,F_drive,label="F$^D$(t)",lw=5)
-    ax1.legend(loc=4,fontsize=20,borderaxespad=0.1,frameon=0) #,labelspacing=0.2
+    ax1.legend(loc=4,fontsize=20,borderaxespad=0.0,frameon=0,handlelength=1.5) #,labelspacing=0.2
     ax2.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
     #plt.xlim(155,157)
     ax2.set_xlabel("time")
