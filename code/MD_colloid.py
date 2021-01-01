@@ -188,6 +188,9 @@ if __name__ == "__main__":
         #peaks of the FD curve
         ax2.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
         ax1.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
-     
+
+    ax1.text(0.02,0.9,"(a)",transform = ax1.transAxes,backgroundcolor="white")
+    ax2.text(0.02,0.9,"(b)",transform = ax2.transAxes,backgroundcolor="white")
+        
     plt.tight_layout(pad=0.1)
     plt.savefig("single_particle.pdf")
