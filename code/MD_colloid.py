@@ -12,7 +12,7 @@ Tiare Guerrero
 '''
 #################################################################
 import numpy as np
-import math
+import math, sys
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
@@ -96,9 +96,9 @@ def md_step(y, dt, time, F_DC):
     
     return y, vy
 
-
-#-------------------------------------------------------------------
-if __name__ == "__main__":
+def single_particle(parameters):
+    '''Run MD simulation for a single particle driven across a washboard potential with an oscillating driving force
+    '''
 
     #define the constants (parameters and initial conditions)
     dt = 0.001 #
@@ -131,8 +131,6 @@ if __name__ == "__main__":
 
         if int_time > 0 and abs(F_DC - F_DC_max) > F_DC_incr: 
             F_DC = ramp_dc_force(F_DC,int_time,drop,F_DC_incr)
-            print(F_DC)
-
 
         #apply the force calculations for the current position/time
         #note vy is not necessary 
@@ -150,6 +148,7 @@ if __name__ == "__main__":
         #update the time (simulation units)
         time += dt
 
+    #for plot
     #calculate the driving force from F_DC and time
     F_AC = 0.05
     freq = 0.01
@@ -195,3 +194,43 @@ if __name__ == "__main__":
         
     plt.tight_layout(pad=0.1)
     plt.savefig("single_particle.pdf")
+
+def set_parameters():
+    '''Hardcode simulation parameters here.  In a compiled language like C this would be in a separate file that would be read into the code at execution time, so you wouldn't need to recompile to change the parameters
+    '''
+
+    #use a python dict (i.e. a hash to organize the parameters)
+    dict={}
+
+    dict['dt'] = 0.001 #timestep in simulation units
+
+    dict['Sy']=36.5         #height of system
+    dict['Sx']=36.5         #width of system
+    dict['vy0'] = 0          #initial velocity of particle
+    dict['time0'] = 0        #initial time in integer timesteps
+    dict['Np'] = 20         #number of troughs in the substrate
+    dict['period'] = Sy/Np  #spatial period of substrate in y-direction
+
+    #start the particle in a local minima (not a local max!)
+    dict['y'] = period #Sy/2
+
+    dict['F_DC'] = 0              #initial F_DC
+    dict['F_DC_incr'] = 0.01      #amount to increase FDC at every drop step
+    dict['F_DC_max'] = 0.1        #"constant" driving force for most of simulation
+    dict['drop'] = 4000           #how many integeter timesteps to "ramp" the DC force from the initial condition
+    
+    #integer time steps
+    dict['maxtime']=300000        #how many total time steps in simulation
+    dict['writemovietime']=1000   #how often to write data to arrays for plotting
+    return dict
+
+    
+#-------------------------------------------------------------------
+if __name__ == "__main__":
+
+    parameters = get_parameters()
+
+    #run a single MD simulation for a set of parameters
+    single_particle()
+
+    sys.exit()
