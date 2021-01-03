@@ -153,7 +153,7 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     ax2.text(0.02,0.9,"(b)",transform = ax2.transAxes,backgroundcolor="white")
         
     plt.tight_layout(pad=0.1)
-    plt.savefig("single_particle.pdf")
+    plt.savefig(parameters['filename'])
     
     return 
 
@@ -217,7 +217,7 @@ def single_particle(parameters):
 
     
 #########################################################################
-def set_parameters():
+def set_parameters_fig2():
     '''Hardcode simulation parameters here.  In a compiled language like C this would be in a separate file that would be read into the code at execution time, so you wouldn't need to recompile to change the parameters
     '''
 
@@ -259,9 +259,21 @@ def set_parameters():
 if __name__ == "__main__":
 
     #define simulation constants/controls
-    parameters = set_parameters()
+    parameters = set_parameters_fig2()
+
+    parameters['filename']="single_particle.pdf"
 
     #run a single MD simulation for a set of parameters
     single_particle(parameters)
 
+    #reset some parameters for subsequent figures
+    parameters['F_DC_incr'] = 0.001      #amount to increase FDC at every drop step
+    parameters['F_DC_max'] = 0.3        #"constant" driving force for most of simulation
+    parameters['drop'] = 4000           #integer timesteps to "ramp" the DC force
+    parameters['filename']="single_particle_new.pdf"
+    parameters['y0'] = 5.0*parameters['period']
+
+    #run a single MD simulation for a set of parameters
+    single_particle(parameters)
+    
     sys.exit()
