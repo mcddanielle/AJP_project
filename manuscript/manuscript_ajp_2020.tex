@@ -202,61 +202,6 @@ A sinusoidal or ac drive creates mode-locking,
 where the average particle velocity
 is fixed for a range of dc drive forces \cite{Reichhardt2015}.
 
-%Oscillators ordered into chains or lattices.
-%has many important
-%technological applications
-Dynamical mode-locking
-is %often
-observed
-in quantum electronic
-devices such as Josephson junctions \cite{Josephson1962,Josephson1965}.
-A single junction contains 
-two superconductoring layers which sandwich an insulating layer.
-When subject to an external voltage,
-Cooper pairs in the superconducting materials
-tunnel through the insulating layer.
-Phase-locking is observed as 
-%phase-locked current loops \cite{} 
-stepped regions in current-voltage (I-V) relationship in these devices,
-where voltage is the analog of external driving force
-and current is that of particle velocity.
-%where a constant current results from a range of voltages
-%due to the quantized nature of the tunneling probability [NOT QUITE RIGHT...].
-%instead of ohmic relationships.
-Known as Shapiro steps, % \cite{},
-these phase locked currents  
-have been observed due to applied ac voltages in 
-single Josephson junctions \cite{Shapiro1963, Golubov2004} and
-coupled arrays of junctions \cite{Benz1990}.
-%either in 
-%velocity-force curves and voltage-current curves \cite{Golubov2004}.
-Shapiro steps vary in width depending on the strength of the
-applied AC forces,
-and are observed in a variety of systems
-displaying
-%are hallmarks of
-non-Ohmic behavior in voltage-current curves,
-including
-ac and dc driven
-charge and spin density waves.
-
-%where these steps are generated
-%by the tendency of the response of a system
-%to be flat across a range of applied driving forces or voltages,
-%which can be probed with
-%  atoms on surfaces.
-%  voltage driven superconducting vortices
-%  confined in a Josephson junction,
-
-%
-%
-%mini review of synchronization in electronics
-%careful - the following is all simulations
-%Recent studies demonstrate
-%that coupled electronic oscillators can be
-%programmed for use as micro-controllers for robotic locomotion \cite{Dutta2019}.
-
-
 \section{Colloidal Models}
 \label{sec:colloids}
 
@@ -343,25 +288,6 @@ imaged in electronic systems such as Josephson junctions.
 Thus the study of
 mode-locking is a useful problem
 of complex quantum mechanical systems.
-Mode-locked 
-colloid dynamics have been achieved in 
-experiments \cite{Juniper2015, Lutz2004} and
-simulations \cite{Herrera-Velarde2007, Herrera-Velarde2008} 
-for a variety of interaction types such as 
-magnetic dipoles and electric forces.
-%-----------------------------------------------------------
-%particle interaction types
-%Particles which interact over long distances
-%include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more%e detail and references]
-%Particles which interact over short distances include
-%bubble arrays/emulsions [more systems and references].----------------------
-%The presence of a modulating surface
-%can modify these patterns in a variety of ways,
-%changing the onset of dynamical flows,
-%and the overall flow patterns.
-%  adjustable strength, geometry and length scale of substrate potential
-%Baumgartl, Brunner, Bechinger, PRL 93, 168301 (2004).
-%Baumgartl, Zvyagolskaya, Bechinger, PRL 99, 205503 (2007).
 
 %external forces
 %The
@@ -885,8 +811,28 @@ in supplementary materials \cite{supp1}.
 \end{figure}
 \end{center}
 
-\section{Synchronization in multi-particle systems}
+\section{Synchronized particle chains}
 \label{sec:sync}
+
+Mode-locked 
+colloid dynamics have been achieved in 
+experiments \cite{Juniper2015, Lutz2004} and
+simulations \cite{Herrera-Velarde2007, Herrera-Velarde2008} 
+for a variety of interaction types such as 
+magnetic dipoles and electric forces.
+%-----------------------------------------------------------
+%particle interaction types
+%Particles which interact over long distances
+%include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more%e detail and references]
+%Particles which interact over short distances include
+%bubble arrays/emulsions [more systems and references].----------------------
+%The presence of a modulating surface
+%can modify these patterns in a variety of ways,
+%changing the onset of dynamical flows,
+%and the overall flow patterns.
+%  adjustable strength, geometry and length scale of substrate potential
+%Baumgartl, Brunner, Bechinger, PRL 93, 168301 (2004).
+%Baumgartl, Zvyagolskaya, Bechinger, PRL 99, 205503 (2007).
 
 %-----------------------------------------------
 %environments
@@ -949,9 +895,9 @@ and blue regions are low potential.
  We model particle interaction forces
 $\vec{F}_{ij} = -\nabla U_{ij}(r_{ij})$ 
 with
-the Yukawa potential energy 
+the Yukawa potential $V_{ij} = U_{ij} / q$ 
 \begin{equation}
-  U_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
+  V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
   \label{eq:yukawa}
 \end{equation}
 where particle $i$ and $j$ are distance
@@ -961,7 +907,7 @@ screened Coulomb potential
 %$E_0=2$ scales strength of repulsion
 is scaled in terms of energy unit $E_0$
 defined in Table ~\ref{tab:1}.
-%$ = k q_1 q_2$. %[CHECK scaling/units].
+[elaborate for students $F_{Coulomb} = = k q_1 q_2 / r^2$, check scaling/units].
 $\kappa = 1/R_0$ is the screening parameter 
 that describes the length scale at
 which particles interact.
@@ -1144,6 +1090,61 @@ for a grid of values $(x_n,y_n)$.
 
 \section{Conclusion}
 \label{sec:conclusion}	% You can label sections for reference
+
+%Oscillators ordered into chains or lattices.
+%has many important
+%technological applications
+Dynamical mode-locking
+is %often
+observed
+in quantum electronic
+devices such as Josephson junctions \cite{Josephson1962,Josephson1965}.
+A single junction contains 
+two superconductoring layers which sandwich an insulating layer.
+When subject to an external voltage,
+Cooper pairs in the superconducting materials
+tunnel through the insulating layer.
+Phase-locking is observed as 
+%phase-locked current loops \cite{} 
+stepped regions in current-voltage (I-V) relationship in these devices,
+where voltage is the analog of external driving force
+and current is that of particle velocity.
+%where a constant current results from a range of voltages
+%due to the quantized nature of the tunneling probability [NOT QUITE RIGHT...].
+%instead of ohmic relationships.
+Known as Shapiro steps, % \cite{},
+these phase locked currents  
+have been observed due to applied ac voltages in 
+single Josephson junctions \cite{Shapiro1963, Golubov2004} and
+coupled arrays of junctions \cite{Benz1990}.
+%either in 
+%velocity-force curves and voltage-current curves \cite{Golubov2004}.
+Shapiro steps vary in width depending on the strength of the
+applied AC forces,
+and are observed in a variety of systems
+displaying
+%are hallmarks of
+non-Ohmic behavior in voltage-current curves,
+including
+ac and dc driven
+charge and spin density waves.
+
+%where these steps are generated
+%by the tendency of the response of a system
+%to be flat across a range of applied driving forces or voltages,
+%which can be probed with
+%  atoms on surfaces.
+%  voltage driven superconducting vortices
+%  confined in a Josephson junction,
+
+%
+%
+%mini review of synchronization in electronics
+%careful - the following is all simulations
+%Recent studies demonstrate
+%that coupled electronic oscillators can be
+%programmed for use as micro-controllers for robotic locomotion \cite{Dutta2019}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Supplementary Materials}
