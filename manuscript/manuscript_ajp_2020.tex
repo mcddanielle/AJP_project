@@ -594,21 +594,22 @@ equation of motion.
 %undulations due to some external force. %such as
 %suspension in a viscous fluid \cite{}.
 In our colloidal model we assume
-the damping comes from the viscosity of the fluid,
-where a sphere of radius $0.5 \mu m$ has a Reynolds number
-of $R \approx 10^{-6}$, indicating that linear drag dominates
-the particle motion.
-See Section~\ref{sec:problems} Exercise~\ref{ex:reynolds} for more information
-about the Reynold's number.
+the particle is suspending in a viscous fluid
+that provides friction, or damping.
 In the overdamped model the
 linear friction produced by this 
 nonconservative force,
-$\vec{F}_{drag} = -\eta \vec{v}_i$ is 
+$\vec{F}_{drag} = -\eta \vec{v}_i$ is
 sufficient so that
 the acceleration of the particle is zero.
-Such a model is appropriate when the particles
-are small and the viscosity of the suspending medium is high.
-
+The friction coefficient $\eta$
+is proportional to the fluid viscosity.
+Such a model in which inertia is set to zero
+is appropriate for small particles
+moving through a high viscosity fluid
+such as a colloid moving in water.
+We discuss this further in 
+Section~\ref{sec:problems} Exercise~\ref{ex:reynolds}. %for more information 
 
 Newton's second law for an individual particle
 $m \vec{a}_i = \sum \vec{F}$ is simplified
@@ -621,7 +622,7 @@ The equation of motion for an isolated particle is
   \eta \vec{v}_i = \vec{F}^l_{i} + \vec{F}^{D}(t).
     \label{eq:motion}
 \end{equation}
-with the viscosity coefficient $\eta = 1$,
+with the viscosity coefficient $\eta = 1$ in units,
 which we describe in more detail in Exercise~\ref{ex:reynolds}.
 In Section~\ref{sec:problems} Exercise~\ref{ex:n2l}
 we invite the reader to confirm this result.
@@ -674,15 +675,15 @@ energy & $E_0 = 1$ \\
 %dimensionless interaction strength & $q$ \\
 %effective colloidal charge & $Z^*$ \\
 %solvent dielectric constant & $\epsilon \epsilon_0$\\
-force & $E_0 / a_0$\\
-viscosity coefficient & $\eta = 1$ \\
-velocity &  $ E_0 / (\eta a_0) $ \\
-time &  $(\eta / E_0) {a_0}^2$ \\
+force & $F_0 = E_0 / a_0$\\
+velocity &  $ a_0 / \tau $ \\
+viscosity coefficient & $\eta = F_0 \tau / a_0 = 1 $\\
+time &  $ \tau = \eta a_0 / F_0 $ \\
+
 \end{tabular}
 \end{ruledtabular}
 \label{tab:1}
 \end{table}
-
 
 %\section{Results}
 %\label{sec:results}
@@ -812,8 +813,10 @@ is $\bar{v}_y = \lambda f$. %, where $T = 1/f$.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\columnwidth]{single_particle.pdf}
-\caption{(a) The applied driving force $F^D(t)$ (orange) where the parameter $F^{DC}$ (blue) is ramped to a constant value.  (b) 
-  The position as a function of time of a single driven particle
+\caption{(a) The applied driving force $F^D(t)$ (orange) in Eq.~\ref{eq:drive}
+  where the parameter $F^{DC}$ (blue) is slowly increased from zero to a constant value
+  as described in the text.  (b) 
+  The $y-$position of the driven particle as a function of time %of a single driven particle
   normalized by the period of the substrate $\lambda$.
   }
 \label{fig:0}
@@ -1031,27 +1034,47 @@ $F^{DC}/F^{AC} = 1$ [CHECK!]
 \label{sec:problems}	% You can label sections for reference
 
 \begin{enumerate}
-\item Stokes' law the viscous drag on a sphere is
-$\vec{F}_{lin} = 3 \pi \eta D \vec{v}$ \cite{}
-where the fluid viscosity is $\eta$,
-$D$ is the particle diameter.
-Assuming a colloid with diameter 
-$D = 1 \mu m$ and
-the viscosity of water at room temperature is
-$\eta = 0.01 cm^2/sec$ \cite{} %CONFIRM!
-%density $\rho = 0.9982 g/cm^3$
-%https://ascelibrary.org/doi/pdf/10.1061/9780784408230.ap02
-Reynold's number $R = D v \rho / \eta$
-where $\rho$ is the fluid density and $v$ the particle's speed.
-When $R$ is small, the quadratic and higher order drag terms
-may be ignored in favor of the linear drag term.
-A velocity $v$ in experiment is on the order of $v \sim 1 \mu /s$,
-thus $R \approx 10^-6$.
+\item Stokes' law describes the viscous drag on a sphere
+  moving at velocity $\vec{v}$ as 
+  $\vec{F}^{lin} = 3 \pi \eta D \vec{v}$ \cite{}
+  where $\eta$ is the dynamic fluid viscosity and 
+  $D$ is the particle diameter.
+  (In simulation we
+  subsume the constants $3 \pi D$
+  such that $\eta \rightarrow 3 \pi D \eta$.)
+  Often drag forces are
+  modeled as a polynomial series
+  $\vec{F}^{drag} = \vec{F}^{lin} + \vec{F}^{quad} + ... $.
+  Truncating the series to the first term
+  is justified by calculating the Reynolds number  
+  $R = D v \rho / \eta$
+  where $\rho$ is the fluid density and $v$ the particle's speed.
+  When $R$ is small, the quadratic and higher order drag terms
+  may be ignored in favor of the linear drag term.
+
+  Demonstrate the Reynolds number is low
+  for this system.
+  
+  Reasonable experimental values for
+  a colloid are $D = 1 \mu m$ and $v \sim 1 \mu m /s$.
+  Viscosity of water decreases with temperature
+  from $1.3 \times 10^{-3} Pa s$ at $10^{\circ}C$ to 
+  from $0.31 \times 10^{-3} Pa s$ at $90^{\circ}C$,
+  making $\eta \sim 10^{-3} Pa s $.
+  Likewise the density $\rho$ varies with temperature
+  and $\rho \sim 10^3 kg/cm^3$ is a reasonable approximation.
+  
+  [citation for these values better than wikipedia] \cite{} %CONFIRM!
+  %density $\rho = 0.9982 g/cm^3$
+  %https://ascelibrary.org/doi/pdf/10.1061/9780784408230.ap02
 
 This model should be familiar to readers
 of a standard classical mechanics text, such as Ref.~\cite{Taylor2005}
 when studying 
 models Millikan's oil drops.
+
+[could certainly do more with this question to make it more computational.  For instance, plot $R$ as a function of any of the parameters $v$, $D$ and $\rho$, include a temperature dependent $\eta(T)$ in the Brownian system.  Suggest students model something big and include inertia and quadratic drag, but then we're fairly off topic...]
+
 \label{ex:reynolds}
 
 \item Newton's second law states that the sum of forces on a particle is proportional to the acceleration of the particle.
@@ -1097,7 +1120,11 @@ for a grid of values $(x_n,y_n)$.
 %Onset of synchronization in networks of second-order Kuramoto oscillators with delayed coupling: Exact results and application to phase-locked loops
 %PHYSICAL REVIEW RESEARCH 2, 023183 (2020)
 
-\item Brownian motion without fluid dynamics using  Ermak's algorithm
+\item Brownian motion.  Consider the consequences of a non-zero temperature on the simulation, in which particles will collide with invisible particles making up the suspending fluid.  These collisions are more likely at higher temperature due to the increased kinetic energy of the fluid particles, as described by the Maxwell-Boltzmann distribution \cite{}.  In molecular dynamics simulations temperature effects can be modeled by including randomized forces $f^T$ to emulate the motion of particles undergoing Brownian motion.  A distribution of randomizes forces contributes equally in all directions such that the force averaged over a finite time interval is zero $\langle f^T(t) \rangle = 0$.  Random distributions of contain no correlations over the independent variable (time in this case) $\langle f^T(t) f^T(\tau)\rangle = 2 \eta k_B T \delta(t-\tau)$ where the energy $k_B T$ derived from the Boltzmann constant $k_B$ and temperature $T$ has energy units $E_0$.  \cite{Allen2017}
+
+  With no applied driving force, measure the minimum temperature required for a single particle to hop between minima in the potential landscape.
+
+  Measure the rate of diffusion.
 
 \item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
 
@@ -1120,58 +1147,7 @@ for a grid of values $(x_n,y_n)$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Supplementary Materials}
 
-\subsection{Grid Contour Plot of landscape}
-%code is located in
-%~/pymodules/animation_code/channel_colloid_movie_maker.py
-Testing section - how will putting the code directly in the appendix appear?
 
-\begin{verbatim}
-############################################
-#ADD CONTOUR PLOT
-############################################
-def add_contour(ax,L,N,corrugated = True):
-    '''
-    Hardwired to color quasi1D potential
-    that contains 
-    the particles in a trough.  
-    Can add the washboard/corrugated substrate.
-
-    Required Arguments
-
-    Optional Arguments:
-
-    corrugated (default = True)  
-    Adds the washboard in the y-direction.  
-    Hardwired for a single parameter set.    
-    '''
-
-    a_p = L/N
-
-    #we don't want to cover the entire range
-    X = np.arange(0, L/2.0, 0.1)
-    Y = np.arange(0, L, 0.1)
-    X, Y = np.meshgrid(X, Y)
-
-    Z_mag = 2.0 # set by what "looks good"
-    Z = Z_mag*np.sin(2*np.pi*X/L)
-    if corrugated == True:
-        Z += np.sin(2*np.pi*(Y+1.75)/a_p) 
-
-    cmap=cm.coolwarm_r
-
-    #alpha = transparency. set by what looks good.
-    cset = ax.contourf(X,Y,Z,cmap=cmap,alpha=0.25)
-
-    #ax1.set_xlim(15,20)
-    #ax1.set_ylim(15,20)
-
-    #ax1.set_xlabel(r"$X$")
-    #ax1.set_ylabel(r"$y$",rotation='horizontal',ha='right')
-
-    #ax1.set_xticks([])
-    #ax1.set_yticks([])
-    return
-\end{verbatim}
 
 \begin{acknowledgments}
 
@@ -1279,6 +1255,7 @@ def add_contour(ax,L,N,corrugated = True):
       %Molecular dynamics references
 
     \bibitem{Frenkel2001} D. Frenkel and B. Smit, Understanding Molecular Simulation: From Algorithms to Applications (Academic Press, London, 2001).
+      
     \bibitem{Allen2017} M. P. Allen and D. J. Tildesley, Computer Simulation of Liquids.  Second Edition. Oxford University Press (2017).
 
     \bibitem{Taylor2005} J. Taylor,  Classical mechanics. University Science Books (2005).
@@ -1454,3 +1431,58 @@ def add_contour(ax,L,N,corrugated = True):
 %confines single cells and particles with lower energy than light / lasers
 %%X. Ding, J. Shi, S.-C. S. Lin, S. Yazdi, B. Kiraly and T. J. Huang, “Tunable patterning of microparticles and cells using standing surface acoustic waves” Lab Chip, 2012, 12, 2491– 2497.
 %%%Acousto-optically generated potential energy landscapes: Potential mapping using colloids under flow Michael P. N. Juniper,1,∗ Rut Besseling,2 Dirk G. A. L. Aarts,1 and Roel P. A. Dullens1
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Grid Contour Plot of landscape}
+%code is located in
+%~/pymodules/animation_code/channel_colloid_movie_maker.py
+Testing section - how will putting the code directly in the appendix appear?
+
+\begin{verbatim}
+############################################
+#ADD CONTOUR PLOT
+############################################
+def add_contour(ax,L,N,corrugated = True):
+    '''
+    Hardwired to color quasi1D potential
+    that contains 
+    the particles in a trough.  
+    Can add the washboard/corrugated substrate.
+
+    Required Arguments
+
+    Optional Arguments:
+
+    corrugated (default = True)  
+    Adds the washboard in the y-direction.  
+    Hardwired for a single parameter set.    
+    '''
+
+    a_p = L/N
+
+    #we don't want to cover the entire range
+    X = np.arange(0, L/2.0, 0.1)
+    Y = np.arange(0, L, 0.1)
+    X, Y = np.meshgrid(X, Y)
+
+    Z_mag = 2.0 # set by what "looks good"
+    Z = Z_mag*np.sin(2*np.pi*X/L)
+    if corrugated == True:
+        Z += np.sin(2*np.pi*(Y+1.75)/a_p) 
+
+    cmap=cm.coolwarm_r
+
+    #alpha = transparency. set by what looks good.
+    cset = ax.contourf(X,Y,Z,cmap=cmap,alpha=0.25)
+
+    #ax1.set_xlim(15,20)
+    #ax1.set_ylim(15,20)
+
+    #ax1.set_xlabel(r"$X$")
+    #ax1.set_ylabel(r"$y$",rotation='horizontal',ha='right')
+
+    #ax1.set_xticks([])
+    #ax1.set_yticks([])
+    return
+\end{verbatim}
