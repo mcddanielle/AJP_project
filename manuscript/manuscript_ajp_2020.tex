@@ -501,8 +501,10 @@ When $F^{DC}$ is non-zero,
 %In several simulations
 we slowly increase 
 $F^{DC}$ from zero
-to avoid transient effects.
-We illustrate this force in Fig.~\ref{fig:0}(a).
+to avoid transient behavior
+by ensuring the particle is subject to a smoothly varying force.
+We illustrate the increase
+of $F^{DC}$ in Fig.~\ref{fig:0}(a).
 
 %because 
 We model the 
@@ -632,7 +634,7 @@ show the relationship between the applied force and particle
 position % as a function of time.
 for 
 %We drive
-a single particle across a periodic landscape. 
+a single particle driven across a periodic landscape. 
 %along the y-direction
 %({\it redundant, just refer back to eq. in Model?})
 %and $V_{0y}=0.2$.
@@ -662,21 +664,23 @@ The time independent constants are
 $F^{AC}=0.2$ and $f=0.01$ cycles per time unit.
 The temporal period of the driving force is
 $T = 1/f = 100$.
-To avoid quenching the system, 
+To avoid transient oscillations at early times, 
 the dc driving force is initially zero   
 and 
-slowly increased %$F^{DC}$
+slowly increased %$F^{DC}$.
 at a rate of $\Delta F^{DC} = 0.01$ every $\Delta t = 4000$ integer timesteps 
-to the constant value $F^{DC}=0.1$,
-as shown in the blue curve in Fig.~\ref{fig:0}(a)
-where $F^{DC}$ increases for the first $40$ time units.
-The combined ac and dc drive $F^D(t)$ is shown in orange,
+to the constant value $F^{DC}=0.1$.
+In Fig.~\ref{fig:0}(a) we plot $F^{DC}$
+in blue to show the increase in 
+$F^{DC}$ for the first $40$ time units.
+In orange we show 
+the combined ac and dc drive $F^D(t)$,
 where 
-the magnitude of the ac applied force is initially zero
-since $\sin{(0)}=0$.
+the magnitude of the ac applied force is initially zero.
+%since $\sin{(0)}=0$.
 The vertical dashed lines in panels (a) and (b) coincide
 with the condition $\sin{(\omega t)} = 1$,
-where the applied force is maximum once $F^{DC}$ has reached its constant value.
+where the applied force is maximum once $F^{DC}$ has become constant.
 
 
 %with the initial driving force at is minimum value 
@@ -687,30 +691,36 @@ we show the $y-$position of the particle
 as a function of time,
 where we 
 normalize $y$ by the spatial period of the potential %washboard as
-$y/\lambda$.
+$\lambda$.
 The initial particle position is $y=0$,
 where the landscape force is minimum $F^l = 0$.
 The horizontal dashed lines
 coincide with the condition the substrate force is
 minimum 
-$\sin{(\pi y / \lambda)} = 1 $. 
+$\sin{(\pi y / \lambda)} = 1 $, so $F^l = -A_p$.
 %or $\pi y / \lambda = m \pi/2$, where $m = 1, 5, 7$, {\it etc.}
 The crossing of the particle position $y$
 with the horizontal and vertical lines
 indicates the synchronization
 of the driving force with the lattice position of the particle,
-where driving force is maximum when the particle
-is at the landscape minimum.
+where driving force is maximum positive when the
+force on the particle from the landscape is maximum negative.
+It can be shown this synchronization
+occurs for any initial position of $y$.
 
-
+The slope of $y/\lambda$
+is proportional to the net force on the particle (See Eq.~\ref{eq:motion}).
+This can be seen in 
+Fig.~\ref{fig:0} %we demonstrate this relationship,
+where local extrema appear in $y/\lambda$
+when $F_{D}(t) \approx 0 $ and 
 When $F^D(t) > A_p$, a particle can 
-overcome the barrier height of the landscape troughs,
+overcome the barrier height of the landscape maxima,
 and 
 the particle hops between minima in the energy landscape.
-{\it UPDATE:} 
-In Fig.~\ref{fig:0} we demonstrate this relationship,
-where over half of a driving period ($T = 50$) %time units
-while $F_{D}(t) > 0 $ 
+
+
+
 the particle moves
 in the positive y-direction
 through three
