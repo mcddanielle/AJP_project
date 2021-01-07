@@ -41,7 +41,9 @@
   %confined to a narrow channel 
   driven
   across a washboard potential energy landscape
-  exhibit a variety of synchronization effects.
+  move in 
+  synchronized patterns.   
+  %exhibit a variety of synchronization effects.
   %in
   %  Numerical model
   We discuss a simple
@@ -62,8 +64,7 @@
   a viscous liquid.
   This model reproduces behaviors observed
   in experimental systems 
-  of interest to condensed matter physics 
-  including 
+  of %interest to condensed matter physics %including 
   magnetically driven colloidal particles
   confined by light-fields.
   %
@@ -71,12 +72,6 @@
   %so we model the dynamics of each particle
   %with 
   %overdamped equations of motion.
-  We demonstrate how to 
-  visualize
-  the system with
-  numerical representations of the landscape
-  and
-  animations of the particle motion.
   Our results show a variety of synchronization effects 
   in single and multi-particle systems, 
   %and detect synchronization using
@@ -85,6 +80,12 @@
   plots of 
   particle velocity as a function of applied driving force,
   and phase diagrams of position versus velocity.
+  %We demonstrate how to 
+  %visualize
+  %the system with
+  %numerical representations of the landscape
+  %and
+  %animations of the particle motion.
   %We include sample code
   %and exercises for students
   %with 
@@ -108,24 +109,33 @@
 Synchronization is a universal phenomena
 in which individual oscillators adjust frequency due
 to external stimulus \cite{Pikovsky2003}.
-In phase oscillations
-%Synchronous behaviors where oscillators move in-phase
-%(i.e. in time motions)
-are observed
-in many everyday systems
+Many everyday systems
+exhibit in-phase oscillations of components 
 such as the
-flickering candle flames coupled by temperature fluctuations \cite{Okamoto2016},
+flickering patterns of
+candle flames coupled by temperature fluctuations \cite{Okamoto2016},
 vibrations of singing wineglasses \cite{Arane2009}, 
 and metronomes coupled through a supporting platform \cite{Jia2015}.
 Biological systems benefit from cooperative
-synchronization such as 
-birds coordinating wing flaps
+synchronization -- %such as 
+birds coordinate wing flaps
 to optimize energy use during flight \cite{Portugal2014},
-frogs alternating croaking patterns \cite{Aihara2014},
-and humans clapping in time with music \cite{Tranchant2016}.
-At a cellular level, 
+frogs alternate croaking patterns \cite{Aihara2014},
+humans clap in time with music \cite{Tranchant2016}
+and 
+at a cellular level, 
 neurons simultaneously fire in cardiac muscle \cite{MartinHall1999}
 and brain tissue \cite{Singer1999}.
+External forcing can cause or regulate 
+synchronization. % is often achieved via external forcing
+%such as when
+%single particle oscillators
+For instance,
+an electrical pacemaker %(an electrical generator)
+pulses to regulate a heart beat,
+and 
+a flashing light can modify the
+pattern of flashing fireflies .% \cite{Agrawal2013}.
 
 %Christiaan Huygens 
 %[has been adapted into many useful technologies...]
@@ -145,15 +155,16 @@ no matter the original phase of the clocks \cite{Bennett2002}.
 %phase locking
 Dynamical systems %with multiple frequencies
 exhibit phase-locking 
-when oscillators with different rhythms couple
-so the frequency ratio or mode 
-is an integer number \cite{Bak1986}.
+when oscillators with different rhythms adjust %couple
+to a frequency ratio or mode 
+of an integer number \cite{Bak1986}.
 %Dynamical mode locking
 %The phenomena
 Synchronization 
 is often studied with simple computational models
 and can be visualized 
-with phase plots or Lissajous figures.
+with phase
+plots or Lissajous figures.
 In phase space 
 a mode-locked system is confined to 
 a closed loop in a 
@@ -164,43 +175,81 @@ and easily generated with a computer code
 or oscilloscope \cite{Tong1997}. 
 %with a frequency generator,
 %where two combined frequencies at perpendicular orientations
-({\it As we will demonstrate in phase plots in Figs. X, Y, Z})
+%({\it As we will demonstrate in phase plots in Figs. X, Y, Z})
+It should be noted that oscillation phase and phase space
+  refer to different uses of the word ``phase.''  Oscillation
+  phase $\phi_0$ is the constant portion of the argument in a periodic function
+  $\sin{(\omega t + \phi_0)}$ while phase space refers
+  to plots of velocity versus position (such as $v_y$ vs. $y$)
+  that are used to characterize oscillating systems.
+ 
 
-External forcing can cause or regulate 
-synchronization. % is often achieved via external forcing
-%such as when
-%single particle oscillators
-For instance a
-%pushing a child on a swing at the high point on her path, or
-pacemaker (an electrical generator)
-pulses to regulate a heart beat
-or controlling the pattern of flashing
-fireflies with a pulsed light \cite{Agrawal2013}.
-These behaviors can be modeled with
-numerical studies %can be performed
-where
-a driving force is applied to simple harmonic system,
-either
-coupled oscillators %\cite{Kuramoto193?}
-or a single particle driven across a periodic potential landscape.
-A single particle particle oscillator
-within a potential well is 
-much like a skateboarder in a half-pipe or
-a child on a swing
-moving back and forth. % through equilibrium.  % \cite{}.
-Single particle studies 
-are useful to understand synchronization
-in the absence of collective effects.
-With a constant or 
-dc drive the landscape modulates 
-the particle velocity, below some threshold below
-the dc force is not strong enough to push the particle
-across a potential maximum so the average velocity is zero,
-a phenomena refered to as pinning \cite{Reichhardt2017},
-and dissipating energy from the system at all driving forces.
-A sinusoidal or ac drive creates mode-locking,
-where the average particle velocity
-is fixed for a range of dc drive forces \cite{Reichhardt2015}.
+%Given the prevalence of synchronization,
+%it is the subject of many computational models.
+Here we perform numerical studies 
+on the synchronized dynamics
+of confined particles driven over
+a washboard shaped potential energy landscape.
+Numerical studies %of harmonic systems
+can yield insights
+to the mechanics of naturally oscillating systems.
+We chose this model for its
+relevance to condensed matter systems
+and ease of simulation.
+%---------------------------------------------------------------
+%kinks and nanofriction
+%-----------------------------------------------------------------
+%transition from synchronized to chaotic
+%describe types of physical systems - particle types
+%%In this work,
+%we perform 
+%numerical simulations of confined, driven particles
+%to model a variety of physical phenomena.
+%-----------------------------------------------------------------------
+%paper outline
+%In the following paper
+In Section~\ref{sec:colloids} we describe colloid particles,
+an relevent
+experimental analog of our simulations.
+We describe
+our molecular dynamics model for a single particle in Section~\ref{sec:MD}.
+%In this section, we restrict our discussion to a single particle,
+%and include additional information
+%for multiple particles in Section~\ref{sec:sync}.
+%including various  and confining environments.
+We summarize
+our results 
+%in Section~\ref{sec:results} 
+including synchronized motion of a single confined particle
+driven across a periodic landscape in 
+Section~\ref{sec:one}.
+In Section~\ref{sec:sync}
+we 
+extend the model to include multiple particles,
+and show how confined 
+interacting particles respond to the same applied driving force.
+%including stationary propagation of high density kinks
+%in Sec.~\ref{sec:kink}.
+%We include code to simulate
+%and visualize the landscape and dynamics in this section
+%and supplementary material.
+%we
+%demonstrate how uniform environments and applied forces
+%and create synchronized flow patterns.
+%We present these results using standard tools of non-linear oscillators
+%such phase diagrams of velocity versus position.
+%PHASE DIAGRAMS SHOWING COUPLING, OR QUASI-PERIODIC COUPLING
+%INDICATE COOPERATIVE MOTION IN THE Q1D SUBSTRATE
+%In Section~\ref{sec:quasiperiod},
+%we show how an aperiodic landscape modifies the particle dynamics.
+%Finally we explore the transition to chaotic dynamics in 
+%Section~\ref{sec:chaos}
+%and conclude 
+%in Section~\ref{sec:conclusion}. 
+We conclude with
+exercises for interested students 
+in Section~\ref{sec:problems}.
+
 
 \section{Colloidal Models}
 \label{sec:colloids}
@@ -211,14 +260,16 @@ In experiment, colloids are typically spheres of
 plastic suspended in
 highly de-ionized water or silica in suspended in organic solvent.
 %experimental - colloids specifically
-The spheres are a few microns in size
+Because 
+the spheres are a few microns in size
 and move at rates of microns per second,
-so a system can be imaged
-with a traditional optical camera
-due to the large size and slow speed of the particles.
+the position of a particle %is large and slow enough to
+can be imaged as a function of time 
+with a traditional optical camera.
+%due to the large size and slow speed of the particles.
 Individual colloids exhibit 
 Brownian motion,
-where particles change direction in a seemly random fashion
+where particles change direction %in a seemingly random fashion
 due to unseen 
 collisions 
 with particles comprising the suspending fluid \cite{}.
@@ -303,75 +354,6 @@ Numerical modeling of colloids can provide mechanistic insight
 that can be difficult to achieve in experimental conditions
 where Brownian motion and other sources of noise dominate.
 
-%Given the prevalence of synchronization,
-%it is the subject of many computational models.
-Here we perform numerical studies 
-on the synchronized dynamics
-of confined particles driven over
-a washboard shaped potential energy landscape.
-We chose this model for its
-relevance to condensed matter systems
-and ease of simulation.
-%We examine
-The period of the substrate
-can be used to control the
-intrinsic velocity of the dc driven particle,
-and the applied ac drive can cause mode-locking
-which appears as
-Shapiro steps in the force-velocity relationship.
-
-
-%---------------------------------------------------------------
-%kinks and nanofriction
-
-%-----------------------------------------------------------------
-%transition from synchronized to chaotic
-%describe types of physical systems - particle types
-%%In this work,
-%we perform 
-%numerical simulations of confined, driven particles
-%to model a variety of physical phenomena.
-%-----------------------------------------------------------------------
-%paper outline
-%In the following paper
-We describe
-our molecular dynamics model for a single particle in Section~\ref{sec:MD}.
-%In this section, we restrict our discussion to a single particle,
-%and include additional information
-%for multiple particles in Section~\ref{sec:sync}.
-%including various  and confining environments.
-We summarize
-our results 
-%in Section~\ref{sec:results} 
-including synchronized motion of a single confined particle
-driven across a periodic landscape in 
-Section~\ref{sec:one}.
-In Section~\ref{sec:sync}
-we 
-extend the model to include multiple particles,
-and show how confined 
-interacting particles respond to the same applied driving force.
-%including stationary propagation of high density kinks
-%in Sec.~\ref{sec:kink}.
-%We include code to simulate
-%and visualize the landscape and dynamics in this section
-%and supplementary material.
-%we
-%demonstrate how uniform environments and applied forces
-%and create synchronized flow patterns.
-%We present these results using standard tools of non-linear oscillators
-%such phase diagrams of velocity versus position.
-%PHASE DIAGRAMS SHOWING COUPLING, OR QUASI-PERIODIC COUPLING
-%INDICATE COOPERATIVE MOTION IN THE Q1D SUBSTRATE
-%In Section~\ref{sec:quasiperiod},
-%we show how an aperiodic landscape modifies the particle dynamics.
-%Finally we explore the transition to chaotic dynamics in 
-%Section~\ref{sec:chaos}
-%and conclude 
-%in Section~\ref{sec:conclusion}. 
-We conclude with
-exercises for interested students 
-in Section~\ref{sec:problems}.
 
 
 %Here we model the microscopic dynamics of phase locking in a colloidal model syestem using molecular dynamics (MD).
@@ -630,6 +612,11 @@ time &  $ \tau = \eta a_0 / F_0 $ \\
 % In subsection headings, only the first word is capitalized.
 \label{sec:one}
 
+A single particle on this landscape
+responds to the applied driving force
+by synchronizing its motion across the landscape maxima 
+to the periodic pattern of 
+applied driving force.
 In Fig.~\ref{fig:0} we
 show the relationship between the applied force and particle
 position % as a function of time.
@@ -662,7 +649,7 @@ In Fig.~\ref{fig:0}(a)
 we plot the applied driving force defined in Eq.~\ref{eq:drive}
 as a function of time.
 The time independent constants are 
-$F^{AC}=0.2$ and $f=0.01$ cycles per time unit.
+$F^{AC}=0.05$ and $f=0.01$ cycles per time unit.
 The temporal period of the driving force is
 $T = 1/f = 100$.
 To avoid transient oscillations at early times, 
@@ -720,73 +707,78 @@ When $F^D(t) > A_p$, a particle can
 overcome the barrier height of the landscape maxima,
 and 
 the particle hops between minima in the energy landscape.
-In this example
-we note 
+Here 
 the particle moves
 in the positive y-direction
-through $\Delta y = 2 \lambda$ in one time period $\Delta t = T$.
-When $F_{D}(t) < 0 $
-the particle moves in the negative y-direction 
-for a short time.
+through $\Delta y = 2 \lambda$ in one time period $\Delta t = T$,
+with 
+the average velocity 
+$\bar{v}_y = 2 \lambda f$ where $T = 1/f$.
 %reaching a minimum position
 %of $y/\lambda = 1$
 %over the total period $T = 100$.
-The average velocity $\bar{v}_y$
-is the average displacement $\Delta y = y(t_0+T) - y(t_0)$
-over the period of the driving force.
+%The average velocity $\bar{v}_y$
+%is the average displacement $\Delta y = y(t_0+T) - y(t_0)$
+%over the period of the driving force.
 %In Fig. ~\ref{fig:0}
 %the average displacement during one time period is a single wavelength
 %of the substrate $y(t_0+T) - y(t_0) = \lambda$.
-Thus the average velocity 
-is $\bar{v}_y = 2 \lambda f$ where $T = 1/f$.
-
-[add example where particle moves backward].
-
-
 %single DC case with figure
 %dc_current 0.01
-%ac_current 0.2
-%ac_frequency 0.0001
+%ac_current 0.05
+%ac_frequency 0.01
 %fp_y 0.1
 \begin{center}
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\columnwidth]{single_particle.pdf}
 \caption{(a) The applied driving force $F^D(t)$ (orange) in Eq.~\ref{eq:drive}
-  where the parameter $F^{DC}$ (blue) is slowly increased from zero to a constant value
+  where the parameter $F^{DC}$ (blue) is slowly increased from zero
+  to a constant value
   as described in the text.  (b) 
-  The $y-$position of the driven particle as a function of time %of a single driven particle
+  The $y-$position of the driven particle
+  as a function of time %of a single driven particle
   normalized by the period of the substrate $\lambda$.
   }
 \label{fig:0}
 \end{figure}
 \end{center}
 
+The ratio of $F^{AC}/F^{DC}$ and the barrier height $A_p$
+control the rate and length of the particle hops
+forward and backward in the landscape.
+When $F^{AC}/F^{DC} > 1$
+and $F^{DC} - F^{AC} > A_p$ the particle
+moves in the negative y-direction 
+during part of the cycle.
+To explore the possible hopping patterns,
+we sweep through a range of $F^{DC}$ for fixed $F^{AC}$ and $A_p$,
+as shown in Fig.~\ref{fig:1}(b).
+We keep $F^{DC}$ constant
+for $\Delta t = 10^4$ timesteps
+and 
+sample the average velocity $\langle v_y \rangle $ 
+as a function of $F^{DC}$.
+
+We perform this sweep for several values
+of $F^{AC}$ including the limiting case that the applied force
+is a constant value.
+When $F^{AC} = 0$, no steps appear
+in the $\langle v_y \rangle $ vs $F^{DC}$ curve.  
+
+Synchronization
+of the driving force with the landscape,
+despite the overall magnitude
+of $F^{DC}$.
+
+
+
 Phase locked steps occur for average displacements integer
 multiples of the substrate period $n\lambda$.
 
-We sample the average velocity $\langle v_y \rangle $
-as a function of $F^{DC}$.
 
-The hopping pattern of the driven particle is periodic,
-and could be achieved over a range of $F^{DC}$.  %, as we will demonstrate in Fig.~\ref{fig:1}
-We explore the ranges of periodic hopping patterns
-by increasing $F^{DC}$ as a function of time,
-as shown in 
-%
-Fig.~\ref{fig:1}.
-%we show the result increasing the 
-%force to the particle as a function of time.  
-%increased DC
-%We apply an external applied force, 
-%with 
-%a constant $F^{AC}$ with frequency $\omega = 2\pi f$
-%then slowly increase $F^{DC}$
-%at a rate of $\Delta F^{DC} = 0.001$ every $\Delta t = 4000$ integer timesteps
-%or $40$ time units.
-%this seems fast, but it is slow enough to estimate
-%the velocity accurately.
-%this is not be so for a multiple particle system!
+
+
 The particle 
 achieves a variety of oscillation modes as a function of $F^{DC}$.
 A mode is a periodic pattern of hops
@@ -794,9 +786,9 @@ with a constant average particle velocity, $\bar{v}_{y}$
 over a range of driving forces $F^{DC}$.
 We illustrate mode-locking in 
 the velocity-force plot in Fig.~\ref{fig:1}(b).
-Here $\bar{v}_{y}$ is increasing in non-uniform steps,
+Here $\langle v_{y} \rangle$ is increasing in non-uniform steps,
 with a quantized height of
-$\bar{v}_{y} = n \lambda f$,
+$\langle v_{y} \rangle = n \lambda f$,
 where $n$ is an integer.  
 %$\lambda = L/N_p = 36.5/20 = 1.825$ is the spatial period, or wavelength
 %of the landscape,
@@ -810,8 +802,7 @@ experiments of
 driven colloids on a
 optical periodic landscape.
 
-We illustrate the hopping pattern in Fig.~\ref{fig:1}(b)
-and 
+We 
 show the dynamics 
 in supplementary materials \cite{supp1}.
 
@@ -819,10 +810,48 @@ in supplementary materials \cite{supp1}.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\columnwidth]{single}
-\caption{\textbf{(a)} The particle is driven with a constant amplitude $F^{AC}$ and frequency $\omega$ through a periodic spatial potential landscape.  The landscape is represented with a colormap where blue are minima and red are maxima in the potential. \textbf{(b)} An average particle velocity in the y-direction $\bar{v}_{y}$ as a function of a constant driving force $F^{DC}$. In the animation available in Ref.~\cite{supp1} the magenta dot represents the average velocity of the particle $\bar{v}_{y}$ at which the particle in Fig. 1(a) is moving.}
+\caption{(Average particle velocity in the y-direction $\langle v_{y} \rangle$ as a function of a constant driving force $F^{DC}$.}
 \label{fig:1}
 \end{figure}
 \end{center}
+
+%In the animation available in Ref.~\cite{supp1} the magenta dot represents the average velocity of the particle $\langle v_{y} \rangle$ at which the particle in Fig. 1(a) is moving.
+
+%We examine
+The period of the substrate
+can be used to control the
+intrinsic velocity of the dc driven particle,
+and the applied ac drive can cause mode-locking
+which appears as non-linear 
+steps in the force-velocity relationship.
+
+Fundamental models
+of synchronization 
+can include many coupled oscillators
+or focus on 
+a single particle driven across a periodic potential landscape.
+Single particle studies 
+are useful to understand synchronization
+in the absence of collective effects.
+%A single particle particle oscillator
+%within a potential well is 
+%much like a skateboarder in a half-pipe or
+%a child on a swing
+%moving back and forth. % through equilibrium.  % \cite{}.
+The relationship between the driving force and
+landscape can change the pattern of motion.  
+With a constant or 
+dc drive the landscape modulates 
+the particle velocity, below some threshold  
+the dc force is not strong enough to push the particle
+across a potential maximum so the average velocity is zero,
+a phenomena refered to as pinning \cite{Reichhardt2017}.  
+%and dissipating energy from the system at all driving forces.
+A sinusoidal or ac drive creates mode-locking,
+where the average particle velocity
+is fixed for a range of dc drive forces \cite{Reichhardt2015}.
+
+
 
 \section{Synchronized particle chains}
 \label{sec:sync}
@@ -1250,7 +1279,9 @@ charge and spin density waves.
 
     \bibitem{Tong1997} E. Y. C. Tong, Lissajous figures, The Physics Teacher {\bf 35}, 491 (1997).
 
-    \bibitem{Agrawal2013} D. K. Agrawal, J. Woodhouse, and A. A. Seshia, Physical Review Letters {\bf 111}, 084101 (2013).
+
+      %PRACTICAL APPLICATION
+    %\bibitem{Agrawal2013} D. K. Agrawal, J. Woodhouse, and A. A. Seshia, Observation of locked phase dynamics and enhanced frequency stability in synchronized micromechanical oscillators, Physical Review Letters {\bf 111}, 084101 (2013).
 
     \bibitem{Josephson1962} B. D. Josephson, Phys. Letters {\bf 16}, 25 (1962). 
     \bibitem{Josephson1965} B. D. Josephson, Advan. Phys. {\bf 14}, 419 (1965).
