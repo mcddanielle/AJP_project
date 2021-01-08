@@ -36,13 +36,22 @@
 \date{\today}
 
 \begin{abstract}
+  Synchronization
+  plays a key role in many physical processes.
+  %Simplified models
+  %such as 
   %What problem did you study and why is it important?
   Particles
   %confined to a narrow channel 
   driven
   across a washboard potential energy landscape
   move in 
-  synchronized patterns.   
+  synchronized patterns,
+  as observed in 
+  experiments %al systems 
+  of %interest to condensed matter physics %including 
+  magnetically driven colloidal particles
+  confined by light-fields.
   %exhibit a variety of synchronization effects.
   %in
   %  Numerical model
@@ -62,11 +71,6 @@
   molecular dynamics simulations
   for particles moving through
   a viscous liquid.
-  This model reproduces behaviors observed
-  in experimental systems 
-  of %interest to condensed matter physics %including 
-  magnetically driven colloidal particles
-  confined by light-fields.
   %
   %applied to single and multiple particle systems.
   %so we model the dynamics of each particle
@@ -190,9 +194,9 @@ Here we perform numerical studies
 on the synchronized dynamics
 of confined particles driven over
 a washboard shaped potential energy landscape.
-Numerical studies %of harmonic systems
-can yield insights
-to the mechanics of naturally oscillating systems.
+%Numerical studies %of harmonic systems
+%can yield insights
+%to the mechanics of naturally oscillating systems.
 We chose this model for its
 relevance to condensed matter systems
 and ease of simulation.
@@ -245,7 +249,10 @@ interacting particles respond to the same applied driving force.
 %Finally we explore the transition to chaotic dynamics in 
 %Section~\ref{sec:chaos}
 %and conclude 
-%in Section~\ref{sec:conclusion}. 
+In Section~\ref{sec:conclusion}
+we describe how our work with colloids applies more broadly
+to many physical systems
+such as dusty plasmas, superconducting vortices and Josephson junctions.
 We conclude with
 exercises for interested students 
 in Section~\ref{sec:problems}.
@@ -256,7 +263,7 @@ in Section~\ref{sec:problems}.
 
 Complex dynamics can be studied with
 colloid particles with experiments and simulation.
-In experiment, colloids are typically spheres of 
+In typical experiments colloids are spheres of 
 plastic suspended in
 highly de-ionized water or silica in suspended in organic solvent.
 %experimental - colloids specifically
@@ -270,32 +277,10 @@ with a traditional optical camera.
 Individual colloids exhibit 
 Brownian motion,
 where particles change direction %in a seemingly random fashion
-due to unseen 
+due to 
 collisions 
-with particles comprising the suspending fluid \cite{}.
-Brownian motion is a temperature and viscosity dependent
-phenomena. \cite{}
-[elaborate - move to associated problems?].
-
-Due to the relative ease of
-manipulation and imagining, 
-colloids are used as experimental models
-for systems relatively hard to access and visualize. 
-%SAME SENTENCE TWICE
-Collections of colloids can
-be used to study the properties of solids and liquids
-%comprised of smaller particles
-%such as atoms \cite{} or electrons \cite{}
-or more exotic systems 
-such as cold atoms or electron gases \cite{Grier2003}.  
-The interaction forces between colloids can be controlled 
-by altering the chemistry of the suspending fluid
-or surface ligands of the particles.
-Thus colloids can 
-be modified to mimic different
-systems such as hard spheres interacting via contact forces \cite{},
-dipole interactions \cite{},
-and long range electrostatic interactions \cite{}.
+with unseen particles comprising the suspending fluid \cite{}.
+%[elaborate - move to associated problems?].
 
 Light is a
 tool for manipulating the colloidal environment.
@@ -488,54 +473,46 @@ by ensuring the particle is subject to a smoothly varying force.
 We illustrate the increase
 of $F^{DC}$ in Fig.~\ref{fig:0}(a).
 
-%because 
-We model the 
-particle dynamics 
-with an overdamped
-equation of motion.
-%integrated with the Verlet method.
-%The suspending fluid is highly viscous
-%and exerts a damping force on the particles equivalent
-%to a linear drag force.
-%Overdamped dynamics is a common assumption in models of colloidal particles.
-%This is an assumption that
-%The term overdamped or critically damped indicates
-%that an oscillator cannot undergo periodic
-%undulations due to some external force. %such as
-%suspension in a viscous fluid \cite{}.
-In our colloidal model we assume
-the particle is suspending in a viscous fluid
-that provides friction, or damping.
-In the overdamped model the
-linear friction produced by this 
-nonconservative force,
-$\vec{F}_{drag} = -\eta \vec{v}_i$ is
-sufficient so that
-the acceleration of the particle is zero.
-The friction coefficient $\eta$
-is proportional to the fluid viscosity.
-Such a model in which inertia is set to zero
-is appropriate for small particles
-moving through a high viscosity fluid
-such as a colloid moving in water.
-We discuss this further in 
-Section~\ref{sec:problems} Exercise~\ref{ex:reynolds}. %for more information 
-
+%because
+The inertia of 
+small particles is greatly reduced by interactions
+with fluid particles \cite{Purcell1977}.
+Our model 
+colloids are overdamped
+-- i.e. suspended in a continuous viscous fluid
+that dissipates energy at a rate such 
+that the particles do not accelerate.
+%that greatly impedes their motions.
+Energy dissipation from the fluid is modeled
+with a frictional force on particle with velocity $\vec{v}_i$
+%that removes energy from
+%the particles,
+%which we model as
+$\vec{F}^{drag}_i = -\eta \vec{v}_i$
+%proportional to the particle velocity 
+with a friction coefficient $\eta$
+proportional to the fluid viscosity.
+We discuss friction models for
+spheres moving through fluids in 
+Section~\ref{sec:problems} Exercise~\ref{ex:reynolds}. %for more information
+%We model the particle dynamics  with an overdamped equation of motion. Models with inertia set to zero are appropriate for moving through a high viscosity fluid
 Newton's second law for an individual particle
-$m \vec{a}_i = \sum \vec{F}$ is simplified
-by the assumption $\vec{a}_i$ is zero in overdamped model.
+%$m \vec{a}_i = \sum \vec{F}$
+is simplified
+by the assumption $\vec{a}_i$ is zero. % in the overdamped model.
 %Newton's second law can be rearranged %for the velocity
 %to
-The equation of motion for an isolated particle is
+The overdamped equation of motion for an isolated particle is
 %solved for velocity 
 \begin{equation}
   \eta \vec{v}_i = \vec{F}^l_{i} + \vec{F}^{D}(t).
     \label{eq:motion}
 \end{equation}
-with the viscosity coefficient $\eta = 1$,
-which we describe in more detail in Table~\ref{tab:1}
-and Exercise~\ref{ex:reynolds}.
-In Section~\ref{sec:problems} Exercise~\ref{ex:n2l}
+with  $\eta = 1$.  
+%which we describe in more detail in Table~\ref{tab:1}
+%and Exercise~\ref{ex:reynolds}.
+In %Section~\ref{sec:problems}
+Exercise~\ref{ex:n2l}
 we invite the reader to confirm this result.
 
 The equation of motion provides a direct calculation of the velocity
@@ -855,6 +832,14 @@ is fixed for a range of dc drive forces \cite{Reichhardt2015}.
 
 \section{Synchronized particle chains}
 \label{sec:sync}
+The interaction forces between colloids can be controlled 
+by altering the chemistry of the suspending fluid
+or surface ligands of the particles.
+Thus colloids can 
+be modified to mimic different
+systems such as hard spheres interacting via contact forces \cite{},
+dipole interactions \cite{},
+and long range electrostatic interactions \cite{}.
 
 Mode-locked 
 colloid dynamics have been achieved in 
@@ -1135,7 +1120,10 @@ for a grid of values $(x_n,y_n)$.
 %Onset of synchronization in networks of second-order Kuramoto oscillators with delayed coupling: Exact results and application to phase-locked loops
 %PHYSICAL REVIEW RESEARCH 2, 023183 (2020)
 
-\item Brownian motion.  Consider the consequences of a non-zero temperature on the simulation, in which particles will collide with invisible particles making up the suspending fluid.  These collisions are more likely at higher temperature due to the increased kinetic energy of the fluid particles, as described by the Maxwell-Boltzmann distribution \cite{}.  In molecular dynamics simulations temperature effects can be modeled by including randomized forces $f^T$ to emulate the motion of particles undergoing Brownian motion.  A distribution of randomizes forces contributes equally in all directions such that the force averaged over a finite time interval is zero $\langle f^T(t) \rangle = 0$.  Random distributions of contain no correlations over the independent variable (time in this case) $\langle f^T(t) f^T(\tau)\rangle = 2 \eta k_B T \delta(t-\tau)$ where the energy $k_B T$ derived from the Boltzmann constant $k_B$ and temperature $T$ has energy units $E_0$.  \cite{Allen2017}
+\item {\bf Brownian motion}
+  is a temperature and viscosity dependent
+  phenomena. \cite{}
+  Consider the consequences of a non-zero temperature on the simulation, in which particles will collide with invisible particles making up the suspending fluid.  These collisions are more likely at higher temperature due to the increased kinetic energy of the fluid particles, as described by the Maxwell-Boltzmann distribution \cite{}.  In molecular dynamics simulations temperature effects can be modeled by including randomized forces $f^T$ to emulate the motion of particles undergoing Brownian motion.  A distribution of randomizes forces contributes equally in all directions such that the force averaged over a finite time interval is zero $\langle f^T(t) \rangle = 0$.  Random distributions of contain no correlations over the independent variable (time in this case) $\langle f^T(t) f^T(\tau)\rangle = 2 \eta k_B T \delta(t-\tau)$ where the energy $k_B T$ derived from the Boltzmann constant $k_B$ and temperature $T$ has energy units $E_0$.  \cite{Allen2017}
 
   With no applied driving force, measure the minimum temperature required for a single particle to hop between minima in the potential landscape.
 
@@ -1158,6 +1146,17 @@ for a grid of values $(x_n,y_n)$.
 
 \section{Conclusion}
 \label{sec:conclusion}	% You can label sections for reference
+Due to the relative ease of
+manipulation and imagining, 
+colloids are used as experimental models
+for systems relatively hard to access and visualize. 
+%SAME SENTENCE TWICE
+Collections of colloids can
+be used to study the properties of solids and liquids
+%comprised of smaller particles
+%such as atoms \cite{} or electrons \cite{}
+or more exotic systems 
+such as cold atoms or electron gases \cite{Grier2003}.
 
 %Oscillators ordered into chains or lattices.
 %has many important
@@ -1279,6 +1278,7 @@ charge and spin density waves.
 
     \bibitem{Tong1997} E. Y. C. Tong, Lissajous figures, The Physics Teacher {\bf 35}, 491 (1997).
 
+    \bibitem{Purcell1977} E. M. Purcell, Life at low Reynolds numbers, Am. J. Phys. {\bf 45}, 3–11 (1977).
 
       %PRACTICAL APPLICATION
     %\bibitem{Agrawal2013} D. K. Agrawal, J. Woodhouse, and A. A. Seshia, Observation of locked phase dynamics and enhanced frequency stability in synchronized micromechanical oscillators, Physical Review Letters {\bf 111}, 084101 (2013).
