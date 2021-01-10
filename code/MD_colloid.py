@@ -123,8 +123,8 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     # time = m/(4*freq)
 
         #plot the data
-    ax1.plot(time_data,FDC_data,label="F$^{DC}$")
-    ax1.plot(time_data,F_drive,label="F$^D$(t)",lw=5)
+    ax1.plot(time_data,FDC_data,label="F$^{dc}$")
+    ax1.plot(time_data,F_drive,label="F$^d$(t)",lw=5)
     ax1.legend(loc=4,fontsize=20,borderaxespad=0.0,frameon=0,handlelength=1.5) #,labelspacing=0.2
     ax2.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
     #plt.xlim(155,157)
@@ -152,7 +152,64 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     ax1.text(0.02,0.9,"(a)",transform = ax1.transAxes,backgroundcolor="white")
     ax2.text(0.02,0.9,"(b)",transform = ax2.transAxes,backgroundcolor="white")
         
-    plt.tight_layout(pad=0.1)
+    plt.tight_layout(pad=0.2)
+    plt.savefig(parameters['filename'])
+    
+    return 
+
+#####################################################################
+def plot_velocity_force(velocity_data,FDC_data,p):
+    '''Make Fig. 3 in AJP
+    '''
+
+    #for plot
+    #calculate the driving force from F_DC and time
+    F_AC = p['F_AC']
+    freq = p['freq']
+    period = p['period']
+    
+    fig = plt.figure(figsize=(8,4))
+    gs=gridspec.GridSpec(1,1)
+    ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
+
+    #calculate from np.array rather than incrementally from subroutines
+    F_drive = FDC_data + F_AC*np.sin(2*np.pi*freq*time_data)
+
+    #max occurs at
+    # 2*np.pi*freq*time_data = m*pi/2, where m = 1, 5, 9, 13, ...
+    # time = m/(4*freq)
+
+        #plot the data
+    ax1.plot(time_data,FDC_data,label="F$^{dc}$")
+    ax1.plot(time_data,F_drive,label="F$^d$(t)",lw=5)
+    ax1.legend(loc=4,fontsize=20,borderaxespad=0.0,frameon=0,handlelength=1.5) #,labelspacing=0.2
+    ax2.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
+    #plt.xlim(155,157)
+    ax2.set_xlabel("time")
+    ax2.set_ylabel(r"y/$\lambda$")
+    ax1.set_ylabel(r"F(t)")
+
+    ax1.set_xticks([])
+
+    ax1.set_xlim(0,time_data[-1]+1)
+    ax2.set_xlim(0,time_data[-1]+1)
+    #ax2.set_ylim(0,y_data/period[-1]+0.1)
+
+    #add horizontal lines for potential minima
+    for i in [1,3,5]:
+        #ax2.hline(i)
+        #, label = "U(y) = -U$_0$")
+        ax2.axhline(y=i, color = "black", linestyle = "--")
+
+    for i in [1,5,9,13]:
+        #peaks of the FD curve
+        ax2.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
+        ax1.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
+
+    ax1.text(0.02,0.9,"(a)",transform = ax1.transAxes,backgroundcolor="white")
+    ax2.text(0.02,0.9,"(b)",transform = ax2.transAxes,backgroundcolor="white")
+        
+    plt.tight_layout(pad=0.2)
     plt.savefig(parameters['filename'])
     
     return 
@@ -232,7 +289,7 @@ def set_parameters_fig2():
     dict['time0'] = 0       #initial time in integer timesteps
 
     #start the particle in a local minima (not a local max!)
-    dict['y0'] = 0 #period  #Sy/2
+    dict['y0'] = 1. #period  #Sy/2
 
     #landscape potential
     dict['F0'] = 0.1
@@ -250,10 +307,13 @@ def set_parameters_fig2():
     dict['freq'] = 0.01              #frequence of force osillation
     
     #integer time steps
-    dict['maxtime']=300000        #total time steps in simulation
+    dict['maxtime']=400000        #total time steps in simulation
     dict['writemovietime']=1000   #interval to write data to arrays for plotting
     return dict
 
+def average_velocity():
+    '''calculate the average velocity over a range
+    '''
     
 #-------------------------------------------------------------------
 if __name__ == "__main__":
@@ -261,19 +321,24 @@ if __name__ == "__main__":
     #define simulation constants/controls
     parameters = set_parameters_fig2()
 
-    parameters['filename']="single_particle.pdf"
+    if 1:
+        parameters['filename']="single_particle.pdf"
 
-    #run a single MD simulation for a set of parameters
-    single_particle(parameters)
+        #run a single MD simulation for a set of parameters
+        single_particle(parameters)
+        sys.exit()
 
     #reset some parameters for subsequent figures
     parameters['F_DC_incr'] = 0.001      #amount to increase FDC at every drop step
     parameters['F_DC_max'] = 0.3        #"constant" driving force for most of simulation
-    parameters['drop'] = 4000           #integer timesteps to "ramp" the DC force
+    parameters['drop'] = 5000           #integer timesteps to "ramp" the DC force
+    dict['maxtime']=300000        #total time steps in simulation
+
     parameters['filename']="single_particle_new.pdf"
-    parameters['y0'] = 5.0*parameters['period']
+    #parameters['y0'] = 5.0*parameters['period']
 
     #run a single MD simulation for a set of parameters
     single_particle(parameters)
     
     sys.exit()
+
