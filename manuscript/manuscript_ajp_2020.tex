@@ -431,7 +431,7 @@ with the periodic function
   energy 
   $\vec{F}^l = -\nabla U(\vec{r})$.
   (a) View of the $x-y$ plane. %of the simulation
-  The time-dependent applied driving force $\vec{F}^D$
+  The time-dependent applied driving force $\vec{F}^d$
   is parallel to the y-axis.
   The landscape is shown with a contour plot,
   with maxima in the potential energy marked in red
@@ -454,24 +454,24 @@ $\vec{F}_{D}(t)$
 applied parallel to the y-direction.
 We model this force as
 \begin{equation}
-  \vec{F}^{D}(t) = [F^{DC} + F^{AC} \sin(\omega t)] \hat{y},
+  \vec{F}^{d}(t) = [F^{dc} + F^{ac} \sin(\omega t)] \hat{y},
     \label{eq:drive}
 \end{equation}
 with modifiable parameters including
-a constant component $F^{DC}$,
-and a time dependent component with amplitude $F^{AC}$
+a constant component $F^{dc}$,
+and a time dependent component with amplitude $F^{ac}$
 and frequency $\omega = 2 \pi f$.
 %in the positive $y-$direction.
 %but it may 
 %be zero or negative depending the the parameters and time.
-When $F^{DC}$ is non-zero,  
+When $F^{dc}$ is non-zero,  
 %In several simulations
 we slowly increase 
-$F^{DC}$ from zero
+$F^{dc}$ from zero
 to avoid transient behavior
 by ensuring the particle is subject to a smoothly varying force.
 We illustrate the increase
-of $F^{DC}$ in Fig.~\ref{fig:0}(a).
+of $F^{dc}$ in Fig.~\ref{fig:0}(a).
 
 %because
 The inertia of 
@@ -505,7 +505,7 @@ by the assumption $\vec{a}_i$ is zero. % in the overdamped model.
 The overdamped equation of motion for an isolated particle is
 %solved for velocity 
 \begin{equation}
-  \eta \vec{v}_i = \vec{F}^l_{i} + \vec{F}^{D}(t).
+  \eta \vec{v}_i = \vec{F}^l_{i} + \vec{F}^{d}(t).
     \label{eq:motion}
 \end{equation}
 with  $\eta = 1$.  
@@ -579,7 +579,7 @@ time &  $ \tau = \eta a_0 / F_0 $ \\
 % and many particles
 % move (Sec.~\ref{sec:sync})
 % in response to this applied force in a variety of environments.
-% In Sec.~\ref{sec:kink} we set $F^{DC}$
+% In Sec.~\ref{sec:kink} we set $F^{dc}$
 % to zero and track the motion
 % of a high density area of a particle chain
 % (i.e. kink dynamics).
@@ -589,17 +589,11 @@ time &  $ \tau = \eta a_0 / F_0 $ \\
 % In subsection headings, only the first word is capitalized.
 \label{sec:one}
 
-A single particle on this landscape
+A single particle %on this landscape
 responds to the applied driving force
-by synchronizing its motion across the landscape maxima 
+by synchronizing its motion across the landscape %maxima 
 to the periodic pattern of 
 applied driving force.
-In Fig.~\ref{fig:0} we
-show the relationship between the applied force and particle
-position % as a function of time.
-for 
-%We drive
-a single particle driven across a periodic landscape. 
 %along the y-direction
 %({\it redundant, just refer back to eq. in Model?})
 %and $V_{0y}=0.2$.
@@ -612,79 +606,113 @@ is calculated with Eq.~\ref{eq:ysubstrate} as
   \label{eq:force}
   F^l_y(y) = -A_{p} \sin{(N_p \pi y / L)} 
 \end{equation}
-where the force is scaled with parameter $A_{p} = 0.1$ force units 
-%in simulation units for force. % $E_0/a_0$.
-%The substrate is described in 
-%\begin{equation}
-%  \label{eq:landscape_potential}
-%  U_l(y) = U_{0y} \cos{(N_p \pi y / L)} 
-%\end{equation}
-with $N_p=20$ %troughs in the landscape
-and spatial period $\lambda = 1.825 a_0$.
+where the force is scaled with parameter $A_{p}$.
+In this section, we fix the landscape parameters
+to $A_{p} = 0.1$ force units
+with $N_p=20$ minima in the landscape
+corresponding to a spatial period $\lambda = 1.825 a_0$.
+
+In Fig.~\ref{fig:0} 
+a single driven particle adjusts
+its motion so the particle traverses
+the periodic landscape with the same rhythm as 
+the applied time-dependent force $F^d(t)$.
 %
 In Fig.~\ref{fig:0}(a)
-we plot the applied driving force defined in Eq.~\ref{eq:drive}
-as a function of time.
+we plot $F^d(t)$ defined in Eq.~\ref{eq:drive}.
+%as a function of time.
 The time independent constants are 
-$F^{AC}=0.05$ and $f=0.01$ cycles per time unit.
+$F^{ac}=0.05$ and $f=0.01$ cycles per time unit.
 The temporal period of the driving force is
-$T = 1/f = 100$.
+$T = 1/f = 100$ time units.
 To avoid transient oscillations at early times, 
 the dc driving force is initially zero   
 and 
-slowly increased %$F^{DC}$.
-at a rate of $\Delta F^{DC} = 0.01$ every $\Delta t = 4000$ integer timesteps 
-to the constant value $F^{DC}=0.1$.
-In Fig.~\ref{fig:0}(a) we plot $F^{DC}$
+slowly increased %$F^{dc}$.
+at a rate of $\Delta F^{dc} = 0.01$ every $\Delta t = 4$ time units  
+to the constant value $F^{dc}=0.1$.
+In Fig.~\ref{fig:0}(a) we plot $F^{dc}$
 in blue to show the increase in 
-$F^{DC}$ for the first $40$ time units.
+$F^{dc}$ for the first $40$ time units
 In orange we show 
-the combined ac and dc drive $F^D(t)$,
-where 
-the magnitude of the ac applied force is initially zero.
+the combined ac and dc drive $F^d(t)$ 
+when the magnitude of the ac applied force is initially zero.
 %since $\sin{(0)}=0$.
-The vertical dashed lines in panels (a) and (b) coincide
-with the condition $\sin{(\omega t)} = 1$,
-where the applied force is maximum once $F^{DC}$ has become constant.
+We mark the maxima of $F^{ac}(t)$
+with the
+vertical dashed lines %in panels (a) and (b)
+(i.e. $\sin{(\omega t)} = 1$).
 
 
 %with the initial driving force at is minimum value 
-%$F^D(0) = F^{DC}$. 
+%$F^d(0) = F^{dc}$. 
 
 In Fig.~\ref{fig:0}(b) 
 we show the $y-$position of the particle
 as a function of time,
 where we 
-normalize $y$ by the spatial period of the potential %washboard as
-$\lambda$.
-The initial particle position is $y=0$,
-where the landscape force is minimum $F^l = 0$.
+normalize $y$ by $\lambda$, the spatial period of the potential.
+The initial particle position is $y = 1$,
+where the landscape force is negative $F^l < 0$,
+causing the particle to move into
+a landscape minima at the start of the simulation.
+As the driving force increases,
+%the effects of the landscape become less obvious,
+and the motion of the particle
+becomes locked to the driving period $T$.
 The horizontal dashed lines
 coincide with the condition the substrate force is
-minimum 
-$\sin{(\pi y / \lambda)} = 1 $, so $F^l = -A_p$.
+minimum $F^l = -A_p$ 
+(i.e. $\sin{(\pi y / \lambda)} = 1$).
 %or $\pi y / \lambda = m \pi/2$, where $m = 1, 5, 7$, {\it etc.}
-The crossing of the particle position $y$
-with the horizontal and vertical lines
-indicates the synchronization
-of the driving force with the lattice position of the particle,
-where driving force is maximum positive when the
-force on the particle from the landscape is maximum negative.
-It can be shown this synchronization
-occurs for any initial position of $y$.
-({\it exercise to student})
-
+Once the particle motion
+coincides with the applied drive, 
+the particle position $y$
+crosses the intersection of
+the horizontal and vertical lines.
+This indicates 
+the driving force is maximum positive when the
+force on the particle from the landscape is maximum negative,
+indicating synchronization.
 The slope of $y/\lambda$
-is proportional to the net force on the particle (See Eq.~\ref{eq:motion}).
+is proportional to the net force on the particle.
 This can be seen in 
 Fig.~\ref{fig:0} %we demonstrate this relationship,
 where local extrema appear in $y/\lambda$
 when $F_{D}(t) \approx 0 $. 
-When $F^D(t) > A_p$, a particle can 
+We invite interested students to repeat this
+simulation for any initial particle position %of $y$
+and a range of simulation constants
+to demonstrate that synchronization in this model
+does not depend on a particular set of conditions.
+%but is a direct consequence of the simplicity of the model.
+
+\begin{center}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\columnwidth]{single_particle.pdf}
+\caption{(a) The applied driving force $F^d(t)$ (orange) in Eq.~\ref{eq:drive}
+  where the parameter $F^{dc}$ (blue) is slowly increased from zero
+  to a constant value
+  as described in the text.  (b) 
+  The $y-$position of the driven particle
+  as a function of time %of a single driven particle
+  normalized by the period of the substrate $\lambda$.
+  }
+\label{fig:0}
+\end{figure}
+\end{center}
+
+The competition between the driving force and landscape potential
+can produce a variety of hopping patterns in the particle motion.
+If $A_p$ is large compared to the extrema of $F^{d}(t)$,
+the particle is trapped in a single
+minima so it oscillates back and forth with no net velocity.
+When $F^d(t) > A_p$, a particle can 
 overcome the barrier height of the landscape maxima,
 and 
 the particle hops between minima in the energy landscape.
-Here 
+In Fig.~\ref{fig:0}
 the particle moves
 in the positive y-direction
 through $\Delta y = 2 \lambda$ in one time period $\Delta t = T$,
@@ -700,53 +728,38 @@ $\bar{v}_y = 2 \lambda f$ where $T = 1/f$.
 %In Fig. ~\ref{fig:0}
 %the average displacement during one time period is a single wavelength
 %of the substrate $y(t_0+T) - y(t_0) = \lambda$.
-%single DC case with figure
+%single dc case with figure
 %dc_current 0.01
 %ac_current 0.05
 %ac_frequency 0.01
 %fp_y 0.1
-\begin{center}
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\columnwidth]{single_particle.pdf}
-\caption{(a) The applied driving force $F^D(t)$ (orange) in Eq.~\ref{eq:drive}
-  where the parameter $F^{DC}$ (blue) is slowly increased from zero
-  to a constant value
-  as described in the text.  (b) 
-  The $y-$position of the driven particle
-  as a function of time %of a single driven particle
-  normalized by the period of the substrate $\lambda$.
-  }
-\label{fig:0}
-\end{figure}
-\end{center}
 
-The ratio of $F^{AC}/F^{DC}$ and the barrier height $A_p$
+The ratio of $F^{ac}$, $F^{dc}$ and the barrier height $A_p$
 control the rate and length of the particle hops
 forward and backward in the landscape.
-When $F^{AC}/F^{DC} > 1$
-and $F^{DC} - F^{AC} > A_p$ the particle
+When $F^{ac}/F^{dc} > 1$
+and $F^{dc} - F^{ac} > A_p$ the particle
 moves in the negative y-direction 
 during part of the cycle.
 To explore the possible hopping patterns,
-we sweep through a range of $F^{DC}$ for fixed $F^{AC}$ and $A_p$,
+we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$,
 as shown in Fig.~\ref{fig:1}(b).
-We keep $F^{DC}$ constant
+We keep $F^{dc}$ constant
 for $\Delta t = 10^4$ timesteps
 and 
 sample the average velocity $\langle v_y \rangle $ 
-as a function of $F^{DC}$.
+as a function of $F^{dc}$.
 
 We perform this sweep for several values
-of $F^{AC}$ including the limiting case that the applied force
+of $F^{ac}$ including the limiting case that the applied force
 is a constant value.
-When $F^{AC} = 0$, no steps appear
-in the $\langle v_y \rangle $ vs $F^{DC}$ curve.  
+When $F^{ac} = 0$, no steps appear
+in the $\langle v_y \rangle $ vs $F^{dc}$ curve.  
 
 Synchronization
 of the driving force with the landscape,
 despite the overall magnitude
-of $F^{DC}$.
+of $F^{dc}$.
 
 
 
@@ -757,10 +770,10 @@ multiples of the substrate period $n\lambda$.
 
 
 The particle 
-achieves a variety of oscillation modes as a function of $F^{DC}$.
+achieves a variety of oscillation modes as a function of $F^{dc}$.
 A mode is a periodic pattern of hops
 with a constant average particle velocity, $\bar{v}_{y}$
-over a range of driving forces $F^{DC}$.
+over a range of driving forces $F^{dc}$.
 We illustrate mode-locking in 
 the velocity-force plot in Fig.~\ref{fig:1}(b).
 Here $\langle v_{y} \rangle$ is increasing in non-uniform steps,
@@ -787,7 +800,7 @@ in supplementary materials \cite{supp1}.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\columnwidth]{single}
-\caption{(Average particle velocity in the y-direction $\langle v_{y} \rangle$ as a function of a constant driving force $F^{DC}$.}
+\caption{(Average particle velocity in the y-direction $\langle v_{y} \rangle$ as a function of a constant driving force $F^{dc}$.}
 \label{fig:1}
 \end{figure}
 \end{center}
@@ -978,13 +991,13 @@ our simulations begin with particle configurations
 that result from the annealing process,
 as listed in Appendix [ref] and available in supplementary material.
 
-When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen AC drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
+When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen ac drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
 
 \begin{center}
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\columnwidth]{twenty}
-\caption{\textbf{(a)} A single particle (colored orange - mark in some manner for non-color views) is driven with a constant amplitude $F^{AC}$ and frequency $\omega$ through 19 neighboring particles (colored green - mark differently) confined by a quasi one-dimensional channel. The landscape is colored as in Fig.~\ref{fig1}(a). \textbf{(b)} Average $\bar{v}_{y}$ versus $F^{DC}$, where $\bar{v}_{y}$ is the average particle velocity of the driven particle in the y-direction.}
+\caption{\textbf{(a)} A single particle (colored orange - mark in some manner for non-color views) is driven with a constant amplitude $F^{ac}$ and frequency $\omega$ through 19 neighboring particles (colored green - mark differently) confined by a quasi one-dimensional channel. The landscape is colored as in Fig.~\ref{fig1}(a). \textbf{(b)} Average $\bar{v}_{y}$ versus $F^{dc}$, where $\bar{v}_{y}$ is the average particle velocity of the driven particle in the y-direction.}
 \label{fig:2}
 \end{figure}
 \end{center}
@@ -993,7 +1006,7 @@ When a single particle is driven, the neighboring particles act similarly to a p
 \label{sec:kink}	% You can label sections for reference
 We confine $N$ particles to $N-1$ troughs to create a
 local high density region.
-$F^{DC}/F^{AC} = 1$ [CHECK!]
+$F^{dc}/F^{ac} = 1$ [CHECK!]
 
 
 
@@ -1080,7 +1093,7 @@ models Millikan's oil drops.
   a regime in which the acceleration term can be ignored
   entirely.
   Demonstrate that a particle confined to a landscape exerting force
-  $F^l(\vec{r}_i)$ subject to a time dependent drive $F^D(t)$
+  $F^l(\vec{r}_i)$ subject to a time dependent drive $F^d(t)$
   can be modeled with the equation of motion described in 
   Eq.~\ref{eq:motion}. 
   \label{ex:n2l}
@@ -1187,7 +1200,7 @@ coupled arrays of junctions \cite{Benz1990}.
 %either in 
 %velocity-force curves and voltage-current curves \cite{Golubov2004}.
 Shapiro steps vary in width depending on the strength of the
-applied AC forces,
+applied ac forces,
 and are observed in a variety of systems
 displaying
 %are hallmarks of
