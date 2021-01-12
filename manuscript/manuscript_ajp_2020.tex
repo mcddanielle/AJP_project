@@ -591,9 +591,10 @@ time &  $ \tau = \eta a_0 / F_0 $ \\
 
 A single particle %on this landscape
 responds to the applied driving force
-by synchronizing its motion across the landscape %maxima 
-to the periodic pattern of 
-applied driving force.
+by moving across the landscape %maxima
+synchronized with 
+the period of $F^d(t)$.
+%applied driving force.
 %along the y-direction
 %({\it redundant, just refer back to eq. in Model?})
 %and $V_{0y}=0.2$.
@@ -607,21 +608,26 @@ is calculated with Eq.~\ref{eq:ysubstrate} as
   F^l_y(y) = -A_{p} \sin{(N_p \pi y / L)} 
 \end{equation}
 where the force is scaled with parameter $A_{p}$.
+When $F^d(t) > A_p$, a particle can 
+overcome the barrier height of the landscape,
+and 
+the particle hops between minima in the energy landscape.
 In this section, we fix the landscape parameters
 to $A_{p} = 0.1$ force units
 with $N_p=20$ minima in the landscape
 corresponding to a spatial period $\lambda = 1.825 a_0$.
 
 In Fig.~\ref{fig:0} 
-a single driven particle adjusts
-its motion so the particle traverses
+the driven particle adjusts
+its motion to traverse
 the periodic landscape with the same rhythm as 
 the applied time-dependent force $F^d(t)$.
 %
 In Fig.~\ref{fig:0}(a)
-we plot $F^d(t)$ defined in Eq.~\ref{eq:drive}.
-%as a function of time.
-The time independent constants are 
+we plot $F^d(t)$ %defined in Eq.~\ref{eq:drive}.
+as a function of time with
+%The time independent
+constants 
 $F^{ac}=0.05$ and $f=0.01$ cycles per time unit.
 The temporal period of the driving force is
 $T = 1/f = 100$ time units.
@@ -649,17 +655,24 @@ vertical dashed lines %in panels (a) and (b)
 
 In Fig.~\ref{fig:0}(b) 
 we show the $y-$position of the particle
-as a function of time,
-where we 
-normalize $y$ by $\lambda$, the spatial period of the potential.
+as a function of time.
+We 
+normalize $y$ by $\lambda$, the spatial period of the potential
+to show how the particle moves between substrate minima.  
 The initial particle position is $y = 1$,
-where the landscape force is negative $F^l < 0$,
-causing the particle to move into
+where the $F^l$ is negative, 
+causing the particle to move to
 a landscape minima at the start of the simulation.
 As the driving force increases,
 %the effects of the landscape become less obvious,
-and the motion of the particle
+the motion of the particle
 becomes locked to the driving period $T$.
+The particle moves
+in the positive y-direction
+through $\Delta y = 2 \lambda$ in one time period $\Delta t = T$,
+with 
+the average velocity 
+$\bar{v}_y = 2 \lambda f$. % where $T = 1/f$.
 The horizontal dashed lines
 coincide with the condition the substrate force is
 minimum $F^l = -A_p$ 
@@ -706,19 +719,11 @@ does not depend on a particular set of conditions.
 The competition between the driving force and landscape potential
 can produce a variety of hopping patterns in the particle motion.
 If $A_p$ is large compared to the extrema of $F^{d}(t)$,
-the particle is trapped in a single
-minima so it oscillates back and forth with no net velocity.
-When $F^d(t) > A_p$, a particle can 
-overcome the barrier height of the landscape maxima,
-and 
-the particle hops between minima in the energy landscape.
-In Fig.~\ref{fig:0}
-the particle moves
-in the positive y-direction
-through $\Delta y = 2 \lambda$ in one time period $\Delta t = T$,
-with 
-the average velocity 
-$\bar{v}_y = 2 \lambda f$ where $T = 1/f$.
+the particle oscillates back and forth
+in a single minima
+with no net velocity.  
+%In Fig.~\ref{fig:0}
+
 %reaching a minimum position
 %of $y/\lambda = 1$
 %over the total period $T = 100$.
@@ -734,13 +739,13 @@ $\bar{v}_y = 2 \lambda f$ where $T = 1/f$.
 %ac_frequency 0.01
 %fp_y 0.1
 
-The ratio of $F^{ac}$, $F^{dc}$ and the barrier height $A_p$
+The relative values of $F^{ac}$, $F^{dc}$ and $A_p$
 control the rate and length of the particle hops
 forward and backward in the landscape.
-When $F^{ac}/F^{dc} > 1$
-and $F^{dc} - F^{ac} > A_p$ the particle
+When $F^{dc} - F^{ac} < -A_p$ the particle
 moves in the negative y-direction 
 during part of the cycle.
+We explore this in Ex.~\ref{ex:backwards}.
 To explore the possible hopping patterns,
 we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$,
 as shown in Fig.~\ref{fig:1}(b).
@@ -763,10 +768,6 @@ of $F^{dc}$.
 
 
 
-Phase locked steps occur for average displacements integer
-multiples of the substrate period $n\lambda$.
-
-
 
 
 The particle 
@@ -784,11 +785,14 @@ where $n$ is an integer.
 %of the landscape,
 %and $f = 0.01$ cycles per time unit.
 
+Phase locked steps occur for average displacements integer
+multiples of the substrate period $n\lambda$.
+
 Our simulations reproduce results presented in 
 Juniper {\it et al.} \cite{Juniper2015, Juniper2018}
 which demonstrated
 mode locking in
-experiments of 
+experiments and simulations of 
 driven colloids on a
 optical periodic landscape.
 
@@ -799,8 +803,8 @@ in supplementary materials \cite{supp1}.
 \begin{center}
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\columnwidth]{single}
-\caption{(Average particle velocity in the y-direction $\langle v_{y} \rangle$ as a function of a constant driving force $F^{dc}$.}
+\includegraphics[width=\columnwidth]{sweep_FDC_vs_vx.pdf}
+\caption{(Average particle velocity  $\langle v_{y} \rangle$ as a function of $F^{dc}$.  We fix the amplitude of $F^d(t)$ as $F^{ac}=0.05$ as in Fig.~\ref{fig:0}}.
 \label{fig:1}
 \end{figure}
 \end{center}
