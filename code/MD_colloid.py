@@ -196,7 +196,7 @@ def plot_velocity_force(avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC
     #freq = p['freq']
     #period = p['period']
     
-    fig = plt.figure(figsize=(6,4))
+    fig = plt.figure(figsize=(7,4))
     gs=gridspec.GridSpec(1,1)
     ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
 
@@ -332,7 +332,7 @@ def set_parameters():
     dict['F_DC_incr'] = 0.01      #amount to increase FDC at every drop step
     dict['F_DC_max'] = 0.1        #"constant" driving force for most of simulation
     dict['drop'] = 4000           #integer timesteps to "ramp" the DC force
-    dict['decifactor'] = 4000     #decimation factor integer timesteps to average force
+    dict['decifactor'] = 5000     #decimation factor integer timesteps to average force
 
     #control the oscillating component of driving force
     dict['F_AC'] = 0.05              #amplitude of force oscillation
@@ -369,11 +369,11 @@ if __name__ == "__main__":
         #parameters['drop'] = 2000            #integer timesteps to "ramp" the DC force
         #parameters['decifactor'] = 2000      #integer timesteps to "ramp" the DC force
 
-        #parameters['maxtime']=3000000        #total time steps in simulation
+        #parameters['maxtime']=100000           #total time steps in simulation can be short
         parameters['filename']="sweep_FDC_vs_vx.pdf"
         
         delta_Fdc = 0.001
-        Fdc_max=0.4
+        Fdc_max=0.3
         max_value = int(Fdc_max/delta_Fdc)
         avg_vy_data = np.zeros(max_value)
         Fdc_data = np.arange(0,Fdc_max,delta_Fdc)
