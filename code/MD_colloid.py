@@ -186,7 +186,7 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
 #    '''
 
 #####################################################################
-def plot_velocity_force(time_data,avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC_data,p):
+def plot_velocity_force(avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC_data,p):
     '''Make Fig. 3 in AJP
     '''
 
@@ -210,7 +210,7 @@ def plot_velocity_force(time_data,avg_FDC_data,avg_vy_data,parameters): #velocit
     #plot the data
     #ax1.plot(FDC_data,vy_data) #,label="F$^{dc}$")
     ax1.plot(avg_FDC_data,avg_vy_data,'.') #,label="F$^{dc}$")
-    #ax1.plot(time_data,F_drive,label="F$^d$(t)",lw=5)
+
     #ax1.legend(loc=4,fontsize=20,borderaxespad=0.0,frameon=0,handlelength=1.5) #,labelspacing=0.2
 
     #plt.xlim(155,157)
@@ -295,10 +295,12 @@ def single_particle(parameters,plot="y-position"):
 
     if plot == "y-position":
         plot_force_position_vs_time(time_data,FDC_data,y_data,parameters)
+        return
+    
     elif plot == "y-velocity":  
-        plot_velocity_force(time_data,avg_FDC_data,avg_vy_data,parameters)
+        return np.average(avg_vy_data)
       
-    return
+
 
 
     
@@ -330,7 +332,7 @@ def set_parameters():
     dict['F_DC_incr'] = 0.01      #amount to increase FDC at every drop step
     dict['F_DC_max'] = 0.1        #"constant" driving force for most of simulation
     dict['drop'] = 4000           #integer timesteps to "ramp" the DC force
-    #dict['decifactor'] = 4000     #decimation factor integer timesteps to average force
+    dict['decifactor'] = 4000     #decimation factor integer timesteps to average force
 
     #control the oscillating component of driving force
     dict['F_AC'] = 0.05              #amplitude of force oscillation
@@ -363,17 +365,37 @@ if __name__ == "__main__":
 
     if make_fig3: 
         #reset some parameters for subsequent figures
-        parameters['F_DC_incr'] = 0.001      #amount to increase FDC at every drop step
-        parameters['F_DC_max'] = 1.0         #"constant" driving force for most of simulation
-        parameters['drop'] = 2000            #integer timesteps to "ramp" the DC force
-        parameters['maxtime']=3000000        #total time steps in simulation
-        parameters['decifactor'] = 2000      #integer timesteps to "ramp" the DC force
+        #parameters['F_DC_incr'] = 0.01        #amount to increase FDC at every drop step
+        #parameters['drop'] = 2000            #integer timesteps to "ramp" the DC force
+        #parameters['decifactor'] = 2000      #integer timesteps to "ramp" the DC force
 
+        #parameters['maxtime']=3000000        #total time steps in simulation
         parameters['filename']="sweep_FDC_vs_vx.pdf"
-        #parameters['y0'] = 5.0*parameters['period']
+        
+        delta_Fdc = 0.001
+        Fdc_max=0.4
+        max_value = int(Fdc_max/delta_Fdc)
+        avg_vy_data = np.zeros(max_value)
+        Fdc_data = np.arange(0,Fdc_max,delta_Fdc)
 
-        #run a single MD simulation for a set of parameters
-        single_particle(parameters,plot="y-velocity")
+        #print(Fdc_data)
+        #sys.exit()
+
+        for i in range(len(Fdc_data)):
+
+            #reset - though I think unnecessary
+            parameters['F_DC'] = 0              #initial F_DC
+
+            #"constant" driving force for most of simulation
+            parameters['F_DC_max'] = Fdc_data[i]
+
+            #parameters['y0'] = 5.0*parameters['period']
+
+            #run a single MD simulation for a set of parameters
+            avg_vy_data[i] = single_particle(parameters,plot="y-velocity")
+            
+
+        plot_velocity_force(Fdc_data,avg_vy_data,parameters)
     
     sys.exit()
 
