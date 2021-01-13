@@ -132,7 +132,7 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     freq = p['freq']
     period = p['period']
     
-    fig = plt.figure(figsize=(8,8))
+    fig = plt.figure(figsize=(8,7.25))
     gs=gridspec.GridSpec(2,1)
     ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
     ax2 = fig.add_subplot(gs[1,0]) #,sharex=ax1)  #scatter plot of particles
@@ -145,9 +145,9 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     # time = m/(4*freq)
 
         #plot the data
-    ax1.plot(time_data,FDC_data,label="F$^{dc}$")
+    #ax1.plot(time_data,FDC_data,label="F$^{dc}$")
     ax1.plot(time_data,F_drive,label="F$^d$(t)",lw=5)
-    ax1.legend(loc=4,fontsize=20,borderaxespad=0.0,frameon=0,handlelength=1.5) #,labelspacing=0.2
+    #ax1.legend(loc=4,fontsize=20,borderaxespad=0.0,frameon=0,handlelength=1.5) #,labelspacing=0.2
     ax2.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
     #plt.xlim(155,157)
     ax2.set_xlabel("time")
@@ -160,6 +160,9 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     ax2.set_xlim(0,time_data[-1]+1)
     #ax2.set_ylim(0,y_data/period[-1]+0.1)
 
+    ax1.text(0.9,0.85,"(a)",transform = ax1.transAxes,backgroundcolor="white")
+    ax2.text(0.004,0.89,"(b)",transform = ax2.transAxes,backgroundcolor="white",zorder=-10)
+    
     #add horizontal lines for potential minima
     for i in [1,3,5]:
         #ax2.hline(i)
@@ -171,10 +174,9 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
         ax2.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
         ax1.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
 
-    ax1.text(0.02,0.9,"(a)",transform = ax1.transAxes,backgroundcolor="white")
-    ax2.text(0.02,0.9,"(b)",transform = ax2.transAxes,backgroundcolor="white")
         
-    plt.tight_layout(pad=0.2)
+    plt.tight_layout(pad=0.1,h_pad=-0.3)
+    #g.tight_layout(fig, rect=[0, 0, 1, 1], h_pad=p_val,w_pad=p_val,pad=0.0)
     plt.savefig(parameters['filename'])
     
     return 
@@ -327,20 +329,29 @@ def set_parameters():
     dict['Np'] = 20         #number of troughs in the substrate
     dict['period'] = dict['Sy']/dict['Np']  #spatial period of substrate in y-direction
 
+    #integer time steps
+    dict['maxtime']=400000        #total time steps in simulation
+    dict['writemovietime']=1000   #interval to write data to arrays for plotting
+    
     #control the "constant" component of driving force
-    dict['F_DC'] = 0              #initial F_DC
-    dict['F_DC_incr'] = 0.01      #amount to increase FDC at every drop step
     dict['F_DC_max'] = 0.1        #"constant" driving force for most of simulation
-    dict['drop'] = 4000           #integer timesteps to "ramp" the DC force
+    if 0:
+        dict['F_DC'] = 0              #initial F_DC
+        dict['F_DC_incr'] = 0.01      #amount to increase FDC at every drop step
+        dict['F_DC_max'] = 0.1        #"constant" driving force for most of simulation
+        dict['drop'] = 4000           #integer timesteps to "ramp" the DC force
+    else:
+        dict['F_DC'] = dict['F_DC_max']  #initial F_DC
+        dict['F_DC_incr'] = 0.0          #amount to increase FDC at every drop step
+        dict['drop'] = dict['maxtime']   #integer timesteps to "ramp" the DC force
+        
     dict['decifactor'] = 5000     #decimation factor integer timesteps to average force
 
     #control the oscillating component of driving force
     dict['F_AC'] = 0.05              #amplitude of force oscillation
     dict['freq'] = 0.01              #frequence of force osillation
     
-    #integer time steps
-    dict['maxtime']=400000        #total time steps in simulation
-    dict['writemovietime']=1000   #interval to write data to arrays for plotting
+
     return dict
 
 
@@ -373,18 +384,18 @@ if __name__ == "__main__":
         parameters['filename']="sweep_FDC_vs_vx.pdf"
         
         delta_Fdc = 0.001
-        Fdc_max=0.3
-        max_value = int(Fdc_max/delta_Fdc)
+        Fdc_max=0.3+delta_Fdc
+        max_value = int(np.ceil(Fdc_max/delta_Fdc))
         avg_vy_data = np.zeros(max_value)
         Fdc_data = np.arange(0,Fdc_max,delta_Fdc)
 
         #print(Fdc_data)
         #sys.exit()
 
-        for i in range(len(Fdc_data)):
+        for i in range(len(avg_vy_data)):
 
             #reset - though I think unnecessary
-            parameters['F_DC'] = 0              #initial F_DC
+            parameters['F_DC'] = Fdc_data[i] #0              #initial F_DC
 
             #"constant" driving force for most of simulation
             parameters['F_DC_max'] = Fdc_data[i]

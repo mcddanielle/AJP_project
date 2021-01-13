@@ -464,18 +464,14 @@ and frequency $\omega = 2 \pi f$.
 %in the positive $y-$direction.
 %but it may 
 %be zero or negative depending the the parameters and time.
-When $F^{dc}$ is non-zero,  
-%In several simulations
-we slowly increase 
-$F^{dc}$ from zero
-to avoid transient behavior
-by ensuring the particle is subject to a smoothly varying force.
-We illustrate the increase
-of $F^{dc}$ in Fig.~\ref{fig:0}(a).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%RAMP!!!
+%%%When $F^{dc}$ is non-zero,  we slowly increase $F^{dc}$ from zero to avoid transient behavior by ensuring the particle is subject to a smoothly varying force. We illustrate the increase of $F^{dc}$ in Fig.~\ref{fig:0}(a).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %because
 The inertia of 
-small particles is greatly reduced by interactions
+small particles is reduced by interactions
 with fluid particles \cite{Purcell1977}.
 Our model 
 colloids are overdamped
@@ -627,22 +623,14 @@ In Fig.~\ref{fig:0}(a)
 we plot $F^d(t)$ %defined in Eq.~\ref{eq:drive}.
 as a function of time with
 %The time independent
-constants 
+constants $F^{dc}=0.1$, 
 $F^{ac}=0.05$ and $f=0.01$ cycles per time unit.
 The temporal period of the driving force is
 $T = 1/f = 100$ time units.
-To avoid transient oscillations at early times, 
-the dc driving force is initially zero   
-and 
-slowly increased %$F^{dc}$.
-at a rate of $\Delta F^{dc} = 0.01$ every $\Delta t = 4$ time units  
-to the constant value $F^{dc}=0.1$.
-In Fig.~\ref{fig:0}(a) we plot $F^{dc}$
-in blue to show the increase in 
-$F^{dc}$ for the first $40$ time units
-In orange we show 
-the combined ac and dc drive $F^d(t)$ 
-when the magnitude of the ac applied force is initially zero.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%RAMP
+%To avoid transient oscillations at early times, the dc driving force is initially zero and slowly increased %$F^{dc}$. at a rate of $\Delta F^{dc} = 0.01$ every $\Delta t = 4$ time units  to the constant value $F^{dc}=0.1$. In Fig.~\ref{fig:0}(a) we plot $F^{dc}$ in blue to show the increase in  $F^{dc}$ for the first $40$ time units In orange we show  the combined ac and dc drive $F^d(t)$ when the magnitude of the ac applied force is initially zero.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %since $\sin{(0)}=0$.
 We mark the maxima of $F^{ac}(t)$
 with the
@@ -704,10 +692,9 @@ does not depend on a particular set of conditions.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\columnwidth]{single_particle.pdf}
-\caption{(a) The applied driving force $F^d(t)$ (orange) in Eq.~\ref{eq:drive}
-  where the parameter $F^{dc}$ (blue) is slowly increased from zero
-  to a constant value
-  as described in the text.  (b) 
+\caption{(a) The applied driving force $F^d(t)$. % (Eq.~\ref{eq:drive}).
+  %where the parameter $F^{dc}$ (blue) is slowly increased from zero %to a constant value %as described in the text.
+  (b) 
   The $y-$position of the driven particle
   as a function of time %of a single driven particle
   normalized by the period of the substrate $\lambda$.
