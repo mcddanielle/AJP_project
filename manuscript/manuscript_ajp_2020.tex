@@ -710,13 +710,9 @@ the particle oscillates back and forth
 in a single minima
 with no net velocity.  
 %In Fig.~\ref{fig:0}
-
 %reaching a minimum position
 %of $y/\lambda = 1$
 %over the total period $T = 100$.
-%The average velocity $\bar{v}_y$
-%is the average displacement $\Delta y = y(t_0+T) - y(t_0)$
-%over the period of the driving force.
 %In Fig. ~\ref{fig:0}
 %the average displacement during one time period is a single wavelength
 %of the substrate $y(t_0+T) - y(t_0) = \lambda$.
@@ -727,7 +723,7 @@ with no net velocity.
 %fp_y 0.1
 
 The relative values of $F^{ac}$, $F^{dc}$ and $A_p$
-control the rate and length of the particle hops
+control the rate and length of the particle motions 
 forward and backward in the landscape.
 When $F^{dc} - F^{ac} < -A_p$ the particle
 moves in the negative y-direction 
@@ -737,24 +733,28 @@ To explore the possible hopping patterns,
 we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$,
 as shown in Fig.~\ref{fig:1}(b).
 We keep $F^{dc}$ constant
-for $\Delta t = 10^4$ timesteps
+for $\Delta t = 10^5$ simulation timesteps
 and 
 sample the average velocity $\langle v_y \rangle $ 
 as a function of $F^{dc}$.
-
-We perform this sweep for several values
-of $F^{ac}$ including the limiting case that the applied force
-is a constant value.
-When $F^{ac} = 0$, no steps appear
-in the $\langle v_y \rangle $ vs $F^{dc}$ curve.  
-
-Synchronization
-of the driving force with the landscape,
-despite the overall magnitude
-of $F^{dc}$.
-
-
-
+We plot the results in Fig.~\ref{fig:1}
+for $F^{ac} = 0.05$, $f=0.01$, and the landscape force $\vec{F}^{l}$
+shown in Fig.~\ref{fig:0}.
+The steps in $\langle v_y \rangle$ occur because 
+the average velocity of the particle
+is constant across a range of $F^{dc}$.
+This synchronization
+of the particle velocity can be measured
+in terms of the landscape period.
+%despite the overall magnitude
+%of $F^{dc}$.
+Each step represents a different pattern of hops
+between substrate minima
+performed by the particle.
+The average velocity $\langle{v}_y\rangle$
+is the average displacement $\Delta y = y(t_0+T) - y(t_0)$
+over the period of the driving force.
+At low $F^{dc}$, the particle starts and ends in the same minima.
 
 
 The particle 
@@ -763,7 +763,7 @@ A mode is a periodic pattern of hops
 with a constant average particle velocity, $\bar{v}_{y}$
 over a range of driving forces $F^{dc}$.
 We illustrate mode-locking in 
-the velocity-force plot in Fig.~\ref{fig:1}(b).
+the velocity-force plot in Fig.~\ref{fig:1}.
 Here $\langle v_{y} \rangle$ is increasing in non-uniform steps,
 with a quantized height of
 $\langle v_{y} \rangle = n \lambda f$,
@@ -782,16 +782,23 @@ mode locking in
 experiments and simulations of 
 driven colloids on a
 optical periodic landscape.
-
+ 
 We 
 show the dynamics 
 in supplementary materials \cite{supp1}.
+
+We perform this sweep for several values
+of $F^{ac}$ including the limiting case that the applied force
+is a constant value.
+When $F^{ac} = 0$, no steps appear
+in the $\langle v_y \rangle $ vs $F^{dc}$ curve. 
 
 \begin{center}
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\columnwidth]{sweep_FDC_vs_vx.pdf}
-\caption{(Average particle velocity  $\langle v_{y} \rangle$ as a function of $F^{dc}$.  We fix the amplitude of $F^d(t)$ as $F^{ac}=0.05$ as in Fig.~\ref{fig:0}}.
+\caption{Average particle velocity  $\langle v_{y} \rangle$ as a function of $F^{dc}$.
+  We fix the remaining parameters in $F^d(t)$ as $F^{ac}=0.05$ and $f = 0.01$ as in Fig.~\ref{fig:0}}.
 \label{fig:1}
 \end{figure}
 \end{center}
@@ -832,6 +839,214 @@ A sinusoidal or ac drive creates mode-locking,
 where the average particle velocity
 is fixed for a range of dc drive forces \cite{Reichhardt2015}.
 
+
+\section{Associated problems}
+\label{sec:problems}	% You can label sections for reference
+
+\begin{enumerate}
+\item Stokes' law describes the viscous drag on a sphere
+  moving at velocity $\vec{v}$ as 
+  $\vec{F}^{lin} = 3 \pi \eta D \vec{v}$ \cite{}
+  where $\eta$ is the dynamic fluid viscosity and 
+  $D$ is the particle diameter.
+  (In simulation we
+  subsume the constants $3 \pi D$
+  such that $\eta \rightarrow 3 \pi D \eta$.)
+  Often drag forces are
+  modeled as a polynomial series
+  $\vec{F}^{drag} = \vec{F}^{lin} + \vec{F}^{quad} + ... $.
+  Truncating the series to the first term
+  is justified by calculating the Reynolds number  
+  $R = D v \rho / \eta$
+  where $\rho$ is the fluid density and $v$ the particle's speed.
+  When $R$ is small, the quadratic and higher order drag terms
+  may be ignored in favor of the linear drag term.
+
+  Demonstrate the Reynolds number is low
+  for this system.
+  
+  Reasonable experimental values for
+  a colloid are $D = 1 \mu m$ and $v \sim 1 \mu m /s$.
+  Viscosity of water decreases with temperature
+  from $1.3 \times 10^{-3} Pa-s$ at $10^{\circ}C$ to 
+  from $0.31 \times 10^{-3} Pa-s$ at $90^{\circ}C$,
+  making $\eta \sim 10^{-3} Pa-s$,
+  where 1 pascal $ = 1 Pa = 1 N/m^2$.
+  Likewise the density $\rho$ varies with temperature
+  and $\rho \sim 10^3 kg/cm^3$ is a reasonable approximation.
+  
+  [citation for these values better than wikipedia] \cite{} %CONFIRM!
+  %density $\rho = 0.9982 g/cm^3$
+  %https://ascelibrary.org/doi/pdf/10.1061/9780784408230.ap02
+
+This model should be familiar to readers
+of a standard classical mechanics text, such as Ref.~\cite{Taylor2005}
+when studying 
+models Millikan's oil drops.
+
+[could certainly do more with this question to make it more computational.  For instance, plot $R$ as a function of any of the parameters $v$, $D$ and $\rho$, include a temperature dependent $\eta(T)$ in the Brownian system.  Suggest students model something big and include inertia and quadratic drag, but then we're fairly off topic...]
+
+\label{ex:reynolds}
+
+\item Newton's second law states that
+  the acceleration of a particle $i$
+  is proportional to 
+  the sum of forces on a particle 
+  \begin{equation}
+  m_i \vec{a}_i = \sum \vec{F}_i
+  \label{eq:n2l}
+  \end{equation}
+  where the constant of proportionality is the
+  inertial mass $m_i$
+  The addition of a dissipative force in a dynamical model
+  on a colloid is typically modeled
+  with a drag force proportional to the particle's velocity
+  in the opposite direction of motion 
+  $\vec{F}^{drag} = - \eta \vec{v}_i$
+  where $\eta$ is the drag coefficient.
+  Demonstrate
+  the ratio of $m/\eta$ has units of time, 
+  %This ratio of the acceleration coefficient $m$
+  %to the drag coefficient $\eta$
+  %is
+  known as the momentum relaxation time.
+  The momentum relaxation time is 
+  known to be small for
+  particles with low Reynolds numbers,
+  indivating 
+  a regime in which the acceleration term can be ignored
+  entirely.
+  Demonstrate that a particle confined to a landscape exerting force
+  $F^l(\vec{r}_i)$ subject to a time dependent drive $F^d(t)$
+  can be modeled with the equation of motion described in 
+  Eq.~\ref{eq:motion}. 
+  \label{ex:n2l}
+
+\item
+  Generally when solving differential equations,
+  the Euler method is effective for solving linear equations,
+  such as the one-dimensional 
+  $f(y) = df/dy$ 
+  but not higher order methods.
+
+  The Verlet method simplifies to
+
+  %FOLLOW UP WITH THIS!
+  Because we are performing molecular dynamics
+  for a single particle on a smooth potential energy landscape,
+  we use a large simulation time step of 
+  $\Delta t = 0.01$.
+  In Sec.~\ref{sec:sync},
+  we decrease the time step
+  to treat multiple particle interactions.
+
+  \label{ex:euler}
+
+\item Drawing the contour
+
+  The code for generating
+a two dimensional colored plot
+of the potential landscape
+is calculated by evaluating
+the analytic function in Eq.~\ref{eq:landscape}
+for a grid of values $(x_n,y_n)$.
+%is included in the supplementary material,
+  
+
+\item {\bf Brownian motion}
+  is a temperature and viscosity dependent
+  phenomena. \cite{}
+  Consider the consequences of a non-zero temperature on the simulation, in which particles will collide with invisible particles making up the suspending fluid.  These collisions are more likely at higher temperature due to the increased kinetic energy of the fluid particles, as described by the Maxwell-Boltzmann distribution \cite{}.  In molecular dynamics simulations temperature effects can be modeled by including randomized forces $f^T$ to emulate the motion of particles undergoing Brownian motion.  A distribution of randomizes forces contributes equally in all directions such that the force averaged over a finite time interval is zero $\langle f^T(t) \rangle = 0$.  Random distributions of contain no correlations over the independent variable (time in this case) $\langle f^T(t) f^T(\tau)\rangle = 2 \eta k_B T \delta(t-\tau)$ where the energy $k_B T$ derived from the Boltzmann constant $k_B$ and temperature $T$ has energy units $E_0$.  \cite{Allen2017}
+
+  With no applied driving force, measure the minimum temperature required for a single particle to hop between minima in the potential landscape.
+
+  Measure the rate of diffusion.
+
+\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
+
+  \item The Fokker-Planck Equation
+
+  \item Aubrey-Kontorova + commensurability
+
+  \item nanotribology
+
+    kink motion
+    Vanossi et al J.Phys.: Condens. Matter 19 (2007)
+
+    
+\end{enumerate}
+
+\section{Conclusion}
+\label{sec:conclusion}	% You can label sections for reference
+Due to the relative ease of
+manipulation and imagining, 
+colloids are used as experimental models
+for systems relatively hard to access and visualize. 
+%SAME SENTENCE TWICE
+Collections of colloids can
+be used to study the properties of solids and liquids
+%comprised of smaller particles
+%such as atoms \cite{} or electrons \cite{}
+or more exotic systems 
+such as cold atoms or electron gases \cite{Grier2003}.
+
+%Oscillators ordered into chains or lattices.
+%has many important
+%technological applications
+Dynamical mode-locking
+is %often
+observed
+in quantum electronic
+devices such as Josephson junctions \cite{Josephson1962,Josephson1965}.
+A single junction contains 
+two superconductoring layers which sandwich an insulating layer.
+When subject to an external voltage,
+Cooper pairs in the superconducting materials
+tunnel through the insulating layer.
+Phase-locking is observed as 
+%phase-locked current loops \cite{} 
+stepped regions in current-voltage (I-V) relationship in these devices,
+where voltage is the analog of external driving force
+and current is that of particle velocity.
+%where a constant current results from a range of voltages
+%due to the quantized nature of the tunneling probability [NOT QUITE RIGHT...].
+%instead of ohmic relationships.
+Known as Shapiro steps, % \cite{},
+these phase locked currents  
+have been observed due to applied ac voltages in 
+single Josephson junctions \cite{Shapiro1963, Golubov2004} and
+coupled arrays of junctions \cite{Benz1990}.
+%either in 
+%velocity-force curves and voltage-current curves \cite{Golubov2004}.
+Shapiro steps vary in width depending on the strength of the
+applied ac forces,
+and are observed in a variety of systems
+displaying
+%are hallmarks of
+non-Ohmic behavior in voltage-current curves,
+including
+ac and dc driven
+charge and spin density waves.
+
+%where these steps are generated
+%by the tendency of the response of a system
+%to be flat across a range of applied driving forces or voltages,
+%which can be probed with
+%  atoms on surfaces.
+%  voltage driven superconducting vortices
+%  confined in a Josephson junction,
+
+%
+%
+%mini review of synchronization in electronics
+%careful - the following is all simulations
+%Recent studies demonstrate
+%that coupled electronic oscillators can be
+%programmed for use as micro-controllers for robotic locomotion \cite{Dutta2019}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Supplementary Materials}
 
 
 \section{Synchronized particle chains}
@@ -1006,221 +1221,6 @@ $F^{dc}/F^{ac} = 1$ [CHECK!]
 
 %\section{Chaotic dynamics}
 %\label{sec:chaos}	% You can label sections for reference
-
-\section{Associated problems}
-\label{sec:problems}	% You can label sections for reference
-
-\begin{enumerate}
-\item Stokes' law describes the viscous drag on a sphere
-  moving at velocity $\vec{v}$ as 
-  $\vec{F}^{lin} = 3 \pi \eta D \vec{v}$ \cite{}
-  where $\eta$ is the dynamic fluid viscosity and 
-  $D$ is the particle diameter.
-  (In simulation we
-  subsume the constants $3 \pi D$
-  such that $\eta \rightarrow 3 \pi D \eta$.)
-  Often drag forces are
-  modeled as a polynomial series
-  $\vec{F}^{drag} = \vec{F}^{lin} + \vec{F}^{quad} + ... $.
-  Truncating the series to the first term
-  is justified by calculating the Reynolds number  
-  $R = D v \rho / \eta$
-  where $\rho$ is the fluid density and $v$ the particle's speed.
-  When $R$ is small, the quadratic and higher order drag terms
-  may be ignored in favor of the linear drag term.
-
-  Demonstrate the Reynolds number is low
-  for this system.
-  
-  Reasonable experimental values for
-  a colloid are $D = 1 \mu m$ and $v \sim 1 \mu m /s$.
-  Viscosity of water decreases with temperature
-  from $1.3 \times 10^{-3} Pa-s$ at $10^{\circ}C$ to 
-  from $0.31 \times 10^{-3} Pa-s$ at $90^{\circ}C$,
-  making $\eta \sim 10^{-3} Pa-s$,
-  where 1 pascal $ = 1 Pa = 1 N/m^2$.
-  Likewise the density $\rho$ varies with temperature
-  and $\rho \sim 10^3 kg/cm^3$ is a reasonable approximation.
-  
-  [citation for these values better than wikipedia] \cite{} %CONFIRM!
-  %density $\rho = 0.9982 g/cm^3$
-  %https://ascelibrary.org/doi/pdf/10.1061/9780784408230.ap02
-
-This model should be familiar to readers
-of a standard classical mechanics text, such as Ref.~\cite{Taylor2005}
-when studying 
-models Millikan's oil drops.
-
-[could certainly do more with this question to make it more computational.  For instance, plot $R$ as a function of any of the parameters $v$, $D$ and $\rho$, include a temperature dependent $\eta(T)$ in the Brownian system.  Suggest students model something big and include inertia and quadratic drag, but then we're fairly off topic...]
-
-\label{ex:reynolds}
-
-\item Newton's second law states that
-  the acceleration of a particle $i$
-  is proportional to 
-  the sum of forces on a particle 
-  \begin{equation}
-  m_i \vec{a}_i = \sum \vec{F}_i
-  \label{eq:n2l}
-  \end{equation}
-  where the constant of proportionality is the
-  inertial mass $m_i$
-  The addition of a dissipative force in a dynamical model
-  on a colloid is typically modeled
-  with a drag force proportional to the particle's velocity
-  in the opposite direction of motion 
-  $\vec{F}^{drag} = - \eta \vec{v}_i$
-  where $\eta$ is the drag coefficient.
-  Demonstrate
-  the ratio of $m/\eta$ has units of time, 
-  %This ratio of the acceleration coefficient $m$
-  %to the drag coefficient $\eta$
-  %is
-  known as the momentum relaxation time.
-  The momentum relaxation time is 
-  known to be small for
-  particles with low Reynolds numbers,
-  indivating 
-  a regime in which the acceleration term can be ignored
-  entirely.
-  Demonstrate that a particle confined to a landscape exerting force
-  $F^l(\vec{r}_i)$ subject to a time dependent drive $F^d(t)$
-  can be modeled with the equation of motion described in 
-  Eq.~\ref{eq:motion}. 
-  \label{ex:n2l}
-
-\item
-  Generally when solving differential equations,
-  the Euler method is effective for solving linear equations,
-  such as the one-dimensional 
-  $f(y) = df/dy$ 
-  but not higher order methods.
-
-  The Verlet method simplifies to
-
-  %FOLLOW UP WITH THIS!
-  Because we are performing molecular dynamics
-  for a single particle on a smooth potential energy landscape,
-  we use a large simulation time step of 
-  $\Delta t = 0.01$.
-  In Sec.~\ref{sec:sync},
-  we decrease the time step
-  to treat multiple particle interactions.
-
-  \label{ex:euler}
-
-\item Drawing the contour
-
-  The code for generating
-a two dimensional colored plot
-of the potential landscape
-is calculated by evaluating
-the analytic function in Eq.~\ref{eq:landscape}
-for a grid of values $(x_n,y_n)$.
-%is included in the supplementary material,
-  
-\item Kuramoto model = overdamped interacting rotors/oscillators are used to model coupled oscillator systems - no substrate or external drive so far as I can see - this seems baked into the oscillator properties/interactions
-%D. Métivier, L. Wetzel, and S. Gupta
-%Onset of synchronization in networks of second-order Kuramoto oscillators with delayed coupling: Exact results and application to phase-locked loops
-%PHYSICAL REVIEW RESEARCH 2, 023183 (2020)
-
-\item {\bf Brownian motion}
-  is a temperature and viscosity dependent
-  phenomena. \cite{}
-  Consider the consequences of a non-zero temperature on the simulation, in which particles will collide with invisible particles making up the suspending fluid.  These collisions are more likely at higher temperature due to the increased kinetic energy of the fluid particles, as described by the Maxwell-Boltzmann distribution \cite{}.  In molecular dynamics simulations temperature effects can be modeled by including randomized forces $f^T$ to emulate the motion of particles undergoing Brownian motion.  A distribution of randomizes forces contributes equally in all directions such that the force averaged over a finite time interval is zero $\langle f^T(t) \rangle = 0$.  Random distributions of contain no correlations over the independent variable (time in this case) $\langle f^T(t) f^T(\tau)\rangle = 2 \eta k_B T \delta(t-\tau)$ where the energy $k_B T$ derived from the Boltzmann constant $k_B$ and temperature $T$ has energy units $E_0$.  \cite{Allen2017}
-
-  With no applied driving force, measure the minimum temperature required for a single particle to hop between minima in the potential landscape.
-
-  Measure the rate of diffusion.
-
-\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
-
-  \item The Fokker-Planck Equation
-
-  \item Aubrey-Kontorova + commensurability
-
-  \item nanotribology
-
-    kink motion
-    Vanossi et al J.Phys.: Condens. Matter 19 (2007)
-
-
-    
-\end{enumerate}
-
-\section{Conclusion}
-\label{sec:conclusion}	% You can label sections for reference
-Due to the relative ease of
-manipulation and imagining, 
-colloids are used as experimental models
-for systems relatively hard to access and visualize. 
-%SAME SENTENCE TWICE
-Collections of colloids can
-be used to study the properties of solids and liquids
-%comprised of smaller particles
-%such as atoms \cite{} or electrons \cite{}
-or more exotic systems 
-such as cold atoms or electron gases \cite{Grier2003}.
-
-%Oscillators ordered into chains or lattices.
-%has many important
-%technological applications
-Dynamical mode-locking
-is %often
-observed
-in quantum electronic
-devices such as Josephson junctions \cite{Josephson1962,Josephson1965}.
-A single junction contains 
-two superconductoring layers which sandwich an insulating layer.
-When subject to an external voltage,
-Cooper pairs in the superconducting materials
-tunnel through the insulating layer.
-Phase-locking is observed as 
-%phase-locked current loops \cite{} 
-stepped regions in current-voltage (I-V) relationship in these devices,
-where voltage is the analog of external driving force
-and current is that of particle velocity.
-%where a constant current results from a range of voltages
-%due to the quantized nature of the tunneling probability [NOT QUITE RIGHT...].
-%instead of ohmic relationships.
-Known as Shapiro steps, % \cite{},
-these phase locked currents  
-have been observed due to applied ac voltages in 
-single Josephson junctions \cite{Shapiro1963, Golubov2004} and
-coupled arrays of junctions \cite{Benz1990}.
-%either in 
-%velocity-force curves and voltage-current curves \cite{Golubov2004}.
-Shapiro steps vary in width depending on the strength of the
-applied ac forces,
-and are observed in a variety of systems
-displaying
-%are hallmarks of
-non-Ohmic behavior in voltage-current curves,
-including
-ac and dc driven
-charge and spin density waves.
-
-%where these steps are generated
-%by the tendency of the response of a system
-%to be flat across a range of applied driving forces or voltages,
-%which can be probed with
-%  atoms on surfaces.
-%  voltage driven superconducting vortices
-%  confined in a Josephson junction,
-
-%
-%
-%mini review of synchronization in electronics
-%careful - the following is all simulations
-%Recent studies demonstrate
-%that coupled electronic oscillators can be
-%programmed for use as micro-controllers for robotic locomotion \cite{Dutta2019}.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Supplementary Materials}
-
-
 
 \begin{acknowledgments}
 
@@ -1562,3 +1562,8 @@ def add_contour(ax,L,N,corrugated = True):
     #ax1.set_yticks([])
     return
 \end{verbatim}
+
+\item Kuramoto model = overdamped interacting rotors/oscillators are used to model coupled oscillator systems - no substrate or external drive so far as I can see - this seems baked into the oscillator properties/interactions
+%D. Métivier, L. Wetzel, and S. Gupta
+%Onset of synchronization in networks of second-order Kuramoto oscillators with delayed coupling: Exact results and application to phase-locked loops
+%PHYSICAL REVIEW RESEARCH 2, 023183 (2020)
