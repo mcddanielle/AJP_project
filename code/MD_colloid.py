@@ -227,10 +227,10 @@ def plot_velocity_force(avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC
 
     #plt.xlim(155,157)
     ax1.set_xlabel("F$^{dc}$")
-    ax1.set_ylabel(r"v$_y$")
+    ax1.set_ylabel(r"$\langle$v$_y \rangle$")
 
-    #ax1.set_xlim(0,time_data[-1]+1)
-    #ax2.set_ylim(0,y_data/period[-1]+0.1)
+    ax1.set_xlim(0,avg_FDC_data[-1])
+    ax1.set_ylim(avg_vy_data[0]-0.001,avg_vy_data[-1])
         
     plt.tight_layout(pad=0.2)
     plt.savefig(parameters['filename'])
@@ -335,7 +335,7 @@ def set_parameters():
     dict['time0'] = 0       #initial time in integer timesteps
 
     #start the particle in a local minima (not a local max!)
-    dict['y0'] = 1. #period  #Sy/2
+    dict['y0'] = 0. #period  #Sy/2
 
     #landscape potential
     dict['F0'] = 0.1
@@ -393,7 +393,7 @@ if __name__ == "__main__":
         #parameters['drop'] = 2000            #integer timesteps to "ramp" the DC force
         #parameters['decifactor'] = 2000      #integer timesteps to "ramp" the DC force
 
-        parameters['maxtime']=100000           #total time steps in simulation can be short
+        parameters['maxtime']=100000          #shorter and I don't get steps
         parameters['filename']="sweep_FDC_vs_vx.pdf"
         
         delta_Fdc = 0.001
