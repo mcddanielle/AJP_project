@@ -72,10 +72,13 @@ def ramp_dc_force(F_DC, time, parameters):
     return F_DC
 
 #####################################################################
-def average_velocity(time, vy, avg_vy, parameters):
-    '''calculate the average velocity over a range of time values for N particles.  
-    Use all vy values, not just those saved during "writemovietime.  So far just "
-    written for the single particle case, where the code is not so interesting.  Subroutine 
+def average_velocity(int_time, vy, avg_vy, parameters):
+    '''calculate the average velocity over 
+    a range of time values for N particles.  
+    Use all vy values, not just those 
+    saved during "writemovietime.  So far just "
+    written for the single particle case, 
+    where the code is not so interesting.  Subroutine 
     generally sums all vxi and vyi values across n particles and averages
     '''
 
@@ -83,20 +86,22 @@ def average_velocity(time, vy, avg_vy, parameters):
 
     avg_vy += vy
             
-    if time == decifactor:
-
+    if int_time % parameters['decifactor'] == 0: 
         avg_vy /= decifactor
-
+        #print(int_time, avg_vy)
+        
     return avg_vy
 
 
 #####################################################################
-def md_step(y, time, F_DC, avg_vy, parameters):
+def md_step(y, int_time, F_DC, avg_vy, parameters):
     '''
     '''
 
     dt = parameters['dt']
     SY = parameters['Sy']
+
+    time = int_time * dt
     
     #integrate the equation of motion \eta v = F^net (eta=1)
 
@@ -107,8 +112,13 @@ def md_step(y, time, F_DC, avg_vy, parameters):
     vy += external_drive(F_DC, time, parameters)
 
     #calculate the average velocity over all vy values
-    avg_vy = average_velocity(time, vy, avg_vy, parameters)
-    
+    avg_vy = average_velocity(int_time, vy, avg_vy, parameters)
+
+    '''
+    decifactor = parameters['decifactor']
+    if int_time == decifactor:
+        print(int_time, avg_vy)
+    '''
     #calculate the new position
     y += vy*dt
 
@@ -271,8 +281,8 @@ def single_particle(parameters,plot="y-position"):
 
         #apply the force calculations for the current position/time
         #note vy is not necessary 
-        y, vy, avg_vy = md_step(y, time, F_DC, avg_vy, parameters)
-
+        y, vy, avg_vy = md_step(y, int_time, F_DC, avg_vy, parameters)
+        
         if int_time % writemovietime == 0:
             #print(int_time)
             #update the data
@@ -287,6 +297,9 @@ def single_particle(parameters,plot="y-position"):
 
             #print(int_time,len(avg_vy_data))
             avg_vy_data[j] = avg_vy
+
+            #print(int_time,avg_vy_data[j])
+
             avg_FDC_data[j] = F_DC
 
             #reset the running average
@@ -300,7 +313,7 @@ def single_particle(parameters,plot="y-position"):
         return
     
     elif plot == "y-velocity":  
-        return np.average(avg_vy_data)
+        return np.average(avg_vy_data) #/decifactor
       
 
 
@@ -380,7 +393,7 @@ if __name__ == "__main__":
         #parameters['drop'] = 2000            #integer timesteps to "ramp" the DC force
         #parameters['decifactor'] = 2000      #integer timesteps to "ramp" the DC force
 
-        #parameters['maxtime']=100000           #total time steps in simulation can be short
+        parameters['maxtime']=100000           #total time steps in simulation can be short
         parameters['filename']="sweep_FDC_vs_vx.pdf"
         
         delta_Fdc = 0.001
