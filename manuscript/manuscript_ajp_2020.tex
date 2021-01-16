@@ -661,10 +661,10 @@ In Fig.~\ref{fig:0}(b)
 we show the $y-$position of the particle
 as a function of time.
 We 
-normalize $y$ by $\lambda$, the spatial period of the potential
+normalize $y$ by $\lambda$ %, the spatial period of the potential
 to show how the particle moves between substrate minima.  
-The initial particle position is $y = 1 a_0$,
-where the $F^l$ is negative.
+The initial particle position is $y = 0 $. %1 a_0$,
+%where the $F^l$ is negative.
 %JUST BECAUSE
 %causing the particle to move to
 %a landscape minima at the start of the simulation.
@@ -672,6 +672,10 @@ As the driving force increases,
 %the effects of the landscape become less obvious,
 the motion of the particle
 synchronizes with the driving period $T$.
+We measure 
+average particle velocity $\langle{v}_y\rangle$
+as the average displacement %$\Delta y = y(t_0+T) - y(t_0)$
+over the period of the driving force.
 The particle moves
 in the positive y-direction
 through $\Delta y = 2 \lambda$ over the time period $T$,
@@ -709,8 +713,9 @@ when $F_{D}(t) \approx 0 $.
   %where the parameter $F^{dc}$ (blue) is slowly increased from zero %to a constant value %as described in the text.
   (b) 
   The $y-$position of the driven particle
-  as a function of time %of a single driven particle
+  %of a single driven particle
   normalized by the period of the substrate $\lambda$.
+  %as a function of time
   }
 \label{fig:0}
 \end{figure}
@@ -735,53 +740,55 @@ The relative values of $F^{ac}$, $F^{dc}$ and $A_p$
 control the rate and distance a  particle moves 
 forward and backward in the landscape.
 To explore the possible hopping patterns,
-we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$,
-as shown in Fig.~\ref{fig:1}(b).
-We keep $F^{dc}$ constant
+we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$
+to illustrate
+a variety of oscillation modes as a function of $F^{dc}$.
+A mode is a periodic pattern of hops
+with a constant average particle velocity, $\langle {v}_{y} \rangle$
+over a range of driving forces $F^{dc}$.
+%as shown
+In Fig.~\ref{fig:1} 
+we keep $F^{dc}$ constant
 for $10^5$ simulation timesteps
 and 
 measure the average velocity $\langle v_y \rangle $ 
-as a function of $F^{dc}$.
-The average velocity $\langle{v}_y\rangle$
-is the average displacement %$\Delta y = y(t_0+T) - y(t_0)$
-over the period of the driving force.
-We plot the results in Fig.~\ref{fig:1}
-for $F^{ac} = 0.05$, $f=0.01$, and the landscape %force $\vec{F}^{l}$
+as a function of $F^{dc}$,
+with $F^{ac} = 0.05$, $f=0.01$, and the landscape %force $\vec{F}^{l}$
 shown in Fig.~\ref{fig:0}.
-Discrete steps in $\langle v_y \rangle$ occur because 
-the average velocity of the particle
-is constant across a range of $F^{dc}$.
-This synchronization
-of the particle velocity can be measured
-in terms of the landscape period.
+%We plot the results in Fig.~\ref{fig:1} for 
+The modes appear as 
+discrete steps in $\langle v_y \rangle$ %occur because
+across a range of $F^{dc}$,
+
+%the average velocity of the particle
+%is constant 
 %despite the overall magnitude
 %of $F^{dc}$.
 Each step represents a different pattern of hops
 between substrate minima
-performed by the particle.
-
-If $A_p$ is large compared to the extrema of $F^{d}(t)$,
+performed by the particle
+due to the landscape confinement.  
+In Fig.~\ref{fig:1} at %this occurs at 
+low $F^{dc}$ the average velocity $\langle v_y \rangle$ is zero.
+Since 
+$A_p$ is large compared to the extrema of $F^{d}(t)$,
 the particle oscillates back and forth
-in a single minima
-with no net velocity.
-In Fig.~\ref{fig:1}, this occurs at 
-low $F^{dc}$ when $\langle v_y \rangle$ is zero.
-
-The particle 
-achieves a variety of oscillation modes as a function of $F^{dc}$.
-A mode is a periodic pattern of hops
-with a constant average particle velocity, $\langle {v}_{y} \rangle$
-over a range of driving forces $F^{dc}$.
-We illustrate mode-locking in 
-the velocity-force plot in Fig.~\ref{fig:1}.
-Here $\langle v_{y} \rangle$ is increasing in non-uniform steps,
-with a quantized height of
+in a single minima with no net velocity.
+At higher $F^{dc}$ the particle velocity 
+$\langle v_{y} \rangle$ is increasing in steps of uniform height,
 $\langle v_{y} \rangle = n \lambda f$,
-where $n$ is an integer.  
+where $n$ is an integer.
+The step width is non-linear 
+and can have a variety of
+interesting patterns - including
+a Devil's staircase pattern \cite{Bak1986}.
 %$\lambda = L/N_p = 36.5/20 = 1.825$ is the spatial period, or wavelength
 %of the landscape,
 %and $f = 0.01$ cycles per time unit.
 
+This synchronization
+of the particle velocity can be measured
+in terms of the landscape period.
 Phase locked steps occur for average displacements integer
 multiples of the substrate period $n\lambda$.
 
