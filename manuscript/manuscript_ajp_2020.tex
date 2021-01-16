@@ -487,10 +487,11 @@ and frequency $\omega = 2 \pi f$.
 The inertia of 
 small particles is reduced by interactions
 with fluid particles \cite{Purcell1977}.
-Our model 
+In this model 
 colloids are overdamped
 -- i.e. suspended in a continuous viscous fluid
-that dissipates energy at a rate such 
+that dissipates energy %at a rate
+such 
 that the particles do not accelerate.
 %that greatly impedes their motions.
 Energy dissipation from the fluid is modeled
@@ -504,7 +505,8 @@ with a friction coefficient $\eta$
 proportional to the fluid viscosity.
 We discuss friction models for
 spheres moving through fluids in 
-Section~\ref{sec:problems} Exercise~\ref{ex:reynolds}. %for more information
+%Section~\ref{sec:problems}
+Exercise~\ref{ex:reynolds}. %for more information
 %We model the particle dynamics  with an overdamped equation of motion. Models with inertia set to zero are appropriate for moving through a high viscosity fluid
 Newton's second law for an individual particle
 %$m \vec{a}_i = \sum \vec{F}$
@@ -515,22 +517,23 @@ by the assumption $\vec{a}_i$ is zero. % in the overdamped model.
 The overdamped equation of motion for an isolated particle is
 %solved for velocity 
 \begin{equation}
-  \eta \vec{v}_i = \vec{F}^l_{i} + \vec{F}^{d}(t).
+  \eta \vec{v}_i = \vec{F}^l_{i}(\vec{r}_i) + \vec{F}^{d}(t).
     \label{eq:motion}
 \end{equation}
 with  $\eta = 1$.  
 %which we describe in more detail in Table~\ref{tab:1}
 %and Exercise~\ref{ex:reynolds}.
-In %Section~\ref{sec:problems}
-Exercise~\ref{ex:n2l}
-we invite the reader to confirm this result.
-
+%In %Section~\ref{sec:problems}
+%Exercise~\ref{ex:n2l}
+%we invite the reader to confirm this result.
 The equation of motion provides a direct calculation of the velocity
 of an individual particle from its location $\vec{r}_i$ %in the simulation
 and the simulation time.
+
 The molecular dynamics simulation is controlled by a $for()$ loop
- which runs from an initial to maximum integer number of time steps $t_i$.
-Each integer time step interval $t_{i+1}-t_i$
+which runs from an initial to maximum integer number of time steps.
+%$t_i$.
+Each integer time step interval %$t_{i+1}-t_i$
 represents a simulation time interval of $\Delta t$ 
 simulation units.  %as described in Table 1
 At each time step
@@ -538,9 +541,8 @@ we evaluate the net force on each particle as a function of its position
 $\vec{r}_i(t)$
 and then integrate
 the equation of motion to move particles
-to an updated position
-$\vec{r}_i(t+\Delta t)$.
-%
+to an updated position.
+%$\vec{r}_i(t+\Delta t)$.%
 Since the acceleration as zero,
 the integration of the equation of motion
 is performed via 
@@ -549,20 +551,19 @@ the Euler method
   \vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t)
     \label{eq:euler}
 \end{equation}
-for a small time step $\Delta t$.
-In Section~\ref{sec:problems} Exercise~\ref{ex:euler}
-we elaborate on
+for a small time step $\Delta t = 0.001 \tau$.
+In %Section~\ref{sec:problems}
+Exercise~\ref{ex:euler}
+we describe 
 the numerical methods for 
-solving differential equations,
-and demonstrate how the Verlet method
-simplifies to the Euler method when $\vec{a}=0$.
+solving differential equations.
 %
 The units of the simulated variables are summarized in Table ~\ref{tab:1}.
 
 \begin{table}[h!]
 \centering
 \caption{Simulation units and approximate values
-  in experiment.}
+  in experiment. (coming soon!)}
 \begin{ruledtabular}
 \begin{tabular}{c c c } %p{5cm}}
 Quantity & Simulation Unit & Experimental range\\
@@ -639,9 +640,9 @@ we plot $F^d(t)$ %defined in Eq.~\ref{eq:drive}.
 as a function of time with
 %The time independent
 constants $F^{dc}=0.1$, 
-$F^{ac}=0.05$ and $f=0.01$ cycles per time unit.
+$F^{ac}=0.05$ and $f=0.01$ cycles per time unit $\tau$.
 The temporal period of the driving force is
-$T = 1/f = 100$ time units.
+$T = 1/f = 100 \tau$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %RAMP
 %To avoid transient oscillations at early times, the dc driving force is initially zero and slowly increased %$F^{dc}$. at a rate of $\Delta F^{dc} = 0.01$ every $\Delta t = 4$ time units  to the constant value $F^{dc}=0.1$. In Fig.~\ref{fig:0}(a) we plot $F^{dc}$ in blue to show the increase in  $F^{dc}$ for the first $40$ time units In orange we show  the combined ac and dc drive $F^d(t)$ when the magnitude of the ac applied force is initially zero.
@@ -662,46 +663,43 @@ as a function of time.
 We 
 normalize $y$ by $\lambda$, the spatial period of the potential
 to show how the particle moves between substrate minima.  
-The initial particle position is $y = 1$,
-where the $F^l$ is negative, 
-causing the particle to move to
-a landscape minima at the start of the simulation.
+The initial particle position is $y = 1 a_0$,
+where the $F^l$ is negative.
+%JUST BECAUSE
+%causing the particle to move to
+%a landscape minima at the start of the simulation.
 As the driving force increases,
 %the effects of the landscape become less obvious,
 the motion of the particle
-becomes locked to the driving period $T$.
+synchronizes with the driving period $T$.
 The particle moves
 in the positive y-direction
-through $\Delta y = 2 \lambda$ in one time period $\Delta t = T$,
+through $\Delta y = 2 \lambda$ over the time period $T$,
 with 
 the average velocity 
-$\bar{v}_y = 2 \lambda f$. % where $T = 1/f$.
+$\langle {v}_y \rangle= 2 \lambda f$. % where $T = 1/f$.
 The horizontal dashed lines
 coincide with the condition the substrate force is
 minimum $F^l = -A_p$,  
 i.e. $\sin{(\pi y / \lambda)} = 1$.
 %or $\pi y / \lambda = m \pi/2$, where $m = 1, 5, 7$, {\it etc.}
-Once the particle motion
-coincides with the applied drive, 
+%Once the particle motion
+%coincides with the applied drive,
+%indicating synchronization,
+The %shows %indicates the
+driving force is maximum when the landscape 
+force on the particle is minimum,
+as indicated with the coincidence of 
 the particle position $y$
-crosses the intersection of
+with the intersection of
 the horizontal and vertical lines.
-This indicates 
-the driving force is maximum positive when the
-force on the particle from the landscape is maximum negative,
-indicating synchronization.
 The slope of $y/\lambda$
 is proportional to the net force on the particle.
 This can be seen in 
 Fig.~\ref{fig:0} %we demonstrate this relationship,
 where local extrema appear in $y/\lambda$
 when $F_{D}(t) \approx 0 $. 
-We invite interested students to repeat this
-simulation for any initial particle position %of $y$
-and a range of simulation constants
-to demonstrate that synchronization in this model
-does not depend on a particular set of conditions.
-%but is a direct consequence of the simplicity of the model.
+
 
 \begin{center}
 \begin{figure}[h!]
@@ -740,14 +738,17 @@ To explore the possible hopping patterns,
 we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$,
 as shown in Fig.~\ref{fig:1}(b).
 We keep $F^{dc}$ constant
-for $\Delta t = 10^5$ simulation timesteps
+for $10^5$ simulation timesteps
 and 
 measure the average velocity $\langle v_y \rangle $ 
 as a function of $F^{dc}$.
+The average velocity $\langle{v}_y\rangle$
+is the average displacement %$\Delta y = y(t_0+T) - y(t_0)$
+over the period of the driving force.
 We plot the results in Fig.~\ref{fig:1}
-for $F^{ac} = 0.05$, $f=0.01$, and the landscape force $\vec{F}^{l}$
+for $F^{ac} = 0.05$, $f=0.01$, and the landscape %force $\vec{F}^{l}$
 shown in Fig.~\ref{fig:0}.
-The steps in $\langle v_y \rangle$ occur because 
+Discrete steps in $\langle v_y \rangle$ occur because 
 the average velocity of the particle
 is constant across a range of $F^{dc}$.
 This synchronization
@@ -758,21 +759,18 @@ in terms of the landscape period.
 Each step represents a different pattern of hops
 between substrate minima
 performed by the particle.
-The average velocity $\langle{v}_y\rangle$
-is the average displacement $\Delta y = y(t_0+T) - y(t_0)$
-over the period of the driving force.
 
 If $A_p$ is large compared to the extrema of $F^{d}(t)$,
 the particle oscillates back and forth
 in a single minima
 with no net velocity.
-In Fig.~\ref{fig:1}, this occurs at low
+In Fig.~\ref{fig:1}, this occurs at 
 low $F^{dc}$ when $\langle v_y \rangle$ is zero.
 
 The particle 
 achieves a variety of oscillation modes as a function of $F^{dc}$.
 A mode is a periodic pattern of hops
-with a constant average particle velocity, $\bar{v}_{y}$
+with a constant average particle velocity, $\langle {v}_{y} \rangle$
 over a range of driving forces $F^{dc}$.
 We illustrate mode-locking in 
 the velocity-force plot in Fig.~\ref{fig:1}.
@@ -898,7 +896,9 @@ models Millikan's oil drops.
 
 \label{ex:reynolds}
 
-\item Newton's second law states that
+\item{Equation of Motion and Integration Methods}
+
+  Newton's second law states that
   the acceleration of a particle $i$
   is proportional to 
   the sum of forces on a particle 
@@ -930,9 +930,9 @@ models Millikan's oil drops.
   $F^l(\vec{r}_i)$ subject to a time dependent drive $F^d(t)$
   can be modeled with the equation of motion described in 
   Eq.~\ref{eq:motion}. 
-  \label{ex:n2l}
+  %\label{ex:n2l}
 
-\item
+%\item
   Generally when solving differential equations,
   the Euler method is effective for solving linear equations,
   such as the one-dimensional 
@@ -941,6 +941,9 @@ models Millikan's oil drops.
 
   The Verlet method simplifies to
 
+  and demonstrate how the Verlet method
+  simplifies to the Euler method when $\vec{a}=0$.
+  
   %FOLLOW UP WITH THIS!
   Because we are performing molecular dynamics
   for a single particle on a smooth potential energy landscape,
@@ -951,6 +954,13 @@ models Millikan's oil drops.
   to treat multiple particle interactions.
 
   \label{ex:euler}
+
+  We invite interested students to repeat this
+simulation for any initial particle position %of $y$
+and a range of simulation constants
+to demonstrate that synchronization in this model
+does not depend on a particular set of conditions.
+%but is a direct consequence of the simplicity of the model.
 
 \item Drawing the contour
 
@@ -1223,7 +1233,7 @@ When a single particle is driven, the neighboring particles act similarly to a p
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\columnwidth]{twenty}
-\caption{\textbf{(a)} A single particle (colored orange - mark in some manner for non-color views) is driven with a constant amplitude $F^{ac}$ and frequency $\omega$ through 19 neighboring particles (colored green - mark differently) confined by a quasi one-dimensional channel. The landscape is colored as in Fig.~\ref{fig1}(a). \textbf{(b)} Average $\bar{v}_{y}$ versus $F^{dc}$, where $\bar{v}_{y}$ is the average particle velocity of the driven particle in the y-direction.}
+\caption{\textbf{(a)} A single particle (colored orange - mark in some manner for non-color views) is driven with a constant amplitude $F^{ac}$ and frequency $\omega$ through 19 neighboring particles (colored green - mark differently) confined by a quasi one-dimensional channel. The landscape is colored as in Fig.~\ref{fig1}(a). \textbf{(b)} Average $\langle {v}_{y} \rangle $ versus $F^{dc}$, where $\langle {v}_{y} \rangle$ is the average particle velocity of the driven particle in the y-direction.}
 \label{fig:2}
 \end{figure}
 \end{center}
