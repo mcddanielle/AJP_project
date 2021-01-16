@@ -160,7 +160,7 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     #ax1.legend(loc=4,fontsize=20,borderaxespad=0.0,frameon=0,handlelength=1.5) #,labelspacing=0.2
     ax2.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
     #plt.xlim(155,157)
-    ax2.set_xlabel("time")
+    ax2.set_xlabel("time (\tau)")
     ax2.set_ylabel(r"y/$\lambda$")
     ax1.set_ylabel(r"F(t)")
 
@@ -168,13 +168,13 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
 
     ax1.set_xlim(0,time_data[-1]+1)
     ax2.set_xlim(0,time_data[-1]+1)
-    #ax2.set_ylim(0,y_data/period[-1]+0.1)
+    ax2.set_ylim(-0.1,y_data[-1]/period+0.2)
 
     ax1.text(0.9,0.85,"(a)",transform = ax1.transAxes,backgroundcolor="white")
-    ax2.text(0.004,0.89,"(b)",transform = ax2.transAxes,backgroundcolor="white",zorder=-10)
+    ax2.text(0.9,0.84,"(b)",transform = ax2.transAxes,backgroundcolor="white",zorder=-10)
     
     #add horizontal lines for potential minima
-    for i in [1,3,5]:
+    for i in [1,3,5,7]:
         #ax2.hline(i)
         #, label = "U(y) = -U$_0$")
         ax2.axhline(y=i, color = "black", linestyle = "--")
@@ -374,8 +374,8 @@ if __name__ == "__main__":
 
     parameters = set_parameters()
 
-    make_fig2 = False
-    make_fig3 = True
+    make_fig2 = True #False
+    make_fig3 = False #True
 
     #--------------------------------------------------------------
     #make Fig. 2 - run a single particle at a single driving force
