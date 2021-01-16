@@ -119,22 +119,22 @@ if __name__ == "__main__":
     scatter2=ax2.scatter(zp,yp,edgecolor='k',s=200)
 
     ax2.annotate("", xytext=(zp, yp), xy=(zf, yf), arrowprops=dict(shrink=0.05,color='magenta')) #arrowstyle="<-",
-    ax2.annotate(r"$\mathrm{\vec{F}^{\ell}}$", xy=(0+0.02, Sy/2), ha='center', va='center',color='magenta') 
+    ax2.annotate(r"$|\mathrm{\vec{F}^{\ell}}|$", xy=(0+0.02, Sy/2), ha='center', va='center',color='black') 
 
     #add annotation showing period
     ax2.annotate(r'$\lambda$', xy=(-0.9*Z_mag,2*Sy/3), ha='center', va='center')
     ax2.annotate('', xy=(-1.01*Z_mag,2*Sy/3-Sy/6),
                  xytext=(-1.01*Z_mag,2*Sy/3+Sy/6),
                  xycoords='data', textcoords='data',
-                 arrowprops={'arrowstyle': '<|-|>','color':"red"})
+                 arrowprops={'arrowstyle': '<|-|>','color':"black"})
 
     ax1.annotate(r'$\lambda$', xy=(2,2*Sy/3), ha='center', va='center')
     ax1.annotate('', xy=(0.5,2*Sy/3-Sy/6),
                  xytext=(0.5,2*Sy/3+Sy/6),
                  xycoords='data', textcoords='data',
-                 arrowprops={'arrowstyle': '<|-|>','color':"red"})
+                 arrowprops={'arrowstyle': '<|-|>','color':"black"})
     
-    ax1.annotate("", xy=(xp, yp-6), xytext=(xp, yp), arrowprops=dict(color='magenta', shrink=0.05),ha="center")
+    ax1.annotate("", xy=(xp, yp-4), xytext=(xp, yp), arrowprops=dict(color='magenta', shrink=0.05),ha="center")
     ax1.annotate(r"$\mathrm{\vec{F}^{\ell}}$", xy=(xp+1, yp-6),ha="left",va="center")
     
     ax1.annotate("", xy=(xp, yp+8), xytext=(xp, yp), arrowprops=dict(color='gray', shrink=0.05), ha="center")
