@@ -563,12 +563,13 @@ The units of the simulated variables are summarized in Table ~\ref{tab:1}.
 \begin{table}[h!]
 \centering
 \caption{Simulation units and approximate values
-  in experiment. (coming soon!)}
+  in experiment ~\cite{Juniper2015}.
+{\it might be more appropriate to match Juniper parameters more precisely given our focus...}}
 \begin{ruledtabular}
 \begin{tabular}{c c c } %p{5cm}}
 Quantity & Simulation Unit & Experimental range\\
 \hline
-length &  $a_0 = 1$ & $ < a_0 <$\\
+length &  $a_0 = 1$ & $ a_0 \sim 1.5 \mu m$\\
 energy & $E_0 = 1$ & $ < E_0 <$ \\
 %electric potential & $V(r_{ij}) = E_0/r_{ij}$ \\
 %energy & $E_0 = q^2{Z^*}^2/4\pi \epsilon \epsilon_0 a_0$ \\
@@ -578,7 +579,26 @@ energy & $E_0 = 1$ & $ < E_0 <$ \\
 force & $F_0 = E_0 / a_0$ & $<F_0<$\\
 velocity &  $ a_0 / \tau $ &  $ < v < $\\
 viscosity coefficient & $\eta = F_0 \tau / a_0 $ & $ <\eta<$\\
+%juniper uses water–ethanol mixture
 time &  $ \tau = \eta a_0 / F_0 $ & $ < \tau <$\\
+
+%FROM JUNIPER2015
+%l¼3.5 mm and a laser power per trap of WE0.75mW (trap stiffness: k=3.8\times10^7 kg /s^2; trap depth: V0 = 75 k_B T
+%ref51
+%Juniper, M. P. N., Besseling, R., Aarts, D. G. A. L. & Dullens, R. P. A. Acousto- optically generated potential energy landscapes: potential mapping using colloids under flow. Opt. Express 27, 28707–28716 (2012).
+%U(x) measured in ratio of k_BT from -75 to -25
+%0 < vAC < 8 micrometer/s and frequency f=0.25 to 0.75 Hz.
+%0 < vDC < 5 micrometer/s
+%convert to force units?
+%check when steps exist - in Juniper - steps don't exist for n=1or n=3, even though steps exist for n¼0,2,4,5 and 6.
+%flexible chains
+%dipole interaction $\Gamma \propto B^2$
+%\Gamma =15 (B=0.43mT) and a stiff chain at \Gamma=392 (B=2.2mT).
+%Kink
+%16 particles in a strong potential energy landscape of 15 minima (trap spacing: l¼5.5 mm; laser power per trap: WE1.75 mW; trap stiffness: k¼8.7?10?7 kg s?2; trap depth: V0¼200 kBT),
+
+%Volpe AJP Parameters
+%We will consider a silica microparticle in water with radius R=1micro m, mass m=11picograms, viscosity eta=0.001 Ns/m^2; $\gamma=6\pi \eta R$,  T=300K, and \tau=0.6\micro s.
 
 \end{tabular}
 \end{ruledtabular}
@@ -1002,14 +1022,16 @@ Also the animation library in python...
 
 \section{Conclusion}
 \label{sec:conclusion}	% You can label sections for reference
-Fundamental models
-of synchronization 
-can include many coupled oscillators
-or focus on 
-a single particle driven across a periodic potential landscape.
-Single particle studies 
-are useful to understand synchronization
-in the absence of collective effects.
+%Fundamental models
+%of synchronization 
+%can %include many coupled oscillators
+%or
+%focus on 
+A single particle driven across a periodic potential landscape 
+%Single particle studies are useful
+to understand synchronization
+in the absence of collective effects
+due to interactions between particles.
 %A single particle particle oscillator
 %within a potential well is 
 %much like a skateboarder in a half-pipe or
@@ -1027,7 +1049,6 @@ a phenomena referred to as pinning \cite{Reichhardt2017}.
 A sinusoidal or ac drive creates mode-locking,
 where the average particle velocity
 is fixed for a range of dc drive forces \cite{Reichhardt2015}.
-
 Our simulations reproduce results presented in 
 Juniper {\it et al.} \cite{Juniper2015, Juniper2018}
 which demonstrated
@@ -1040,13 +1061,13 @@ manipulation and imagining,
 colloids are used as experimental models
 for systems relatively hard to access and visualize. 
 %SAME SENTENCE TWICE
+
 Collections of colloids can
 be used to study the properties of solids and liquids
 %comprised of smaller particles
 %such as atoms \cite{} or electrons \cite{}
 or more exotic systems 
 such as cold atoms or electron gases \cite{Grier2003}.
-
 %Oscillators ordered into chains or lattices.
 %has many important
 %technological applications
@@ -1083,7 +1104,15 @@ displaying
 non-Ohmic behavior in voltage-current curves,
 including
 ac and dc driven
-charge and spin density waves.
+charge and spin density waves
+and superconducting vortices in landscapes 
+engineered with periodic patterns of pinning sites.
+Our results can be relevant 
+to synchronization effects
+in a broad range of experiments systems
+including optically confined colloids,
+superconductors with periodic pinning arrays, 
+and the charge and spin of atomic systems.
 
 %where these steps are generated
 %by the tendency of the response of a system
@@ -1092,185 +1121,11 @@ charge and spin density waves.
 %  atoms on surfaces.
 %  voltage driven superconducting vortices
 %  confined in a Josephson junction,
-
-%
-%
 %mini review of synchronization in electronics
 %careful - the following is all simulations
 %Recent studies demonstrate
 %that coupled electronic oscillators can be
 %programmed for use as micro-controllers for robotic locomotion \cite{Dutta2019}.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Supplementary Materials}
-
-
-\section{Synchronized particle chains}
-\label{sec:sync}
-The interaction forces between colloids can be controlled 
-by altering the chemistry of the suspending fluid
-or surface ligands of the particles.
-Thus colloids can 
-be modified to mimic different
-systems such as hard spheres interacting via contact forces \cite{},
-dipole interactions \cite{},
-and long range electrostatic interactions \cite{}.
-
-Mode-locked 
-colloid dynamics have been achieved in 
-experiments \cite{Juniper2015, Lutz2004} and
-simulations \cite{Herrera-Velarde2007, Herrera-Velarde2008} 
-for a variety of interaction types such as 
-magnetic dipoles and electric forces.
-%-----------------------------------------------------------
-%particle interaction types
-%Particles which interact over long distances
-%include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more%e detail and references]
-%Particles which interact over short distances include
-%bubble arrays/emulsions [more systems and references].----------------------
-%The presence of a modulating surface
-%can modify these patterns in a variety of ways,
-%changing the onset of dynamical flows,
-%and the overall flow patterns.
-%  adjustable strength, geometry and length scale of substrate potential
-%Baumgartl, Brunner, Bechinger, PRL 93, 168301 (2004).
-%Baumgartl, Zvyagolskaya, Bechinger, PRL 99, 205503 (2007).
-
-%-----------------------------------------------
-%environments
-Particles in confined geometries behave differently than free particles.
-Stabilized charged particles form patterns
-due to the interplay of the confining landscape 
-and particle interactions.
-Narrow channels studies are useful to provide insights 
-of how particles move through systems 
-such as charge carries in quantum wires \cite{Tarucha1995} and
-slime molds in microchannels \cite{Gholami2015}.
-%Biological systems such as
-%neuron axons and capillaries can also be studied
-%with these models [more detail and references].
-%Many such systems execute local oscillations
-%about stable points [elaborate].
-%------------------------------------
- In multi-particle simulations, we confine
- the particles to a narrow region
- along the $x-$direction 
- using a periodic function 
- \begin{equation}
-   U_{q1D}(x) = U_{q0} \cos{(\pi x / L)}
-     \label{eq:xsubstrate}
- \end{equation}
- where $U_{q0}$ defines the channel depth.
- %%We could also use a Gaussian function.
- This 
- quasi-one-dimensional geometry
- confines the particles
- primarily to move 
- along the y-direction
- but allows for some lateral motion of particles.
- Otherwise the repulsive interaction between
- particles would cause them to spread throughout the system.
- %
- The total landscape potential energy function is the sum
- \begin{equation}
-   U_{landscape}(x,y) =  U_{q1D}(x) + U_{washboard}(y)
-   \label{eq:xylandscape}
- \end{equation}
-
-We explore collective effects in a 
-twenty particle system confined to a narrow channel, as shown in Fig. 2a).  We create the confining channel with a sinusoidal function
-with a single period.
-\begin{equation}
-  \label{eq:channel}
-  U_l(x) = U_{0x} \cos{(\pi x/L)}.
-\end{equation}
-%where the trough heights is larger  $V_{0x}$,
-%and the associated force
-%\begin{equation}
-%\vec{F}=-\nabla V(x) = -\frac{dV}{dx} \hat{x} = - \frac{V_{0x} \pi}{L} \sin{(\pi x/L)} \hat{x}
-%\end{equation}
-%restores particles to the center of a long narrow region of the simulation.
-The landscape potential energy is illustrated in Fig.~\ref{fig:2}(a)
-where red regions are high potential
-and blue regions are low potential.
-
- We model particle interaction forces
-$\vec{F}_{ij} = -\nabla U_{ij}(r_{ij})$ 
-with
-the Yukawa potential $V_{ij} = U_{ij} / q$ 
-\begin{equation}
-  V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
-  \label{eq:yukawa}
-\end{equation}
-where particle $i$ and $j$ are distance
-$r_{ij} = |\vec{r}_i - \vec{r}_j|$ apart.
-This 
-screened Coulomb potential
-%$E_0=2$ scales strength of repulsion
-is scaled in terms of energy unit $E_0$
-defined in Table ~\ref{tab:1}.
-[elaborate for students $F_{Coulomb} = = k q_1 q_2 / r^2$, check scaling/units].
-$\kappa = 1/R_0$ is the screening parameter 
-that describes the length scale at
-which particles interact.
-We fix the screening length scale $R_0$ to be $a_0$
-(i.e. unity in simulation units).
-In experiments charge screening is observed
-due to ions in the suspending fluid and
-the charges of surrounding particles
-which
-reduces the interaction range of individual particles. % \cite{}.
-Because the particles interact over short ranges, 
-the numerical models can be run efficiency
-using a neighbor list algorithm
-determined using a cell method.
-[explain and reference!]
-
-Newton's second law can be rearranged %for the velocity
-to
-the equation of motion a single particle subject to collective effects is 
-\begin{equation}
-  \eta \vec{v}_i = \vec{F}^l_{i} + \sum_{i \neq j}^{N} \vec{F}_{ij} + \vec{F}_{D}(t).
-    \label{eq:motion}
-\end{equation}
-
-The initial configuration of the system is shown in 
-Fig.~\ref{fig:2}(a).  
-We annealed the system into a ground-state configuration
-by raising the system to a high temperature $T$,
-and slowly lowering the temperature in steps of $dT=-0.01$
-until the particles form a buckled chain in the low region of the channel
-due to the
-competition between particle repulsion and channel confinement.
-The interparticle forces between neighboring particles
-cause the system to form a buckled chain. % when the system is annealed.
-The molecular dynamics of simulated annealing
-is described in Ref.~\ref{Allen2017}.
-Once the ground state particle configuration is obtained,
-no further annealing is necessary,
-so the
-our simulations begin with particle configurations
-that result from the annealing process,
-as listed in Appendix [ref] and available in supplementary material.
-
-When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen ac drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
-
-\begin{center}
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\columnwidth]{twenty}
-\caption{\textbf{(a)} A single particle (colored orange - mark in some manner for non-color views) is driven with a constant amplitude $F^{ac}$ and frequency $\omega$ through 19 neighboring particles (colored green - mark differently) confined by a quasi one-dimensional channel. The landscape is colored as in Fig.~\ref{fig1}(a). \textbf{(b)} Average $\langle {v}_{y} \rangle $ versus $F^{dc}$, where $\langle {v}_{y} \rangle$ is the average particle velocity of the driven particle in the y-direction.}
-\label{fig:2}
-\end{figure}
-\end{center}
-
-\section{Kinked system}
-\label{sec:kink}	% You can label sections for reference
-We confine $N$ particles to $N-1$ troughs to create a
-local high density region.
-$F^{dc}/F^{ac} = 1$ [CHECK!]
-
 
 
 %\section{Quasi-periodic substrate}
@@ -1288,7 +1143,7 @@ $F^{dc}/F^{ac} = 1$ [CHECK!]
   the project and provided the original molecular dynamics code
   written in the C programming language.
   We acknowledge funding from the M.J. Murdock Charitable Trust
-  and the Pacific Research Institute for Science and Mathematics (PRISM).
+  and the Pacific Research Institute for Science and Mathematics. % (PRISM).
 
 \end{acknowledgments}
 
@@ -1634,3 +1489,173 @@ def add_contour(ax,L,N,corrugated = True):
 %D. Métivier, L. Wetzel, and S. Gupta
 %Onset of synchronization in networks of second-order Kuramoto oscillators with delayed coupling: Exact results and application to phase-locked loops
 %PHYSICAL REVIEW RESEARCH 2, 023183 (2020)
+
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Supplementary Materials}
+
+
+\section{Synchronized particle chains}
+\label{sec:sync}
+The interaction forces between colloids can be controlled 
+by altering the chemistry of the suspending fluid
+or surface ligands of the particles.
+Thus colloids can 
+be modified to mimic different
+systems such as hard spheres interacting via contact forces \cite{},
+dipole interactions \cite{},
+and long range electrostatic interactions \cite{}.
+
+Mode-locked 
+colloid dynamics have been achieved in 
+experiments \cite{Juniper2015, Lutz2004} and
+simulations \cite{Herrera-Velarde2007, Herrera-Velarde2008} 
+for a variety of interaction types such as 
+magnetic dipoles and electric forces.
+%-----------------------------------------------------------
+%particle interaction types
+%Particles which interact over long distances
+%include colloids, magnetic beads, superconducting vortices, dusty plasmas, electron gases. [more%e detail and references]
+%Particles which interact over short distances include
+%bubble arrays/emulsions [more systems and references].----------------------
+%The presence of a modulating surface
+%can modify these patterns in a variety of ways,
+%changing the onset of dynamical flows,
+%and the overall flow patterns.
+%  adjustable strength, geometry and length scale of substrate potential
+%Baumgartl, Brunner, Bechinger, PRL 93, 168301 (2004).
+%Baumgartl, Zvyagolskaya, Bechinger, PRL 99, 205503 (2007).
+
+%-----------------------------------------------
+%environments
+Particles in confined geometries behave differently than free particles.
+Stabilized charged particles form patterns
+due to the interplay of the confining landscape 
+and particle interactions.
+Narrow channels studies are useful to provide insights 
+of how particles move through systems 
+such as charge carries in quantum wires \cite{Tarucha1995} and
+slime molds in microchannels \cite{Gholami2015}.
+%Biological systems such as
+%neuron axons and capillaries can also be studied
+%with these models [more detail and references].
+%Many such systems execute local oscillations
+%about stable points [elaborate].
+%------------------------------------
+ In multi-particle simulations, we confine
+ the particles to a narrow region
+ along the $x-$direction 
+ using a periodic function 
+ \begin{equation}
+   U_{q1D}(x) = U_{q0} \cos{(\pi x / L)}
+     \label{eq:xsubstrate}
+ \end{equation}
+ where $U_{q0}$ defines the channel depth.
+ %%We could also use a Gaussian function.
+ This 
+ quasi-one-dimensional geometry
+ confines the particles
+ primarily to move 
+ along the y-direction
+ but allows for some lateral motion of particles.
+ Otherwise the repulsive interaction between
+ particles would cause them to spread throughout the system.
+ %
+ The total landscape potential energy function is the sum
+ \begin{equation}
+   U_{landscape}(x,y) =  U_{q1D}(x) + U_{washboard}(y)
+   \label{eq:xylandscape}
+ \end{equation}
+
+We explore collective effects in a 
+twenty particle system confined to a narrow channel, as shown in Fig. 2a).  We create the confining channel with a sinusoidal function
+with a single period.
+\begin{equation}
+  \label{eq:channel}
+  U_l(x) = U_{0x} \cos{(\pi x/L)}.
+\end{equation}
+%where the trough heights is larger  $V_{0x}$,
+%and the associated force
+%\begin{equation}
+%\vec{F}=-\nabla V(x) = -\frac{dV}{dx} \hat{x} = - \frac{V_{0x} \pi}{L} \sin{(\pi x/L)} \hat{x}
+%\end{equation}
+%restores particles to the center of a long narrow region of the simulation.
+The landscape potential energy is illustrated in Fig.~\ref{fig:2}(a)
+where red regions are high potential
+and blue regions are low potential.
+
+ We model particle interaction forces
+$\vec{F}_{ij} = -\nabla U_{ij}(r_{ij})$ 
+with
+the Yukawa potential $V_{ij} = U_{ij} / q$ 
+\begin{equation}
+  V_{ij}(r_{ij}) = \frac{E_0}{r_{ij}} e^{-\kappa r_{ij}},
+  \label{eq:yukawa}
+\end{equation}
+where particle $i$ and $j$ are distance
+$r_{ij} = |\vec{r}_i - \vec{r}_j|$ apart.
+This 
+screened Coulomb potential
+%$E_0=2$ scales strength of repulsion
+is scaled in terms of energy unit $E_0$
+defined in Table ~\ref{tab:1}.
+[elaborate for students $F_{Coulomb} = = k q_1 q_2 / r^2$, check scaling/units].
+$\kappa = 1/R_0$ is the screening parameter 
+that describes the length scale at
+which particles interact.
+We fix the screening length scale $R_0$ to be $a_0$
+(i.e. unity in simulation units).
+In experiments charge screening is observed
+due to ions in the suspending fluid and
+the charges of surrounding particles
+which
+reduces the interaction range of individual particles. % \cite{}.
+Because the particles interact over short ranges, 
+the numerical models can be run efficiency
+using a neighbor list algorithm
+determined using a cell method.
+[explain and reference!]
+
+Newton's second law can be rearranged %for the velocity
+to
+the equation of motion a single particle subject to collective effects is 
+\begin{equation}
+  \eta \vec{v}_i = \vec{F}^l_{i} + \sum_{i \neq j}^{N} \vec{F}_{ij} + \vec{F}_{D}(t).
+    \label{eq:motion}
+\end{equation}
+
+The initial configuration of the system is shown in 
+Fig.~\ref{fig:2}(a).  
+We annealed the system into a ground-state configuration
+by raising the system to a high temperature $T$,
+and slowly lowering the temperature in steps of $dT=-0.01$
+until the particles form a buckled chain in the low region of the channel
+due to the
+competition between particle repulsion and channel confinement.
+The interparticle forces between neighboring particles
+cause the system to form a buckled chain. % when the system is annealed.
+The molecular dynamics of simulated annealing
+is described in Ref.~\ref{Allen2017}.
+Once the ground state particle configuration is obtained,
+no further annealing is necessary,
+so the
+our simulations begin with particle configurations
+that result from the annealing process,
+as listed in Appendix [ref] and available in supplementary material.
+
+When a single particle is driven, the neighboring particles act similarly to a periodic landscape to impede its motion. A driven particle can exhibit mode locking with a well-chosen ac drive and frequency. In the attached movie, Figure2.mp4, we show the complex dynamics of mode locking, where the driven particle leap-frogs past the other particles. 
+
+\begin{center}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\columnwidth]{twenty}
+\caption{\textbf{(a)} A single particle (colored orange - mark in some manner for non-color views) is driven with a constant amplitude $F^{ac}$ and frequency $\omega$ through 19 neighboring particles (colored green - mark differently) confined by a quasi one-dimensional channel. The landscape is colored as in Fig.~\ref{fig1}(a). \textbf{(b)} Average $\langle {v}_{y} \rangle $ versus $F^{dc}$, where $\langle {v}_{y} \rangle$ is the average particle velocity of the driven particle in the y-direction.}
+\label{fig:2}
+\end{figure}
+\end{center}
+
+\section{Kinked system}
+\label{sec:kink}	% You can label sections for reference
+We confine $N$ particles to $N-1$ troughs to create a
+local high density region.
+$F^{dc}/F^{ac} = 1$ [CHECK!]
