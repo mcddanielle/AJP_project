@@ -404,7 +404,6 @@ with the periodic function
  with simulation units of energy $E_0 = 1$. 
  %We define the substrate strength to be
  %the maximum force the substrate can exert on a particle 
- %$A_p = 2\pi U_0/L$.
  %
  We plot this function in 
  Fig.~\ref{fig:landscape0}
@@ -562,9 +561,9 @@ The units of the simulated variables are summarized in Table ~\ref{tab:1}.
 
 \begin{table}[h!]
 \centering
-\caption{Simulation units and approximate values
-  in experiment ~\cite{Juniper2015}.
-{\it might be more appropriate to match Juniper parameters more precisely given our focus...}}
+\caption{Simulation units and comparable
+  experimental values~\cite{Juniper2015}.}
+%{\it might be more appropriate to match Juniper parameters more precisely given our focus...}}
 \begin{ruledtabular}
 \begin{tabular}{c c c } %p{5cm}}
 Quantity & Simulation Unit & Experimental range\\
@@ -577,10 +576,13 @@ energy & $E_0 = 1$ & $ < E_0 <$ \\
 %effective colloidal charge & $Z^*$ \\
 %solvent dielectric constant & $\epsilon \epsilon_0$\\
 force & $F_0 = E_0 / a_0$ & $<F_0<$\\
-velocity &  $ a_0 / \tau $ &  $ < v < $\\
+velocity &  $ a_0 / \tau $ &  $v \sim 5 \mu m/s $\\
 viscosity coefficient & $\eta = F_0 \tau / a_0 $ & $ <\eta<$\\
 %juniper uses water–ethanol mixture
 time &  $ \tau = \eta a_0 / F_0 $ & $ < \tau <$\\
+period & $\lambda = 1.825 a_0$ & $\lambda = 3.5 \mu m$ \\
+potential amplitude & $U_0 = 0.058 E_0$ & $U_0 = 75 k_B T \sim 2 J$ \\
+temperature & $T_0 = 0$ \footnote{a. see Ex.~\ref{ex:brownian} to include temperature.} & $T \sim 300K $ \\
 
 %FROM JUNIPER2015
 %l¼3.5 mm and a laser power per trap of WE0.75mW (trap stiffness: k=3.8\times10^7 kg /s^2; trap depth: V0 = 75 k_B T
@@ -639,14 +641,10 @@ is calculated with Eq.~\ref{eq:ysubstrate} as
   \label{eq:force}
   F^l_y(y) = -A_{p} \sin{(N_p \pi y / L)} 
 \end{equation}
-where the force is scaled with parameter $A_{p}$.
-When $F^d(t) > A_p$, a particle can 
-overcome the barrier height of the landscape,
-and 
-the particle hops between minima in the energy landscape.
+where the force is scaled with parameter $A_{p} = N_p \pi U_0/L$.
 In this section, we fix the landscape parameters
 to $A_{p} = 0.1$ force units
-with $N_p=20$ minima in the landscape
+with $N_p=20$ minima %in the landscape
 corresponding to a spatial period $\lambda = 1.825 a_0$.
 
 %In Fig.~\ref{fig:0} 
@@ -654,6 +652,10 @@ The driven particle adjusts
 its motion to traverse
 the periodic landscape with the same rhythm as 
 the applied time-dependent force $F^d(t)$.
+When $F^d(t) > A_p$, a particle can 
+overcome the barrier height of the landscape,
+and 
+the particle hops between minima in the energy landscape.
 %
 In Fig.~\ref{fig:0}(a)
 we plot $F^d(t)$ %defined in Eq.~\ref{eq:drive}.
@@ -800,7 +802,8 @@ $\langle v_{y} \rangle = n \lambda f$,
 where $n$ is an integer.
 The step width is non-linear 
 and can have a variety of
-interesting patterns \cite{Bak1986}.
+interesting patterns
+such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
 %$\lambda = L/N_p = 36.5/20 = 1.825$ is the spatial period, or wavelength
 %of the landscape,
 %and $f = 0.01$ cycles per time unit.
@@ -829,9 +832,19 @@ and the applied ac drive can cause mode-locking
 which appears as non-linear 
 steps in the force-velocity relationship.
 
-We 
-show the dynamics 
-in supplementary materials \cite{supp1}.
+In the following section
+we include exercises to explore our numerical model,
+including the 
+to linear drag equation in Ex.~\ref{ex:reynolds}
+the equation of motion in Ex.~\ref{ex:n2l},
+and 
+numerical integration techniques in Ex.~\ref{ex:euler}.
+We explore changes in the particle motion
+with parameter changes in Ex.~\ref{ex:parameters}.
+Methods to visualize the dynamics of the particle motion
+are in Ex.~\ref{ex:animation}.
+An extended model that includes finite temperature effects
+is in Ex.~\ref{ex:brownian}.
 
 \begin{center}
 \begin{figure}[h!]
@@ -845,8 +858,6 @@ in supplementary materials \cite{supp1}.
 \end{center}
 
 %In the animation available in Ref.~\cite{supp1} the magenta dot represents the average velocity of the particle $\langle v_{y} \rangle$ at which the particle in Fig. 1(a) is moving.
-
-[Insert Phase Plots section/figure?]
 
 \section{Associated problems}
 \label{sec:problems}	% You can label sections for reference
@@ -892,16 +903,18 @@ in supplementary materials \cite{supp1}.
   of a standard classical mechanics text, such as Ref.~\cite{Taylor2005}
   when studying 
   models Millikan's oil drops.
-  [{\it could certainly do more with this question to make it more computational.  For instance, plot $R$ as a function of any of the parameters $v$, $D$ and $\rho$, include a temperature dependent $\eta(T)$ in the Brownian system.  Suggest students model something big and include inertia and quadratic drag, but then we're fairly off topic...}]
+  
+  [{\it could certainly do more with this question to make it more computational.  For instance, plot $R$ as a function of any of the parameters $v$, $D$ and $\rho$, include a temperature dependent $\eta(T)$ in the Brownian system.  Suggest students model something big to imagine their own life at low Reynolds number... fairly off topic...}]
 
 \label{ex:reynolds}
 
 \item{\bf Equation of Motion}
-
+  \label{ex:n2l}
+  
   Newton's second law states that
   the acceleration of a particle $i$
   is proportional to 
-  the sum of forces on a particle 
+  the sum of forces on the particle 
   \begin{equation}
   m_i \vec{a}_i = \sum \vec{F}_i
   \label{eq:n2l}
@@ -914,16 +927,12 @@ in supplementary materials \cite{supp1}.
   in the opposite direction of motion 
   $\vec{F}^{drag} = - \eta \vec{v}_i$
   where $\eta$ is the drag coefficient.
-  The ratio of $m/\eta$ has units of time, 
-  %This ratio of the acceleration coefficient $m$
-  %to the drag coefficient $\eta$
-  %is
-  known as the momentum relaxation time.
-  The momentum relaxation time is 
-  known to be small for
-  particles with low Reynolds numbers,
-  indicating 
-  a regime in which the acceleration term can be ignored
+  The ratio of $m/\eta$ is %has units of time, % and is 
+  known as the momentum relaxation time, %.
+  and is small for
+  particles with low Reynolds numbers.
+  When $m/\eta$ is small,
+  particle acceleration can be ignored
   entirely.
   (a) Using Newton's Second Law for
   a small momentum relaxation time, 
@@ -931,7 +940,8 @@ in supplementary materials \cite{supp1}.
   $F^l(\vec{r}_i)$ subject to a time dependent drive $F^d(t)$
   can be modeled with the equation of motion described in 
   Eq.~\ref{eq:motion}. 
-  \label{ex:n2l}
+
+  {\it this isn't very challenging, but I've see undergraduate students have a ``wow'' factor when they work this out for the first time.}
 
   \item {\bf Integration Methods}
   Our equation of motion provides
@@ -999,6 +1009,7 @@ for a grid of values $(x_n,y_n)$.
 Also the animation library in python... 
 
 \item {\bf Brownian motion}
+  \label{ex:brownian}
   is a temperature and viscosity dependent
   phenomena. \cite{}
   Consider the consequences of a non-zero temperature on the simulation, in which particles will collide with invisible particles making up the suspending fluid.  These collisions are more likely at higher temperature due to the increased kinetic energy of the fluid particles, as described by the Maxwell-Boltzmann distribution \cite{}.  In molecular dynamics simulations temperature effects can be modeled by including randomized forces $f^T$ to emulate the motion of particles undergoing Brownian motion.  A distribution of randomizes forces contributes equally in all directions such that the force averaged over a finite time interval is zero $\langle f^T(t) \rangle = 0$.  Random distributions of contain no correlations over the independent variable (time in this case) $\langle f^T(t) f^T(\tau)\rangle = 2 \eta k_B T \delta(t-\tau)$ where the energy $k_B T$ derived from the Boltzmann constant $k_B$ and temperature $T$ has energy units $E_0$.  \cite{Allen2017}
@@ -1017,6 +1028,9 @@ Also the animation library in python...
  %   kink motion
  %   Vanossi et al J.Phys.: Condens. Matter 19 (2007)
 
+
+\item {\bf Visualizing motion + phase plots}
+    \label{ex:animation}
     
 \end{enumerate}
 
