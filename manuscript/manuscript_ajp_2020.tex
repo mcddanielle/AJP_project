@@ -887,8 +887,9 @@ is in Ex.~\ref{ex:brownian}.
   experimental analog of this system, 
   demonstrate the Reynolds number is low
   for this system.
-  
-  Reasonable experimental values for
+
+  To first order 
+  approximate experimental values for
   a colloid are $D = 1 \mu m$ and $v \sim 1 \mu m /s$.
   Viscosity of water decreases with temperature
   from $1.3 \times 10^{-3}$ Pa-s at $10^{\circ}$ C to 
@@ -896,7 +897,8 @@ is in Ex.~\ref{ex:brownian}.
   making $\eta \sim 10^{-3}$ Pa-s,
   where 1 Pascal is $1$ N/m$^2$.
   Likewise the density $\rho$ varies with temperature
-  and $\rho \sim 10^3$ kg/cm$^3$ is a reasonable approximation.
+  but  $\rho \sim 10^3$ kg/cm$^3$ is a reasonable
+  first order approximation.
   \cite{asce}
   
   This model should be familiar to readers
@@ -941,18 +943,19 @@ is in Ex.~\ref{ex:brownian}.
   can be modeled with the equation of motion described in 
   Eq.~\ref{eq:motion}. 
 
-  {\it this isn't very challenging, but I've see undergraduate students have a ``wow'' factor when they work this out for the first time.}
+  {\it this isn't very challenging, but I've see undergraduate students have a ``wow'' factor when they work this out for the first time.  This is closely related to the next exercise which is also primarily analytic rather than computational}
 
   \item {\bf Integration Methods}
-  Our equation of motion provides
+    \label{ex:euler}
+    Our equation of motion provides
   a direct calculation for particle velocity.
   To calculate the position of the particle we
   integrate the equation of motion using
   the standard definition of velocity
-  $\vec{v}_i = d\vec{r}_i/dt$.
-  %
-  In our model we use the
-  Euler method to solve this equation.
+  $\vec{v}_i = d\vec{r}_i/dt$ 
+  via the 
+  %In our model we use the
+  Euler method. % to solve this equation.
   Generally when solving ordinary differential equations,
   the Euler method is effective for solving linear equations
   of the form
@@ -966,47 +969,37 @@ is in Ex.~\ref{ex:brownian}.
   $y_{n+1} = y_n + f(t_n,y_n)$.
   The Euler method can be applied to non-linear
   equations effectively if the time step $\Delta t$
-  is kept sufficiently small.  
-  \cite{Newman}
-  
-  Generally molecular dynamics algorithms
+  is kept sufficiently small \cite{Newman}.
+  Apply the Euler method to our equation
+  of motion to solve for the position of a particle
+  $y_n$ at the $nth$ timestep.
+
+  {\it invite/guide students to play with the timestep and study the results}
+  %FOLLOW UP WITH THIS!
+  %Because we are performing molecular dynamics
+  %for a single particle on a smooth potential energy landscape,
+  %we use a large simulation time step of 
+  %$\Delta t = 0.01$.
+  %In Sec.~\ref{sec:sync},
+  %we decrease the time step
+  %to treat multiple particle interactions.
+
+  Often molecular dynamics algorithms 
   are solved with higher order methods
   such as the Verlet method or Runge-Kutta methods.
+  [{\it explain Verlet and/or RK4...}]
+  Demonstrate how the Verlet method
+  simplifies to the Euler method when
+  the particle acceleration $\vec{a}=0$.
+ 
+  {\it invite/guide students to play with the timestep and study the results in comparison to Euler method}
 
-
-  and demonstrate how the Verlet method
-  simplifies to the Euler method when $\vec{a}=0$.
-  
-  %FOLLOW UP WITH THIS!
-  Because we are performing molecular dynamics
-  for a single particle on a smooth potential energy landscape,
-  we use a large simulation time step of 
-  $\Delta t = 0.01$.
-  In Sec.~\ref{sec:sync},
-  we decrease the time step
-  to treat multiple particle interactions.
-
-  \label{ex:euler}
-
-  We invite interested students to repeat this
-  simulation for any initial particle position %of $y$
-  and a range of simulation constants
-  to demonstrate that synchronization in this model
-  does not depend on a particular set of conditions.
+  %We invite interested students to repeat this
+  %simulation for any initial particle position %of $y$
+  %and a range of simulation constants
+  %to demonstrate that synchronization in this model
+  %does not depend on a particular set of conditions.
   %but is a direct consequence of the simplicity of the model.
-
-\item {\bf Visualizing the motion}
-  Drawing the contour 
-
-  The code for generating
-a two dimensional colored plot
-of the potential landscape
-is calculated by evaluating
-the analytic function in Eq.~\ref{eq:ysubstrate}
-for a grid of values $(x_n,y_n)$.
-%is included in the supplementary material,
-
-Also the animation library in python... 
 
 \item {\bf Brownian motion}
   \label{ex:brownian}
@@ -1030,7 +1023,21 @@ Also the animation library in python...
 
 
 \item {\bf Visualizing motion + phase plots}
-    \label{ex:animation}
+  \label{ex:animation}
+  
+  Drawing the contour 
+
+  The code for generating
+  a two dimensional colored plot
+  of the potential landscape
+  is calculated by evaluating
+  the analytic function in Eq.~\ref{eq:ysubstrate}
+  for a grid of values $(x_n,y_n)$.
+  %is included in the supplementary material,
+
+  Also the animation library in python...
+
+  Phase plots...
     
 \end{enumerate}
 
@@ -1043,9 +1050,10 @@ Also the animation library in python...
 %focus on 
 A single particle driven across a periodic potential landscape 
 %Single particle studies are useful
-to understand synchronization
-in the absence of collective effects
-due to interactions between particles.
+is useful 
+to study synchronization
+in the absence of collective effects of particle interactions.
+%due to interactions between particles.
 %A single particle particle oscillator
 %within a potential well is 
 %much like a skateboarder in a half-pipe or
@@ -1264,12 +1272,18 @@ and the charge and spin of atomic systems.
 
       \bibitem{Newman} M. Newman, Computational Physics... 
       
-\bibitem{supp1} See Figure1.mp4 in appropriate %\url{}
+      \bibitem{supp1} Supplementary videos coming soon.
+        %See Figure1.mp4 in appropriate %\url{}
 
 \bibitem{asce}
-  What is the method for citing non-fundamental constants?
-    (1) https://ascelibrary.org/doi/pdf/10.1061/9780784408230.ap02
-    (2) IAPWS 2008 - http://www.iapws.org/relguide/viscosity.html
+  %Non-fundamental constants for water viscosity are available
+  %in several databases including 
+  %  (1) https://ascelibrary.org/doi/pdf/10.1061/9780784408230.ap02
+  IAPWS R12-08, 
+  Release on the IAPWS Formulation 2008 for the Viscosity of Ordinary Water Substance, 
+  September 2008, 
+  %IAPWS 2008 -
+  http://www.iapws.org/relguide/viscosity.html
   %[citation for these values better than wikipedia] \cite{} %CONFIRM!
   %density $\rho = 0.9982 g/cm^3$
 
