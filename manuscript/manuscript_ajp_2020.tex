@@ -947,16 +947,17 @@ is in Ex.~\ref{ex:brownian}.
 
   \item {\bf Integration Methods}
     \label{ex:euler}
+    To calculate the position of the particle we
+    integrate the equation of motion using
+    the standard definition of velocity
+    $\vec{v}_i = d\vec{r}_i/dt$ 
+    via the 
+    %In our model we use the
+    Euler method. % to solve this equation.
     Our equation of motion provides
-  a direct calculation for particle velocity.
-  To calculate the position of the particle we
-  integrate the equation of motion using
-  the standard definition of velocity
-  $\vec{v}_i = d\vec{r}_i/dt$ 
-  via the 
-  %In our model we use the
-  Euler method. % to solve this equation.
-  Generally when solving ordinary differential equations,
+    a direct calculation for particle velocity.
+    %
+  When solving ordinary differential equations,
   the Euler method is effective for solving linear equations
   of the form
   $dy/dt = f(t,y(t))$ with initial condition $y(t_0) = y_0$.
@@ -971,10 +972,18 @@ is in Ex.~\ref{ex:brownian}.
   equations effectively if the time step $\Delta t$
   is kept sufficiently small \cite{Newman}.
   Apply the Euler method to our equation
-  of motion to solve for the position of a particle
-  $y_n$ at the $nth$ timestep.
+  of motion to solve for the analytic expression
+  of position of a particle
+  $y_n$ at the $nth$ timestep (i.e. Eq.~\ref{eq:euler}).
 
-  {\it invite/guide students to play with the timestep and study the results}
+  In our simulations we use the timestep $\Delta t = 0.001$,
+  examine Fig.~\ref{fig:0}
+  for timesteps $\Delta t = 0.01$ and $\Delta t = 0.1$
+  over the same maximum time
+  (i.e. decrease the overall simulation time).
+  How to the motions of the particle compare when the timestep
+  becomes large?
+
   %FOLLOW UP WITH THIS!
   %Because we are performing molecular dynamics
   %for a single particle on a smooth potential energy landscape,
@@ -1270,7 +1279,7 @@ and the charge and spin of atomic systems.
 
     \bibitem{Taylor2005} J. Taylor,  Classical mechanics. University Science Books (2005).
 
-      \bibitem{Newman} M. Newman, Computational Physics... 
+      \bibitem{Newman} M. Newman, Computational Physics, CreateSpace Independent Publishing Platform. (2012).
       
       \bibitem{supp1} Supplementary videos coming soon.
         %See Figure1.mp4 in appropriate %\url{}
