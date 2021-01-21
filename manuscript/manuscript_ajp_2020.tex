@@ -195,80 +195,9 @@ Oscillation phase $\phi_0$ is the constant portion of the argument in a periodic
   $\sin{(\omega t + \phi_0)}$ while phase space refers
   to plots of velocity versus position (such as $v_y$ vs. $y$)
   that are used to characterize oscillating systems.
- 
 
-%Given the prevalence of synchronization,
-%it is the subject of many computational models.
-Here we perform numerical studies 
-on the synchronized dynamics
-of confined particles driven over
-a washboard shaped potential energy landscape.
-%Numerical studies %of harmonic systems
-%can yield insights
-%to the mechanics of naturally oscillating systems.
-We chose this model for its
-relevance to condensed matter systems
-and ease of simulation.
-%---------------------------------------------------------------
-%kinks and nanofriction
-%-----------------------------------------------------------------
-%transition from synchronized to chaotic
-%describe types of physical systems - particle types
-%%In this work,
-%we perform 
-%numerical simulations of confined, driven particles
-%to model a variety of physical phenomena.
-%-----------------------------------------------------------------------
-%paper outline
-%In the following paper
-In Section~\ref{sec:colloids} we describe colloid particles,
-an relevant
-experimental analog of our simulations.
-We describe
-our molecular dynamics model for a single particle in Section~\ref{sec:MD}.
-%In this section, we restrict our discussion to a single particle,
-%and include additional information
-%for multiple particles in Section~\ref{sec:sync}.
-%including various  and confining environments.
-We summarize
-our results 
-%in Section~\ref{sec:results} 
-including synchronized motion of a single confined particle
-driven across a periodic landscape in 
-Section~\ref{sec:one}.
-In Section~\ref{sec:sync}
-we 
-extend the model to include multiple particles,
-and show how confined 
-interacting particles respond to the same applied driving force.
-%including stationary propagation of high density kinks
-%in Sec.~\ref{sec:kink}.
-%We include code to simulate
-%and visualize the landscape and dynamics in this section
-%and supplementary material.
-%we
-%demonstrate how uniform environments and applied forces
-%and create synchronized flow patterns.
-%We present these results using standard tools of non-linear oscillators
-%such phase diagrams of velocity versus position.
-%PHASE DIAGRAMS SHOWING COUPLING, OR QUASI-PERIODIC COUPLING
-%INDICATE COOPERATIVE MOTION IN THE Q1D SUBSTRATE
-%In Section~\ref{sec:quasiperiod},
-%we show how an aperiodic landscape modifies the particle dynamics.
-%Finally we explore the transition to chaotic dynamics in 
-%Section~\ref{sec:chaos}
-%and conclude 
-In Section~\ref{sec:conclusion}
-we describe how our work with colloids applies more broadly
-to many physical systems
-such as dusty plasmas, superconducting vortices and Josephson junctions.
-We conclude with
-exercises for interested students 
-in Section~\ref{sec:problems}.
-
-
-\section{Colloidal Models}
-\label{sec:colloids}
+%\section{Colloidal Models}
+%\label{sec:colloids}
 
 Complex dynamics can be studied with
 colloid particles with experiments and simulation.
@@ -312,30 +241,36 @@ Depending on the %shape of the trap and
 location of the particle in the trap,
 the radiation pressure either restores colloids toward the local minima
 or ejects it from the trap.
-A single optically trapped colloid executing Brownian motion
+An optically trapped colloid executing Brownian motion
 is a useful probe of microscopic forces,
 and has been studied in detail in Ref.~\cite{Volpe2013}.
 
-In experiments  
- complex environments can be
+%In experiments  
+ Complex environments can be
  engineered with light by %, typically made 
  using diffraction gratings to create a patterned
  potential energy landscape 
- with one or more laser beams \cite{}.
-Experiments of colloid particles confined
-in optical traps arrays or patterns 
-subject to external driving forces 
-have
-been used to examine the microscopic dynamics
-of individual particles during mode-locking \cite{Juniper2015}.
-This produced step-by-step diagrams
-of particle dynamics that cannot be 
-imaged in electronic systems such as Josephson junctions.
-%Recent work with atomic systems such as Bose-Einstein condensates \cite{Zhang2020}
-Thus the study of
-mode-locking is a useful problem
-of complex quantum mechanical systems.
-
+ with one or more laser beams \cite{Grier2003}.
+ How a particle moves
+ in an optical landscape can
+ change
+ when 
+ subject to external driving forces.
+ Individual particles can
+ perform 
+ synchronized % with the environment
+ motions
+ that lock together particle location and velocity.
+ Experimental studies of
+ the microscopic dynamics 
+ colloids performing phase-locked motions
+ produce step-by-step diagrams
+ of particle dynamics useful for
+ understanding synchronization at a single particle level \cite{Juniper2015}.
+ 
+%Numerical modeling of colloids can provide mechanistic insight
+%that can be difficult to achieve in experimental conditions
+%where Brownian motion and other sources of noise dominate.
 %external forces
 %The
 %dynamics of particles subject to 
@@ -353,9 +288,75 @@ of complex quantum mechanical systems.
 %nonlinear systems occurs in mechanical oscillators \cite{chaos}.
 %-------------------------------------------------------------
 
-Numerical modeling of colloids can provide mechanistic insight
-that can be difficult to achieve in experimental conditions
-where Brownian motion and other sources of noise dominate.
+%Given the prevalence of synchronization,
+%it is the subject of many computational models.
+Here we perform numerical studies 
+on the synchronized dynamics
+of confined particles driven over
+a washboard shaped potential energy landscape.
+%Numerical studies %of harmonic systems
+%can yield insights
+%to the mechanics of naturally oscillating systems.
+We chose this model for its
+relevance to condensed matter systems
+and ease of simulation.
+%---------------------------------------------------------------
+%kinks and nanofriction
+%-----------------------------------------------------------------
+%transition from synchronized to chaotic
+%describe types of physical systems - particle types
+%%In this work,
+%we perform 
+%numerical simulations of confined, driven particles
+%to model a variety of physical phenomena.
+%-----------------------------------------------------------------------
+%paper outline
+%In the following paper
+%In Section~\ref{sec:colloids} we describe colloid particles,
+%an relevant
+%experimental analog of our simulations.
+We describe
+our molecular dynamics model for a single particle in Section~\ref{sec:MD}.
+%In this section, we restrict our discussion to a single particle,
+%and include additional information
+%for multiple particles in Section~\ref{sec:sync}.
+%including various  and confining environments.
+We summarize
+our results 
+%in Section~\ref{sec:results} 
+including synchronized motion of a single confined particle
+driven across a periodic landscape in 
+Section~\ref{sec:one}.
+%In Section~\ref{sec:sync}
+%we 
+%extend the model to include multiple particles,
+%and show how confined 
+%interacting particles respond to the same applied driving force.
+%including stationary propagation of high density kinks
+%in Sec.~\ref{sec:kink}.
+%We include code to simulate
+%and visualize the landscape and dynamics in this section
+%and supplementary material.
+%we
+%demonstrate how uniform environments and applied forces
+%and create synchronized flow patterns.
+%We present these results using standard tools of non-linear oscillators
+%such phase diagrams of velocity versus position.
+%PHASE DIAGRAMS SHOWING COUPLING, OR QUASI-PERIODIC COUPLING
+%INDICATE COOPERATIVE MOTION IN THE Q1D SUBSTRATE
+%In Section~\ref{sec:quasiperiod},
+%we show how an aperiodic landscape modifies the particle dynamics.
+%Finally we explore the transition to chaotic dynamics in 
+%Section~\ref{sec:chaos}
+%and conclude 
+We conclude with
+exercises for interested students 
+in Section~\ref{sec:problems}.
+In Section~\ref{sec:conclusion}
+we describe how our work with colloids applies more broadly
+to many physical systems
+such as dusty plasmas, superconducting vortices and Josephson junctions.
+
 
 
 
@@ -1052,22 +1053,26 @@ is in Ex.~\ref{ex:brownian}.
 
 \section{Conclusion}
 \label{sec:conclusion}	% You can label sections for reference
+A single particle oscillator
+in a potential well is 
+much like a skateboarder in a half-pipe or
+a child on a swing.
+If subject to an applied force,
+a confined oscillator may 
+synchronize its location
+to the periodic pattern of the external drive,
+moving back and forth in time with
+the beat. 
 %Fundamental models
 %of synchronization 
 %can %include many coupled oscillators
 %or
-%focus on 
-A single particle driven across a periodic potential landscape 
+%focus on
+We have used 
+a single particle driven across a periodic potential landscape 
 %Single particle studies are useful
-is useful 
-to study synchronization
-in the absence of collective effects of particle interactions.
+to study synchronization dynamics. 
 %due to interactions between particles.
-%A single particle particle oscillator
-%within a potential well is 
-%much like a skateboarder in a half-pipe or
-%a child on a swing
-%moving back and forth. % through equilibrium.  % \cite{}.
 The relationship between the driving force and
 landscape can change the pattern of motion.  
 With a constant or 
@@ -1080,6 +1085,7 @@ a phenomena referred to as pinning \cite{Reichhardt2017}.
 A sinusoidal or ac drive creates mode-locking,
 where the average particle velocity
 is fixed for a range of dc drive forces \cite{Reichhardt2015}.
+
 Our simulations reproduce results presented in 
 Juniper {\it et al.} \cite{Juniper2015, Juniper2018}
 which demonstrated
@@ -1091,8 +1097,6 @@ Due to the relative ease of
 manipulation and imagining, 
 colloids are used as experimental models
 for systems relatively hard to access and visualize. 
-%SAME SENTENCE TWICE
-
 Collections of colloids can
 be used to study the properties of solids and liquids
 %comprised of smaller particles
@@ -1138,6 +1142,9 @@ ac and dc driven
 charge and spin density waves
 and superconducting vortices in landscapes 
 engineered with periodic patterns of pinning sites.
+Thus the study of
+mode-locking is a useful problem
+of complex quantum mechanical systems.
 Our results can be relevant 
 to synchronization effects
 in a broad range of experiments systems
