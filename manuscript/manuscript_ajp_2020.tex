@@ -972,37 +972,57 @@ is in Ex.~\ref{ex:brownian}.
   The Euler method can be applied to non-linear
   equations effectively if the time step $\Delta t$
   is kept sufficiently small \cite{Newman}.
+  In our simulations we use the timestep $\Delta t = 0.001$,
+  but we find for a single particle
+  we can just as easily used 
+  %examine 
+  %for
+  timesteps $\Delta t = 0.01$ and $\Delta t = 0.1$
+  over the same maximum time
+  (i.e. decrease the overall simulation time and sampling rate)
+  and reproduce the motions shown in Fig.~\ref{fig:0}(b).
+  This is due to the linear nature of the solution,
+  and the lack of interaction with neighboring particles.
   Apply the Euler method to our equation
   of motion to solve for the analytic expression
   of position of a particle
   $y_n$ at the $nth$ timestep (i.e. Eq.~\ref{eq:euler}).
-
-  In our simulations we use the timestep $\Delta t = 0.001$,
-  examine Fig.~\ref{fig:0}
-  for timesteps $\Delta t = 0.01$ and $\Delta t = 0.1$
-  over the same maximum time
-  (i.e. decrease the overall simulation time).
-  How to the motions of the particle compare when the timestep
-  becomes large?
+  %How to the motions of the particle compare when the timestep
+  %becomes large?
 
   %FOLLOW UP WITH THIS!
   %Because we are performing molecular dynamics
   %for a single particle on a smooth potential energy landscape,
   %we use a large simulation time step of 
-  %$\Delta t = 0.01$.
-  %In Sec.~\ref{sec:sync},
+  %$\Delta t = 0.01$.  %In Sec.~\ref{sec:sync},
   %we decrease the time step
   %to treat multiple particle interactions.
 
   Often molecular dynamics algorithms 
   are solved with higher order methods
   such as the Verlet method or Runge-Kutta methods.
-  [{\it explain Verlet and/or RK4...}]
+  These methods include  higher order terms
+  that provide accurate solutions for
+  second order differential equations,
+  i.e. $dy/dt = v$ and $dv/dt = f_2(y,t)$,
+  where $f_2(y,t)$ is a second derivative function.
+  In Newton's second law this would be proportional
+  to the net force on a single particle.
+  We do not integrate $f_2(y,t)$ since 
+  $a = dv/dt = 0$,
+  and thus rearrange $f_2(y,t)$ to solve directly for $v$,
+  as described in Ex.~\ref{ex:n2l}.
+  The Taylor expansion of the position function $y(t)$
+  \begin{equation}
+    y(t_n \pm \Delta t) = y(t_n) \pm \frac{dy}{dt} \Delta t + \frac{1}{2} \frac{d^2y}{dt^2} (\Delta t)^2 \pm O(\Delta t)^3 ... %\frac{1}{6} \frac{d^3y}{dt^3} (\Delta t)^3 + ...
+  \end{equation}
+  is exact at first order
+  for the $n$-th time step.
+  
   Demonstrate how the Verlet method
   simplifies to the Euler method when
   the particle acceleration $\vec{a}=0$.
- 
-  {\it invite/guide students to play with the timestep and study the results in comparison to Euler method}
+
 
   %We invite interested students to repeat this
   %simulation for any initial particle position %of $y$
