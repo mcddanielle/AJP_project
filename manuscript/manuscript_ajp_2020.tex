@@ -38,32 +38,9 @@
 \begin{abstract}
   Synchronization
   plays a key role in many physical processes.
-  %Simplified models
-  %such as 
-  %What problem did you study and why is it important?
-  Modeling synchronization
-  with simulations and table-top experiments
-  can 
-  provide insight
-  to complex behaviors
-  in the natural world.
-  Driving particles
-  across a washboard potential energy landscape
-  is a 
-  common 
-  technique to isolate complex 
-  synchronized patterns 
-  in both simulations and experiments.
-  %as observed in 
-  %experiments %al systems 
-  %of %interest to condensed matter physics %including 
-  %magnetically driven colloidal particles
-  %confined by light-fields.
-  %exhibit a variety of synchronization effects.
-  %in
-  %  Numerical model
   We discuss a simple
   numerical model %that
+  of synchronized particles 
   %exhibits
   %provides insight
   %to synchronization behavior
@@ -78,6 +55,31 @@
   molecular dynamics simulations
   for particles moving through
   a viscous liquid.
+  %Simplified models
+  %such as 
+  %What problem did you study and why is it important?
+  Modeling synchronization
+  with simulations and table-top experiments
+  can 
+  provide insight
+  to complex behaviors
+  in the natural world.
+  We drive 
+  particles
+  across a washboard potential energy landscape, 
+  a 
+  common 
+  technique to isolate complex 
+  synchronized patterns 
+  in both simulations and experiments.
+  %as observed in 
+  %experiments %al systems 
+  %of %interest to condensed matter physics %including 
+  %magnetically driven colloidal particles
+  %confined by light-fields.
+  %exhibit a variety of synchronization effects.
+  %in
+  %  Numerical model
   %
   %applied to single and multiple particle systems.
   %so we model the dynamics of each particle
@@ -349,7 +351,7 @@ Section~\ref{sec:one}.
 %Finally we explore the transition to chaotic dynamics in 
 %Section~\ref{sec:chaos}
 %and conclude 
-We conclude with
+We include 
 exercises for interested students 
 in Section~\ref{sec:problems}.
 In Section~\ref{sec:conclusion}
@@ -425,7 +427,54 @@ with the periodic function
  $U(y)$ to illustrate how the magnitude
  $\vec{F}^{l}_i$ is calculated from particle position $y_i$.  
  %in the $y-$direction.
+
  
+ Particles are subject an external time-dependent driving force
+$\vec{F}_{D}(t)$
+applied parallel to the y-direction.
+We model this force as
+\begin{equation}
+  \vec{F}^{d}(t) = [F^{dc} + F^{ac} \sin(\omega t)] \hat{y},
+    \label{eq:drive}
+\end{equation}
+with modifiable parameters including
+a constant component $F^{dc}$,
+and a time dependent component with amplitude $F^{ac}$
+and frequency $\omega = 2 \pi f$.
+%in the positive $y-$direction.
+%but it may 
+%be zero or negative depending the the parameters and time.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%RAMP!!!
+%%%When $F^{dc}$ is non-zero,  we slowly increase $F^{dc}$ from zero to avoid transient behavior by ensuring the particle is subject to a smoothly varying force. We illustrate the increase of $F^{dc}$ in Fig.~\ref{fig:0}(a).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%because
+The inertia of 
+small particles is reduced by interactions
+with fluid particles \cite{Purcell1977}.
+In our model
+we assume 
+colloids are overdamped
+-- i.e. colloids are suspended in a continuous viscous fluid
+that dissipates energy %at a rate
+such 
+that the particles do not accelerate.
+%that greatly impedes their motions.
+Energy dissipation from the fluid is modeled
+with a frictional force on particle with velocity $\vec{v}_i$ as
+%that removes energy from
+%the particles,
+%which we model as
+$\vec{F}^{drag}_i = -\eta \vec{v}_i$
+%proportional to the particle velocity 
+with a friction coefficient $\eta$
+proportional to the fluid viscosity.
+We discuss friction models for
+spheres moving through fluids in 
+%Section~\ref{sec:problems}
+Exercise~\ref{ex:reynolds}. %for more information
+%We model the particle dynamics  with an overdamped equation of motion. Models with inertia set to zero are appropriate for moving through a high viscosity fluid
 \begin{center}
 \begin{figure}[h!]
 \centering
@@ -461,53 +510,6 @@ with the periodic function
 \label{fig:landscape0}
 \end{figure}
 \end{center}
-
- 
- Particles are subject an external time-dependent driving force
-$\vec{F}_{D}(t)$
-applied parallel to the y-direction.
-We model this force as
-\begin{equation}
-  \vec{F}^{d}(t) = [F^{dc} + F^{ac} \sin(\omega t)] \hat{y},
-    \label{eq:drive}
-\end{equation}
-with modifiable parameters including
-a constant component $F^{dc}$,
-and a time dependent component with amplitude $F^{ac}$
-and frequency $\omega = 2 \pi f$.
-%in the positive $y-$direction.
-%but it may 
-%be zero or negative depending the the parameters and time.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%RAMP!!!
-%%%When $F^{dc}$ is non-zero,  we slowly increase $F^{dc}$ from zero to avoid transient behavior by ensuring the particle is subject to a smoothly varying force. We illustrate the increase of $F^{dc}$ in Fig.~\ref{fig:0}(a).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%because
-The inertia of 
-small particles is reduced by interactions
-with fluid particles \cite{Purcell1977}.
-In this model 
-colloids are overdamped
--- i.e. suspended in a continuous viscous fluid
-that dissipates energy %at a rate
-such 
-that the particles do not accelerate.
-%that greatly impedes their motions.
-Energy dissipation from the fluid is modeled
-with a frictional force on particle with velocity $\vec{v}_i$
-%that removes energy from
-%the particles,
-%which we model as
-$\vec{F}^{drag}_i = -\eta \vec{v}_i$
-%proportional to the particle velocity 
-with a friction coefficient $\eta$
-proportional to the fluid viscosity.
-We discuss friction models for
-spheres moving through fluids in 
-%Section~\ref{sec:problems}
-Exercise~\ref{ex:reynolds}. %for more information
-%We model the particle dynamics  with an overdamped equation of motion. Models with inertia set to zero are appropriate for moving through a high viscosity fluid
 Newton's second law for an individual particle
 %$m \vec{a}_i = \sum \vec{F}$
 is simplified
@@ -520,8 +522,8 @@ The overdamped equation of motion for an isolated particle is
   \eta \vec{v}_i = \vec{F}^l_{i}(\vec{r}_i) + \vec{F}^{d}(t).
     \label{eq:motion}
 \end{equation}
-with  $\eta = 1$.  
-%which we describe in more detail in Table~\ref{tab:1}
+with  $\eta = 1$ in units of $v_0 / F_0$. 
+%(see Table~\ref{tab:1}).
 %and Exercise~\ref{ex:reynolds}.
 %In %Section~\ref{sec:problems}
 %Exercise~\ref{ex:n2l}
@@ -534,8 +536,8 @@ The molecular dynamics simulation is controlled by a $for()$ loop
 which runs from an initial to maximum integer number of time steps.
 %$t_i$.
 Each integer time step interval %$t_{i+1}-t_i$
-represents a simulation time interval of $\Delta t$ 
-simulation units.  %as described in Table 1
+represents a simulation time of $\Delta t$ 
+simulation units $\tau$.  %as described in Table 1
 At each time step
 we evaluate the net force on each particle as a function of its position
 $\vec{r}_i(t)$
@@ -578,7 +580,7 @@ energy & $E_0 = 1$ & $ < E_0 <$ \\
 %solvent dielectric constant & $\epsilon \epsilon_0$\\
 force & $F_0 = E_0 / a_0$ & $<F_0<$\\
 velocity &  $ a_0 / \tau $ &  $v \sim 5 \mu m/s $\\
-viscosity coefficient & $\eta = F_0 \tau / a_0 $ & $ <\eta<$\\
+viscosity coefficient & $\eta = F_0 \tau / a_0 $ & $\eta \sim 10^{-3}$ Pa-s \\
 %juniper uses water–ethanol mixture
 time &  $ \tau = \eta a_0 / F_0 $ & $ < \tau <$\\
 period & $\lambda = 1.825 a_0$ & $\lambda = 3.5 \mu m$ \\
@@ -765,7 +767,7 @@ forward and backward in the landscape.
 To explore the possible hopping patterns,
 we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$
 to illustrate
-distinct oscillation modes as a function of $F^{dc}$.
+distinct oscillation modes. % as a function of $F^{dc}$.
 A mode is a periodic pattern of hops
 with a constant average particle velocity, $\langle {v}_{y} \rangle$
 over a range of driving forces $F^{dc}$.
@@ -892,15 +894,17 @@ is in Ex.~\ref{ex:brownian}.
   To first order 
   approximate experimental values for
   a colloid are $D = 1 \mu m$ and $v \sim 1 \mu m /s$.
-  Viscosity of water decreases with temperature
+  %Likewise
+  To first order $\eta \sim 10^{-3}$ Pa-s 
+  since 
+  viscosity of water decreases with temperature
   from $1.3 \times 10^{-3}$ Pa-s at $10^{\circ}$ C to 
   from $0.31 \times 10^{-3}$ Pa-s at $90^{\circ}$ C,
-  making $\eta \sim 10^{-3}$ Pa-s,
   where 1 Pascal is $1$ N/m$^2$.
-  Likewise the density $\rho$ varies with temperature
+  Likewise the liquid density $\rho$ varies with temperature
   but  $\rho \sim 10^3$ kg/cm$^3$ is a reasonable
-  first order approximation.
-  \cite{asce}
+  first order approximation
+  \cite{asce}.
   
   This model should be familiar to readers
   of a standard classical mechanics text, such as Ref.~\cite{Taylor2005}
@@ -990,6 +994,11 @@ is in Ex.~\ref{ex:brownian}.
   %How to the motions of the particle compare when the timestep
   %becomes large?
 
+  {\it small timesteps matter a great deal when particle interactions
+    are included in the model.  I have demonstrated that
+    without particle interactions we can increase the timestep
+  with no penalty, so this isn't a very interesting problem.}
+
   %FOLLOW UP WITH THIS!
   %Because we are performing molecular dynamics
   %for a single particle on a smooth potential energy landscape,
@@ -1065,6 +1074,9 @@ is in Ex.~\ref{ex:brownian}.
   for a grid of values $(x_n,y_n)$.
   %is included in the supplementary material,
 
+  {\it I have python code that does all of this, but I don't have it
+    set up to play nice with my new python MD code}
+  
   Also the animation library in python...
 
   Phase plots...
@@ -1091,7 +1103,9 @@ the beat.
 We have used 
 a single particle driven across a periodic potential landscape 
 %Single particle studies are useful
-to study synchronization dynamics. 
+to study synchronization dynamics
+that arise due to the interplay
+between a particles environment and external forces.
 %due to interactions between particles.
 The relationship between the driving force and
 landscape can change the pattern of motion.  
@@ -1126,7 +1140,8 @@ such as cold atoms or electron gases \cite{Grier2003}.
 %Oscillators ordered into chains or lattices.
 %has many important
 %technological applications
-Dynamical mode-locking
+Dynamical mode-locking, the primary synchronization
+effect explored in this paper, 
 is %often
 observed
 in quantum electronic
