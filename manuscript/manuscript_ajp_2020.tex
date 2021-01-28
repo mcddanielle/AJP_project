@@ -564,28 +564,33 @@ The units of the simulated variables are summarized in Table ~\ref{tab:1}.
 
 \begin{table}[h!]
 \centering
-\caption{Simulation units and comparable
-  experimental values~\cite{Juniper2015}.}
+\caption{Simulation parameters and units and comparable
+  experimental values~\cite{Juniper2015}.
+  Blanks %in the experimental parameters
+  indicate
+  units, rather than parameters that
+  are not easily represented by a single value.}
 %{\it might be more appropriate to match Juniper parameters more precisely given our focus...}}
 \begin{ruledtabular}
 \begin{tabular}{c c c } %p{5cm}}
-Quantity & Simulation Unit & Experimental range\\
+Quantity & Simulation Unit & Experimental value\\
 \hline
 length &  $a_0 = 1$ & $ a_0 \sim 1.5 \mu m$\\
-energy & $E_0 = 1$ & $ < E_0 <$ \\
+energy & $E_0 = 1$ & \\ %$ < E_0 <$ \\
 %electric potential & $V(r_{ij}) = E_0/r_{ij}$ \\
 %energy & $E_0 = q^2{Z^*}^2/4\pi \epsilon \epsilon_0 a_0$ \\
 %dimensionless interaction strength & $q$ \\
 %effective colloidal charge & $Z^*$ \\
 %solvent dielectric constant & $\epsilon \epsilon_0$\\
-force & $F_0 = E_0 / a_0$ & $<F_0<$\\
+force & $F_0 = E_0 / a_0$ & \\ %$<F_0<$\\
+time &  $ \tau = \eta a_0 / F_0 $ \\ %& $ < \tau <$\\
 velocity &  $ a_0 / \tau $ &  $v \sim 5 \mu m/s $\\
+driving period & $T = 100 \tau$ & $T \sim 1.3$ s \\
 viscosity coefficient & $\eta = F_0 \tau / a_0 $ & $\eta \sim 10^{-3}$ Pa-s \\
 %juniper uses water–ethanol mixture
-time &  $ \tau = \eta a_0 / F_0 $ & $ < \tau <$\\
-period & $\lambda = 1.825 a_0$ & $\lambda = 3.5 \mu m$ \\
-potential amplitude & $U_0 = 0.058 E_0$ & $U_0 = 75 k_B T \sim 2 J$ \\
-temperature & $T_0 = 0$ \footnote{a. see Ex.~\ref{ex:brownian} to include temperature.} & $T \sim 300K $ \\
+substrate period & $\lambda = 1.825 a_0$ & $\lambda = 3.5 \mu m$ \\
+substrate amplitude & $U_0 = 0.058 E_0$ & $U_0 = 75 k_B T \sim 2 J$ \\
+temperature & $T_0 = 0$ \footnote{see Ex.~\ref{ex:brownian} to include temperature in the limit where $U_0 \sim k_B T$.} & $T \sim 300K $ \\
 
 %FROM JUNIPER2015
 %l¼3.5 mm and a laser power per trap of WE0.75mW (trap stiffness: k=3.8\times10^7 kg /s^2; trap depth: V0 = 75 k_B T
@@ -604,6 +609,9 @@ temperature & $T_0 = 0$ \footnote{a. see Ex.~\ref{ex:brownian} to include temper
 
 %Volpe AJP Parameters
 %We will consider a silica microparticle in water with radius R=1micro m, mass m=11picograms, viscosity eta=0.001 Ns/m^2; $\gamma=6\pi \eta R$,  T=300K, and \tau=0.6\micro s.
+%thermofisher off the shelf paramagnetic beads
+%https://www.thermofisher.com/us/en/home/references/protocols/proteins-expression-isolation-and-analysis/protein-isolation-protocol/m-270-carboxylic-acid.html
+%~2\times10^9 beads per 30 mg -> 1.5 \times 10^-11 g, 15 ng
 
 \end{tabular}
 \end{ruledtabular}
@@ -838,16 +846,17 @@ steps in the force-velocity relationship.
 In the following section
 we include exercises to explore our numerical model,
 including the 
-to linear drag equation in Ex.~\ref{ex:reynolds}
+to linear drag equation in Ex.~\ref{ex:reynolds}, 
 the equation of motion in Ex.~\ref{ex:n2l},
 and 
 numerical integration techniques in Ex.~\ref{ex:euler}.
+An extended model that includes finite temperature effects
+is in Ex.~\ref{ex:brownian}.
 We explore changes in the particle motion
 with parameter changes in Ex.~\ref{ex:parameters}.
 Methods to visualize the dynamics of the particle motion
 are in Ex.~\ref{ex:animation}.
-An extended model that includes finite temperature effects
-is in Ex.~\ref{ex:brownian}.
+
 
 \begin{center}
 \begin{figure}[h!]
@@ -865,8 +874,9 @@ is in Ex.~\ref{ex:brownian}.
 \section{Associated problems}
 \label{sec:problems}	% You can label sections for reference
 
-\begin{enumerate}
-\item {\bf Drag Models and Reynolds Numbers}
+%\begin{enumerate}
+%\item
+\subsection{Drag Models and Reynolds Numbers.}
   Stokes' law describes the viscous drag on a sphere
   moving at velocity $\vec{v}$ as 
   $\vec{F}^{lin} = -3 \pi \eta D \vec{v}$ 
@@ -874,48 +884,52 @@ is in Ex.~\ref{ex:brownian}.
   $D$ is the particle diameter \cite{Taylor2005}.
   In simulation we
   subsume the constants $3 \pi D$
-  such that $\eta \rightarrow 3 \pi D \eta$.
+  such that $3 \pi D \eta \rightarrow \eta $.
+  %
   Often drag forces are
-  modeled as a polynomial series
-  $\vec{F}^{drag} = -b \vec{v} - c v^2 \hat{v} + ... $.
+  modeled as a polynomial series ~\cite{Taylor2005}
+  \begin{equation}
+    \vec{F}^{drag} = -b \vec{v} - c v^2 \hat{v} + \ldots  .
+  \end{equation}
+  %This model should be familiar to readers
+  %of a standard classical mechanics text, such as Ref.
+  %when studying 
+  %models Millikan's oil drops.
   Truncating the series to the first term
   is justified by demonstrating the sphere
   has a low Reynolds number  
   $R = D v \rho / \eta$
   where $\rho$ is the fluid density and $v$ the particle's speed.
-  When $R$ is small, the quadratic and higher order drag terms
+  When $R$ is small, the quadratic and higher order terms
   may be ignored in favor of the linear drag term.
-  %
+
   Using reasonable values for the
   experimental analog of this system, 
-  demonstrate the Reynolds number is low
-  for this system.
-
-  To first order 
-  approximate experimental values for
-  a colloid are $D = 1 \mu m$ and $v \sim 1 \mu m /s$.
+  demonstrate the Reynolds number is low.
+  In addition to the values listed in Table ~\ref{tab:1}, 
+ % Approximate experimental values for
+ % a colloid size and speed
+ % are $D = 1 \mu m$ and $v \sim 1 \mu m /s$.
+ % %Likewise
+ % To first order the viscosity is $\eta \sim 10^{-3}$ Pa-s 
+ % since 
+ % viscosity of water decreases with temperature
+ % from $1.3 \times 10^{-3}$ Pa-s at $10^{\circ}$ C to 
+ % from $0.31 \times 10^{-3}$ Pa-s at $90^{\circ}$ C,
+ % where 1 Pascal is $1$ N/m$^2$.
   %Likewise
-  To first order $\eta \sim 10^{-3}$ Pa-s 
-  since 
-  viscosity of water decreases with temperature
-  from $1.3 \times 10^{-3}$ Pa-s at $10^{\circ}$ C to 
-  from $0.31 \times 10^{-3}$ Pa-s at $90^{\circ}$ C,
-  where 1 Pascal is $1$ N/m$^2$.
-  Likewise the liquid density $\rho$ varies with temperature
-  but  $\rho \sim 10^3$ kg/cm$^3$ is a reasonable
+  the liquid density $\rho$ varies with temperature
+  with $\rho \sim 10^3$ kg/cm$^3$ a reasonable
   first order approximation
   \cite{asce}.
   
-  This model should be familiar to readers
-  of a standard classical mechanics text, such as Ref.~\cite{Taylor2005}
-  when studying 
-  models Millikan's oil drops.
-  
-  [{\it could certainly do more with this question to make it more computational.  For instance, plot $R$ as a function of any of the parameters $v$, $D$ and $\rho$, include a temperature dependent $\eta(T)$ in the Brownian system.  Suggest students model something big to imagine their own life at low Reynolds number... fairly off topic...}]
+
+%  [{\it could certainly do more with this question to make it more computational.  For instance, plot $R$ as a function of any of the parameters $v$, $D$ and $\rho$, include a temperature dependent $\eta(T)$ in the Brownian system.  Suggest students model something big to imagine their own life at low Reynolds number... fairly off topic...}]
 
 \label{ex:reynolds}
 
-\item{\bf Equation of Motion}
+%\item
+\subsection{Equation of Motion}
   \label{ex:n2l}
   
   Newton's second law states that
@@ -927,18 +941,31 @@ is in Ex.~\ref{ex:brownian}.
   \label{eq:n2l}
   \end{equation}
   where the constant of proportionality is the
-  inertial mass $m_i$
-  The addition of a dissipative force in a dynamical model
-  on a colloid is typically modeled
+  inertial mass $m_i$.  
+  The addition of a dissipative force to a dynamical equation 
+  of colloid motion 
+  is typically modeled
   with a drag force proportional to the particle's velocity
   in the opposite direction of motion 
-  $\vec{F}^{drag} = - \eta \vec{v}_i$
-  where $\eta$ is the drag coefficient.
-  The ratio of $m/\eta$ is %has units of time, % and is 
+  $\vec{F}^{drag} = - \gamma \vec{v}_i$
+  where $\gamma = 3 \pi \eta D$ is the drag coefficient
+  described in Ex.~\ref{ex:reynolds}.
+  The ratio of $m/\gamma$ is %has units of time, % and is 
   known as the momentum relaxation time, %.
   and is small for
   particles with low Reynolds numbers.
-  When $m/\eta$ is small,
+  The mass of the
+  typical experimental colloid particle is $15$ picograms,
+  leading to a momentum relaxation time
+  % \tau = 15 nanograms/(3 pi D \eta)
+  %$15*10^-12 / (3pi * 3*10^-6 meters * 0.001 Pa-s * 1000 g/kg)$  %1 Pa-s = 1 N s /m^2 = 1 kg /(m s)
+  on the order of microseconds.
+  %of $1.6 ~\mu$s.
+  Confirm for the values listed in Table ~\ref{tab:1},
+  the momentum relaxation time is 
+  $m/\gamma = 0.5 ~\mu$s. 
+  
+  When $m/\gamma$ is small,
   particle acceleration can be ignored
   entirely.
   (a) Using Newton's Second Law for
@@ -948,9 +975,10 @@ is in Ex.~\ref{ex:brownian}.
   can be modeled with the equation of motion described in 
   Eq.~\ref{eq:motion}. 
 
-  {\it this isn't very challenging, but I've see undergraduate students have a ``wow'' factor when they work this out for the first time.  This is closely related to the next exercise which is also primarily analytic rather than computational}
+%  {\it this isn't very challenging, but I've see undergraduate students have a ``wow'' factor when they work this out for the first time.  This is closely related to the next exercise which is also primarily analytic rather than computational}
 
-  \item {\bf Integration Methods}
+%\item
+  \subsection{Integration Methods}
     \label{ex:euler}
     To calculate the position of the particle we
     integrate the equation of motion using
@@ -960,8 +988,9 @@ is in Ex.~\ref{ex:brownian}.
     %In our model we use the
     Euler method. % to solve this equation.
     Our equation of motion provides
-    a direct calculation for particle velocity.
-    %
+    a direct calculation for particle velocity,
+    as demonstrated in Ex.~\ref{ex:n2l}.  
+    
   When solving ordinary differential equations,
   the Euler method is effective for solving linear equations
   of the form
@@ -1013,24 +1042,27 @@ is in Ex.~\ref{ex:brownian}.
   These methods include  higher order terms
   that provide accurate solutions for
   second order differential equations,
-  i.e. $dy/dt = v$ and $dv/dt = f_2(y,t)$,
-  where $f_2(y,t)$ is a second derivative function.
-  In Newton's second law this would be proportional
+  i.e. $dy/dt = v$ and $dv/dt = f_2(y,t)$.
+  %where $f_2(y,t)$ is a second derivative function.
+  In Newton's second law $f_2$ would be proportional
   to the net force on a single particle.
-  We do not integrate $f_2(y,t)$ since 
+
+  In our model 
+  we do not integrate $f_2(y,t)$ since 
   $a = dv/dt = 0$,
   and thus rearrange $f_2(y,t)$ to solve directly for $v$,
   as described in Ex.~\ref{ex:n2l}.
   The Taylor expansion of the position function $y(t)$
   \begin{equation}
-    y(t_n \pm \Delta t) = y(t_n) \pm \frac{dy}{dt} \Delta t + \frac{1}{2} \frac{d^2y}{dt^2} (\Delta t)^2 \pm O(\Delta t)^3 ... %\frac{1}{6} \frac{d^3y}{dt^3} (\Delta t)^3 + ...
+    y(t_n \pm \Delta t) = y(t_n) \pm \frac{dy}{dt} \Delta t + \frac{1}{2} \frac{d^2y}{dt^2} (\Delta t)^2 + \ldots
+    %\pm O(\Delta t)^3 ... %\frac{1}{6} \frac{d^3y}{dt^3} (\Delta t)^3 + ...
   \end{equation}
   is exact at first order
   for the $n$-th time step.
   
   Demonstrate how the Verlet method
   simplifies to the Euler method when
-  the particle acceleration $\vec{a}=0$.
+  the particle acceleration $a=0$.
 
 
   %We invite interested students to repeat this
@@ -1040,18 +1072,97 @@ is in Ex.~\ref{ex:brownian}.
   %does not depend on a particular set of conditions.
   %but is a direct consequence of the simplicity of the model.
 
-\item {\bf Brownian motion}
+%\item
+  \subsection{Brownian motion}
   \label{ex:brownian}
+  Brownian motion 
   is a temperature and viscosity dependent
-  phenomena. \cite{}
-  Consider the consequences of a non-zero temperature on the simulation, in which particles will collide with invisible particles making up the suspending fluid.  These collisions are more likely at higher temperature due to the increased kinetic energy of the fluid particles, as described by the Maxwell-Boltzmann distribution \cite{}.  In molecular dynamics simulations temperature effects can be modeled by including randomized forces $f^T$ to emulate the motion of particles undergoing Brownian motion.  A distribution of randomizes forces contributes equally in all directions such that the force averaged over a finite time interval is zero $\langle f^T(t) \rangle = 0$.  Random distributions of contain no correlations over the independent variable (time in this case) $\langle f^T(t) f^T(\tau)\rangle = 2 \eta k_B T \delta(t-\tau)$ where the energy $k_B T$ derived from the Boltzmann constant $k_B$ and temperature $T$ has energy units $E_0$.  \cite{Allen2017}
+  phenomena.
+  Particles change direction %randomly
+  due to collisions with fluid particles.
+  The frequency of collisions depends on the properties of
+  the suspending fluid.
+  These collisions are more likely at higher temperature
+  due to the increased kinetic energy of the fluid particles,
+  as described by the Maxwell-Boltzmann distribution \cite{Einstein1905}.
+  
+  %Consider a non-zero temperature in the simulation.
+  %in which particles will collide with invisible particles
+  %making up the suspending fluid.
+  In molecular dynamics simulations temperature effects
+  can be modeled by including randomized forces $f^T$
+  to emulate the motion of particles undergoing Brownian motion.
+  A distribution of random forces contributes equally in all
+  directions such that the force averaged over a finite time interval
+  is zero $\langle f^T(t) \rangle = 0$.
+  Random distributions are not correlated 
+  over the independent variable,
+  where we take our independent variable to be time 
+  $\langle f^T(t) f^T(\tau)\rangle = 2 \eta k_B T \delta(t-\tau)$
+  for a system with 
+  energy $k_B T$
+  derived from the Boltzmann constant $k_B$
+  and temperature $T$ \cite{Allen2017}.
+  A particle
+  with energy $k_b T_{min} > U_0$ may 
+  hop over landscape
+  barriers.
 
-  With no applied driving force, measure the minimum temperature required for a single particle to hop between minima in the potential landscape.
+  % (a) 
+  In simulation we define our temperature parameter
+  $k_b T/E_0 \rightarrow T$
+  since we set the constants to unity.
+  This allows us to choose
+e  a temperature that is easily compared to
+  the other system parameters that scale the forces.
+  For instance, 
+  with
+  no applied driving force,
+  the minimum temperature required for a single particle
+  to hop between minima in the potential landscape is
+  $T_{min} > A_p$.
+  Assuming a particle is confined to
+  motion along the $y-$direction, 
+  measure the position vs. time
+  of a non-driven colloid for $T/A_p = 0.5, 1.0$, and $2.0$
+  when Brownian motion is included
+  in the model.
+  Confirm that a particle will hop a barrier
+  for sufficiently high $T/A_p$ ratios.
+  
+  A quantity of interest
+  for a particle undergoing Brownian motion
+  is the rate of displacement
+  of the particle from its initial position 
+  This is measured as mean square displacement
+  as a function of time
+  \begin{equation}
+    \langle \Delta \vec{r}(t) ^2 \rangle = \langle (\vec{r}(t + t_0) - \vec{r}(t_0))^2\rangle 
+  \end{equation}
+  where $t_0$ is the initial time at
+  initial position $\vec{r}(t_0)$.
+  With no substrate, we would expect
+  the root mean square displacement (RMSD)
+  to be proportional to the elapsed time 
+  \begin{equation}
+    \sqrt {\langle \Delta \vec{r}(t) ^2 \rangle} \propto t.
+  \end{equation}
+  Confirm this result for $A_p = 0$.
+  Measure the RMSD as a function of time
+  of a non-driven colloid for $T/A_p = 0.5, 1.0$, and $2.0$.
+  Compare your result to the
+  substrate free RMSD.
 
-  Measure the rate of diffusion.
+  %(b)
+  How does Brownian motion affect
+  the formation of Shapiro steps?
+  With driving force reproduce the paper figures...
 
-\item {\bf Exploring Parameters of the Model}
+%\item
+  \subsection{Exploring Parameters of the Model}
   \label{ex:parameters}
+
+  La la la...
   
 %\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
 %  \item The Fokker-Planck Equation
@@ -1061,7 +1172,8 @@ is in Ex.~\ref{ex:brownian}.
  %   Vanossi et al J.Phys.: Condens. Matter 19 (2007)
 
 
-\item {\bf Visualizing motion + phase plots}
+%\item
+  \subsection{Visualizing motion + phase plots}
   \label{ex:animation}
   
   Drawing the contour 
@@ -1081,7 +1193,7 @@ is in Ex.~\ref{ex:brownian}.
 
   Phase plots...
     
-\end{enumerate}
+%\end{enumerate}
 
 \section{Conclusion}
 \label{sec:conclusion}	% You can label sections for reference
@@ -1338,6 +1450,7 @@ and the charge and spin of atomic systems.
   %[citation for these values better than wikipedia] \cite{} %CONFIRM!
   %density $\rho = 0.9982 g/cm^3$
 
+  \bibitem{Einstein1905} A Einstein, Investigations on the Theory of the Brownian Movement,  Dover Publications (1956).
     
 %\bibitem{latexsite} \LaTeX\ Project Web Site, \url{<http://www.latex-project.org/>}.
 
