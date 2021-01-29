@@ -590,7 +590,10 @@ viscosity coefficient & $\eta = F_0 \tau / a_0 $ & $\eta \sim 10^{-3}$ Pa-s \\
 %juniper uses water–ethanol mixture
 substrate period & $\lambda = 1.825 a_0$ & $\lambda = 3.5 \mu m$ \\
 substrate amplitude & $U_0 = 0.058 E_0$ & $U_0 = 75 k_B T \sim 2 J$ \\
-temperature & $T_0 = 0$ \footnote{see Ex.~\ref{ex:brownian} to include temperature in the limit where $U_0 \sim k_B T$.} & $T \sim 300K $ \\
+temperature & $T_0 = 0$ \footnote{to learn more about the effects
+  of temperature on this simulation
+  see Ex.~\ref{ex:brownian} where we study the limit
+  $U_0 \sim k_B T$.} & $T \sim 300K $ \\
 
 %FROM JUNIPER2015
 %l¼3.5 mm and a laser power per trap of WE0.75mW (trap stiffness: k=3.8\times10^7 kg /s^2; trap depth: V0 = 75 k_B T
@@ -1109,12 +1112,13 @@ are in Ex.~\ref{ex:animation}.
   barriers.
 
   % (a) 
-  In simulation we define our temperature parameter
+  In simulation we define our temperature parameter to
   $k_b T/E_0 \rightarrow T$
   since we set the constants to unity.
-  This allows us to choose
-e  a temperature that is easily compared to
-  the other system parameters that scale the forces.
+  In these units we can compare 
+  simulation temperature directly
+  to force 
+  in order to estimate the degree of random fluctuation.
   For instance, 
   with
   no applied driving force,
@@ -1122,13 +1126,16 @@ e  a temperature that is easily compared to
   to hop between minima in the potential landscape is
   $T_{min} > A_p$.
   Assuming a particle is confined to
-  motion along the $y-$direction, 
-  measure the position vs. time
-  of a non-driven colloid for $T/A_p = 0.5, 1.0$, and $2.0$
-  when Brownian motion is included
+  move along the $y-$direction,
+  include Brownian motion 
   in the model.
-  Confirm that a particle will hop a barrier
+  Measure the position vs. time
+  of a non-driven colloid for $T/A_p = 2.0, 4.0, 6.0$
+  and note  a particle will hop a barrier
   for sufficiently high $T/A_p$ ratios.
+  We find the crossover
+  to a hopping regime at $T/A_p \approx 5.6$
+  %when
   
   A quantity of interest
   for a particle undergoing Brownian motion
