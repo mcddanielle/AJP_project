@@ -159,7 +159,7 @@ def md_step(y, int_time, F_DC, avg_vy, parameters, ft=0):
 
 
 #####################################################################
-def plot_position_vs_time(time_data,y_data,p):
+def plot_position_vs_time(ax2,time_data,y_data,p):
     '''Make Fig. 2 in AJP
     '''
 
@@ -168,10 +168,6 @@ def plot_position_vs_time(time_data,y_data,p):
     F_AC = p['F_AC']
     freq = p['freq']
     period = p['period']
-    
-    fig = plt.figure(figsize=(8,8))
-    gs=gridspec.GridSpec(1,1)
-    ax2 = fig.add_subplot(gs[0,0])  #scatter plot of particles
 
     ax2.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
     #plt.xlim(155,157)
@@ -191,10 +187,6 @@ def plot_position_vs_time(time_data,y_data,p):
     for i in [1,5,9,13]:
         ax2.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
     '''
-    
-    plt.tight_layout(pad=0.1,h_pad=-0.3)
-    #g.tight_layout(fig, rect=[0, 0, 1, 1], h_pad=p_val,w_pad=p_val,pad=0.0)
-    plt.savefig(parameters['filename'])
     
     return 
 
@@ -384,7 +376,7 @@ def single_particle(parameters,plot="y-position"):
         return np.average(avg_vy_data) #/decifactor
       
 
-def brownian_particle(parameters):
+def brownian_particle(parameters,ax):
     '''
     '''
 
@@ -458,7 +450,7 @@ def brownian_particle(parameters):
         #update the time (simulation units)
         time += dt
 
-    plot_position_vs_time(time_data,y_data,parameters)
+    plot_position_vs_time(ax,time_data,y_data,parameters)
     return
     
     
@@ -481,7 +473,7 @@ def set_parameters():
     dict['y0'] =  dict['Sy']/2
 
     #landscape potential
-    dict['F0'] = 0.1
+    dict['F0'] = 0.1 
     dict['Np'] = 20         #number of troughs in the substrate
     dict['period'] = dict['Sy']/dict['Np']  #spatial period of substrate in y-direction
 
@@ -543,14 +535,33 @@ if __name__ == "__main__":
     if make_brownian:
         
         parameters['dt'] = 0.1 #timestep in simulation units
-        parameters['maxtime']=10000000        #total time steps in simulation
+        parameters['maxtime']=3000000        #total time steps in simulation
         parameters['writemovietime']=10000   #interval to write data to arrays for plotting
         parameters['decifactor']=1   #interval to write data to arrays for plotting
         parameters['filename']="brownian_particle_dt0.1.pdf"
 
-        #run a single MD simulation for a set of parameters
-        brownian_particle(parameters)
+        fig = plt.figure(figsize=(10,15))
+        gs=gridspec.GridSpec(3,1)
+        i=0
+        letter=["(a)","(b)","(c)"]
         
+        for temp in [4.0, 5.0, 6.0]:
+
+            ax = fig.add_subplot(gs[i,0])
+            ax.text(0.02,0.89,letter[i],transform = ax.transAxes,backgroundcolor="white",zorder=-10)
+
+            #Brownian motion factor
+            parameters['temperature'] = temp*parameters['F0']
+
+            #run a single MD simulation for a set of parameters
+            brownian_particle(parameters,ax)
+
+            i+=1
+
+        plt.tight_layout(pad=0.1,h_pad=-0.3)
+        #g.tight_layout(fig, rect=[0, 0, 1, 1], h_pad=p_val,w_pad=p_val,pad=0.0)
+        plt.savefig(parameters['filename'])
+            
     if make_fig3: 
         #reset some parameters for subsequent figures
         #parameters['F_DC_incr'] = 0.01        #amount to increase FDC at every drop step
