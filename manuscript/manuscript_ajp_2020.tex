@@ -982,7 +982,8 @@ are in Ex.~\ref{ex:animation}.
 
 %\item
   \subsection{Integration Methods}
-    \label{ex:euler}
+  \label{ex:euler}
+  %{\it cut this one?  not really saying much}
     To calculate the position of the particle we
     integrate the equation of motion using
     the standard definition of velocity
@@ -1080,8 +1081,8 @@ are in Ex.~\ref{ex:animation}.
   \label{ex:brownian}
   Brownian motion 
   is a temperature and viscosity dependent
-  phenomena.
-  Particles change direction %randomly
+  phenomena in which 
+  particles change direction %randomly
   due to collisions with fluid particles.
   The frequency of collisions depends on the properties of
   the suspending fluid.
@@ -1128,14 +1129,18 @@ are in Ex.~\ref{ex:animation}.
   Assuming a particle is confined to
   move along the $y-$direction,
   include Brownian motion 
-  in the model.
-  Measure the position vs. time
-  of a non-driven colloid for $T/A_p = 4.0, 5.0, 6.0$
-  and note  a particle will hop a barrier
-  for sufficiently high $T/A_p$ ratios.
-  We find the crossover
-  to a hopping regime at $T/A_p \approx 5.6$
+  in the model,
+  we find the crossover
+  to a hopping regime at $T/A_p \approx 5.6$.
   %when
+  We demonstrate this hopping
+  pattern in 
+  %Measure the position vs. time
+  a non-driven colloid for $T/A_p = 4.0, 5.0, 6.0$.
+  %and note  a particle will hop a barrier
+  %for sufficiently high $T/A_p$ ratios.
+  Reproduce these results.
+  
   \begin{center}
     \begin{figure}[h!]
       \centering
@@ -1153,6 +1158,33 @@ are in Ex.~\ref{ex:animation}.
     \end{figure}
   \end{center}
   In Fig.~\ref{fig:brownian}
+  we show the position versus time of a simple particle
+  confined to a sinusoidal landscape
+  undergoing Brownian motion.
+  We increase the temperature relative
+  to the amplitude of the landscape
+  troughs until the particle enters a hopping regime.
+  In  Fig.~\ref{fig:brownian}(a)
+  $T/A_p = 4.0$ and the particle executes a 
+  random walk centered at the potential minima $y/\lambda = 10$.
+  We ran many simulations and never observed a hop to another minima.
+  In  Fig.~\ref{fig:brownian}(b)
+  $T/A_p = 5.0$ where hops between
+  potential minima are possible but not probable,
+  a single hop occurs from
+  $y/\lambda = 10$ to $y/\lambda = 11$ at
+  $t \sim 13000 \tau$.
+  In other simulations with identical parameters,
+  we sometimes observed no hops or two hops between minima,
+  as expected with random fluctuating systems.
+  In  Fig.~\ref{fig:brownian}(c)
+  $T/A_p = 6.0$ 
+  we observe approximately 15 hops,
+  indicating the random thermalized kicks are
+  sufficiently large to make the particle perform
+  a random walk of hops a top the substrate
+  in addition to the small scale random walk executed
+  by all particles in this section.
   
   A quantity of interest
   for a particle undergoing Brownian motion
