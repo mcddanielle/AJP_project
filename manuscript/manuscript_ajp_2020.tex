@@ -867,7 +867,7 @@ are in Ex.~\ref{ex:animation}.
 \includegraphics[width=\columnwidth]{sweep_FDC_vs_vx.pdf}
 \caption{Average particle velocity  $\langle v_{y} \rangle$ as a function of $F^{dc}$,
   the constant parameter of $F^d(t)$ defined in Eq.~\ref{eq:drive}.
-  The remaining parameters in $F^d(t)$ are as in Fig.~\ref{fig:0}, $F^{ac}=0.05$ and $f = 0.01$. [{\it I believe the slight slope in this curve is due to sampling - where does the particle start/end ?}]}
+  The remaining parameters in $F^d(t)$ are as in Fig.~\ref{fig:0}, $F^{ac}=0.05$ and $f = 0.01$. }
 \label{fig:1}
 \end{figure}
 \end{center}
@@ -1082,29 +1082,43 @@ are in Ex.~\ref{ex:animation}.
   Brownian motion 
   is a temperature and viscosity dependent
   phenomena in which 
-  particles change direction %randomly
-  due to collisions with fluid particles.
+  visible particles change direction,
+  apparently at random, 
+  due to collisions with invisible fluid particles.
   The frequency of collisions depends on the properties of
   the suspending fluid.
-  These collisions are more likely at higher temperature
-  due to the increased kinetic energy of the fluid particles,
+  At higher temperatures
+  the increased kinetic energy of particles
+  makes collisions more likely, 
   as described by the Maxwell-Boltzmann distribution \cite{Einstein1905}.
   
   %Consider a non-zero temperature in the simulation.
   %in which particles will collide with invisible particles
   %making up the suspending fluid.
   In molecular dynamics simulations temperature effects
-  can be modeled by including randomized forces $f^T$
+  can be modeled with randomized forces $f^T$
   to emulate the motion of particles undergoing Brownian motion.
-  A distribution of random forces contributes equally in all
+  A random distribution of forces
+  causes motion
+  equally in all
   directions such that the force averaged over a finite time interval
-  is zero $\langle f^T(t) \rangle = 0$.
+  is zero
+  \begin{equation}
+    \langle f^T(t) \rangle = \frac{1}{N} \sum_n^N f^T_n = 0
+  \end{equation}
+  where $n$ is an integer indicating
+  discrete simulation timesteps
+  such that $t = N \Delta t$.
   Random distributions are not correlated 
   over the independent variable,
-  where we take our independent variable to be time 
-  $\langle f^T(t) f^T(\tau)\rangle = 2 \eta k_B T \delta(t-\tau)$
-  for a system with 
-  energy $k_B T$
+  for the independent variable to be time
+  \begin{equation}
+  \langle f^T(t) f^T(\tau)\rangle = 2 \eta k_B T \delta(t-\tau)
+  \end{equation}
+  for times $t$ and $\tau$,
+  where $\delta(t-\tau)$ is the Dirac-delta function.
+  Here the scaling factor energy of 
+  $k_B T$ is
   derived from the Boltzmann constant $k_B$
   and temperature $T$ \cite{Allen2017}.
   A particle
@@ -1218,7 +1232,10 @@ are in Ex.~\ref{ex:animation}.
   \subsection{Exploring Parameters of the Model}
   \label{ex:parameters}
 
-  La la la...
+  A range of interesting behaviors
+  can be explored by varying the
+  relative strength of the confining landscape
+  and external driving force.  
   
 %\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
 %  \item The Fokker-Planck Equation
