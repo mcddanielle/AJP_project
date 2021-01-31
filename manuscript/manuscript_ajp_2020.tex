@@ -818,6 +818,14 @@ The step width is non-linear
 and can have a variety of
 interesting patterns
 such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
+We note the individual steps
+are not strictly horizontal 
+since particles move continuously
+through the landscape, so changes in $F^{dc}$
+will create linear changes in 
+net particle displacement that are observable
+within a single step.
+
 %$\lambda = L/N_p = 36.5/20 = 1.825$ is the spatial period, or wavelength
 %of the landscape,
 %and $f = 0.01$ cycles per time unit.
@@ -867,7 +875,7 @@ are in Ex.~\ref{ex:animation}.
 \includegraphics[width=\columnwidth]{sweep_FDC_vs_vx.pdf}
 \caption{Average particle velocity  $\langle v_{y} \rangle$ as a function of $F^{dc}$,
   the constant parameter of $F^d(t)$ defined in Eq.~\ref{eq:drive}.
-  The remaining parameters in $F^d(t)$ are as in Fig.~\ref{fig:0}, $F^{ac}=0.05$ and $f = 0.01$. }
+  The remaining parameters in $F^d(t)$ are as in Fig.~\ref{fig:0}, $F^{ac}=0.05$ and $f = 0.01$.  }
 \label{fig:1}
 \end{figure}
 \end{center}
@@ -1235,7 +1243,35 @@ are in Ex.~\ref{ex:animation}.
   A range of interesting behaviors
   can be explored by varying the
   relative strength of the confining landscape
-  and external driving force.  
+  and external driving force.
+  For the single driven particle,
+  the hopping patterns are typically characterized
+  by $n_f$ the number of steps forward
+  versus $n_b$ the number of steps backward within a single
+  time period,
+  for a total displacement of $n_f - n_b$ integer steps of $\lambda$
+  In Fig.~\ref{fig:0},
+  the particle moves forward through two minima, i.e. $n_f = 2$,
+  and does not move backward a full minima - $n_b = 0$,
+  in a single period, such that the pattern
+  is characterized as $2(2,0)$.
+  In experiments with single particles \cite{Juniper2015}, 
+  hopping patterns of $n_f = 0 - 6$ for $n_b = 0$,
+  $n_f = 0 - 5$ for $n_b = -1$,
+  and
+  $n_f = 2 - 3$ for $n_b = -2$
+  were realized 
+  for a variety of applied forces parameters $F^{dc}$ and $F^{ac}$.
+
+  In order to achieve
+  backwards hops,
+  a particle must have a high ratio of $F^{ac}/F^{dc}$.
+  
+  Additionally the frequency must be low so that
+  the high force portions of the cycle last
+  long enough to move a particle over substrate extrema.
+
+  
   
 %\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
 %  \item The Fokker-Planck Equation
@@ -1306,7 +1342,7 @@ where the average particle velocity
 is fixed for a range of dc drive forces \cite{Reichhardt2015}.
 
 Our simulations reproduce results presented in 
-Juniper {\it et al.} \cite{Juniper2015, Juniper2018}
+Juniper {\it et al.} \cite{Juniper2015} %, Juniper2018}
 which demonstrated
 mode locking in
 experiments and simulations of 
@@ -1477,9 +1513,9 @@ and the charge and spin of atomic systems.
 
     \bibitem{Reichhardt2015} C. Reichhardt, and C. J. O. Reichhardt,  Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Phys. Rev. B {\bf 92}, (22). (2015).
       
-    \bibitem{Juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015).
-
-    \bibitem{Juniper2018} Juniper, M. P. N., Zimmermann, U., Straube, A. V., Besseling, R., Aarts, D. G. A. L., Löwen, H., and Dullens, R. P. A.  Dynamic mode locking in a driven colloidal system: Experiments and theory. New Journal of Physics, 19(1). (2017).  %https://doi.org/10.1088/1367-2630/aa53cd
+    \bibitem{Juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015); 
+    %\bibitem{Juniper2018}
+      Juniper, M. P. N., Zimmermann, U., Straube, A. V., Besseling, R., Aarts, D. G. A. L., Löwen, H., and Dullens, R. P. A.  Dynamic mode locking in a driven colloidal system: Experiments and theory. New Journal of Physics, 19(1). (2017).  %https://doi.org/10.1088/1367-2630/aa53cd
       
     \bibitem{Herrera-Velarde2008} S. Herrera-Velarde and R. Castañeda-Priego, Superparamagnetic colloids confined in narrow corrugated substrates, Phys. Rev. E {\bf 77}, 041407 (2008).
 
