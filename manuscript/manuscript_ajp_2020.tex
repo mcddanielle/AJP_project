@@ -719,8 +719,8 @@ with
 the average velocity 
 $\langle {v}_y \rangle= 2 \lambda f$. % where $T = 1/f$.
 The horizontal dashed lines
-coincide with %the condition the is
-minimum substrate force  $F^l = -A_p$,  
+coincide with the condition the particle is at a substrate minima
+where substrate force  $F^l = -A_p$,  
 i.e. $\sin{(\pi y / \lambda)} = 1$.
 %or $\pi y / \lambda = m \pi/2$, where $m = 1, 5, 7$, {\it etc.}
 %Once the particle motion
@@ -729,10 +729,10 @@ i.e. $\sin{(\pi y / \lambda)} = 1$.
 The particle synchronizes its motion such that the 
 driving force is maximum when the landscape 
 force is minimum,
-as indicated with %the coincidence of 
+as indicated %with the coincidence of 
 with the intersection of
-horizontal and vertical lines
-and the particle position $y$.
+vertical and horizontal lines.  
+%i.e. the particle position $y/\lambda$.  
 The slope of $y/\lambda$
 is proportional to the net force on the particle.
 This can be seen in 
@@ -974,7 +974,7 @@ are in Ex.~\ref{ex:animation}.
   %of $1.6 ~\mu$s.
   Confirm for the values listed in Table ~\ref{tab:1},
   the momentum relaxation time is 
-  $m/\gamma = 0.5 ~\mu$s. 
+  $m/\gamma \approx 0.5 ~\mu$s. 
   
   When $m/\gamma$ is small,
   particle acceleration can be ignored
@@ -1026,20 +1026,31 @@ are in Ex.~\ref{ex:animation}.
   over the same maximum time
   (i.e. decrease the overall simulation time and sampling rate)
   and reproduce the motions shown in Fig.~\ref{fig:0}(b).
-  This is due to the linear nature of the solution,
-  and the lack of interaction with neighboring particles.
+  This is due to the linear nature of the solution
+  for an isolated particle.
   Apply the Euler method to our equation
   of motion to solve for the analytic expression
   of position of a particle
   $y_n$ at the $nth$ timestep (i.e. Eq.~\ref{eq:euler}).
   %How to the motions of the particle compare when the timestep
   %becomes large?
+  [UPDATE]
+  Demonstrate the timestep
+  of a single particle can be made large
+  with no change to the overall physics.
+  You will need to modify the maximum
+  simulation time, and the frequency of data saved for plotting purposes.
 
-  {\it small timesteps matter a great deal when particle interactions
-    are included in the model.  I have demonstrated that
-    without particle interactions we can increase the timestep
-  with no penalty, so this isn't a very interesting problem.}
-
+  Interaction with neighboring particles
+  makes a small timestep essential for molecular dynamics simulations.
+  Since particle-particle interactions are typically non-linear,
+  the interaction force changes significantly over small distances,
+  making this simulation a unique
+  exception to typical simulation timesteps.
+  %{\it small timesteps matter a great deal when particle interactions
+  %  are included in the model.  I have demonstrated that
+  %  without particle interactions we can increase the timestep
+  %with no penalty, so this isn't a very interesting problem.}
   %FOLLOW UP WITH THIS!
   %Because we are performing molecular dynamics
   %for a single particle on a smooth potential energy landscape,
@@ -1180,7 +1191,7 @@ are in Ex.~\ref{ex:animation}.
     \end{figure}
   \end{center}
   In Fig.~\ref{fig:brownian}
-  we show the position versus time of a simple particle
+  we show the position versus time of a particle
   confined to a sinusoidal landscape
   undergoing Brownian motion.
   We increase the temperature relative
@@ -1226,21 +1237,25 @@ are in Ex.~\ref{ex:animation}.
     \sqrt {\langle \Delta \vec{r}(t) ^2 \rangle} \propto t.
   \end{equation}
   Confirm this result for $A_p = 0$.
+  %[INSERT advice on length of time to run?]
   Measure the RMSD as a function of time
-  of a non-driven colloid for $T/A_p = 0.5, 1.0$, and $2.0$.
+  of a non-driven colloid for $T/A_p = 4.0, 5.0$, and $6.0$,
+  as shown in Fig.~\ref{fig:brownian}.
   Compare your result to the
   substrate free RMSD.
+  %%[INSERT EXPECTED RESULTS.  presumbably for sufficiently large $T/A_p$ the result collapsed back to standard diffusion.]
 
   %(b)
   How does Brownian motion affect
   the formation of Shapiro steps?
   With driving force reproduce the paper figures...
+  %%[there is no way I want to run this with python...]
 
 %\item
   \subsection{Exploring Parameters of the Model}
   \label{ex:parameters}
 
-  A range of interesting behaviors
+  A range of oscillation behaviors
   can be explored by varying the
   relative strength of the confining landscape
   and external driving force.
@@ -1248,29 +1263,83 @@ are in Ex.~\ref{ex:animation}.
   the hopping patterns are typically characterized
   by $n_f$ the number of steps forward
   versus $n_b$ the number of steps backward within a single
-  time period,
-  for a total displacement of $n_f - n_b$ integer steps of $\lambda$
+  time period.
+  The total displacement of $n_f - n_b$ integer steps of
+  the substrate period $\lambda$ characterize
+  the net hop length.  
   In Fig.~\ref{fig:0},
+  in a single period 
   the particle moves forward through two minima, i.e. $n_f = 2$,
-  and does not move backward a full minima - $n_b = 0$,
-  in a single period, such that the pattern
-  is characterized as $2(2,0)$.
-  In experiments with single particles \cite{Juniper2015}, 
-  hopping patterns of $n_f = 0 - 6$ for $n_b = 0$,
-  $n_f = 0 - 5$ for $n_b = -1$,
+  and does not move backward a full minima ($n_b = 0$).  
+  %such that the pattern
+  %is characterized as $2(2,0)$.
+  In order to achieve
+  backwards hops,
+  a particle must have a ratio of $F^{ac}/F^{dc} > 1$,
+  and a difference $|F^{ac} - F^{dc}| > A_p$.
+  %which can also produce large forward hops.
+  %INSERT figure with a range of hopping patterns for a run
+  The frequency must be sufficiently low so that
+  the time interval in which the applied force is large
+  is sustained so that a particle will
+  traverse a substrate extrema.
+  Experiments with single colloids \cite{Juniper2015} 
+  show 
+  hopping patterns with backward steps are more difficult
+  to achieve than forward,
+  with $n_f = 0$ to $6$ for $n_b = 0$,
+  $n_f = 0$ to $5$ for $n_b = -1$,
   and
-  $n_f = 2 - 3$ for $n_b = -2$
+  $n_f = 2$ to $3$ for $n_b = -2$
   were realized 
   for a variety of applied forces parameters $F^{dc}$ and $F^{ac}$.
 
-  In order to achieve
-  backwards hops,
-  a particle must have a high ratio of $F^{ac}/F^{dc}$.
   
-  Additionally the frequency must be low so that
-  the high force portions of the cycle last
-  long enough to move a particle over substrate extrema.
+  In Fig.~\ref{fig:hops}
+  we show the results for lowering the frequency
+  of the system for our original parameters.
+  For the parameters
+  $F^{dc}=0.1$, $F^{ac}=0.05$, and $a_p = 0.1$,
+  $n_b = 0$
+  across a broad range of frequencies,
+  and $n_f$ increases as frequency decreases.
+  Low frequencies
+  result in sustained positive or negative motion of a particle,
+  where in Fig.~\ref{fig:hops}(e)
+  the particle reaches the top edge of the system
+  and wraps back to $y=0$.
 
+  In Fig.~\ref{fig:hops_back}
+  we show the results for increasing $F^{ac}$
+  of the system for our original parameters.
+  Here $n_b$ increases from $n_b = 0$ in (a) to 
+
+  \begin{center}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=\columnwidth]{{parameters_fig5}.pdf}
+      \caption{
+        Motion of a particle with the same values of $F^{dc} = 0.1$ and $F^{ac} = 0.05$ as Fig.~\ref{fig:1} and decreasing frequency as marked.    
+      }
+      \label{fig:hops}
+    \end{figure}
+  \end{center}
+  %In Fig.~\ref{fig:hops}
+
+  \begin{center}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=\columnwidth]{{parameters_fig6}.pdf}
+      \caption{
+        Motion of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:1} and increasing $F^{ac}$.
+        (a) The particle moves forward six minima with no steps backward.
+        (b) The particle moves forward eight minima with two steps backward.
+        (c) The particle moves forward nine minima with four steps backward.
+      }
+      \label{fig:hops_back}
+    \end{figure}
+  \end{center}
+  %In Fig.~\ref{fig:hops}
   
   
 %\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
@@ -1279,9 +1348,8 @@ are in Ex.~\ref{ex:animation}.
 %  \item nanotribology
  %   kink motion
  %   Vanossi et al J.Phys.: Condens. Matter 19 (2007)
-
-
-%\item
+  %\item
+  
   \subsection{Visualizing motion + phase plots}
   \label{ex:animation}
   
@@ -1308,14 +1376,34 @@ are in Ex.~\ref{ex:animation}.
 \label{sec:conclusion}	% You can label sections for reference
 A single particle oscillator
 in a potential well is 
-much like a skateboarder in a half-pipe or
+like a skateboarder in a half-pipe or
 a child on a swing.
-If subject to an applied force,
-a confined oscillator may 
+%If subject to an applied force,
+A confined oscillator may 
 synchronize its location
 to the periodic pattern of the external drive,
 moving back and forth in time with
 the beat. 
+The relationship between the driving force and
+landscape can change the pattern of motion.  
+With a constant or 
+dc drive the landscape modulates 
+the particle velocity, below some threshold  
+the dc force is not strong enough to push the particle
+across a potential maximum so the average velocity is zero,
+a phenomena referred to as pinning \cite{Reichhardt2017}.
+Above the pinning threshold,
+a particle subject to a constant
+drive force will increase its speed at a rate propotional
+to the external drive.  
+%and dissipating energy from the system at all driving forces.
+A sinusoidal or ac drive can create mode-locking,
+where the average particle velocity
+is fixed for a range of dc drive forces \cite{Reichhardt2015}.
+This synchronization phenomena
+is useful for understanding the complex dynamical 
+systems.  
+
 %Fundamental models
 %of synchronization 
 %can %include many coupled oscillators
@@ -1326,38 +1414,24 @@ a single particle driven across a periodic potential landscape
 %Single particle studies are useful
 to study synchronization dynamics
 that arise due to the interplay
-between a particles environment and external forces.
+between environmental and external forces.
 %due to interactions between particles.
-The relationship between the driving force and
-landscape can change the pattern of motion.  
-With a constant or 
-dc drive the landscape modulates 
-the particle velocity, below some threshold  
-the dc force is not strong enough to push the particle
-across a potential maximum so the average velocity is zero,
-a phenomena referred to as pinning \cite{Reichhardt2017}.  
-%and dissipating energy from the system at all driving forces.
-A sinusoidal or ac drive creates mode-locking,
-where the average particle velocity
-is fixed for a range of dc drive forces \cite{Reichhardt2015}.
-
 Our simulations reproduce results presented in 
 Juniper {\it et al.} \cite{Juniper2015} %, Juniper2018}
-which demonstrated
+which demonstrate 
 mode locking in
 experiments and simulations of 
 driven colloids on a
-optical periodic landscape.
+periodic optical landscape.
 Due to the relative ease of
 manipulation and imagining, 
 colloids are used as experimental models
-for systems relatively hard to access and visualize. 
-Collections of colloids can
-be used to study the properties of solids and liquids
-%comprised of smaller particles
-%such as atoms \cite{} or electrons \cite{}
-or more exotic systems 
+for systems %relatively
+hard to access and visualize 
 such as cold atoms or electron gases \cite{Grier2003}.
+%Collections of colloids can
+%be used to study the properties of solids and liquids
+%or more exotic systems 
 %Oscillators ordered into chains or lattices.
 %has many important
 %technological applications
@@ -1367,26 +1441,20 @@ is %often
 observed
 in quantum electronic
 devices such as Josephson junctions \cite{Josephson1962,Josephson1965}.
-A single junction contains 
-two superconductoring layers which sandwich an insulating layer.
-When subject to an external voltage,
-Cooper pairs in the superconducting materials
-tunnel through the insulating layer.
+%A single junction contains 
+%two superconductoring layers which sandwich an insulating layer.
+%When subject to an external voltage,
+%Cooper pairs in the superconducting materials
+%tunnel through the insulating layer.
 Phase-locking is observed as 
-%phase-locked current loops \cite{} 
 stepped regions in current-voltage (I-V) relationship in these devices,
 where voltage is the analog of external driving force
 and current is that of particle velocity.
-%where a constant current results from a range of voltages
-%due to the quantized nature of the tunneling probability [NOT QUITE RIGHT...].
-%instead of ohmic relationships.
 Known as Shapiro steps, % \cite{},
 these phase locked currents  
 have been observed due to applied ac voltages in 
 single Josephson junctions \cite{Shapiro1963, Golubov2004} and
 coupled arrays of junctions \cite{Benz1990}.
-%either in 
-%velocity-force curves and voltage-current curves \cite{Golubov2004}.
 Shapiro steps vary in width depending on the strength of the
 applied ac forces,
 and are observed in a variety of systems
@@ -1399,7 +1467,7 @@ charge and spin density waves
 and superconducting vortices in landscapes 
 engineered with periodic patterns of pinning sites.
 Thus the study of
-mode-locking is a useful problem
+mode-locking is a useful probe 
 of complex quantum mechanical systems.
 Our results can be relevant 
 to synchronization effects
