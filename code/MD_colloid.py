@@ -15,6 +15,9 @@ import math, sys
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
+from matplotlib.ticker import (MultipleLocator, FormatStrFormatter,
+                               AutoMinorLocator)
+
 #set default font of plot
 plt.rc('font', size=24)
 
@@ -591,7 +594,7 @@ if __name__ == "__main__":
         for i in range(n_plots):
 
             ax = fig.add_subplot(gs[i,0])
-            ax.text(0.02,0.8,letter[i]+str_iv%(ind_var[i]),transform = ax.transAxes,backgroundcolor="white",zorder=-10)
+            ax.text(0.02,0.8,letter[i]+str_iv%(ind_var[i]),transform = ax.transAxes,backgroundcolor="white")
                         
             parameters['axis'] = ax
 
@@ -599,6 +602,17 @@ if __name__ == "__main__":
                 parameters['freq'] = frequency[i]
             else:
                 parameters['F_AC'] = F_AC[i]
+                '''
+                if i == 1:
+                    for j in [6,12,18]:
+                        ax.axhline(y=j, color="black", linestyle = "--")
+                elif i == 2:
+                    for j in [5,10,15]:
+                        ax.axhline(y=j, color="black", linestyle = "--")                  '''
+                #horizontal grid
+                ax.set_ylim(0,20)
+                ax.yaxis.set_minor_locator(AutoMinorLocator(5))
+                ax.grid(axis='y',which='both')
                 
             single_particle(parameters,plot="just_position")
 
