@@ -160,7 +160,7 @@ def md_step(y, int_time, F_DC, avg_vy, parameters, ft=0):
 
 #####################################################################
 def plot_position_vs_time(ax2,time_data,y_data,p):
-    '''Make Fig. 2 in AJP
+    '''Brownian figure, Fig. 5
     '''
 
     #for plot
@@ -180,6 +180,7 @@ def plot_position_vs_time(ax2,time_data,y_data,p):
     #ax2.text(0.9,0.84,"(b)",transform = ax2.transAxes,backgroundcolor="white",zorder=-10)
     
     #add horizontal lines for potential minima
+
     '''
     for i in [1,3,5,7]:
         ax2.axhline(y=i, color = "black", linestyle = "--")
@@ -228,17 +229,21 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
 
     ax1.set_xlim(0,time_data[-1]+1)
     ax2.set_xlim(0,time_data[-1]+1)
-    ax2.set_ylim(-0.1,y_data[-1]/period+0.2)
+    #ax2.set_ylim(-0.1,y_data[-1]/period+0.2)
 
-    ax1.text(0.9,0.85,"(a)",transform = ax1.transAxes,backgroundcolor="white")
-    ax2.text(0.9,0.84,"(b)",transform = ax2.transAxes,backgroundcolor="white",zorder=-10)
+    ax1.text(0.9,0.86,"(a)",transform = ax1.transAxes,backgroundcolor="white")
+    ax2.text(0.9,0.06,"(b)",transform = ax2.transAxes,backgroundcolor="white")
+
+    ax2.set_ylim(0.0,8.501)
+    ax2.set_yticks([1,3,5,7])
     
     #add horizontal lines for potential minima
-    for i in [1,3,5,7]:
+    #'''
+    for i in range(1,10)[::2]:
         #ax2.hline(i)
         #, label = "U(y) = -U$_0$")
         ax2.axhline(y=i, color = "black", linestyle = "--")
-
+    #'''
     for i in [1,5,9,13]:
         #peaks of the FD curve
         ax2.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
@@ -372,10 +377,17 @@ def single_particle(parameters,plot="y-position"):
         plot_force_position_vs_time(time_data,FDC_data,y_data,parameters)
         return
     
+    elif plot == "just_position":
+        plot_position_vs_time(parameters['axis'], time_data,y_data,parameters)
+        return
+    
     elif plot == "y-velocity":  
         return np.average(avg_vy_data) #/decifactor
       
 
+#----------------------------------------------------------------
+#
+#----------------------------------------------------------------
 def brownian_particle(parameters,ax):
     '''
     '''
@@ -470,10 +482,10 @@ def set_parameters():
     dict['time0'] = 0       #initial time in integer timesteps
 
     #start the particle in a local minima (not a local max!)
-    dict['y0'] =  dict['Sy']/2
+    dict['y0'] =  0 #dict['Sy']/2
 
-    #landscape potential
-    dict['F0'] = 0.1 
+    #landscape potential - Fig2 - 0.1
+    dict['F0'] = 0.1 #parameters 0.2
     dict['Np'] = 20         #number of troughs in the substrate
     dict['period'] = dict['Sy']/dict['Np']  #spatial period of substrate in y-direction
 
@@ -499,27 +511,35 @@ def set_parameters():
     dict['decifactor'] = 5000     #decimation factor integer timesteps to average force
 
     #control the oscillating component of driving force
+
+    #fig2
     dict['F_AC'] = 0.05              #amplitude of force oscillation
     dict['freq'] = 0.01              #frequence of force osillation
+    
+    #parameters
+    #dict['F_AC'] = 0.8              #amplitude of force oscillation
+    #dict['freq'] = 0.006              #frequence of force osillation
     
 
     return dict
 
-
-    
 #-------------------------------------------------------------------
 if __name__ == "__main__":
 
     parameters = set_parameters()
 
-    make_fig2 = False #True 
+    make_fig2 = False #True #False #True 
     make_fig3 = False #True
-    make_brownian = True
+    make_brownian = False #True
+    make_fig5 = False #True
+    make_fig6 = True #False #True
 
+    letter=["(a)","(b)","(c)","(d)","(e)","(f)","(g)"]
+
+            
     #--------------------------------------------------------------
     #make Fig. 2 - run a single particle at a single driving force
     #--------------------------------------------------------------
-
     if make_fig2:
         
         parameters['dt'] = 0.1 #timestep in simulation units
@@ -532,6 +552,64 @@ if __name__ == "__main__":
         #run a single MD simulation for a set of parameters
         single_particle(parameters)
 
+
+    if make_fig5 or make_fig6:
+        
+        parameters['dt'] = 0.1 #timestep in simulation units
+        parameters['maxtime']=3000        #total time steps in simulation
+        parameters['writemovietime']=1   #interval to write data to arrays for plotting
+        parameters['decifactor']=1   #interval to write data to arrays for plotting
+
+        if make_fig5:
+            parameters['filename']="parameters_fig5.pdf"
+            frequency = [0.1, 0.05, 0.01, 0.005, 0.001]
+
+            ind_var = frequency
+            str_iv=" f=%1.3f"
+
+        else:
+            frequency = [0.01]
+            F_AC = [0.2, 0.3, 0.4]
+
+            ind_var = F_AC
+            str_iv=" $F^{ac}$=%1.2f"
+            
+            parameters['filename']="parameters_fig6.pdf"
+            parameters['freq'] = frequency[0]
+
+            #parameters['F0'] = 0.05              
+            #parameters['F_DC_max'] = 0.05        #"constant" driving force for most of simulation
+
+            
+        n_plots = len(ind_var)
+        
+        fig = plt.figure(figsize=(10,3*n_plots))
+
+        gs=gridspec.GridSpec(n_plots,1)
+        
+        #run a single MD simulation for a set of parameters
+        for i in range(n_plots):
+
+            ax = fig.add_subplot(gs[i,0])
+            ax.text(0.02,0.8,letter[i]+str_iv%(ind_var[i]),transform = ax.transAxes,backgroundcolor="white",zorder=-10)
+                        
+            parameters['axis'] = ax
+
+            if make_fig5:
+                parameters['freq'] = frequency[i]
+            else:
+                parameters['F_AC'] = F_AC[i]
+                
+            single_particle(parameters,plot="just_position")
+
+            if i < n_plots-1:
+                ax.tick_params(labelbottom=False)
+                ax.set_xlabel("")
+
+        plt.tight_layout(pad=0.1,h_pad=-0.3)
+
+        plt.savefig(parameters['filename'])
+        
     if make_brownian:
         
         parameters['dt'] = 0.1 #timestep in simulation units
