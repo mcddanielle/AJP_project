@@ -914,9 +914,9 @@ are in Ex.~\ref{ex:animation}.
   When $R$ is small, the quadratic and higher order terms
   may be ignored in favor of the linear drag term.
 
-  Using reasonable values for the
+  {\bf Using reasonable values for the
   experimental analog of this system, 
-  demonstrate the Reynolds number is low.
+  show that the Reynolds number is small.}
   In addition to the values listed in Table ~\ref{tab:1}, 
  % Approximate experimental values for
  % a colloid size and speed
@@ -972,19 +972,19 @@ are in Ex.~\ref{ex:animation}.
   %$15*10^-12 / (3pi * 3*10^-6 meters * 0.001 Pa-s * 1000 g/kg)$  %1 Pa-s = 1 N s /m^2 = 1 kg /(m s)
   on the order of microseconds.
   %of $1.6 ~\mu$s.
-  Confirm for the values listed in Table ~\ref{tab:1},
+  {\bf Confirm for the values listed in Table ~\ref{tab:1},
   the momentum relaxation time is 
-  $m/\gamma \approx 0.5 ~\mu$s. 
+  $m/\gamma \approx 0.5 ~\mu$s. }
   
   When $m/\gamma$ is small,
   particle acceleration can be ignored
   entirely.
   (a) Using Newton's Second Law for
   a small momentum relaxation time, 
-  demonstrate that a particle confined to a landscape exerting force
+  {\bf show that a particle confined to a landscape exerting force
   $F^l(\vec{r}_i)$ subject to a time dependent drive $F^d(t)$
   can be modeled with the equation of motion described in 
-  Eq.~\ref{eq:motion}. 
+  Eq.~\ref{eq:motion}. }
 
 %  {\it this isn't very challenging, but I've see undergraduate students have a ``wow'' factor when they work this out for the first time.  This is closely related to the next exercise which is also primarily analytic rather than computational}
 
@@ -1002,7 +1002,6 @@ are in Ex.~\ref{ex:animation}.
     Our equation of motion provides
     a direct calculation for particle velocity,
     as demonstrated in Ex.~\ref{ex:n2l}.  
-    
   When solving ordinary differential equations,
   the Euler method is effective for solving linear equations
   of the form
@@ -1014,6 +1013,11 @@ are in Ex.~\ref{ex:animation}.
   value for $y$ is calculated as a map solution using
   discrete times 
   $y_{n+1} = y_n + f(t_n,y_n)$.
+    {\bf Apply the Euler method to our equation
+  of motion to solve for the analytic expression
+  of position of a particle
+  $y_n$ at the $nth$ timestep (i.e. Eq.~\ref{eq:euler}).}
+    
   The Euler method can be applied to non-linear
   equations effectively if the time step $\Delta t$
   is kept sufficiently small \cite{Newman}.
@@ -1028,16 +1032,13 @@ are in Ex.~\ref{ex:animation}.
   and reproduce the motions shown in Fig.~\ref{fig:0}(b).
   This is due to the linear nature of the solution
   for an isolated particle.
-  Apply the Euler method to our equation
-  of motion to solve for the analytic expression
-  of position of a particle
-  $y_n$ at the $nth$ timestep (i.e. Eq.~\ref{eq:euler}).
   %How to the motions of the particle compare when the timestep
   %becomes large?
-  [UPDATE]
-  Demonstrate the timestep
-  of a single particle can be made large
-  with no change to the overall physics.
+  %[UPDATE]
+  {\bf Demonstrate the simulation timestep 
+  can be large
+  with no change to the overall physics
+  in the motion of a single particle.}
   You will need to modify the maximum
   simulation time, and the frequency of data saved for plotting purposes.
 
@@ -1061,7 +1062,7 @@ are in Ex.~\ref{ex:animation}.
 
   Often molecular dynamics algorithms 
   are solved with higher order methods
-  such as the Verlet method or Runge-Kutta methods.
+  such as the Verlet or Runge-Kutta methods.
   These methods include  higher order terms
   that provide accurate solutions for
   second order differential equations,
@@ -1069,66 +1070,70 @@ are in Ex.~\ref{ex:animation}.
   %where $f_2(y,t)$ is a second derivative function.
   In Newton's second law $f_2$ would be proportional
   to the net force on a single particle.
-
   In our model 
   we do not integrate $f_2(y,t)$ since 
   $a = dv/dt = 0$,
-  and thus rearrange $f_2(y,t)$ to solve directly for $v$,
+  %and thus rearrange $f_2(y,t)$ to solve directly for $v$,
   as described in Ex.~\ref{ex:n2l}.
-  The Taylor expansion of the position function $y(t)$
-  \begin{equation}
-    y(t_n \pm \Delta t) = y(t_n) \pm \frac{dy}{dt} \Delta t + \frac{1}{2} \frac{d^2y}{dt^2} (\Delta t)^2 + \ldots
+  %The Taylor expansion of the position function $y(t)$
+  %\begin{equation}
+  %  y(t_n \pm \Delta t) = y(t_n) \pm \frac{dy}{dt} \Delta t + \frac{1}{2} \frac{d^2y}{dt^2} (\Delta t)^2 + \ldots
     %\pm O(\Delta t)^3 ... %\frac{1}{6} \frac{d^3y}{dt^3} (\Delta t)^3 + ...
-  \end{equation}
-  is exact at first order
-  for the $n$-th time step.
-  
-  Demonstrate how the Verlet method
-  simplifies to the Euler method when
-  the particle acceleration $a=0$.
-
-
+  %\end{equation}
+  %is exact at first order
+  %for the $n$-th time step.
+  %Demonstrate how the Verlet method
+  %simplifies to the Euler method when
+  %the particle acceleration $a=0$.
   %We invite interested students to repeat this
   %simulation for any initial particle position %of $y$
   %and a range of simulation constants
   %to demonstrate that synchronization in this model
   %does not depend on a particular set of conditions.
   %but is a direct consequence of the simplicity of the model.
-
 %\item
   \subsection{Brownian motion}
   \label{ex:brownian}
-  Brownian motion 
-  is a temperature and viscosity dependent
-  phenomena in which 
+  Brownian motion is a phenomena in which 
   visible particles change direction,
   apparently at random, 
   due to collisions with invisible fluid particles.
-  The frequency of collisions depends on the properties of
+  The rate of collisions depends on the temperature, viscosity
+  amd density of 
   the suspending fluid.
   At higher temperatures
   the increased kinetic energy of particles
   makes collisions more likely, 
   as described by the Maxwell-Boltzmann distribution \cite{Einstein1905}.
-  
+
   %Consider a non-zero temperature in the simulation.
   %in which particles will collide with invisible particles
   %making up the suspending fluid.
-  In molecular dynamics simulations temperature effects
-  can be modeled with randomized forces $f^T$
-  to emulate the motion of particles undergoing Brownian motion.
-  A random distribution of forces
-  causes motion
+  In molecular dynamics simulations
+  it is common to treat the 
+  invisible fluid particles as a continuous substance
+  to reduce computational expense.
+  Temperature effects
+  can be modeled by applying randomized forces $f^T$
+  to the visible particles.
+  %\footnote{%In our simulations %np.random.normal
+  We use the normal distristribution from the NumPy random module
+  to generate a series of $f^T_n$ values for
+  each integer timestep $n$ \cite{numpy}.
+  A normalized random distribution of forces
+  causes fluctuations in %particles to emulate Brownian
+  motion 
   equally in all
-  directions such that the force averaged over a finite time interval
-  is zero
+  directions such that the force $f^T$
+  averaged over a finite time interval
+  is zero.  In one dimension this is expressed as 
   \begin{equation}
     \langle f^T(t) \rangle = \frac{1}{N} \sum_n^N f^T_n = 0
   \end{equation}
-  where $n$ is an integer indicating
-  discrete simulation timesteps
+  %where $n$ is an integer indicating
+  %discrete simulation timesteps
   such that $t = N \Delta t$.
-  Random distributions are not correlated 
+  Random normal distributions are not correlated 
   over the independent variable,
   for the independent variable to be time
   \begin{equation}
@@ -1141,39 +1146,38 @@ are in Ex.~\ref{ex:animation}.
   derived from the Boltzmann constant $k_B$
   and temperature $T$ \cite{Allen2017}.
   A particle
-  with energy $k_b T_{min} > U_0$ may 
+  with sufficient energy $k_b T_{min}$ may 
   hop over landscape
   barriers.
-
   % (a) 
-  In simulation we define our temperature parameter to
+  In our simulations,
+  we define temperature as 
   $k_b T/E_0 \rightarrow T$
-  since we set the constants to unity.
-  In these units we can compare 
-  simulation temperature directly
-  to force 
-  in order to estimate the degree of random fluctuation.
-  For instance, 
-  with
-  no applied driving force,
+  with constants set to unity
+  to
+  %In these units
+  compare directly with force. 
+  %in order to estimate the degree of random fluctuation.
+
+ 
+  {\bf With no applied driving force,
+    find 
   the minimum temperature required for a single particle
-  to hop between minima in the potential landscape is
-  $T_{min} > A_p$.
-  Assuming a particle is confined to
+  to hop over maxima in the potential landscape.}
+  %$T_{min} > A_p$.
+  Assume the particle is confined to
   move along the $y-$direction,
   include Brownian motion 
-  in the model,
-  we find the crossover
-  to a hopping regime at $T/A_p \approx 5.6$.
-  %when
-  We demonstrate this hopping
-  pattern in 
+  in the model.
+  In Fig.~\ref{fig:brownian},
+  we demonstrate the transition
+  from pinned to hopping
+  in 
   %Measure the position vs. time
   a non-driven colloid for $T/A_p = 4.0, 5.0, 6.0$.
-  %and note  a particle will hop a barrier
-  %for sufficiently high $T/A_p$ ratios.
-  Reproduce these results.
-  
+  The crossover
+  to a hopping regime occurs at $T/A_p \approx 5.6$.
+  %Reproduce these results.  
   \begin{center}
     \begin{figure}[h!]
       \centering
@@ -1184,10 +1188,11 @@ are in Ex.~\ref{ex:animation}.
         energy landscape.
         (a) $T/A_p = 4.0$ no hopping occurs.
         (b) $T/A_p = 5.0$ a single hop occurs at $t = 130000$
+        across a distance of $\Delta y = 2 \lambda$.
         (c) $T/A_p = 6.0$ many hops occur.
         Note the scale of the $y-$axis differs in each panel
-        and the time scale on the $x-$axis is
-        much greater than the period in Fig.~\ref{fig:1}.
+        and the time scale is
+        much greater than in Fig.~\ref{fig:1}.
       }
       \label{fig:brownian}
     \end{figure}
@@ -1200,62 +1205,79 @@ are in Ex.~\ref{ex:animation}.
   to the amplitude of the landscape
   troughs until the particle enters a hopping regime.
   In  Fig.~\ref{fig:brownian}(a)
-  $T/A_p = 4.0$ and the particle executes a 
+  the temperature is $T/A_p = 4.0$.
+  The particle executes a 
   random walk centered at the potential minima $y/\lambda = 10$.
-  We ran many simulations and never observed a hop to another minima.
+  We ran many simulations and never observed a hop to another minima
+  within this simulation time.  
   In  Fig.~\ref{fig:brownian}(b)
   $T/A_p = 5.0$ where hops between
   potential minima are possible but not probable,
   a single hop occurs from
-  $y/\lambda = 10$ to $y/\lambda = 11$ at
-  $t \sim 13000 \tau$.
+  $y/\lambda = 10$ to $y/\lambda = 12$ at
+  $t \sim 40000 \tau$ and 
+  $y/\lambda = 10$ to $y/\lambda = 8$ at
+  $t \sim 280000 \tau$.
   In other simulations with identical parameters,
   we sometimes observed no hops or two hops between minima,
   as expected with random fluctuating systems.
   In  Fig.~\ref{fig:brownian}(c)
   $T/A_p = 6.0$ 
-  we observe approximately 15 hops,
-  indicating the random thermalized kicks are
+  we observe many hops.
+  The random thermalized kicks are
   sufficiently large to make the particle perform
-  a random walk of hops a top the substrate
-  in addition to the small scale random walk executed
-  by all particles in this section.
-  At these temperatures the rate
-  of hopping is much less than the
-  frequency of the applied drive and synchronized motion,
-  so the effects of temperature are may ignored
-  in these simulations.
+  what appears to be 
+  a random walk of hops atop the substrate.
+  %in addition to the small scale random walk executed
+  %by all particles in this section.
   
-  A quantity of interest
-  for a particle undergoing Brownian motion
-  is the rate of displacement
-  of the particle from its initial position 
-  This is measured as mean square displacement
-  as a function of time
-  \begin{equation}
-    \langle \Delta \vec{r}(t) ^2 \rangle = \langle (\vec{r}(t + t_0) - \vec{r}(t_0))^2\rangle 
-  \end{equation}
-  where $t_0$ is the initial time at
-  initial position $\vec{r}(t_0)$.
-  With no substrate, we would expect
-  the root mean square displacement (RMSD)
-  to be proportional to the elapsed time 
-  \begin{equation}
-    \sqrt {\langle \Delta \vec{r}(t) ^2 \rangle} \propto t.
-  \end{equation}
-  Confirm this result for $A_p = 0$.
-  %[INSERT advice on length of time to run?]
-  Measure the RMSD as a function of time
-  of a non-driven colloid for $T/A_p = 4.0, 5.0$, and $6.0$,
-  as shown in Fig.~\ref{fig:brownian}.
-  Compare your result to the
-  substrate free RMSD.
+  %A quantity of interest
+  %for a particle undergoing Brownian motion
+  %is the rate of displacement
+  %of the particle from its initial position 
+  %This is measured as mean square displacement
+  %as a function of time
+  %\begin{equation}
+  %  \langle \Delta \vec{r}(t) ^2 \rangle = \langle (\vec{r}(t + t_0) - \vec{r}(t_0))^2\rangle 
+  %\end{equation}
+  %where $t_0$ is the initial time at
+  %initial position $\vec{r}(t_0)$.
+  %With no substrate, we would expect
+  %the root mean square displacement (RMSD)
+  %to be proportional to the elapsed time 
+  %\begin{equation}
+  %  \sqrt {\langle \Delta \vec{r}(t) ^2 \rangle} \propto t.
+  %\end{equation}
+  %Confirm this result for $A_p = 0$.
+  %%[INSERT advice on length of time to run?]
+  %Measure the RMSD as a function of time
+  %of a non-driven colloid for $T/A_p = 4.0, 5.0$, and $6.0$,
+  %as shown in Fig.~\ref{fig:brownian}.
+  %Compare your result to the
+  %substrate free RMSD.
   %%[INSERT EXPECTED RESULTS.  presumbably for sufficiently large $T/A_p$ the result collapsed back to standard diffusion.]
 
   %(b)
-  How does Brownian motion affect
-  the formation of Shapiro steps?
-  With driving force reproduce the paper figures...
+  For a driven particle,
+  we ignore 
+  the effects of temperature 
+  in these simulations.  
+  We note that even at $T/A_p = 6.0$ 
+  the hopping rate
+  is much less than the
+  frequency of the applied drive.
+  This can be seen in the time scale in Fig.~\ref{fig:brownian},
+  where the average hopping rate is approximately
+  every $15000\tau$,
+  a value much larger than $T = 100\tau$.
+  At sufficiently high temperatures,
+  Brownian motion does affect 
+  the formation of Shapiro steps
+  and can be observed in experiments.
+  %and could be included
+  %to emulate noise seen in some 
+  %How does Brownian motion affect
+  %With driving force reproduce the paper figures...
   %%[there is no way I want to run this with python...]
 
 %\item
@@ -1271,25 +1293,25 @@ are in Ex.~\ref{ex:animation}.
   by $n_f$ the number of steps forward
   versus $n_b$ the number of steps backward within a single
   time period.
-  The total displacement of $n_f - n_b$ integer steps of
-  the substrate period $\lambda$ characterize
-  the net hop length.  
+  The total displacement of $(n_f - n_b) \lambda$ %integer steps of
+  is the net hop length.  
+  %the substrate period $$ characterize
   In Fig.~\ref{fig:0},
-  in a single period 
-  the particle moves forward through two minima, i.e. $n_f = 2$,
+  the particle moves forward through two minima ($n_f = 2$),
   and does not move backward a full minima ($n_b = 0$).  
   %such that the pattern
   %is characterized as $2(2,0)$.
   In order to achieve
   backwards hops,
-  a particle must have a ratio of $F^{ac}/F^{dc} > 1$,
+  the driving parameters must have
+  a ratio of $F^{ac}/F^{dc} > 1$ 
   and a difference $|F^{ac} - F^{dc}| > A_p$.
   %which can also produce large forward hops.
   %INSERT figure with a range of hopping patterns for a run
-  The frequency must be sufficiently low so that
-  the time interval in which the applied force is large
-  is sustained so that a particle will
-  traverse a substrate extrema.
+  The frequency must be sufficiently low so that 
+  the applied force is large
+  over a sustained time interval,
+  allowing a particle to hop a substrate maxima.
   Experiments with single colloids \cite{Juniper2015} 
   show 
   hopping patterns with backward steps are more difficult
@@ -1300,40 +1322,45 @@ are in Ex.~\ref{ex:animation}.
   $n_f = 2$ to $3$ for $n_b = -2$
   were realized 
   for a variety of applied forces parameters $F^{dc}$ and $F^{ac}$.
+  {\bf Find the parameters
+  that create hopping patterns similar to those in Ref.~\cite{Juniper2015}}.
 
   
   In Fig.~\ref{fig:hops}
-  we show the results for lowering the frequency
-  of the system for our original parameters.
-  For the parameters
-  $F^{dc}=0.1$, $F^{ac}=0.05$, and $a_p = 0.1$,
-  $n_b = 0$
-  across a broad range of frequencies,
-  and $n_f$ increases as frequency decreases.
+  we show the effects of lowering the frequency
+  of applied driving force,
+  holding the remaining parameters fixed 
+  to 
+  $F^{dc}=0.1$, $F^{ac}=0.05$, and $A_p = 0.1$.
+  We observe no backward steps 
+  ($n_b = 0$) 
+  across a broad range of frequencies.
+  The number of forward steps 
+  $n_f$ increases as frequency decreases.
   Low frequencies
   result in sustained positive or negative motion of a particle,
   where in Fig.~\ref{fig:hops}(e)
   the particle reaches the top edge of the system
   and wraps back to $y=0$.
-
-  In Fig.~\ref{fig:hops_back}
-  we show the results for increasing $F^{ac}$
-  of the system for our original parameters.
-  Here $n_b$ increases from $n_b = 0$ in (a) to
-  $n_b = 2$ in (b) to $n_b = 4$ in (c).  
-
   \begin{center}
     \begin{figure}[h!]
       \centering
       \includegraphics[width=\columnwidth]{{parameters_fig5}.pdf}
       \caption{
-        Motion of a particle with the same values of $F^{dc} = 0.1$ and $F^{ac} = 0.05$ as Fig.~\ref{fig:1} and decreasing frequency as marked.    
+        Motion of a particle with the same values of $F^{dc} = 0.1$ and $F^{ac} = 0.05$ as Fig.~\ref{fig:1} and decreasing frequency as marked.
+        In (e) the particle wraps the periodic boundary conditions.
       }
       \label{fig:hops}
     \end{figure}
   \end{center}
   %In Fig.~\ref{fig:hops}
 
+  In Fig.~\ref{fig:hops_back}
+  we fix $f=0.01$, $F^{dc}=0.1$, and and $A_p = 0.1$.
+  We show the results for increasing $F^{ac} = 0.2, 0.3, 0.4$.
+  %of the system for our original parameters.
+  Here $n_b$ increases from $n_b = 0$ in (a) to
+  $n_b = 2$ in (b) to $n_b = 4$ in (c).  
   \begin{center}
     \begin{figure}[h!]
       \centering
@@ -1349,7 +1376,7 @@ are in Ex.~\ref{ex:animation}.
   \end{center}
   %In Fig.~\ref{fig:hops}
   
-  
+  Shapiro steps
 %\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
 %  \item The Fokker-Planck Equation
 %  \item Aubrey-Kontorova + commensurability
@@ -1636,6 +1663,8 @@ and the charge and spin of atomic systems.
   %density $\rho = 0.9982 g/cm^3$
 
   \bibitem{Einstein1905} A Einstein, Investigations on the Theory of the Brownian Movement,  Dover Publications (1956).
+
+    \bibitem{numpy} Harris, C.R., Millman, K.J., van der Walt, S.J. et al. Array programming with NumPy. Nature {\bf 585}, 357 (2020). %DOI: 0.1038/s41586-020-2649-2. (Publisher link).
     
 %\bibitem{latexsite} \LaTeX\ Project Web Site, \url{<http://www.latex-project.org/>}.
 
