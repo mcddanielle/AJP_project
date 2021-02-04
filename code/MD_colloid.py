@@ -531,17 +531,17 @@ if __name__ == "__main__":
 
     parameters = set_parameters()
 
+    #select which figure in the AJP you would like to make
     make_fig2 = False #True #False #True 
     make_fig3 = False #True
-    make_brownian = False #True
+    make_fig4 = False #True
     make_fig5 = False #True
-    make_fig6 = True #False #True
+    make_fig6 =  True #False #True
 
     letter=["(a)","(b)","(c)","(d)","(e)","(f)","(g)"]
 
-            
     #--------------------------------------------------------------
-    #make Fig. 2 - run a single particle at a single driving force
+    #run a single particle at a single driving force
     #--------------------------------------------------------------
     if make_fig2:
         
@@ -556,104 +556,9 @@ if __name__ == "__main__":
         single_particle(parameters)
 
 
-    if make_fig5 or make_fig6:
-        
-        parameters['dt'] = 0.1 #timestep in simulation units
-        parameters['maxtime']=3000        #total time steps in simulation
-        parameters['writemovietime']=1   #interval to write data to arrays for plotting
-        parameters['decifactor']=1   #interval to write data to arrays for plotting
-
-        if make_fig5:
-            parameters['filename']="parameters_fig5.pdf"
-            frequency = [0.1, 0.05, 0.01, 0.005, 0.001]
-
-            ind_var = frequency
-            str_iv=" f=%1.3f"
-
-        else:
-            frequency = [0.01]
-            F_AC = [0.2, 0.3, 0.4]
-
-            ind_var = F_AC
-            str_iv=" $F^{ac}$=%1.2f"
-            
-            parameters['filename']="parameters_fig6.pdf"
-            parameters['freq'] = frequency[0]
-
-            #parameters['F0'] = 0.05              
-            #parameters['F_DC_max'] = 0.05        #"constant" driving force for most of simulation
-
-            
-        n_plots = len(ind_var)
-        
-        fig = plt.figure(figsize=(10,3*n_plots))
-
-        gs=gridspec.GridSpec(n_plots,1)
-        
-        #run a single MD simulation for a set of parameters
-        for i in range(n_plots):
-
-            ax = fig.add_subplot(gs[i,0])
-            ax.text(0.02,0.8,letter[i]+str_iv%(ind_var[i]),transform = ax.transAxes,backgroundcolor="white")
-                        
-            parameters['axis'] = ax
-
-            if make_fig5:
-                parameters['freq'] = frequency[i]
-            else:
-                parameters['F_AC'] = F_AC[i]
-                '''
-                if i == 1:
-                    for j in [6,12,18]:
-                        ax.axhline(y=j, color="black", linestyle = "--")
-                elif i == 2:
-                    for j in [5,10,15]:
-                        ax.axhline(y=j, color="black", linestyle = "--")                  '''
-                #horizontal grid
-                ax.set_ylim(0,20)
-                ax.yaxis.set_minor_locator(AutoMinorLocator(5))
-                ax.grid(axis='y',which='both')
-                
-            single_particle(parameters,plot="just_position")
-
-            if i < n_plots-1:
-                ax.tick_params(labelbottom=False)
-                ax.set_xlabel("")
-
-        plt.tight_layout(pad=0.1,h_pad=-0.3)
-
-        plt.savefig(parameters['filename'])
-        
-    if make_brownian:
-        
-        parameters['dt'] = 0.1 #timestep in simulation units
-        parameters['maxtime']=3000000        #total time steps in simulation
-        parameters['writemovietime']=10000   #interval to write data to arrays for plotting
-        parameters['decifactor']=1   #interval to write data to arrays for plotting
-        parameters['filename']="brownian_particle_dt0.1.pdf"
-
-        fig = plt.figure(figsize=(10,15))
-        gs=gridspec.GridSpec(3,1)
-        i=0
-        letter=["(a)","(b)","(c)"]
-        
-        for temp in [4.0, 5.0, 6.0]:
-
-            ax = fig.add_subplot(gs[i,0])
-            ax.text(0.02,0.89,letter[i],transform = ax.transAxes,backgroundcolor="white",zorder=-10)
-
-            #Brownian motion factor
-            parameters['temperature'] = temp*parameters['F0']
-
-            #run a single MD simulation for a set of parameters
-            brownian_particle(parameters,ax)
-
-            i+=1
-
-        plt.tight_layout(pad=0.1,h_pad=-0.3)
-        #g.tight_layout(fig, rect=[0, 0, 1, 1], h_pad=p_val,w_pad=p_val,pad=0.0)
-        plt.savefig(parameters['filename'])
-            
+    #--------------------------------------------------------------
+    #make shapiro steps with a range of F^{dc}
+    #--------------------------------------------------------------
     if make_fig3: 
         #reset some parameters for subsequent figures
         #parameters['F_DC_incr'] = 0.01        #amount to increase FDC at every drop step
@@ -687,6 +592,120 @@ if __name__ == "__main__":
             
 
         plot_velocity_force(Fdc_data,avg_vy_data,parameters)
-    
+
+
+    #--------------------------------------------------------------
+    #study Brownian motion for increasing temperature
+    #--------------------------------------------------------------
+    if make_fig4:
+
+        #place particle in center to remove hops across periodic boundary conditions
+        parameters['y0'] = parameters['Sy']/2
+
+        #simulating for a long time, 
+        parameters['dt'] = 0.1 #timestep in simulation units
+        parameters['maxtime']=3000000        #total time 
+        parameters['writemovietime']=10000   #interval to write data 
+        parameters['decifactor']=1   #interval to write data to arrays for plotting
+
+        #save the figure in
+        parameters['filename']="brownian_particle_dt0.1.pdf"
+
+        #make the figure
+        fig = plt.figure(figsize=(10,12))
+        gs=gridspec.GridSpec(3,1)
+        i=0
+
+        #sweep through temperatures
+        for temp in [4.0, 5.0, 6.0]:
+
+            #create and label the subplot
+            ax = fig.add_subplot(gs[i,0])
+            ax.text(0.02,0.89,letter[i],
+                    transform = ax.transAxes,backgroundcolor="white",zorder=-10)
+
+            #Brownian motion factor as a ratio of the Ap value
+            parameters['temperature'] = temp*parameters['F0']
+
+            #run a single MD simulation for a set of parameters,
+            #will be plotted on subplot
+            brownian_particle(parameters,ax)
+
+            i+=1
+
+        #save fig 4
+        plt.tight_layout(pad=0.1,h_pad=-0.3)
+        plt.savefig(parameters['filename'])
+        
+    #--------------------------------------------------------------
+    #modify either frequency (fig5) or F^ac amplitude (fig6)
+    #--------------------------------------------------------------
+    if make_fig5 or make_fig6:
+        
+        parameters['dt'] = 0.1 #timestep in simulation units
+        parameters['maxtime']=3000        #total time steps in simulation
+        parameters['writemovietime']=1   #interval to write data to arrays for plotting
+        parameters['decifactor']=1   #interval to write data to arrays for plotting
+
+        if make_fig5:
+            parameters['filename']="parameters_fig5.pdf"
+            frequency = [0.1, 0.05, 0.01, 0.005, 0.001]
+
+            #we will sweep through the following independent variable
+            ind_var = frequency
+            str_iv=" f=%1.3f"
+
+        else:
+            F_AC = [0.2, 0.3, 0.4]
+
+            ind_var = F_AC
+            str_iv=" $F^{ac}$=%1.2f"
+            
+            #we will sweep through the following independent variable
+            parameters['filename']="parameters_fig6.pdf"
+            parameters['freq'] = 0.01
+
+            #parameters['F0'] = 0.05              
+            #parameters['F_DC_max'] = 0.05        #"constant" driving force for most of simulation
+
+
+        #make the figure
+        n_plots = len(ind_var)
+        fig = plt.figure(figsize=(10,3*n_plots))
+        gs=gridspec.GridSpec(n_plots,1)
+        
+        #run a single MD simulation for a set of parameters in independent variable
+        for i in range(n_plots):
+
+            #make the subplot
+            ax = fig.add_subplot(gs[i,0])
+            ax.text(0.02,0.8,letter[i]+str_iv%(ind_var[i]),
+                    transform = ax.transAxes,backgroundcolor="white")
+            parameters['axis'] = ax
+
+            #select the independent variable
+            if make_fig5:
+                parameters['freq'] = frequency[i]
+            else:
+                parameters['F_AC'] = F_AC[i]
+
+                #horizontal grid so we can count hops
+                ax.set_ylim(-0.9,20.9)
+                ax.yaxis.set_minor_locator(AutoMinorLocator(5))
+                ax.grid(axis='y',which='both')
+
+            #run the MD simulation    
+            single_particle(parameters,plot="just_position")
+
+            if i < n_plots-1:
+                ax.tick_params(labelbottom=False)
+                ax.set_xlabel("")
+
+        #save the figure
+        plt.tight_layout(pad=0.1,h_pad=-0.3)
+        plt.savefig(parameters['filename'])
+
+
+    #-----------------------------------------------------------------------------------
     sys.exit()
 
