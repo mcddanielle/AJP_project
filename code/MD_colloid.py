@@ -537,6 +537,7 @@ if __name__ == "__main__":
     make_fig4 = False #True
     make_fig5 = False #True
     make_fig6 =  True #False #True
+    make_fig7 = True
 
     letter=["(a)","(b)","(c)","(d)","(e)","(f)","(g)"]
 
@@ -559,17 +560,25 @@ if __name__ == "__main__":
     #--------------------------------------------------------------
     #make shapiro steps with a range of F^{dc}
     #--------------------------------------------------------------
-    if make_fig3: 
+    if make_fig3 or make_fig7: 
         #reset some parameters for subsequent figures
         #parameters['F_DC_incr'] = 0.01        #amount to increase FDC at every drop step
         #parameters['drop'] = 2000            #integer timesteps to "ramp" the DC force
         #parameters['decifactor'] = 2000      #integer timesteps to "ramp" the DC force
 
         parameters['maxtime']=100000          #shorter and I don't get steps
-        parameters['filename']="sweep_FDC_vs_vx.pdf"
-        
-        delta_Fdc = 0.001
-        Fdc_max=0.3+delta_Fdc
+        parameters['filename']="fig7_sweep_FDC_vs_vx.pdf"
+
+        if make_fig3:
+            delta_Fdc = 0.001
+            Fdc_max=0.3+delta_Fdc
+
+        elif make_fig7:
+            delta_Fdc = 0.01
+            parameters['drop'] = 10000    #integer timesteps to "ramp" the DC force
+            parameters['F_AC'] = 0.4
+            Fdc_max=0.6+delta_Fdc
+            
         max_value = int(np.ceil(Fdc_max/delta_Fdc))
         avg_vy_data = np.zeros(max_value)
         Fdc_data = np.arange(0,Fdc_max,delta_Fdc)
