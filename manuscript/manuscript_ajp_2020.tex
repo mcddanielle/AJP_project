@@ -86,12 +86,12 @@
   %with 
   %overdamped equations of motion.
   Our results show a variety of synchronization effects 
-  in single and multi-particle systems, 
+  in single particle systems, 
   %and detect synchronization using
   %measurements of
-  which we characterize with
-  plots of 
-  particle velocity as a function of applied driving force,
+  which we characterize by 
+  plotting 
+  particle velocity as a function of applied driving force 
   and phase diagrams of position versus velocity.
   %We demonstrate how to 
   %visualize
@@ -120,16 +120,16 @@
 %------------------------------------------------------------------
 %synchronization = widest audience possible
 Synchronization is a universal phenomena
-in which individual oscillators adjust frequency due
-to external stimulus \cite{Pikovsky2003}.
-Many everyday systems
-exhibit in-phase coupled oscillations %of components 
-such as the
+in which
+individual oscillators change frequency due
+to external stimuli \cite{Pikovsky2003}.
+The
 flickering patterns of
 candle flames mediated by temperature fluctuations \cite{Okamoto2016},
 vibrations of singing wineglasses interacting 
 through sound waves \cite{Arane2009}, 
-and metronomes vibrating through a supporting platform \cite{Jia2015}.
+and metronomes vibrating through a supporting platform \cite{Jia2015}
+are examples of in-phase coupled oscillations. %of components 
 Biological systems benefit from cooperative
 synchronization -- %such as 
 birds coordinate wing flaps
@@ -141,134 +141,169 @@ at a cellular level,
 neurons simultaneously fire in cardiac muscle \cite{MartinHall1999}
 and brain tissue \cite{Singer1999}.
 External forcing can cause or regulate 
-synchronization. % is often achieved via external forcing
+synchronization %. % is often achieved via external forcing
 %such as when
 %single particle oscillators
-For instance,
+-- %For instance,
 an electrical pacemaker %(an electrical generator)
-pulses to regulate a heart beat,
+regulates a heart beat 
 and 
-a flashing light can modify the
-pattern of flashing fireflies .% \cite{Agrawal2013}.
+a pulsed light modifies the
+flashing pattern of fireflies .% \cite{Agrawal2013}.
 
 %Christiaan Huygens 
 %[has been adapted into many useful technologies...]
-A particular form of 
-synchronization is phase-locking or mode-locking,
-which first appeared in the scientific literature
+Synchronized phase-locking or mode-locking 
+first appeared in the scientific literature
 with 
 Huygens' 1665 experiments on
-the 
-motions of two wall-mounted pendulum clocks.
-Huygens demonstrated the tendency of
-the pendula 
-to swing in time, 
-even when started out of phase,
+motions of 
+pendula in two wall-mounted clocks.
+Even when started out of phase, 
+%Huygens demonstrated the tendency of
+coupled pendula tend to swing in time
 due to interactions through the wall \cite{Bennett2002}.
 %phase locking
-Dynamical systems %with multiple frequencies
-exhibit phase-locking 
-when oscillators with different rhythms adjust %couple
-to a frequency ratio or mode 
-of an integer number \cite{Bak1986}.
+A locked-mode is an integer frequency ratio.
+In Huygens clocks, 
+the pendula were observed swing at same rate in a 1:1 mode.
+For simple pendula of different lengths,
+a 2:1 mode can be seen when a pendulum four
+times the length of the other swings with twice the period.
+%
+%to a mode or frequency ratio  
+%of an integer number \cite{Bak1986}.
 %Dynamical mode locking
 %The phenomena
 Synchronization 
-is often studied with simple computational models
-and can be visualized 
+%is often studied with simple computational models and
+can be visualized 
 with phase
-plots or Lissajous figures.
-In phase space 
-a mode-locked system is confined to 
-a closed loop in a 
-parametric space showing the relationship between two periodic functions
-with patterns determined by the mode, % frequency ratio,
-first reported in 1857 \cite{Lissajous1857}
-and easily generated with a computer code 
-or oscilloscope \cite{Tong1997}. 
+plots or Lissajous figures, 
+first reported in 1857 \cite{Lissajous1857}.
+%and easily generated with a computer code 
+%or oscilloscope \cite{Tong1997}. 
+A mode-locked system is confined to 
+a closed loop in  
+parametric phase space % showing the relationship between two periodic functions
+with patterns determined by the mode. % frequency ratio,
+({\it As we will demonstrate in phase plots in Figs. X, Y, Z}).
 %with a frequency generator,
 %where two combined frequencies at perpendicular orientations
-%({\it As we will demonstrate in phase plots in Figs. X, Y, Z})
-It should be noted that the term phase
-has two scientific meanings, 
-``oscillation phase'' and ``phase space''
+Note the term phase
+has two scientific meanings:  
+%``oscillation phase'' and ``phase space.''
 %refer to different uses of the word ``phase.''
-Oscillation phase $\phi_0$ is the constant portion of the argument in a periodic function
-  $\sin{(\omega t + \phi_0)}$ while phase space refers
-  to plots of velocity versus position (such as $v_y$ vs. $y$)
-  that are used to characterize oscillating systems.
+oscillation phase $\phi_0$ is the constant of the argument
+in a periodic function
+$\sin{(\omega t + \phi_0)}$ and phase space is
+used to characterize oscillating systems with
+parametric plots of $v_y$ vs. $y$.
 
 %\section{Colloidal Models}
 %\label{sec:colloids}
 
 Complex dynamics can be studied with
-colloid particles with experiments and simulation.
-In typical experiments colloids are spheres of 
-plastic suspended in
-highly de-ionized water or silica in suspended in organic solvent.
+colloid particles in experiments or simulations.
+Typical colloids are   
+plastic spheres suspended in
+de-ionized water or silica beads suspended in organic solvent.
 %experimental - colloids specifically
 Because 
-the spheres are a few microns in size
-and move at rates of microns per second,
-the position of a particle %is large and slow enough to
-can be imaged as a function of time 
-with a traditional optical camera.
+colloids are large %-- a few microns in size
+and move slowly %-- a few microns per second,
+particle position 
+can be imaged in real time 
+with an optical camera \cite{Pertsinidis2001}. %(see Table ~\ref{tab:1}).
+Experimental measurements of 
+step-by-step dynamics of 
+colloids performing phase-locked motions
+are useful for
+understanding synchronization at a single particle level \cite{Juniper2015}.
+ 
 %due to the large size and slow speed of the particles.
-Individual colloids exhibit 
-Brownian motion,
-where particles change direction %in a seemingly random fashion
-due to 
-collisions 
-with unseen particles comprising the suspending fluid \cite{}.
+%Individual colloids exhibit 
+%Brownian motion,
+%where particles change direction %in a seemingly random fashion
+%due to 
+%collisions 
+%with unseen particles comprising the suspending fluid \cite{}.
 %[elaborate - move to associated problems?].
 
 Light is a
 tool for manipulating the colloidal environment.
-A single laser beam can be used to create an optical trap,
-which uses 
-photon radiation pressure to
-control colloid motions \cite{Ashkin1997}.
-A circular optical trap is designed
-with a local energy minimum 
-at its center.
-A colloid in the beam center is subject to a
-uniform distribution of photon bombardment,
-and motions away from the center create a net force
-due to an uneven 
-distribution of photon collisions on its surface.
+A circular optical trap uses 
+radiation pressure from 
+a laser beam to confine colloids \cite{Ashkin1997}.
+%Since photon density is high at the beam center,
+A colloid centered in the beam is %subject to a
+uniformly bombarded by photons while 
+%form a circular pattern with a higher density 
+%central 
+%energy minimum.
+%optical trap  trap colloids
+%with radiation pressure  which uses  photon 
+%control colloid motions 
+%A  is designed
+off-center colloids %away from center
+collide with photons unevenly,
+creating a net force.
 %Colloids at a trap edge
 %experience a net force
 %due to the 
 Depending on the %shape of the trap and
 location of the particle in the trap,
-the radiation pressure either restores colloids toward the local minima
+the radiation pressure either moves colloids toward the local minimum 
 or ejects it from the trap.
 An optically trapped colloid executing Brownian motion
 is a useful probe of microscopic forces,
 and has been studied in detail in Ref.~\cite{Volpe2013}.
+%In experiments
+Diffraction gratings can be used to create
+more complex light environments, 
+%with one or more laser beams,
+such as periodic patterns of minima
+suitable for synchronization studies \cite{Grier2003}.
 
-%In experiments  
- Complex environments can be
- engineered with light by %, typically made 
- using diffraction gratings to create a patterned
- potential energy landscape 
- with one or more laser beams \cite{Grier2003}.
+A single particle oscillator
+in a potential well is 
+like a skateboarder in a half-pipe or
+a child on a swing.
+%If subject to an applied force,
  How a particle moves
  in an optical landscape can
  change
  when 
  subject to external driving forces.
- Individual particles can
- perform 
- synchronized % with the environment
- motions
- that lock together particle location and velocity.
- Experimental studies of
- the microscopic dynamics 
- colloids performing phase-locked motions
- produce step-by-step diagrams
- of particle dynamics useful for
- understanding synchronization at a single particle level \cite{Juniper2015}.
+ %Individual particles can
+ %move with synchronized location and velocity
+ % with the environment
+ %motions
+ %that lock together particle .
+ A confined oscillator may 
+ synchronize its location
+ to the periodic pattern of the external drive,
+ moving back and forth in time with
+ the beat. 
+ %The relationship between the driving force and
+ %landscape can change the pattern of motion.  
+ With a constant or 
+ dc drive the landscape modulates 
+ the particle velocity, below some threshold  
+ the dc force is not strong enough to push the particle
+ across a potential maximum so the average velocity is zero,
+ a phenomena referred to as pinning \cite{Reichhardt2017}.
+ Above the pinning threshold,
+ a particle subject to a constant
+ drive force will increase its speed at a rate propotional
+ to the external drive.  
+ %and dissipating energy from the system at all driving forces.
+ A sinusoidal or ac drive can create mode-locking,
+ where the average particle velocity
+ is fixed for a range of dc drive forces \cite{Reichhardt2015}.
+ %This synchronization phenomena
+ %is useful for understanding the complex dynamical 
+ %systems.  
  
 %Numerical modeling of colloids can provide mechanistic insight
 %that can be difficult to achieve in experimental conditions
@@ -1187,12 +1222,12 @@ are in Ex.~\ref{ex:animation}.
         on a washboard potential
         energy landscape.
         (a) $T/A_p = 4.0$ no hopping occurs.
-        (b) $T/A_p = 5.0$ a single hop occurs at $t = 130000$
-        across a distance of $\Delta y = 2 \lambda$.
+        (b) $T/A_p = 5.0$ a three hops occur %at $t = 130000$
+        across distances of $\Delta y = 2 \lambda$.
         (c) $T/A_p = 6.0$ many hops occur.
         Note the scale of the $y-$axis differs in each panel
         and the time scale is
-        much greater than in Fig.~\ref{fig:1}.
+        much greater than in Fig.~\ref{fig:0}.
       }
       \label{fig:brownian}
     \end{figure}
@@ -1347,7 +1382,7 @@ are in Ex.~\ref{ex:animation}.
       \centering
       \includegraphics[width=\columnwidth]{{parameters_fig5}.pdf}
       \caption{
-        Motion of a particle with the same values of $F^{dc} = 0.1$ and $F^{ac} = 0.05$ as Fig.~\ref{fig:1} and decreasing frequency as marked.
+        Motion of a particle with the same values of $F^{dc} = 0.1$ and $F^{ac} = 0.05$ as Fig.~\ref{fig:0} and decreasing frequency as marked.
         In (e) the particle wraps the periodic boundary conditions.
       }
       \label{fig:hops}
@@ -1366,7 +1401,7 @@ are in Ex.~\ref{ex:animation}.
       \centering
       \includegraphics[width=\columnwidth]{{parameters_fig6}.pdf}
       \caption{
-        Motion of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:1} and increasing $F^{ac}$.
+        Motion of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:0} and increasing $F^{ac}$.
         (a) The particle moves forward six minima with no steps backward.
         (b) The particle moves forward eight minima with two steps backward.
         (c) The particle moves forward nine minima with four steps backward.
@@ -1376,7 +1411,17 @@ are in Ex.~\ref{ex:animation}.
   \end{center}
   %In Fig.~\ref{fig:hops}
   
-  Shapiro steps
+    \begin{center}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=\columnwidth]{{fig7_sweep_FDC_vs_vx}.pdf}
+      \caption{
+        Mode-locked steps in $\langle v_y \rangle$ vs. $F^{dc}$ of a particle with frequency $f=0.01$ and $F^{ac}=0.4$.  At low values of $F^{dc}$ the particle may move backwards, distorting the steps.
+      }
+      \label{fig:shapiro}
+    \end{figure}
+  \end{center}
+  %In Fig.~\ref{fig:hops}
 %\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
 %  \item The Fokker-Planck Equation
 %  \item Aubrey-Kontorova + commensurability
@@ -1409,101 +1454,77 @@ are in Ex.~\ref{ex:animation}.
 
 \section{Conclusion}
 \label{sec:conclusion}	% You can label sections for reference
-A single particle oscillator
-in a potential well is 
-like a skateboarder in a half-pipe or
-a child on a swing.
-%If subject to an applied force,
-A confined oscillator may 
-synchronize its location
-to the periodic pattern of the external drive,
-moving back and forth in time with
-the beat. 
-The relationship between the driving force and
-landscape can change the pattern of motion.  
-With a constant or 
-dc drive the landscape modulates 
-the particle velocity, below some threshold  
-the dc force is not strong enough to push the particle
-across a potential maximum so the average velocity is zero,
-a phenomena referred to as pinning \cite{Reichhardt2017}.
-Above the pinning threshold,
-a particle subject to a constant
-drive force will increase its speed at a rate propotional
-to the external drive.  
-%and dissipating energy from the system at all driving forces.
-A sinusoidal or ac drive can create mode-locking,
-where the average particle velocity
-is fixed for a range of dc drive forces \cite{Reichhardt2015}.
-This synchronization phenomena
-is useful for understanding the complex dynamical 
-systems.  
 
 %Fundamental models
 %of synchronization 
 %can %include many coupled oscillators
 %or
 %focus on
-We have used 
-a single particle driven across a periodic potential landscape 
+%We have driven 
+A single particle driven across a periodic potential landscape 
 %Single particle studies are useful
-to study synchronization dynamics
-that arise due to the interplay
-between environmental and external forces.
+synchronizes its motion %to study synchronization dynamics
+%that arise
+to environmental and external forces,
+a phenomena known as mode-locking.  
 %due to interactions between particles.
-Our simulations reproduce results presented in 
+Our simulations reproduce experiments presented in 
 Juniper {\it et al.} \cite{Juniper2015} %, Juniper2018}
-which demonstrate 
+of 
 mode locking in
-experiments and simulations of 
+%experiments and simulations of 
 driven colloids on a
 periodic optical landscape.
-Due to the relative ease of
-manipulation and imagining, 
-colloids are used as experimental models
+Colloids are 
+relatively easy to 
+manipulate and image in experiments,
+making ideal proxies 
 for systems %relatively
-hard to access and visualize 
 such as cold atoms or electron gases \cite{Grier2003}.
+%which are 
+%hard to access and visualize 
 %Collections of colloids can
 %be used to study the properties of solids and liquids
 %or more exotic systems 
 %Oscillators ordered into chains or lattices.
 %has many important
 %technological applications
-Dynamical mode-locking, the primary synchronization
-effect explored in this paper, 
+Dynamical mode-locking %, the primary synchronization
+%effect explored in this paper, 
 is %often
 observed
 in quantum electronic
-devices such as Josephson junctions \cite{Josephson1962,Josephson1965}.
+devices %, such as Josephson junctions \cite{Josephson1962,Josephson1965}, 
 %A single junction contains 
 %two superconductoring layers which sandwich an insulating layer.
 %When subject to an external voltage,
 %Cooper pairs in the superconducting materials
 %tunnel through the insulating layer.
-Phase-locking is observed as 
-stepped regions in current-voltage (I-V) relationship in these devices,
+%Phase-locking is observed in these devices
+as 
+stepped regions in current-voltage (I-V) relationship,
 where voltage is the analog of external driving force
 and current is that of particle velocity.
 Known as Shapiro steps, % \cite{},
-these phase locked currents  
+these mode-locked or phase-locked currents  
 have been observed due to applied ac voltages in 
 single Josephson junctions \cite{Shapiro1963, Golubov2004} and
 coupled arrays of junctions \cite{Benz1990}.
 Shapiro steps vary in width depending on the strength of the
 applied ac forces,
-and are observed in a variety of systems
+and are observed in a variety of ac and dc driven systems
 displaying
 %are hallmarks of
 non-Ohmic behavior in voltage-current curves,
 including
-ac and dc driven
-charge and spin density waves
+charge waves, spin density waves
 and superconducting vortices in landscapes 
 engineered with periodic patterns of pinning sites.
-Thus the study of
-mode-locking is a useful probe 
-of complex quantum mechanical systems.
+%Thus the study of
+Mode-locking is a useful probe 
+of complex quantum mechanical systems
+since the motions of individual particles can only be inferred
+from other measurements.
 Our results can be relevant 
 to synchronization effects
 in a broad range of experiments systems
@@ -1591,6 +1612,8 @@ and the charge and spin of atomic systems.
 
     \bibitem{Tong1997} E. Y. C. Tong, Lissajous figures, The Physics Teacher {\bf 35}, 491 (1997).
 
+      \bibitem{Pertsinidis2001} A. Pertsinidis, and X. Ling,  Equilibrium Configurations and Energetics of Point Defects in Two-Dimensional Colloidal Crystals. {\it Phys Rev Lett}, {\bf 87}, 098303 (2001). %https://doi.org/10.1103/PhysRevLett.87.098303
+      
     \bibitem{Purcell1977} E. M. Purcell, Life at low Reynolds numbers, Am. J. Phys. {\bf 45}, 3–11 (1977).
 
       %PRACTICAL APPLICATION
@@ -1608,7 +1631,8 @@ and the charge and spin of atomic systems.
 
     \bibitem{Golubov2004} A. A. Golubov, M. Yu. Kupriyanov, and E. Il’ichev. The current-phase relation in Josephson junctions, Rev. Mod. Phys. {\bf 76}, 411 (2004).
 
-      quote: Phase engineering techniques are used to control the dynamics of long-bosonic Josephson-junction arrays built by linearly coupling Bose-Einstein condensates.
+      %quote: Phase engineering techniques are used to control the dynamics of long-bosonic Josephson-junction arrays built by linearly coupling Bose-Einstein condensates.
+      
     \bibitem{Zhang2020} Dengling Zhang, Haibo Qiu, and Antonio Muñoz Mateo, Unlocked-relative-phase states in arrays of Bose-Einstein condensates, Phys. Rev. A {\bf 101}, 063623 (2020).
 
       %reichhardt review
