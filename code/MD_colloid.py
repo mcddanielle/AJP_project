@@ -532,19 +532,24 @@ if __name__ == "__main__":
     parameters = set_parameters()
 
     #select which figure in the AJP you would like to make
+    '''
     make_fig2 = False #True #False #True 
-    make_fig3 = False #True
+    make_fig3 = True #
     make_fig4 = False #True
     make_fig5 = False #True
-    make_fig6 =  True #False #True
-    make_fig7 = True
+    make_fig6 = False #True
+    make_fig7 = False #True
+    '''
+
+    #Coded to make figures 2 to 8
+    make_fig = 7
 
     letter=["(a)","(b)","(c)","(d)","(e)","(f)","(g)"]
 
     #--------------------------------------------------------------
     #run a single particle at a single driving force
     #--------------------------------------------------------------
-    if make_fig2:
+    if make_fig == 2:
         
         parameters['dt'] = 0.1 #timestep in simulation units
         parameters['maxtime']=4000        #total time steps in simulation
@@ -556,28 +561,31 @@ if __name__ == "__main__":
         #run a single MD simulation for a set of parameters
         single_particle(parameters)
 
-
     #--------------------------------------------------------------
     #make shapiro steps with a range of F^{dc}
     #--------------------------------------------------------------
-    if make_fig3 or make_fig7: 
+    if make_fig == 3 or make_fig == 7: 
         #reset some parameters for subsequent figures
         #parameters['F_DC_incr'] = 0.01        #amount to increase FDC at every drop step
         #parameters['drop'] = 2000            #integer timesteps to "ramp" the DC force
         #parameters['decifactor'] = 2000      #integer timesteps to "ramp" the DC force
 
         parameters['maxtime']=100000          #shorter and I don't get steps
-        parameters['filename']="fig7_sweep_FDC_vs_vx.pdf"
 
-        if make_fig3:
+        
+        if make_fig == 3:
             delta_Fdc = 0.001
             Fdc_max=0.3+delta_Fdc
+            parameters['filename']="fig3_sweep_FDC_vs_vx.pdf"
 
-        elif make_fig7:
+        elif make_fig == 7:
             delta_Fdc = 0.01
             parameters['drop'] = 10000    #integer timesteps to "ramp" the DC force
+            parameters['decifactor'] = 10000      #integer timesteps to "ramp" the DC force
+
             parameters['F_AC'] = 0.4
             Fdc_max=0.6+delta_Fdc
+            parameters['filename']="fig7_sweep_FDC_vs_vx.pdf"
             
         max_value = int(np.ceil(Fdc_max/delta_Fdc))
         avg_vy_data = np.zeros(max_value)
@@ -597,8 +605,7 @@ if __name__ == "__main__":
             #parameters['y0'] = 5.0*parameters['period']
 
             #run a single MD simulation for a set of parameters
-            avg_vy_data[i] = single_particle(parameters,plot="y-velocity")
-            
+            avg_vy_data[i] = single_particle(parameters,plot="y-velocity")            
 
         plot_velocity_force(Fdc_data,avg_vy_data,parameters)
 
@@ -606,7 +613,7 @@ if __name__ == "__main__":
     #--------------------------------------------------------------
     #study Brownian motion for increasing temperature
     #--------------------------------------------------------------
-    if make_fig4:
+    if make_fig == 4:
 
         #place particle in center to remove hops across periodic boundary conditions
         parameters['y0'] = parameters['Sy']/2
@@ -649,14 +656,14 @@ if __name__ == "__main__":
     #--------------------------------------------------------------
     #modify either frequency (fig5) or F^ac amplitude (fig6)
     #--------------------------------------------------------------
-    if make_fig5 or make_fig6:
+    if make_fig == 5 or make_fig == 6:
         
         parameters['dt'] = 0.1 #timestep in simulation units
         parameters['maxtime']=3000        #total time steps in simulation
         parameters['writemovietime']=1   #interval to write data to arrays for plotting
         parameters['decifactor']=1   #interval to write data to arrays for plotting
 
-        if make_fig5:
+        if make_fig == 5:
             parameters['filename']="parameters_fig5.pdf"
             frequency = [0.1, 0.05, 0.01, 0.005, 0.001]
 
@@ -693,7 +700,7 @@ if __name__ == "__main__":
             parameters['axis'] = ax
 
             #select the independent variable
-            if make_fig5:
+            if make_fig == 5:
                 parameters['freq'] = frequency[i]
             else:
                 parameters['F_AC'] = F_AC[i]
