@@ -261,9 +261,38 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
 
 
 #####################################################################
-#def plot_velocity_force(time_data,FDC_data,vy_data,parameters):
-#    '''
-#    '''
+
+def plot_phase(ax,y_data,avg_vy_data,p):
+    '''Make Fig. 8 in AJP
+    '''
+
+    #for plot
+    #calculate the driving force from F_DC and time
+
+    #plot the position within the period
+    #y_data /= p['period']
+    vbar = np.average(avg_vy_data)
+    time = np.arange(1,4001,1)*p['dt']
+        
+    plot_delay = 100
+        
+    #no subtraction
+    
+    phi_y_data = 2*np.pi*(y_data - vbar*time)/(p['period'])
+    dot_phi_y_data = 2*np.pi*(phi_y_data - vbar)/(p['period'])
+
+    if 0:
+        ax.scatter(phi_y_data[plot_delay:],dot_phi_y_data[plot_delay:]) #,lw=5)
+    else:
+        ax.scatter(phi_y_data[plot_delay:],avg_vy_data[plot_delay:]) #,lw=5)
+
+    ax.set_xlabel(r"$\phi_y(t)$")
+    ax.set_ylabel(r"$\dot{\phi}_y(t)$")
+
+    #ax1.set_xticks([])
+    #ax1.set_xlim(0,time_data[-1]+1)
+    
+    return 
 
 #####################################################################
 def plot_velocity_force(avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC_data,p):
@@ -379,6 +408,10 @@ def single_particle(parameters,plot="y-position"):
     if plot == "y-position":
         plot_force_position_vs_time(time_data,FDC_data,y_data,parameters)
         return
+
+    elif plot == "phase":
+        #plot_phase(y_data,avg_vy_data,parameters)
+        return y_data, avg_vy_data
     
     elif plot == "just_position":
         plot_position_vs_time(parameters['axis'], time_data,y_data,parameters)
@@ -532,34 +565,52 @@ if __name__ == "__main__":
     parameters = set_parameters()
 
     #select which figure in the AJP you would like to make
-    '''
-    make_fig2 = False #True #False #True 
-    make_fig3 = True #
-    make_fig4 = False #True
-    make_fig5 = False #True
-    make_fig6 = False #True
-    make_fig7 = False #True
-    '''
-
     #Coded to make figures 2 to 8
-    make_fig = 7
+    make_fig = 8
 
     letter=["(a)","(b)","(c)","(d)","(e)","(f)","(g)"]
 
     #--------------------------------------------------------------
     #run a single particle at a single driving force
     #--------------------------------------------------------------
-    if make_fig == 2:
+    if make_fig == 2 or make_fig == 8:
         
-        parameters['dt'] = 0.1 #timestep in simulation units
+        parameters['dt'] = 0.05 #timestep in simulation units
         parameters['maxtime']=4000        #total time steps in simulation
         parameters['writemovietime']=1   #interval to write data to arrays for plotting
         parameters['decifactor']=1   #interval to write data to arrays for plotting
 
-        parameters['filename']="single_particle_dt0.1.pdf"
-
         #run a single MD simulation for a set of parameters
-        single_particle(parameters)
+        if make_fig == 2:
+            parameters['filename']="single_particle_dt0.1.pdf"
+            single_particle(parameters)
+        elif make_fig == 8:
+
+            parameters['F_AC'] = 0.05
+            parameters['freq'] = 0.01
+            parameters['F0'] = 0.05
+
+            fig = plt.figure(figsize=(12,12))
+            gs=gridspec.GridSpec(2,2)
+
+            parameters['filename']="phase.pdf"
+
+            AC = [0.05,0.1,0.2,0.3]
+            k=0
+            for i in range(2):
+                for j in range(2):
+                    ax = fig.add_subplot(gs[i,j])  #scatter plot of particles
+                    parameters['F_AC'] = AC[k]
+                    k+=1
+                
+                    y_data, avg_vy_data = single_particle(parameters,plot="phase")
+
+                    plot_phase(ax, y_data,avg_vy_data,parameters)
+
+
+            
+            plt.tight_layout() #pad=0.1,h_pad=-0.3)
+            plt.savefig(parameters['filename'])
 
     #--------------------------------------------------------------
     #make shapiro steps with a range of F^{dc}
@@ -579,7 +630,7 @@ if __name__ == "__main__":
             parameters['filename']="fig3_sweep_FDC_vs_vx.pdf"
 
         elif make_fig == 7:
-            delta_Fdc = 0.01
+            delta_Fdc = 0.001
             parameters['drop'] = 10000    #integer timesteps to "ramp" the DC force
             parameters['decifactor'] = 10000      #integer timesteps to "ramp" the DC force
 
