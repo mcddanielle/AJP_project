@@ -279,15 +279,16 @@ def plot_phase(ax,y_data,avg_vy_data,p):
     #no subtraction
     
     phi_y_data = 2*np.pi*(y_data - vbar*time)/(p['period'])
-    dot_phi_y_data = 2*np.pi*(phi_y_data - vbar)/(p['period'])
+    dot_phi_y_data = 2*np.pi*(avg_vy_data - vbar)/(p['period'])
 
-    if 0:
-        ax.scatter(phi_y_data[plot_delay:],dot_phi_y_data[plot_delay:]) #,lw=5)
+    if 1:
+        ax.scatter(phi_y_data[plot_delay:],dot_phi_y_data[plot_delay:],s=5) #,lw=5)
     else:
         ax.scatter(phi_y_data[plot_delay:],avg_vy_data[plot_delay:]) #,lw=5)
 
     ax.set_xlabel(r"$\phi_y(t)$")
     ax.set_ylabel(r"$\dot{\phi}_y(t)$")
+    ax.yaxis.set_label_coords(-0.22, 0.5)
 
     #ax1.set_xticks([])
     #ax1.set_xlim(0,time_data[-1]+1)
@@ -586,21 +587,25 @@ if __name__ == "__main__":
             single_particle(parameters)
         elif make_fig == 8:
 
-            parameters['F_AC'] = 0.05
+            parameters['F_AC'] = 0.2
             parameters['freq'] = 0.01
-            parameters['F0'] = 0.05
+            #parameters['F0'] = 0.05
 
-            fig = plt.figure(figsize=(12,12))
+            fig = plt.figure(figsize=(12,11))
             gs=gridspec.GridSpec(2,2)
 
             parameters['filename']="phase.pdf"
 
-            AC = [0.05,0.1,0.2,0.3]
+            F0 = [0.0,0.05,0.1,0.2]
             k=0
             for i in range(2):
                 for j in range(2):
                     ax = fig.add_subplot(gs[i,j])  #scatter plot of particles
-                    parameters['F_AC'] = AC[k]
+                    ax.text(0.02,0.9,letter[k],
+                            transform = ax.transAxes,
+                            backgroundcolor="white",zorder=-10)
+
+                    parameters['F0'] = F0[k]
                     k+=1
                 
                     y_data, avg_vy_data = single_particle(parameters,plot="phase")
@@ -609,7 +614,7 @@ if __name__ == "__main__":
 
 
             
-            plt.tight_layout() #pad=0.1,h_pad=-0.3)
+            plt.tight_layout(pad=0.5,h_pad=-0.2) #,v_pad=-0.3)
             plt.savefig(parameters['filename'])
 
     #--------------------------------------------------------------
