@@ -38,61 +38,34 @@
 \begin{abstract}
   Synchronization
   plays a key role in many physical processes.
-  We discuss a simple
-  numerical model %that
-  of synchronized particles 
-  %exhibits
-  %provides insight
-  %to synchronization behavior
-  %and
-  %atoms on surfaces.
-  %voltage driven superconducting vortices
-  %confined in a Josephson junction,
-  %and ac and dc driven
-  %charge and spin density waves.
-  %We present the basics
-  using
-  molecular dynamics simulations
-  for particles moving through
-  a viscous liquid.
-  %Simplified models
-  %such as 
-  %What problem did you study and why is it important?
-  Modeling synchronization
-  with simulations and table-top experiments
-  can 
-  provide insight
-  to complex behaviors
+  Modeling 
+  single particle
+  synchronization 
+  with simulations or table-top experiments
+  can is a useful technique to isolate
+  complex behaviors %to 
+  %provide insight
   in the natural world.
-  We drive 
-  particles
-  across a washboard potential energy landscape, 
-  a 
-  common 
-  technique to isolate complex 
-  synchronized patterns 
-  in both simulations and experiments.
-  %as observed in 
-  %experiments %al systems 
-  %of %interest to condensed matter physics %including 
-  %magnetically driven colloidal particles
-  %confined by light-fields.
-  %exhibit a variety of synchronization effects.
-  %in
-  %  Numerical model
-  %
-  %applied to single and multiple particle systems.
-  %so we model the dynamics of each particle
-  %with 
-  %overdamped equations of motion.
-  Our results show a variety of synchronization effects 
-  in single particle systems, 
-  %and detect synchronization using
-  %measurements of
-  which we characterize by 
-  plotting 
-  particle velocity as a function of applied driving force 
-  and phase diagrams of position versus velocity.
+  We discuss a %simple
+  %numerical model %that
+  molecular dynamics simulation
+  of a single particle
+  moving through
+  a viscous liquid
+  driven 
+  across a washboard potential energy landscape.
+  Our results show many dynamical patterns
+  as we alter the landscape and driving force.
+  Under certain conditions,
+  the particle velocity and location
+  are synchronized or 
+  phase-locked.
+  We include molecular dynamics code %and exercises
+  to simulate and characterize
+  particle dynamics.
+  %including 
+  %plotting  particle velocity as a function of applied driving force 
+  %and phase diagrams of position versus velocity.
   %We demonstrate how to 
   %visualize
   %the system with
@@ -190,7 +163,7 @@ Because
 colloids are large %-- a few microns in size
 and move slowly %-- a few microns per second,
 particle position 
-can be imaged in real time 
+can be captured in real time 
 with an optical camera \cite{Pertsinidis2001}. %(see Table ~\ref{tab:1}).
 Experimental measurements of 
 step-by-step dynamics of 
@@ -213,8 +186,8 @@ A circular optical trap uses
 radiation pressure from 
 a laser beam to confine colloids \cite{Ashkin1997}.
 %Since photon density is high at the beam center,
-A colloid centered in the beam is %subject to a
-uniformly bombarded by photons while 
+A colloid centered in the trap is %subject to a
+uniformly bombarded by photons. % while 
 %form a circular pattern with a higher density 
 %central 
 %energy minimum.
@@ -222,19 +195,18 @@ uniformly bombarded by photons while
 %with radiation pressure  which uses  photon 
 %control colloid motions 
 %A  is designed
-off-center colloids %away from center
-collide with photons unevenly,
-creating a net force.
+Off-center colloids %away from center
+experience a net force
+due to uneven photon collisions across
+the particle surface.
 %Colloids at a trap edge
 %experience a net force
 %due to the 
 Depending on the %shape of the trap and
 location of the particle in the trap,
-the radiation pressure either moves colloids toward the beam center 
+the radiation pressure either moves colloids toward center 
 %local minimum 
 or ejects it from the trap.
-An optically trapped colloid executing Brownian motion
-is a useful probe of microscopic forces ~\cite{Volpe2013}.
 %In experiments
 Diffraction gratings can be used to create
 more complex light environments, 
@@ -246,27 +218,18 @@ A single particle oscillator
 in a potential well is 
 like a skateboarder in a half-pipe or
 a child on a swing.
-%If subject to an applied force,
- How a particle moves
- in an optical landscape can
- change
- when 
- subject to external driving forces.
- %Individual particles can
- %move with synchronized location and velocity
- % with the environment
- %motions
- %that lock together particle .
  A confined oscillator may 
  synchronize its location
  to the periodic pattern of the external drive,
  moving back and forth in time with
- the beat. 
+ the beat,
+ or moving between substrate minima.
  %The relationship between the driving force and
  %landscape can change the pattern of motion.  
- With a constant or 
+ A constant or 
  dc drive the landscape modulates 
- the particle velocity, below some threshold  
+ the particle velocity.
+ Below some threshold  
  the dc force is not strong enough to push the particle
  across a potential maximum so the average velocity is zero,
  a phenomena referred to as pinning \cite{Reichhardt2017}.
@@ -280,7 +243,14 @@ a child on a swing.
  is fixed for a range of dc drive forces \cite{Reichhardt2015}.
  %This synchronization phenomena
  %is useful for understanding the complex dynamical 
- %systems.  
+ %systems.
+ When the applied force varies periodically,
+ the ac drive can 
+ cause the particle to hop back and forth across
+ the landscape minima.
+ Many synchronized patterns occur
+ controlled by the substrate period.
+
  
 %Numerical modeling of colloids can provide mechanistic insight
 %that can be difficult to achieve in experimental conditions
@@ -311,9 +281,9 @@ a washboard shaped potential energy landscape.
 %Numerical studies %of harmonic systems
 %can yield insights
 %to the mechanics of naturally oscillating systems.
-We chose this model for its
-relevance to condensed matter systems
-and ease of simulation.
+%We choose this model for its
+%relevance to condensed matter systems
+%and ease of simulation.
 %---------------------------------------------------------------
 %kinks and nanofriction
 %-----------------------------------------------------------------
@@ -325,12 +295,14 @@ and ease of simulation.
 %to model a variety of physical phenomena.
 %-----------------------------------------------------------------------
 %paper outline
-%In the following paper
 %In Section~\ref{sec:colloids} we describe colloid particles,
 %an relevant
 %experimental analog of our simulations.
 We describe
 our molecular dynamics model for a single particle in Section~\ref{sec:MD}.
+We choose this model for its
+relevance to condensed matter systems
+and ease of simulation.
 %In this section, we restrict our discussion to a single particle,
 %and include additional information
 %for multiple particles in Section~\ref{sec:sync}.
@@ -439,19 +411,18 @@ with the periodic function
  $U(y)$ to illustrate how the magnitude
  $\vec{F}^{l}_i$ is calculated from particle position $y_i$.  
  %in the $y-$direction.
-
  
  Particles are subject an external time-dependent driving force
-$\vec{F}_{D}(t)$
+$\vec{F}^{D}(t)$
 applied parallel to the y-direction.
 We model this force as
 \begin{equation}
-  \vec{F}^{d}(t) = [F^{dc} + F^{ac} \sin(\omega t)] \hat{y},
+  \vec{F}^{D}(t) = [F^{dc} + F^{ac} \sin(\omega t)] \hat{y},
     \label{eq:drive}
 \end{equation}
-with modifiable parameters including
+with %parameters including
 a constant component $F^{dc}$,
-and a time dependent component with amplitude $F^{ac}$
+a time dependent component with amplitude $F^{ac}$
 and frequency $\omega = 2 \pi f$.
 %in the positive $y-$direction.
 %but it may 
@@ -504,7 +475,7 @@ Exercise~\ref{ex:reynolds}. %for more information
   energy 
   $\vec{F}^l = -\nabla U(\vec{r})$.
   (a) View of the $x-y$ plane. %of the simulation
-  The time-dependent applied driving force $\vec{F}^d$
+  The time-dependent applied driving force $\vec{F}^D$
   is parallel to the y-axis.
   The landscape is shown with a contour plot,
   with maxima in the potential energy marked in red
@@ -531,7 +502,7 @@ by the assumption $\vec{a}_i$ is zero. % in the overdamped model.
 The overdamped equation of motion for an isolated particle is
 %solved for velocity 
 \begin{equation}
-  \eta \vec{v}_i = \vec{F}^l_{i}(\vec{r}_i) + \vec{F}^{d}(t).
+  \eta \vec{v}_i = \vec{F}^l_{i}(\vec{r}_i) + \vec{F}^{D}(t).
     \label{eq:motion}
 \end{equation}
 with  $\eta = 1$ in units of $v_0 / F_0$. 
@@ -653,7 +624,7 @@ A single particle %on this landscape
 responds to the applied driving force
 by moving across the landscape %maxima
 synchronized with 
-the period of $F^d(t)$.
+the period of $F^D(t)$.
 %applied driving force.
 %along the y-direction
 %({\it redundant, just refer back to eq. in Model?})
@@ -677,14 +648,14 @@ corresponding to a spatial period $\lambda = 1.825 a_0$.
 The driven particle adjusts
 its motion to traverse
 the periodic landscape with the same rhythm as 
-the applied time-dependent force $F^d(t)$.
-When $F^d(t) > A_p$, a particle can 
+the applied time-dependent force $F^D(t)$.
+When $F^D(t) > A_p$, a particle can 
 overcome the barrier height of the landscape,
 and 
 the particle hops between minima in the energy landscape.
 %
 In Fig.~\ref{fig:0}(a)
-we plot $F^d(t)$ %defined in Eq.~\ref{eq:drive}.
+we plot $F^D(t)$ %defined in Eq.~\ref{eq:drive}.
 as a function of time with
 %The time independent
 constants $F^{dc}=0.1$, 
@@ -693,7 +664,7 @@ The temporal period of the driving force is
 $T = 1/f = 100 \tau$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %RAMP
-%To avoid transient oscillations at early times, the dc driving force is initially zero and slowly increased %$F^{dc}$. at a rate of $\Delta F^{dc} = 0.01$ every $\Delta t = 4$ time units  to the constant value $F^{dc}=0.1$. In Fig.~\ref{fig:0}(a) we plot $F^{dc}$ in blue to show the increase in  $F^{dc}$ for the first $40$ time units In orange we show  the combined ac and dc drive $F^d(t)$ when the magnitude of the ac applied force is initially zero.
+%To avoid transient oscillations at early times, the dc driving force is initially zero and slowly increased %$F^{dc}$. at a rate of $\Delta F^{dc} = 0.01$ every $\Delta t = 4$ time units  to the constant value $F^{dc}=0.1$. In Fig.~\ref{fig:0}(a) we plot $F^{dc}$ in blue to show the increase in  $F^{dc}$ for the first $40$ time units In orange we show  the combined ac and dc drive $F^D(t)$ when the magnitude of the ac applied force is initially zero.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %since $\sin{(0)}=0$.
 We mark the maxima of $F^{ac}(t)$
@@ -703,7 +674,7 @@ vertical dashed lines %in panels (a) and (b)
 %
 %
 %with the initial driving force at is minimum value 
-%$F^d(0) = F^{dc}$. 
+%$F^D(0) = F^{dc}$. 
 %
 In Fig.~\ref{fig:0}(b) 
 we show the $y-$position of the particle
@@ -757,7 +728,7 @@ when $F_{D}(t) \approx 0 $.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\columnwidth]{single_particle.pdf}
-\caption{(a) The applied driving force $F^d(t)$. % (Eq.~\ref{eq:drive}).
+\caption{(a) The applied driving force $F^D(t)$. % (Eq.~\ref{eq:drive}).
   %where the parameter $F^{dc}$ (blue) is slowly increased from zero %to a constant value %as described in the text.
   (b) 
   The $y-$position of the driven particle
@@ -819,7 +790,7 @@ due to the landscape confinement.
 In Fig.~\ref{fig:1} at %this occurs at 
 low $F^{dc}$ the average velocity $\langle v_y \rangle$ is zero.
 Since 
-$A_p$ is large compared to the extrema of $F^{d}(t)$,
+$A_p$ is large compared to the extrema of $F^{D}(t)$,
 the particle oscillates back and forth
 in a single minima with no net velocity.
 At higher $F^{dc}$ the particle velocity 
@@ -866,15 +837,16 @@ and the applied ac drive can cause mode-locking
 which appears as non-linear 
 steps in the force-velocity relationship.
 
-In the following section
-we include exercises to explore our numerical model,
-including the 
+In Section ~\ref{sec:problems}
+we explore our numerical model.
+Analytic exercises examine the 
 to linear drag equation in Ex.~\ref{ex:reynolds}, 
 the equation of motion in Ex.~\ref{ex:n2l},
 and 
 numerical integration techniques in Ex.~\ref{ex:euler}.
-An extended model that includes finite temperature effects
-is in Ex.~\ref{ex:brownian}.
+Numerical exercises extend the model
+to include finite temperature effects
+in Ex.~\ref{ex:brownian}.
 We explore changes in the particle motion
 with parameter changes in Ex.~\ref{ex:parameters}.
 Methods to visualize the dynamics of the particle motion
@@ -886,8 +858,8 @@ are in Ex.~\ref{ex:animation}.
 \centering
 \includegraphics[width=\columnwidth]{sweep_FDC_vs_vx.pdf}
 \caption{Average particle velocity  $\langle v_{y} \rangle$ as a function of $F^{dc}$,
-  the constant parameter of $F^d(t)$ defined in Eq.~\ref{eq:drive}.
-  The remaining parameters in $F^d(t)$ are as in Fig.~\ref{fig:0}, $F^{ac}=0.05$ and $f = 0.01$.  }
+  the constant parameter of $F^D(t)$ defined in Eq.~\ref{eq:drive}.
+  The remaining parameters in $F^D(t)$ are as in Fig.~\ref{fig:0}, $F^{ac}=0.05$ and $f = 0.01$.  }
 \label{fig:1}
 \end{figure}
 \end{center}
@@ -994,7 +966,7 @@ are in Ex.~\ref{ex:animation}.
   (a) Using Newton's Second Law for
   a small momentum relaxation time, 
   {\bf show that a particle confined to a landscape exerting force
-  $F^l(\vec{r}_i)$ subject to a time dependent drive $F^d(t)$
+  $F^l(\vec{r}_i)$ subject to a time dependent drive $F^D(t)$
   can be modeled with the equation of motion described in 
   Eq.~\ref{eq:motion}. }
 
@@ -1117,7 +1089,9 @@ are in Ex.~\ref{ex:animation}.
   the increased kinetic energy of particles
   makes collisions more likely, 
   as described by the Maxwell-Boltzmann distribution \cite{Einstein1905}.
-
+  An optically trapped colloid executing Brownian motion
+  is a useful probe of microscopic forces ~\cite{Volpe2013}.
+  
   %Consider a non-zero temperature in the simulation.
   %in which particles will collide with invisible particles
   %making up the suspending fluid.
@@ -1413,10 +1387,14 @@ are in Ex.~\ref{ex:animation}.
 
   Synchronization 
   %is often studied with simple computational models and
-  can be visualized 
+  can be detected with 
   with phase
-  plots or Lissajous figures, 
-  first reported in 1857 \cite{Lissajous1857}.
+  plots or Lissajous figures.
+  %First reported in 1815 by Nathanial Bowditch
+  %and later by Lissajous in 1857  \cite{Lissajous1857}.
+  Lissajous figures
+  combine two periodic signals
+  into a two dimensional plot.  
   %and easily generated with a computer code 
   %or oscilloscope \cite{Tong1997}. 
   A mode-locked system is confined to 
@@ -1434,19 +1412,34 @@ are in Ex.~\ref{ex:animation}.
   in a periodic function
   $\sin{(\omega t + \phi_0)}$ and phase space is
   used to characterize oscillating systems with
-  parametric plots of $v_y$ vs. $y$.
-
-  In driven systems,
-  the y-position is monotonically increasing.
-  We are most interested in the position of the particle
-  within the substrate period
-
+  parametric plots.
+  
+  In a non-driven system, an appropriate
+  phase space is $v_y$ versus $y$
+  in order to characterize whether a particle velocity
+  synchronizes to a particular spatial location.
+  In a system driven parallel to the $y-$direction,
+  the particle position is monotonically increasing
+  in time.
+  A synchronized driven particle
+  repeats a particular velocity
+  at the same $y-$position of the particle
+  within the substrate period.
+  We define a phase variable 
   \begin{equation}
-  (y mod \lambda) / \lambda
+    %(y mod \lambda) / \lambda
+    \phi(t) = 2\pi(y(t)-\bar{v}_y t)/\lambda
   \end{equation}
-
-  %Juniper so-called ‘phase portraits’, in which the phase velocity, d\phi(t)/dt,is plotted against the phase, \phi(t) = 2\pi (x(t)-\bar{v}t)/\lambda (ref. 53). The
-  %REF 53
+  that is centered about the average particle velocity $\bar{v}_y$
+  and normalized by the substrate period $\lambda$ \cite{Juniper2015}.
+  We plot this phase
+  versus the phase velocity 
+  \begin{equation}
+    %(y mod \lambda) / \lambda
+    \dot{\phi}(t) = 2\pi(v_y(t)-\bar{v}_y/\lambda.
+  \end{equation}
+  %Juniper %REF 53
+  
 
   
   \begin{center}
@@ -1454,7 +1447,7 @@ are in Ex.~\ref{ex:animation}.
       \centering
       \includegraphics[width=\columnwidth]{phase.pdf}
       \caption{
-        Phase plot of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:0}.
+        Phase plot of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:0}.  $F^{ac} = 0.2$ and $A_p = $ (a) $0.0$, (b) $0.05$, (c) $0.1$, and (d) $0.2$.
       }
       \label{fig:phase}
     \end{figure}
