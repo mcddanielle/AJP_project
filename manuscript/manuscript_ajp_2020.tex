@@ -838,13 +838,15 @@ which appears as non-linear
 steps in the force-velocity relationship.
 
 In Section ~\ref{sec:problems}
-we explore our numerical model.
-Analytic exercises examine the 
+we explore our model
+with suggested exercises for interested readers.
+We include analytic exercises to examine the 
 to linear drag equation in Ex.~\ref{ex:reynolds}, 
 the equation of motion in Ex.~\ref{ex:n2l},
 and 
 numerical integration techniques in Ex.~\ref{ex:euler}.
-Numerical exercises extend the model
+We extend the model with
+numerical exercises %extend the model
 to include finite temperature effects
 in Ex.~\ref{ex:brownian}.
 We explore changes in the particle motion
@@ -872,9 +874,10 @@ are in Ex.~\ref{ex:animation}.
 %\begin{enumerate}
 %\item
 \subsection{Drag Models and Reynolds Numbers.}
-  Stokes' law describes the viscous drag on a sphere
-  moving at velocity $\vec{v}$ as 
-  $\vec{F}^{lin} = -3 \pi \eta D \vec{v}$ 
+Stokes' law describes the drag force
+$\vec{F}^{lin} = -3 \pi \eta D \vec{v}$ 
+on a sphere
+moving through a viscous liquid at velocity $\vec{v}$ 
   where $\eta$ is the dynamic fluid viscosity and 
   $D$ is the particle diameter \cite{Taylor2005}.
   In simulation we
@@ -1386,38 +1389,37 @@ are in Ex.~\ref{ex:animation}.
   \label{ex:phase}
 
   Synchronization 
-  %is often studied with simple computational models and
   can be detected with 
-  with phase
-  plots or Lissajous figures.
+  phase
+  plots or Lissajous figures
+  that 
   %First reported in 1815 by Nathanial Bowditch
   %and later by Lissajous in 1857  \cite{Lissajous1857}.
-  Lissajous figures
-  combine two periodic signals
-  into a two dimensional plot.  
+  %Lissajous figures
+  compare two periodic signals
+  into a two dimensional plot.
+  In a non-driven system, an appropriate
+  phase space is $v_y$ versus $y$.  
   %and easily generated with a computer code 
-  %or oscilloscope \cite{Tong1997}. 
-  A mode-locked system is confined to 
+  %or oscilloscope \cite{Tong1997}.
+  When a particle velocity
+  synchronizes to a particular spatial location
+  the dynamics
+  appears as 
+  %A mode-locked system is confined to 
   a closed loop in  
-  parametric phase space % showing the relationship
+  phase space, % showing the relationship
   %between two periodic functions
   with patterns determined by the mode. % frequency ratio,
   %with a frequency generator,
   %where two combined frequencies at perpendicular orientations
-  Note the term phase
-  has two scientific meanings:  
-  %``oscillation phase'' and ``phase space.''
-  %refer to different uses of the word ``phase.''
-  oscillation phase $\phi_0$ is the constant of the argument
-  in a periodic function
-  $\sin{(\omega t + \phi_0)}$ and phase space is
-  used to characterize oscillating systems with
-  parametric plots.
-  
-  In a non-driven system, an appropriate
-  phase space is $v_y$ versus $y$
-  in order to characterize whether a particle velocity
-  synchronizes to a particular spatial location.
+  %\footnote{The term phase
+  %has two scientific meanings:  
+  %oscillation phase $\phi_0$ is the constant of the argument
+  %in a periodic function
+  %$\sin{(\omega t + \phi_0)}$ and phase space is
+  %used to characterize oscillating systems with
+  %parametric plots.}.
   In a system driven parallel to the $y-$direction,
   the particle position is monotonically increasing
   in time.
