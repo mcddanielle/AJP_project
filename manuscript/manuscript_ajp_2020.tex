@@ -766,6 +766,123 @@ A mode is a periodic pattern of hops
 with a constant average particle velocity, $\langle {v}_{y} \rangle$
 over a range of driving forces $F^{dc}$.
 %as shown
+
+
+  It is useful to compare
+  mode-locked quantities %periodic signals
+  in a two dimensional phase plot.
+  In a non-driven system, an appropriate
+  phase space is particle velocity $v_y$ versus position $y$.  
+  %and easily generated with a computer code 
+  %or oscilloscope \cite{Tong1997}.
+  When $v_y$ %a particle velocity
+  is mode-locked to %repeat periodically
+  a spatial location
+  a closed loop appears in  
+  $v_y$ vs $y$ space. % showing the relationship
+  %between two periodic functions
+  The pattern is determined by the mode,
+  or frequency ratio,
+  so a $1-1$ mode appears as a circle or oval.
+  Nodes appear in the oval 
+  for higher modes,
+  sometimes forming figure-eights
+  or other recognizable patterns.
+  A system that is not fully phase locked
+  will apppear as an unclosed loop.
+  Such quasiperiodic systems are
+  not fully synchronized.
+  %and the shifts in phase space represent
+  %small changes in system behavior.
+  With a long simulation time,
+  a quasiperiodic phase diagram
+  fills the plotting region due to the gradual shift
+  in the velocity-position relationship.
+  %with a frequency generator,
+  %where two combined frequencies at perpendicular orientations
+  %\footnote{The term phase
+  %has two scientific meanings:  
+  %oscillation phase $\phi_0$ is the constant of the argument
+  %in a periodic function
+  %$\sin{(\omega t + \phi_0)}$ and phase space is
+  %used to characterize oscillating systems with
+  %parametric plots.}.
+  
+  In a system driven parallel to the $y-$direction,
+  %the particle velocity and position increase
+  %in time. % due to $F^{dc}$.
+  %Since a system does not form
+  %a closed loop in
+  %$v_y$ vs $y$ space,
+  we define phase variables 
+  to account for the net increase in velocity
+  and position.
+  The phase position is
+  defined as 
+  %within the substrate period as 
+  %We define a phase variable 
+  \begin{equation}
+    %(y mod \lambda) / \lambda
+    \phi(t) = 2\pi(y(t)-\bar{v}_y t)/\lambda
+  \end{equation}
+  centered about the average particle velocity $\bar{v}_y$
+  and normalized by the substrate period $\lambda$ \cite{Juniper2015}.
+  We plot this phase
+  versus the phase velocity 
+  \begin{equation}
+    %(y mod \lambda) / \lambda
+    \dot{\phi}(t) = 2\pi(v_y(t)-\bar{v}_y/\lambda.
+  \end{equation}
+  %Juniper %REF 53
+  
+  In Fig.~\ref{fig:phase}
+  we plot $\dot{\phi}(t)$ versus $\phi(t)$
+  for increasing substrate amplitude $A_p$.
+  We fix the driving force with parameters
+  $F^{dc} = 0.1$ and frequency $f = 0.01$ and $F^{ac} = 0.2$.
+  In Fig.~\ref{fig:phase}(a)
+  there is no substrate ($A_p = 0.0$)
+  and the phase plot is a closed oval
+  centered at
+  $(\phi,\dot{\phi})=(10,0)$
+  with a semimajor axis of $\Delta \phi = 20$ %ANALYTIC
+  and semiminor axis of $\Delta \dot{\phi} = 2\pi/\lambda v_{max}$.
+  [insert analysis.]
+  As the force from the substrate
+  increases,
+  nodes form in the phase diagram
+  and the motion becomes quasiperiodic
+  so the loops in phase space do not fully overlap.
+  In Fig.~\ref{fig:phase}(b)
+  $A_p = 0.05$
+  the spatial properties are similar to
+  those in $A_p = 0.0$
+  with 
+  $(\phi,\dot{\phi})=(10,0)$
+  with a semimajor axis of $\Delta \phi = 20$.
+  The dynamical properties
+  are asymmetric,
+  with nodes in the positive $\dot{\phi}$ values.
+  [insert analysis.]
+  As the substrate
+  force becomes larger,
+  $\phi$ shifts to lower values
+  and $\dot{\phi}$ to positive values,
+  indicating
+  the particle can only move 
+  backward over a short distance.
+  \begin{center}
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=\columnwidth]{phase.pdf}
+      \caption{
+        Phase plot of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:0}.  $F^{ac} = 0.2$ and $A_p = $ (a) $0.0$, (b) $0.05$, (c) $0.1$, (d) $0.2$, (e) $0.25$ and (f) $0.3$.
+      }
+      \label{fig:phase}
+    \end{figure}
+  \end{center}
+
+
 In Fig.~\ref{fig:1} 
 we keep $F^{dc}$ constant
 for $10^5$ simulation timesteps
@@ -808,16 +925,26 @@ through the landscape, so changes in $F^{dc}$
 will create linear changes in 
 net particle displacement that are observable
 within a single step.
-
+\begin{center}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\columnwidth]{sweep_FDC_vs_vx.pdf}
+\caption{Average particle velocity  $\langle v_{y} \rangle$ as a function of $F^{dc}$,
+  the constant parameter of $F^D(t)$ defined in Eq.~\ref{eq:drive}.
+  The remaining parameters in $F^D(t)$ are as in Fig.~\ref{fig:0}, $F^{ac}=0.05$ and $f = 0.01$.  }
+\label{fig:1}
+\end{figure}
+\end{center}
 %$\lambda = L/N_p = 36.5/20 = 1.825$ is the spatial period, or wavelength
 %of the landscape,
 %and $f = 0.01$ cycles per time unit.
-
 %This synchronization
 %of the particle velocity can be measured
 %in terms of the landscape period.
 %Phase locked steps occur for average displacements integer
 %multiples of the substrate period $n\lambda$.
+%\subsection{Phase plots}
+%  \label{ex:phase}
 
 We explore a range of parameters in Ex.~\ref{ex:parameters}
 where 
@@ -853,19 +980,6 @@ We explore changes in the particle motion
 with parameter changes in Ex.~\ref{ex:parameters}.
 Methods to visualize the dynamics of the particle motion
 are in Ex.~\ref{ex:animation}.
-
-
-\begin{center}
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\columnwidth]{sweep_FDC_vs_vx.pdf}
-\caption{Average particle velocity  $\langle v_{y} \rangle$ as a function of $F^{dc}$,
-  the constant parameter of $F^D(t)$ defined in Eq.~\ref{eq:drive}.
-  The remaining parameters in $F^D(t)$ are as in Fig.~\ref{fig:0}, $F^{ac}=0.05$ and $f = 0.01$.  }
-\label{fig:1}
-\end{figure}
-\end{center}
-
 %In the animation available in Ref.~\cite{supp1} the magenta dot represents the average velocity of the particle $\langle v_{y} \rangle$ at which the particle in Fig. 1(a) is moving.
 
 \section{Associated problems}
@@ -1348,7 +1462,8 @@ moving through a viscous liquid at velocity $\vec{v}$
   we fix $f=0.01$, $F^{dc}=0.1$, and and $A_p = 0.1$.
   We show the results for increasing $F^{ac} = 0.2, 0.3, 0.4$.
   %of the system for our original parameters.
-  Here $n_b$ increases from $n_b = 0$ in (a) to
+  Here the number of backwards steps
+  $n_b$ increases from $n_b = 0$ in (a) to
   $n_b = 2$ in (b) to $n_b = 4$ in (c).  
   \begin{center}
     \begin{figure}[h!]
@@ -1384,77 +1499,6 @@ moving through a viscous liquid at velocity $\vec{v}$
  %   Vanossi et al J.Phys.: Condens. Matter 19 (2007)
   %\item
   
-
-\subsection{Phase plots}
-  \label{ex:phase}
-
-  Synchronization 
-  can be detected with 
-  phase
-  plots or Lissajous figures
-  that 
-  %First reported in 1815 by Nathanial Bowditch
-  %and later by Lissajous in 1857  \cite{Lissajous1857}.
-  %Lissajous figures
-  compare two periodic signals
-  into a two dimensional plot.
-  In a non-driven system, an appropriate
-  phase space is $v_y$ versus $y$.  
-  %and easily generated with a computer code 
-  %or oscilloscope \cite{Tong1997}.
-  When a particle velocity
-  synchronizes to a particular spatial location
-  the dynamics
-  appears as 
-  %A mode-locked system is confined to 
-  a closed loop in  
-  phase space, % showing the relationship
-  %between two periodic functions
-  with patterns determined by the mode. % frequency ratio,
-  %with a frequency generator,
-  %where two combined frequencies at perpendicular orientations
-  %\footnote{The term phase
-  %has two scientific meanings:  
-  %oscillation phase $\phi_0$ is the constant of the argument
-  %in a periodic function
-  %$\sin{(\omega t + \phi_0)}$ and phase space is
-  %used to characterize oscillating systems with
-  %parametric plots.}.
-  In a system driven parallel to the $y-$direction,
-  the particle position is monotonically increasing
-  in time.
-  A synchronized driven particle
-  repeats a particular velocity
-  at the same $y-$position of the particle
-  within the substrate period.
-  We define a phase variable 
-  \begin{equation}
-    %(y mod \lambda) / \lambda
-    \phi(t) = 2\pi(y(t)-\bar{v}_y t)/\lambda
-  \end{equation}
-  that is centered about the average particle velocity $\bar{v}_y$
-  and normalized by the substrate period $\lambda$ \cite{Juniper2015}.
-  We plot this phase
-  versus the phase velocity 
-  \begin{equation}
-    %(y mod \lambda) / \lambda
-    \dot{\phi}(t) = 2\pi(v_y(t)-\bar{v}_y/\lambda.
-  \end{equation}
-  %Juniper %REF 53
-  
-
-  
-  \begin{center}
-    \begin{figure}[h!]
-      \centering
-      \includegraphics[width=\columnwidth]{phase.pdf}
-      \caption{
-        Phase plot of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:0}.  $F^{ac} = 0.2$ and $A_p = $ (a) $0.0$, (b) $0.05$, (c) $0.1$, and (d) $0.2$.
-      }
-      \label{fig:phase}
-    \end{figure}
-  \end{center}
-
   
   \subsection{Visualizing motion}
   \label{ex:animation}
