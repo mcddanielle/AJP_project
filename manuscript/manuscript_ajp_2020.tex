@@ -38,14 +38,18 @@
 \begin{abstract}
   Synchronization
   plays a key role in many physical processes.
-  Modeling 
-  single particle
-  synchronization 
-  with simulations or table-top experiments
-  can is a useful technique to isolate
-  complex behaviors %to 
+  %Modeling
+  A particle may
+  execute
+  motion 
+  coordinated  with position,
+  a synchronization behavior
+  that 
+  can be used to isolate
+  complex natural behaviors,  %to
+  either with
+  simulations or table-top experiments.
   %provide insight
-  in the natural world.
   We discuss a %simple
   %numerical model %that
   molecular dynamics simulation
@@ -59,7 +63,12 @@
   Under certain conditions,
   the particle velocity and location
   are synchronized or 
-  phase-locked.
+  phase-locked,
+  forming closed orbits in phase space.
+  Quasi-periodic motion is common, % in this system,
+  where the
+  dynamical center of motion shifts the
+  phase space orbit.
   We include molecular dynamics code %and exercises
   to simulate and characterize
   particle dynamics.
@@ -141,8 +150,9 @@ A locked-mode is an integer frequency ratio.
 In Huygens clocks,
 %even when started out of phase, 
 the pendula were observed swing at same rate -- a 1:1 mode.
-For simple pendula of different lengths,
-a 2:1 mode can be seen when a pendulum four
+For a higher modes,
+consider simple pendula of different lengths,
+a 2:1 mode occurs when a pendulum four
 times the length of another swings with twice the period.
 %
 %to a mode or frequency ratio  
@@ -153,7 +163,8 @@ times the length of another swings with twice the period.
 %\section{Colloidal Models}
 %\label{sec:colloids}
 
-Complex dynamics can be studied with
+Complex dynamics such as synchronized mode-locking
+can be studied with
 colloid particles in experiments or simulations.
 Typical colloids are   
 plastic spheres suspended in
@@ -161,16 +172,15 @@ de-ionized water or silica beads suspended in organic solvent.
 %experimental - colloids specifically
 Because 
 colloids are large %-- a few microns in size
-and move slowly %-- a few microns per second,
+and move slowly, %-- a few microns per second,
 particle position 
-can be captured in real time 
+can be measured in real time 
 with an optical camera \cite{Pertsinidis2001}. %(see Table ~\ref{tab:1}).
 Experimental measurements of 
 step-by-step dynamics of 
 colloids performing phase-locked motions
 are useful for
-understanding synchronization at a single particle level \cite{Juniper2015}.
- 
+understanding synchronization at a single particle level \cite{Juniper2015}. 
 %due to the large size and slow speed of the particles.
 %Individual colloids exhibit 
 %Brownian motion,
@@ -181,12 +191,15 @@ understanding synchronization at a single particle level \cite{Juniper2015}.
 %[elaborate - move to associated problems?].
 
 Light is a
-tool for manipulating the colloidal environment.
-A circular optical trap uses 
+tool for manipulating the colloidal environment
+to alter synchronization patterns.
+Colloids can be trapped
+with 
+%A circular optical trap uses 
 radiation pressure from 
-a laser beam to confine colloids \cite{Ashkin1997}.
+a laser beam \cite{Ashkin1997}.
 %Since photon density is high at the beam center,
-A colloid centered in the trap is %subject to a
+A colloid centered in an optical trap is %subject to a
 uniformly bombarded by photons. % while 
 %form a circular pattern with a higher density 
 %central 
@@ -208,7 +221,7 @@ the radiation pressure either moves colloids toward center
 %local minimum 
 or ejects it from the trap.
 %In experiments
-Diffraction gratings can be used to create
+Diffraction gratings can create
 more complex light environments, 
 %with one or more laser beams,
 such as periodic patterns of minima
@@ -238,18 +251,22 @@ a child on a swing.
  drive force will increase its speed at a rate propotional
  to the external drive.  
  %and dissipating energy from the system at all driving forces.
- A sinusoidal or ac drive can create mode-locking,
- where the average particle velocity
- is fixed for a range of dc drive forces \cite{Reichhardt2015}.
- %This synchronization phenomena
- %is useful for understanding the complex dynamical 
- %systems.
  When the applied force varies periodically,
  the ac drive can 
  cause the particle to hop back and forth across
  the landscape minima.
  Many synchronized patterns occur
- controlled by the substrate period.
+ controlled by the substrate period,
+ leading to 
+ %A sinusoidal or ac drive can create
+ mode-locking,
+ where the average particle velocity
+ is fixed for a range of dc drive forces \cite{Reichhardt2015}.
+ %This synchronization phenomena
+ %is useful for understanding the complex dynamical 
+ %systems.
+
+
 
  
 %Numerical modeling of colloids can provide mechanistic insight
@@ -536,7 +553,7 @@ the Euler method
   \vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t)
     \label{eq:euler}
 \end{equation}
-for a small time step $\Delta t = 0.001 \tau$.
+for a small time step $\Delta t = 0.01 \tau$.
 In %Section~\ref{sec:problems}
 Exercise~\ref{ex:euler}
 we describe 
@@ -640,7 +657,7 @@ is calculated with Eq.~\ref{eq:ysubstrate} as
 \end{equation}
 where the force is scaled with parameter $A_{p} = N_p \pi U_0/L$.
 In this section, we fix the landscape parameters
-to $A_{p} = 0.1$ force units
+to $A_{p} = 0.1 F_0$ %force units
 with $N_p=20$ minima %in the landscape
 corresponding to a spatial period $\lambda = 1.825 a_0$.
 
@@ -758,32 +775,48 @@ can produce a variety of hopping patterns in the particle motion.
 The relative values of $F^{ac}$, $F^{dc}$ and $A_p$
 control the rate and distance a  particle moves 
 forward and backward in the landscape.
-To explore the possible hopping patterns,
-we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$
-to illustrate
-distinct oscillation modes. % as a function of $F^{dc}$.
-A mode is a periodic pattern of hops
-with a constant average particle velocity, $\langle {v}_{y} \rangle$
-over a range of driving forces $F^{dc}$.
-%as shown
-
-
   It is useful to compare
   mode-locked quantities %periodic signals
   in a two dimensional phase plot.
   In a non-driven system, an appropriate
   phase space is particle velocity $v_y$ versus position $y$.  
+  In a system driven parallel to the $y-$direction,
+  %the particle velocity and position increase
+  %in time. % due to $F^{dc}$.
+  %Since a system does not form
+  %a closed loop in
+  %$v_y$ vs $y$ space,
+  we define phase variables 
+  to account for the net increase in velocity
+  and position.
+  The phase position is
+  defined as 
+  %within the substrate period as 
+  %We define a phase variable 
+  \begin{equation}
+    %(y mod \lambda) / \lambda
+    \phi(t) = 2\pi(y(t)-\langle v_y \rangle t)/\lambda
+  \end{equation}
+  centered about the average particle velocity $\langle v_y \rangle$
+  and normalized by the substrate period $\lambda$ \cite{Juniper2015}.
+  We plot this phase
+  versus the phase velocity 
+  \begin{equation}
+    %(y mod \lambda) / \lambda
+    \dot{\phi}(t) = 2\pi(v_y(t)-\langle v_y \rangle /\lambda.
+  \end{equation}
+  %Juniper %REF 53
   %and easily generated with a computer code 
   %or oscilloscope \cite{Tong1997}.
-  When $v_y$ %a particle velocity
+  When velocity
   is mode-locked to %repeat periodically
   a spatial location
   a closed loop appears in  
-  $v_y$ vs $y$ space. % showing the relationship
+  phase space. % showing the relationship
   %between two periodic functions
   The pattern is determined by the mode,
   or frequency ratio,
-  so a $1-1$ mode appears as a circle or oval.
+  so a 1:1 mode appears as a circle or oval.
   Nodes appear in the oval 
   for higher modes,
   sometimes forming figure-eights
@@ -808,32 +841,6 @@ over a range of driving forces $F^{dc}$.
   %used to characterize oscillating systems with
   %parametric plots.}.
   
-  In a system driven parallel to the $y-$direction,
-  %the particle velocity and position increase
-  %in time. % due to $F^{dc}$.
-  %Since a system does not form
-  %a closed loop in
-  %$v_y$ vs $y$ space,
-  we define phase variables 
-  to account for the net increase in velocity
-  and position.
-  The phase position is
-  defined as 
-  %within the substrate period as 
-  %We define a phase variable 
-  \begin{equation}
-    %(y mod \lambda) / \lambda
-    \phi(t) = 2\pi(y(t)-\bar{v}_y t)/\lambda
-  \end{equation}
-  centered about the average particle velocity $\bar{v}_y$
-  and normalized by the substrate period $\lambda$ \cite{Juniper2015}.
-  We plot this phase
-  versus the phase velocity 
-  \begin{equation}
-    %(y mod \lambda) / \lambda
-    \dot{\phi}(t) = 2\pi(v_y(t)-\bar{v}_y/\lambda.
-  \end{equation}
-  %Juniper %REF 53
   
   In Fig.~\ref{fig:phase}
   we plot $\dot{\phi}(t)$ versus $\phi(t)$
@@ -862,7 +869,9 @@ over a range of driving forces $F^{dc}$.
   with a semimajor axis of $\Delta \phi = 20$.
   The dynamical properties
   are asymmetric,
-  with nodes in the positive $\dot{\phi}$ values.
+  with three nodes in the positive $\dot{\phi}$ values.
+  The thickening of the line
+  indicates the system is not fully synchronized.
   [insert analysis.]
   As the substrate
   force becomes larger,
@@ -871,6 +880,33 @@ over a range of driving forces $F^{dc}$.
   indicating
   the particle can only move 
   backward over a short distance.
+  In Fig.~\ref{fig:phase}(c)
+  $A_p = 0.1$
+  the phase properties are similar to
+  those in $A_p = 0.05$,
+  the three nodes have 
+  increased asymmetry in both phase variables 
+  $(\phi,\dot{\phi})$.
+  The nodes deepen,
+  indicating [insert analysis.].
+  In Fig.~\ref{fig:phase}(d)
+  $A_p = 0.2$
+  the pattern shifts
+  to two nodes,
+  [indicating change analysis].
+  In Fig.~\ref{fig:phase}(e)
+  $A_p = 0.25$
+  the system returns to a nodeless
+  orbit,
+  shaped like a triangle [because why?]
+  In Fig.~\ref{fig:phase}(f)
+  $A_p = 0.3$
+  the particle is trapped between substrate minima,
+  and traces out a small unclosed
+  orbit in phase space [because...]
+  The phase velocity is near zero
+  throughout the motion -
+  [comment on initial conditions]
   \begin{center}
     \begin{figure}[h!]
       \centering
@@ -882,7 +918,14 @@ over a range of driving forces $F^{dc}$.
     \end{figure}
   \end{center}
 
-
+To explore the possible hopping patterns,
+we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$
+to illustrate
+distinct oscillation modes. % as a function of $F^{dc}$.
+A mode is a periodic pattern of hops
+with a constant average particle velocity, $\langle {v}_{y} \rangle$
+over a range of driving forces $F^{dc}$.
+%as shown
 In Fig.~\ref{fig:1} 
 we keep $F^{dc}$ constant
 for $10^5$ simulation timesteps
@@ -959,7 +1002,7 @@ during part of the cycle.
 %We examine
 The period of the substrate
 can be used to control the
-intrinsic velocity of the dc driven particle,
+net velocity of the dc driven particle,
 and the applied ac drive can cause mode-locking
 which appears as non-linear 
 steps in the force-velocity relationship.
@@ -1314,12 +1357,12 @@ moving through a viscous liquid at velocity $\vec{v}$
   We ran many simulations and never observed a hop to another minima
   within this simulation time.  
   In  Fig.~\ref{fig:brownian}(b)
-  $T/A_p = 5.0$ where hops between
+  $T/A_p = 5.0$,  hops between
   potential minima are possible but not probable,
-  a single hop occurs from
-  $y/\lambda = 10$ to $y/\lambda = 12$ at
-  $t \sim 40000 \tau$ and 
-  $y/\lambda = 10$ to $y/\lambda = 8$ at
+  a back-forth hop occurs from
+  $y/\lambda = 10$ to $12$ at
+  $t \sim 40000 \tau$ and a single hop from 
+  $y/\lambda = 10$ to $8$ occurs at
   $t \sim 280000 \tau$.
   In other simulations with identical parameters,
   we sometimes observed no hops or two hops between minima,
@@ -1331,6 +1374,7 @@ moving through a viscous liquid at velocity $\vec{v}$
   sufficiently large to make the particle perform
   what appears to be 
   a random walk of hops atop the substrate.
+  [prove it]
   %in addition to the small scale random walk executed
   %by all particles in this section.
   
@@ -1375,8 +1419,9 @@ moving through a viscous liquid at velocity $\vec{v}$
   a value much larger than $T = 100\tau$.
   At sufficiently high temperatures,
   Brownian motion does affect 
-  the formation of Shapiro steps
+  the formation of mode-locked steps
   and can be observed in experiments.
+  [explore]
   %and could be included
   %to emulate noise seen in some 
   %How does Brownian motion affect
@@ -1415,20 +1460,8 @@ moving through a viscous liquid at velocity $\vec{v}$
   the applied force is large
   over a sustained time interval,
   allowing a particle to hop a substrate maxima.
-  Experiments with single colloids \cite{Juniper2015} 
-  show 
-  hopping patterns with backward steps are more difficult
-  to achieve than forward,
-  with $n_f = 0$ to $6$ for $n_b = 0$,
-  $n_f = 0$ to $5$ for $n_b = -1$,
-  and
-  $n_f = 2$ to $3$ for $n_b = -2$
-  were realized 
-  for a variety of applied forces parameters $F^{dc}$ and $F^{ac}$.
-  {\bf Find the parameters
-  that create hopping patterns similar to those in Ref.~\cite{Juniper2015}}.
+  {\bf Explore the effect changing the driving frequency on the hopping pattern.}
 
-  
   In Fig.~\ref{fig:hops}
   we show the effects of lowering the frequency
   of applied driving force,
@@ -1437,7 +1470,9 @@ moving through a viscous liquid at velocity $\vec{v}$
   $F^{dc}=0.1$, $F^{ac}=0.05$, and $A_p = 0.1$.
   We observe no backward steps 
   ($n_b = 0$) 
-  across a broad range of frequencies.
+  across a broad range of frequencies
+  since $F^{dc} - F^{ac}= 0.05$
+  is too small to overcome $A_p$.
   The number of forward steps 
   $n_f$ increases as frequency decreases.
   Low frequencies
@@ -1458,6 +1493,19 @@ moving through a viscous liquid at velocity $\vec{v}$
   \end{center}
   %In Fig.~\ref{fig:hops}
 
+  Experiments with single colloids \cite{Juniper2015} 
+  show 
+  hopping patterns with backward steps are more difficult
+  to achieve than forward,
+  with $n_f = 0$ to $6$ for $n_b = 0$,
+  $n_f = 0$ to $5$ for $n_b = -1$,
+  and
+  $n_f = 2$ to $3$ for $n_b = -2$
+  were realized 
+  for a variety of applied forces parameters $F^{dc}$ and $F^{ac}$.
+  {\bf Find the parameters
+  that create hopping patterns similar to those in Ref.~\cite{Juniper2015}}.
+  %[well, go one...]
   In Fig.~\ref{fig:hops_back}
   we fix $f=0.01$, $F^{dc}=0.1$, and and $A_p = 0.1$.
   We show the results for increasing $F^{ac} = 0.2, 0.3, 0.4$.
