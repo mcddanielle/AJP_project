@@ -284,11 +284,11 @@ def plot_phase(ax,y_data,avg_vy_data,p):
     if 1:
         ax.scatter(phi_y_data[plot_delay:],dot_phi_y_data[plot_delay:],s=5) #,lw=5)
     else:
-        ax.scatter(phi_y_data[plot_delay:],avg_vy_data[plot_delay:]) #,lw=5)
+        ax.scatter(y_data[plot_delay:],avg_vy_data[plot_delay:]) #,lw=5)
 
     ax.set_xlabel(r"$\phi_y(t)$")
     ax.set_ylabel(r"$\dot{\phi}_y(t)$")
-    ax.yaxis.set_label_coords(-0.22, 0.5)
+    ax.yaxis.set_label_coords(-0.2, 0.5)
 
     #ax1.set_xticks([])
     #ax1.set_xlim(0,time_data[-1]+1)
@@ -306,9 +306,7 @@ def plot_velocity_force(avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC
     #freq = p['freq']
     #period = p['period']
     
-    fig = plt.figure(figsize=(7,4))
-    gs=gridspec.GridSpec(1,1)
-    ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
+    ax1 = parameters['ax']
 
     #calculate from np.array rather than incrementally from subroutines
     #F_drive = FDC_data + F_AC*np.sin(2*np.pi*freq*time_data)
@@ -323,16 +321,6 @@ def plot_velocity_force(avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC
 
     #ax1.legend(loc=4,fontsize=20,borderaxespad=0.0,frameon=0,handlelength=1.5) #,labelspacing=0.2
 
-    #plt.xlim(155,157)
-    ax1.set_xlabel("F$^{dc}$")
-    ax1.set_ylabel(r"$\langle$v$_y \rangle$")
-
-    ax1.set_xlim(0,avg_FDC_data[-1])
-    ax1.set_ylim(avg_vy_data[0]-0.001,avg_vy_data[-1])
-        
-    plt.tight_layout(pad=0.2)
-    plt.savefig(parameters['filename'])
-    
     return 
 
 #-------------------------------------------------------------------
@@ -567,7 +555,7 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #Coded to make figures 2 to 8
-    make_fig = 8
+    make_fig = 9
 
     letter=["(a)","(b)","(c)","(d)","(e)","(f)","(g)"]
 
@@ -585,20 +573,26 @@ if __name__ == "__main__":
         if make_fig == 2:
             parameters['filename']="single_particle_dt0.1.pdf"
             single_particle(parameters)
+            
         elif make_fig == 8:
+
+            #parameters['drop'] = 4000   
+            #parameters['maxtime'] = 5000
+            #parameters['decifactor'] = 1 #4000
 
             parameters['F_AC'] = 0.2
             parameters['freq'] = 0.01
             #parameters['F0'] = 0.05
+            parameters['y0'] = 0 #
 
-            fig = plt.figure(figsize=(12,11))
-            gs=gridspec.GridSpec(2,2)
+            fig = plt.figure(figsize=(10,12))
+            gs=gridspec.GridSpec(3,2)
 
             parameters['filename']="phase.pdf"
 
-            F0 = [0.0,0.05,0.1,0.2]
+            F0 = [0.0,0.05,0.1,0.2,0.25,0.3]
             k=0
-            for i in range(2):
+            for i in range(3):
                 for j in range(2):
                     ax = fig.add_subplot(gs[i,j])  #scatter plot of particles
                     ax.text(0.02,0.9,letter[k],
@@ -606,21 +600,24 @@ if __name__ == "__main__":
                             backgroundcolor="white",zorder=-10)
 
                     parameters['F0'] = F0[k]
-                    k+=1
+                    if k == 5:
+                        parameters['y0'] = parameters['period']
+
                 
                     y_data, avg_vy_data = single_particle(parameters,plot="phase")
 
                     plot_phase(ax, y_data,avg_vy_data,parameters)
-
+                    k+=1
 
             
-            plt.tight_layout(pad=0.5,h_pad=-0.2) #,v_pad=-0.3)
+            plt.tight_layout(pad=0.1,h_pad=-0.3) #,v_pad=-0.3)
             plt.savefig(parameters['filename'])
 
     #--------------------------------------------------------------
     #make shapiro steps with a range of F^{dc}
+    #this is the place to include the strictly DC force...
     #--------------------------------------------------------------
-    if make_fig == 3 or make_fig == 7: 
+    if make_fig == 3 or make_fig == 7 or make_fig == 9: 
         #reset some parameters for subsequent figures
         #parameters['F_DC_incr'] = 0.01        #amount to increase FDC at every drop step
         #parameters['drop'] = 2000            #integer timesteps to "ramp" the DC force
@@ -634,7 +631,8 @@ if __name__ == "__main__":
             Fdc_max=0.3+delta_Fdc
             parameters['filename']="fig3_sweep_FDC_vs_vx.pdf"
 
-        elif make_fig == 7:
+            '''
+            elif make_fig == 7:
             delta_Fdc = 0.001
             parameters['drop'] = 10000    #integer timesteps to "ramp" the DC force
             parameters['decifactor'] = 10000      #integer timesteps to "ramp" the DC force
@@ -642,7 +640,18 @@ if __name__ == "__main__":
             parameters['F_AC'] = 0.4
             Fdc_max=0.6+delta_Fdc
             parameters['filename']="fig7_sweep_FDC_vs_vx.pdf"
-            
+            '''
+        
+        elif make_fig == 9:
+            delta_Fdc = 0.001
+            parameters['drop'] = 10000    #integer timesteps to "ramp" the DC force
+            parameters['decifactor'] = 10000      #integer timesteps to "ramp" the DC force
+
+            F_AC = [0.0,0.4]
+            #parameters['F_AC'] = 0.0 #0.4
+            Fdc_max=0.6+delta_Fdc
+            parameters['filename']="fig9_sweep_FDC_vs_vx.pdf"
+
         max_value = int(np.ceil(Fdc_max/delta_Fdc))
         avg_vy_data = np.zeros(max_value)
         Fdc_data = np.arange(0,Fdc_max,delta_Fdc)
@@ -650,22 +659,40 @@ if __name__ == "__main__":
         #print(Fdc_data)
         #sys.exit()
 
-        for i in range(len(avg_vy_data)):
+        fig = plt.figure(figsize=(7,4))
+        gs=gridspec.GridSpec(1,1)
+        ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
+        parameters['ax'] = ax1
 
-            #reset - though I think unnecessary
-            parameters['F_DC'] = Fdc_data[i] #0              #initial F_DC
+        for F in F_AC:
+            parameters['F_AC'] = F
 
-            #"constant" driving force for most of simulation
-            parameters['F_DC_max'] = Fdc_data[i]
+            for i in range(len(avg_vy_data)):
 
-            #parameters['y0'] = 5.0*parameters['period']
+                #reset - though I think unnecessary
+                parameters['F_DC'] = Fdc_data[i] #0              #initial F_DC
 
-            #run a single MD simulation for a set of parameters
-            avg_vy_data[i] = single_particle(parameters,plot="y-velocity")            
+                #"constant" driving force for most of simulation
+                parameters['F_DC_max'] = Fdc_data[i]
 
-        plot_velocity_force(Fdc_data,avg_vy_data,parameters)
+                #parameters['y0'] = 5.0*parameters['period']
+                
+                #run a single MD simulation for a set of parameters
+                avg_vy_data[i] = single_particle(parameters,plot="y-velocity")            
 
+            #plot_velocity_force(Fdc_data,avg_vy_data,parameters)
+            ax1.plot(Fdc_data,avg_vy_data,'.',label=r"F$^{ac}$ = %1.1f"%(F))
+            ax1.set_xlim(0,Fdc_data[-1])
+            ax1.set_ylim(avg_vy_data[0]-0.001,avg_vy_data[-1])
 
+        #plt.xlim(155,157)
+        ax1.set_xlabel("F$^{dc}$")
+        ax1.set_ylabel(r"$\langle$v$_y \rangle$")
+        ax1.legend(loc='best',fontsize=22,numpoints=3,borderpad=0.1,handletextpad=0.2)
+                    
+        plt.tight_layout(pad=0.2)
+        plt.savefig(parameters['filename'])
+    
     #--------------------------------------------------------------
     #study Brownian motion for increasing temperature
     #--------------------------------------------------------------
@@ -710,24 +737,26 @@ if __name__ == "__main__":
         plt.savefig(parameters['filename'])
         
     #--------------------------------------------------------------
-    #modify either frequency (fig5) or F^ac amplitude (fig6)
+    #modify either frequency (fig5) or F^ac amplitude (fig6) or F^ac = 0
     #--------------------------------------------------------------
     if make_fig == 5 or make_fig == 6:
         
         parameters['dt'] = 0.1 #timestep in simulation units
-        parameters['maxtime']=3000        #total time steps in simulation
         parameters['writemovietime']=1   #interval to write data to arrays for plotting
         parameters['decifactor']=1   #interval to write data to arrays for plotting
 
         if make_fig == 5:
+            parameters['maxtime']=5000        #total time steps in simulation
+
             parameters['filename']="parameters_fig5.pdf"
-            frequency = [0.1, 0.05, 0.01, 0.005, 0.001]
+            frequency = [0.1, 0.05, 0.015, 0.005, 0.001]
 
             #we will sweep through the following independent variable
             ind_var = frequency
             str_iv=" f=%1.3f"
 
         else:
+            parameters['maxtime']=3000        #total time steps in simulation
             F_AC = [0.2, 0.3, 0.4]
 
             ind_var = F_AC
@@ -778,6 +807,20 @@ if __name__ == "__main__":
         plt.savefig(parameters['filename'])
 
 
-    #-----------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------
+    #compare strictly DC drive to AC drive.
+    
+    if make_fig == 9:
+
+
+        print('tbd')
+
+    #--------------------------------------------------------------------------
+    #animate this
+
+    if make_fig == 10:
+
+        print('animate')
+
     sys.exit()
 
