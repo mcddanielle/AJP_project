@@ -385,6 +385,7 @@ back to a position within the simulation boundaries
 by the transformation $x_i+L \rightarrow x_i$ and $y_i+L \rightarrow y_i$.
 %and particles interact across PBC.
 We show a schematic of the system in Fig.~\ref{fig:landscape0}(a).
+The units of the simulated variables are summarized in Table ~\ref{tab:1}.
 
 We confine the particles using a position dependent 
 potential energy function, called a landscape or substrate.
@@ -560,7 +561,6 @@ we describe
 the numerical methods for 
 solving differential equations.
 %
-The units of the simulated variables are summarized in Table ~\ref{tab:1}.
 
 \begin{table}[h!]
 \centering
@@ -590,6 +590,7 @@ viscosity coefficient & $\eta = F_0 \tau / a_0 $ & $\eta \sim 10^{-3}$ Pa-s \\
 %juniper uses water–ethanol mixture
 substrate period & $\lambda = 1.825 a_0$ & $\lambda = 3.5 \mu m$ \\
 substrate amplitude & $U_0 = 0.058 E_0$ & $U_0 = 75 k_B T \sim 2 J$ \\
+%A_p = 0.1 = N_p pi U_0/L.  this is how calculated U_0
 temperature & $T_0 = 0$ \footnote{to learn more about the effects
   of temperature on this simulation
   see Ex.~\ref{ex:brownian} where we study the limit
@@ -637,11 +638,14 @@ temperature & $T_0 = 0$ \footnote{to learn more about the effects
 % In subsection headings, only the first word is capitalized.
 \label{sec:one}
 
-A single particle %on this landscape
-responds to the applied driving force
-by moving across the landscape %maxima
-synchronized with 
-the period of $F^D(t)$.
+Here we drive 
+a single particle %on this landscape
+%responds to the applied driving force
+%by moving
+across the landscape %maxima
+to characterize its motion.
+%synchronized with 
+%the period of $F^D(t)$.
 %applied driving force.
 %along the y-direction
 %({\it redundant, just refer back to eq. in Model?})
@@ -656,14 +660,14 @@ is calculated with Eq.~\ref{eq:ysubstrate} as
   F^l_y(y) = -A_{p} \sin{(N_p \pi y / L)} 
 \end{equation}
 where the force is scaled with parameter $A_{p} = N_p \pi U_0/L$.
-In this section, we fix the landscape parameters
+In this section we fix the landscape parameters
 to $A_{p} = 0.1 F_0$ %force units
 with $N_p=20$ minima %in the landscape
 corresponding to a spatial period $\lambda = 1.825 a_0$.
 
 %In Fig.~\ref{fig:0} 
-The driven particle adjusts
-its motion to traverse
+The driven particle %adjusts
+moves across %its motion to traverse
 the periodic landscape with the same rhythm as 
 the applied time-dependent force $F^D(t)$.
 When $F^D(t) > A_p$, a particle can 
@@ -710,7 +714,7 @@ the motion of the particle
 synchronizes with the driving period $T$.
 We measure 
 average particle velocity $\langle{v}_y\rangle$
-as the average displacement %$\Delta y = y(t_0+T) - y(t_0)$
+as the displacement %$\Delta y = y(t_0+T) - y(t_0)$
 over the period of the driving force.
 The particle moves
 in the positive y-direction
@@ -739,8 +743,6 @@ This can be seen in
 Fig.~\ref{fig:0} %we demonstrate this relationship,
 where local extrema appear in $y/\lambda$
 when $F_{D}(t) \approx 0 $. 
-
-
 \begin{center}
 \begin{figure}[h!]
 \centering
@@ -775,6 +777,7 @@ can produce a variety of hopping patterns in the particle motion.
 The relative values of $F^{ac}$, $F^{dc}$ and $A_p$
 control the rate and distance a  particle moves 
 forward and backward in the landscape.
+
   It is useful to compare
   mode-locked quantities %periodic signals
   in a two dimensional phase plot.
@@ -1462,10 +1465,10 @@ moving through a viscous liquid at velocity $\vec{v}$
   allowing a particle to hop a substrate maxima.
   {\bf Explore the effect changing the driving frequency on the hopping pattern.}
 
-  In Fig.~\ref{fig:hops}
-  we show the effects of lowering the frequency
-  of applied driving force,
-  holding the remaining parameters fixed 
+  Fig.~\ref{fig:hops}
+  shows the effects of lowering the frequency
+  of applied driving force
+  We hold the remaining parameters fixed 
   to 
   $F^{dc}=0.1$, $F^{ac}=0.05$, and $A_p = 0.1$.
   We observe no backward steps 
@@ -1473,46 +1476,82 @@ moving through a viscous liquid at velocity $\vec{v}$
   across a broad range of frequencies
   since $F^{dc} - F^{ac}= 0.05$
   is too small to overcome $A_p$.
-  The number of forward steps 
-  $n_f$ increases as frequency decreases.
+  The rate of forward hops 
+  increases as frequency decreases,
+  but in each case the particle
+  hops across two substrate periods as in Fig.~\ref{fig:0}.
+  In Fig.~\ref{fig:hops}(a-b) the particle hopping rate
+  do not match the temporal period of $F^D(t)$
+  due to the high frequency.
+  In Fig.~\ref{fig:hops}(a) the high frequency $f= 0.1$
+  is apparent in the undulations of the particle
+  with a period of $10\tau$.
+  %Due to the high frequency,
+  The particle is trapped between substrate minima $y \approx \lambda/2 $ for
+  a time interval of $400 \tau$.
+  In Fig.~\ref{fig:hops}(b) the frequency $f= 0.05$
+  with a period of $20\tau$
+  arrests the particle between minima,
+  with a hopping rate of $200 \tau$.
+  At intermediate frequencies 
+  such as $f=0.01$
+  the particles are synchronized so that 
+  the hopping rate matches the driving frequency.
+  In Fig.~\ref{fig:hops}(c) $f=0.015$
+  the particle hops forward two minima every $67\tau$.
   Low frequencies
-  result in sustained positive or negative motion of a particle,
-  where in Fig.~\ref{fig:hops}(e)
-  the particle reaches the top edge of the system
+  result in sustained positive motion of a particle.
+  In Fig.~\ref{fig:hops}(d) $f=0.005$
+  the particle executes two subsequent forward hops
+  before becoming trapped
+  for the remainder of the period $200 \tau$.
+  In Fig.~\ref{fig:hops}(e) $f=0.001$
+  the hopping is continuous
+  over the simulation time.
+  Here the particle reaches the top edge of the system
   and wraps back to $y=0$.
+  Given a simulation time of the period length $1000 \tau$,
+  the particle would cease forward motion.
   \begin{center}
     \begin{figure}[h!]
       \centering
       \includegraphics[width=\columnwidth]{{parameters_fig5}.pdf}
       \caption{
-        Motion of a particle with the same values of $F^{dc} = 0.1$ and $F^{ac} = 0.05$ as Fig.~\ref{fig:0} and decreasing frequency as marked.
-        In (e) the particle wraps the periodic boundary conditions.
+        Motion of a particle with the same values of $F^{dc} = 0.1$ and $F^{ac} = 0.05$ as Fig.~\ref{fig:0} and decreasing frequency $f=$ (a) $0.1$,
+        (b) $0.05$, (c) $0.015$, (d) $0.005$ and (e) $0.001$ where  
+        the particle wraps the periodic boundary conditions.
       }
       \label{fig:hops}
     \end{figure}
   \end{center}
   %In Fig.~\ref{fig:hops}
 
-  Experiments with single colloids \cite{Juniper2015} 
+  Experiments with single colloids 
   show 
   hopping patterns with backward steps are more difficult
-  to achieve than forward,
-  with $n_f = 0$ to $6$ for $n_b = 0$,
+  to achieve than forward.
+  In Ref.\cite{Juniper2015} the following
+  combinations of forward and backwards steps where realized:
+  $n_f = 0$ to $6$ for $n_b = 0$,
   $n_f = 0$ to $5$ for $n_b = -1$,
   and
   $n_f = 2$ to $3$ for $n_b = -2$
-  were realized 
-  for a variety of applied forces parameters $F^{dc}$ and $F^{ac}$.
+  %were realized 
+  by sweeping through
+  a variety of applied forces parameters $F^{dc}$ and $F^{ac}$.
   {\bf Find the parameters
   that create hopping patterns similar to those in Ref.~\cite{Juniper2015}}.
   %[well, go one...]
   In Fig.~\ref{fig:hops_back}
-  we fix $f=0.01$, $F^{dc}=0.1$, and and $A_p = 0.1$.
-  We show the results for increasing $F^{ac} = 0.2, 0.3, 0.4$.
+  we fix $f=0.01$, $F^{dc}=0.1$, and $A_p = 0.1$.
+  We show the results for increasing
+  the amplitude of $F^{ac} = 0.2, 0.3, 0.4$.
   %of the system for our original parameters.
   Here the number of backwards steps
   $n_b$ increases from $n_b = 0$ in (a) to
-  $n_b = 2$ in (b) to $n_b = 4$ in (c).  
+  $n_b = 2$ in (b) to $n_b = 4$ in (c).
+  The number of forward steps also increases
+  due to the increased total positive amplitude of $F^D(t)$.
   \begin{center}
     \begin{figure}[h!]
       \centering
@@ -1526,14 +1565,32 @@ moving through a viscous liquid at velocity $\vec{v}$
       \label{fig:hops_back}
     \end{figure}
   \end{center}
-  %In Fig.~\ref{fig:hops}
-  
+
+  In Fig.~\ref{fig:shapiro}
+  we show two additional sweeps of $F^{dc}$.
+  In Fig.~\ref{fig:shapiro}(a) $F^{ac}= 0.0$.
+  With no oscillating component of the driving force,
+  the force-velocity relationship is monotonically increasing
+  above the depinning threshold $F^c$ such that
+  \begin{equation}
+    \langle v_y \rangle \propto (F^{dc}-F^c)^{-\beta}
+  \end{equation}
+  The particle does not phase lock since there is no periodicity to $F^D(t)$,
+  but does exhibit undulations in $\langle v_y \rangle$
+  due to the corregations in the substrate.
+  In Fig.~\ref{fig:shapiro}(b) $F^{ac}=0.4$ and frequency $f=0.01$.
+  Mode-locked steps in $\langle v_y \rangle$ vs. $F^{dc}$
+  At low values of $F^{dc}$ the particle may move backwards,
+  distorting the steps, as seen below $F^{dc}<0.3$
+  Between $0.3< F^{dc}<0.5$ the system exhibits phase locked steps.
     \begin{center}
     \begin{figure}[h!]
       \centering
-      \includegraphics[width=\columnwidth]{{fig7_sweep_FDC_vs_vx}.pdf}
+      \includegraphics[width=\columnwidth]{{fig9_sweep_FDC_vs_vx}.pdf}
+      %\includegraphics[width=\columnwidth]{{fig7_sweep_FDC_vs_vx}.pdf}
       \caption{
-        Mode-locked steps in $\langle v_y \rangle$ vs. $F^{dc}$ of a particle with frequency $f=0.01$ and $F^{ac}=0.4$.  At low values of $F^{dc}$ the particle may move backwards, distorting the steps.
+        $\langle v_y \rangle$ vs. $F^{dc}$ of a particle with
+        $F^{ac}=0.0$ (blue) and $0.4$ (orange) with frequency $f=0.01$.
       }
       \label{fig:shapiro}
     \end{figure}
