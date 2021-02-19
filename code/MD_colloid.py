@@ -583,7 +583,7 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #Coded to make figures 2 to 8
-    make_fig = 2
+    make_fig = 3
 
     parameters['filename']="fig%d.pdf"%(make_fig)
 
@@ -660,7 +660,9 @@ if __name__ == "__main__":
         if make_fig == 3:
             delta_Fdc = 0.001
             Fdc_max=0.3+delta_Fdc
-            parameters['filename']="fig3_sweep_FDC_vs_vx.pdf"
+            #parameters['filename']="fig3_sweep_FDC_vs_vx.pdf"
+
+            F_AC = [0.0, 0.05] #, 0.1]
 
             '''
             elif make_fig == 7:
@@ -712,14 +714,14 @@ if __name__ == "__main__":
                 avg_vy_data[i] = single_particle(parameters,plot="y-velocity")            
 
             #plot_velocity_force(Fdc_data,avg_vy_data,parameters)
-            ax1.plot(Fdc_data,avg_vy_data,'.',label=r"F$^{ac}$ = %1.1f"%(F))
+            ax1.plot(Fdc_data,avg_vy_data,label=r"%1.2f"%(F))
             ax1.set_xlim(0,Fdc_data[-1])
             ax1.set_ylim(avg_vy_data[0]-0.001,avg_vy_data[-1])
 
         #plt.xlim(155,157)
         ax1.set_xlabel("F$^{dc}$")
         ax1.set_ylabel(r"$\langle$v$_y \rangle$")
-        ax1.legend(loc='best',fontsize=22,numpoints=3,borderpad=0.1,handletextpad=0.2)
+        ax1.legend(loc='best',fontsize=20,numpoints=3,borderpad=0.1,handletextpad=0.2,title="F$^{ac}$")
                     
         plt.tight_layout(pad=0.2)
         plt.savefig(parameters['filename'])
