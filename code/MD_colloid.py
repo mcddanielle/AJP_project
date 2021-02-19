@@ -44,27 +44,28 @@ def brownian_distribution(parameters):
     
 ##################################################################
 def landscape_force(y,parameters):
-    '''landscape potential is equation (1) in the manuscript, while force is equation (5) - for now anyway
+    '''landscape potential is equation (1) in the manuscript, 
+    while force is equation (5) - for now anyway
 
     U(y) = U0 cos(Np*pi*y/L)
 
-    F_y = -dU/dy = -U0/period * sin(Np*pi*y/L)
+    F_y = -dU/dy = -U0/period * sin(Np*2pi*y/L)
 
-    potential minima occur at U(y) = -U0, or cos(Np*pi*y/L) = -1
-    meaning Np*pi*y/L = m pi, where m is odd
+    potential minima occur at U(y) = -U0, or cos(Np*2pi*y/L) = -1
+    meaning Np*2pi*y/L = m pi, where m is odd
     
     Required Parameters
-    period: float 
-    the spatial period of the washboard potential, should be the system length divided by the number of minima  (L/Np)
-
     y: float
     the location in the y-direction of the individual particle
+
+    parameters: dict
+    contains all constants of the simulation, notably the substrate period and barrier height F0
     '''
 
     period = parameters['period']
     F0 = parameters['F0']
     
-    return -F0*np.sin(np.pi*y/period)
+    return -F0*np.sin(2*np.pi*y/period)
 
 ###################################################################
 def external_drive(F_DC,time, parameters):
@@ -120,7 +121,14 @@ def average_velocity(int_time, vy, avg_vy, parameters):
 #####################################################################
 def md_step(y, int_time, F_DC, avg_vy, parameters, ft=0):
     '''
+    Required Arguments
+    y
+    int_time
+    F_DC
+    avg_vy
+    parameters
 
+    Optional Arguments
     ft random kicks due to temperature affects
     '''
 
@@ -153,6 +161,7 @@ def md_step(y, int_time, F_DC, avg_vy, parameters, ft=0):
     y += vy*dt
 
     #check periodic boundary conditions
+    #if we've left the edge of the system, remap 
     if y > SY:
         y -= SY
     elif y < 0:
@@ -190,7 +199,14 @@ def plot_position_vs_time(ax2,time_data,y_data,p):
 
     for i in [1,5,9,13]:
         ax2.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
+
+    ax1.yaxis.set_minor_locator(AutoMinorLocator(5))
+    ax1.xaxis.set_minor_locator(AutoMinorLocator(8))
+    ax1.grid(axis='both',which='both')
     '''
+    ax2.yaxis.set_minor_locator(AutoMinorLocator(5))
+    ax2.xaxis.set_minor_locator(AutoMinorLocator(8))
+    ax2.grid(axis='both',which='both')
     
     return 
 
@@ -237,21 +253,31 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     ax1.text(0.9,0.86,"(a)",transform = ax1.transAxes,backgroundcolor="white")
     ax2.text(0.9,0.06,"(b)",transform = ax2.transAxes,backgroundcolor="white")
 
-    ax2.set_ylim(0.0,8.501)
-    ax2.set_yticks([1,3,5,7])
+    if 0:
+        ax2.set_ylim(0.0,8.501)
+        ax2.set_yticks([1,3,5,7])
     
-    #add horizontal lines for potential minima
-    #'''
-    for i in range(1,10)[::2]:
-        #ax2.hline(i)
-        #, label = "U(y) = -U$_0$")
-        ax2.axhline(y=i, color = "black", linestyle = "--")
-    #'''
+        #add horizontal lines for potential minima
+        '''
+        for i in range(1,10)[::2]:
+            #ax2.hline(i)
+            #, label = "U(y) = -U$_0$")
+            ax2.axhline(y=i, color = "black", linestyle = "--")
+         '''
+    '''
     for i in [1,5,9,13]:
         #peaks of the FD curve
         ax2.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
         ax1.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
 
+    ax1.yaxis.set_minor_locator(AutoMinorLocator(1))
+    ax1.xaxis.set_minor_locator(AutoMinorLocator(1))
+    ax1.grid(axis='both',which='both')
+    '''
+    ax2.yaxis.set_minor_locator(AutoMinorLocator(2))
+    ax2.xaxis.set_minor_locator(AutoMinorLocator(1))
+    ax2.grid(axis='both',which='both')
+    #ax2.grid(axis='both') #,which='both')
         
     plt.tight_layout(pad=0.1,h_pad=-0.3)
     #g.tight_layout(fig, rect=[0, 0, 1, 1], h_pad=p_val,w_pad=p_val,pad=0.0)
@@ -272,18 +298,20 @@ def plot_phase(ax,y_data,avg_vy_data,p):
     #plot the position within the period
     #y_data /= p['period']
     vbar = np.average(avg_vy_data)
-    time = np.arange(1,4001,1)*p['dt']
+    time = np.arange(1,p['maxtime']+1,1)*p['dt']
         
-    plot_delay = 100
-        
+    #plot_delay = 100   
     #no subtraction
     
+    # driven phase variables
     phi_y_data = 2*np.pi*(y_data - vbar*time)/(p['period'])
     dot_phi_y_data = 2*np.pi*(avg_vy_data - vbar)/(p['period'])
 
     if 1:
+        #plot the driven phase variables
         ax.scatter(phi_y_data[plot_delay:],dot_phi_y_data[plot_delay:],s=5) #,lw=5)
     else:
+        #non-driven phase variables
         ax.scatter(y_data[plot_delay:],avg_vy_data[plot_delay:]) #,lw=5)
 
     ax.set_xlabel(r"$\phi_y(t)$")
@@ -499,7 +527,7 @@ def set_parameters():
     #use a python dict (i.e. a hash to organize the parameters)
     dict={}
 
-    dict['dt'] = 0.001 #timestep in simulation units
+    dict['dt'] = 0.005 #timestep in simulation units
 
     dict['Sy']=36.5         #height of system
     dict['Sx']=36.5         #width of system
@@ -510,7 +538,7 @@ def set_parameters():
     dict['y0'] =  0 #dict['Sy']/2
 
     #landscape potential - Fig2 - 0.1
-    dict['F0'] = 0.1 #parameters 0.2
+    dict['F0'] = 0.125 #parameters 0.1
     dict['Np'] = 20         #number of troughs in the substrate
     dict['period'] = dict['Sy']/dict['Np']  #spatial period of substrate in y-direction
 
@@ -555,7 +583,10 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #Coded to make figures 2 to 8
-    make_fig = 9
+    make_fig = 2
+
+    parameters['filename']="fig%d.pdf"%(make_fig)
+
 
     letter=["(a)","(b)","(c)","(d)","(e)","(f)","(g)"]
 
@@ -564,14 +595,14 @@ if __name__ == "__main__":
     #--------------------------------------------------------------
     if make_fig == 2 or make_fig == 8:
         
-        parameters['dt'] = 0.05 #timestep in simulation units
+        parameters['dt'] = 0.1 #timestep in simulation units
         parameters['maxtime']=4000        #total time steps in simulation
         parameters['writemovietime']=1   #interval to write data to arrays for plotting
         parameters['decifactor']=1   #interval to write data to arrays for plotting
 
         #run a single MD simulation for a set of parameters
         if make_fig == 2:
-            parameters['filename']="single_particle_dt0.1.pdf"
+            #parameters['filename']="single_particle_dt0.1.pdf"
             single_particle(parameters)
             
         elif make_fig == 8:
