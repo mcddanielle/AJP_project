@@ -204,9 +204,9 @@ def plot_position_vs_time(ax2,time_data,y_data,p):
     ax1.xaxis.set_minor_locator(AutoMinorLocator(8))
     ax1.grid(axis='both',which='both')
     '''
-    ax2.yaxis.set_minor_locator(AutoMinorLocator(5))
-    ax2.xaxis.set_minor_locator(AutoMinorLocator(8))
-    ax2.grid(axis='both',which='both')
+    #ax2.yaxis.set_minor_locator(AutoMinorLocator(5))
+    #ax2.xaxis.set_minor_locator(AutoMinorLocator(8))
+    #ax2.grid(axis='both',which='both')
     
     return 
 
@@ -538,7 +538,7 @@ def set_parameters():
     dict['y0'] =  0 #dict['Sy']/2
 
     #landscape potential - Fig2 - 0.1
-    dict['F0'] = 0.125 #parameters 0.1
+    dict['F0'] = 0.1 #25 #parameters 0.1
     dict['Np'] = 20         #number of troughs in the substrate
     dict['period'] = dict['Sy']/dict['Np']  #spatial period of substrate in y-direction
 
@@ -583,7 +583,7 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #Coded to make figures 2 to 8
-    make_fig = 3
+    make_fig = 2
 
     parameters['filename']="fig%d.pdf"%(make_fig)
 
@@ -736,12 +736,12 @@ if __name__ == "__main__":
 
         #simulating for a long time, 
         parameters['dt'] = 0.1 #timestep in simulation units
-        parameters['maxtime']=3000000        #total time 
-        parameters['writemovietime']=10000   #interval to write data 
+        parameters['maxtime']=300000        #total time 
+        parameters['writemovietime']=1000   #interval to write data 
         parameters['decifactor']=1   #interval to write data to arrays for plotting
 
         #save the figure in
-        parameters['filename']="brownian_particle_dt0.1.pdf"
+        #parameters['filename']="brownian_particle_dt0.1.pdf"
 
         #make the figure
         fig = plt.figure(figsize=(10,12))
@@ -749,12 +749,12 @@ if __name__ == "__main__":
         i=0
 
         #sweep through temperatures
-        for temp in [4.0, 5.0, 6.0]:
+        for temp in [3.0, 3.5, 4.0]:
 
             #create and label the subplot
             ax = fig.add_subplot(gs[i,0])
-            ax.text(0.02,0.89,letter[i],
-                    transform = ax.transAxes,backgroundcolor="white",zorder=-10)
+            ax.text(0.02,0.05,letter[i],
+                    transform = ax.transAxes,backgroundcolor="white")
 
             #Brownian motion factor as a ratio of the Ap value
             parameters['temperature'] = temp*parameters['F0']
@@ -781,7 +781,7 @@ if __name__ == "__main__":
         if make_fig == 5:
             parameters['maxtime']=5000        #total time steps in simulation
 
-            parameters['filename']="parameters_fig5.pdf"
+            #parameters['filename']="parameters_fig5.pdf"
             frequency = [0.1, 0.05, 0.015, 0.005, 0.001]
 
             #we will sweep through the following independent variable
