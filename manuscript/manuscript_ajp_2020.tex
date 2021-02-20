@@ -997,11 +997,11 @@ within a single step.
 \centering
 \includegraphics[width=\columnwidth]{fig3.pdf}
 \caption{Average particle velocity  $\langle v_{y} \rangle$
-  as a function of $F^{dc}$,
+  as a function of $F^{dc}$, 
   the constant parameter of $F^D(t)$ defined in Eq.~\ref{eq:drive}.
   We fix
   $F^{ac}=0.0$ (blue) and 
-  $F^{ac}=0.05$ and $f = 0.01$ (orange)
+  $F^{ac}=0.05$ (orange) with $f = 0.01$ 
   as in Fig.~\ref{fig:0}.}
 \label{fig:1}
 \end{figure}
@@ -1348,25 +1348,28 @@ moving through a viscous liquid at velocity $\vec{v}$
   from pinned to hopping
   in 
   %Measure the position vs. time
-  a non-driven colloid for $T/A_p = 4.0$, $5.0$, and $6.0$.
-  The crossover
-  to a hopping regime occurs at $T/A_p \approx 5.6$.
+  a non-driven colloid for $T/A_p = 3.0$, $3.5$, and $4.0$.
+  %The crossover
+  %to a hopping regime occurs at $T/A_p \approx 5.6$.
   %Reproduce these results.  
   \begin{center}
     \begin{figure}[h!]
       \centering
-      \includegraphics[width=\columnwidth]{{brownian_particle_dt0.1}.pdf}
+      \includegraphics[width=\columnwidth]{{fig4}.pdf}
       \caption{
         Motion of a particle undergoing Brownian motion
         on a washboard potential
         energy landscape.
-        (a) $T/A_p = 4.0$ no hopping occurs.
-        (b) $T/A_p = 5.0$ a three hops occur %at $t = 130000$
-        across distances of $\Delta y = 2 \lambda$.
-        (c) $T/A_p = 6.0$ many hops occur.
+        (a) $T/A_p = 3.0$ no hopping occurs.
+        (b) $T/A_p = 3.5$ one hop occurs and %at $t = 130000$
+        %across distances of $\Delta y = 2 \lambda$.
+        (c) $T/A_p = 4.0$ many hops occur.
         Note the scale of the $y-$axis differs in each panel
         and the time scale is
-        much greater than in Fig.~\ref{fig:0}.
+        greater than in Fig.~\ref{fig:0}.
+        The precise timing of hops pattern varies
+        by simulation,
+        sometimes exhibiting several hops for $T/A_p = 3.5$. 
       }
       \label{fig:brownian}
     \end{figure}
