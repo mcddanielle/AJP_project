@@ -610,7 +610,8 @@ temperature & $T_0 = 0$ \footnote{to learn more about the effects
 %\Gamma =15 (B=0.43mT) and a stiff chain at \Gamma=392 (B=2.2mT).
 %Kink
 %16 particles in a strong potential energy landscape of 15 minima (trap spacing: l¼5.5 mm; laser power per trap: WE1.75 mW; trap stiffness: k¼8.7?10?7 kg s?2; trap depth: V0¼200 kBT),
-
+%JUNIPER2017
+%The driving force is provided by a PI-542.2CD piezo-stage, controlled using the LabView interface, at driving 0.4 ≤ FAC/ζ ≤ 14 µm s−1, and a frequency of 1 velocities of 0.05 ≤ FDC/ζ ≤ 8 µm s−1. AC driving veloc
 %Volpe AJP Parameters
 %We will consider a silica microparticle in water with radius R=1micro m, mass m=11picograms, viscosity eta=0.001 Ns/m^2; $\gamma=6\pi \eta R$,  T=300K, and \tau=0.6\micro s.
 %thermofisher off the shelf paramagnetic beads
@@ -796,7 +797,7 @@ when $F_{D}(t) \approx 0 $.
 \end{center}
 
 
-{\it NOTE: YOUR $A_P$ VALUES ARE TOO SMALL TO MAKE THIS A MEANINGFUL PHASE VARIALBE.  YOU NEED TO SCALE WITH THE DRIVE FORCE AMPLITUDES.  THIS CAN ALSO HELP YOU UNDERSTAND WHY YOU ARE GETTING BIG JUMPS IN POSITION COMPARED TO JUNIPER ET AL.  YOU ARE WORKING IN THE WEAK SUBSTRATE LIMIT.  also insert plots of $y/\lambda$ over a single period with the phase plots - like juniper}
+%{\it NOTE: YOUR $A_P$ VALUES ARE TOO SMALL TO MAKE THIS A MEANINGFUL PHASE VARIALBE.  YOU NEED TO SCALE WITH THE DRIVE FORCE AMPLITUDES.  THIS CAN ALSO HELP YOU UNDERSTAND WHY YOU ARE GETTING BIG JUMPS IN POSITION COMPARED TO JUNIPER ET AL.  YOU ARE WORKING IN THE WEAK SUBSTRATE LIMIT.  also insert plots of $y/\lambda$ over a single period with the phase plots - like juniper}
   It is useful to compare
   mode-locked quantities %periodic signals
   in a two dimensional phase plot
@@ -937,6 +938,7 @@ when $F_{D}(t) \approx 0 $.
       \includegraphics[width=\columnwidth]{phase.pdf}
       \caption{
         Phase plot of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:0}.  $F^{ac} = 0.2$ and $A_p = $ (a) $0.0$, (b) $0.05$, (c) $0.1$, (d) $0.2$, (e) $0.25$ and (f) $0.3$.
+        [first 100 timesteps removed to reduce transients]
       }
       \label{fig:phase}
     \end{figure}
@@ -1002,7 +1004,9 @@ within a single step.
   We fix
   $F^{ac}=0.0$ (blue) and 
   $F^{ac}=0.05$ (orange) with $f = 0.01$ 
-  as in Fig.~\ref{fig:0}.}
+  as in Fig.~\ref{fig:0}.
+  {TODO: with these parameters, the steps are fractional!}
+}
 \label{fig:1}
 \end{figure}
 \end{center}
