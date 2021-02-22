@@ -300,7 +300,7 @@ def plot_phase(ax,y_data,avg_vy_data,p):
     vbar = np.average(avg_vy_data)
     time = np.arange(1,p['maxtime']+1,1)*p['dt']
         
-    #plot_delay = 100   
+    plot_delay = 100   
     #no subtraction
     
     # driven phase variables
@@ -316,7 +316,7 @@ def plot_phase(ax,y_data,avg_vy_data,p):
 
     ax.set_xlabel(r"$\phi_y(t)$")
     ax.set_ylabel(r"$\dot{\phi}_y(t)$")
-    ax.yaxis.set_label_coords(-0.2, 0.5)
+    #ax.yaxis.set_label_coords(-0.2, 0.5)
 
     #ax1.set_xticks([])
     #ax1.set_xlim(0,time_data[-1]+1)
@@ -527,7 +527,11 @@ def set_parameters():
     #use a python dict (i.e. a hash to organize the parameters)
     dict={}
 
-    dict['dt'] = 0.005 #timestep in simulation units
+    dict['dt'] = 0.1 #005 #timestep in simulation units
+    
+    #integer time steps
+    dict['maxtime']=4000        #total time steps in simulation
+    dict['writemovietime']=1   #interval to write data to arrays for plotting
 
     dict['Sy']=36.5         #height of system
     dict['Sx']=36.5         #width of system
@@ -545,16 +549,14 @@ def set_parameters():
     #Brownian motion factor
     dict['temperature'] = 5.7*dict['F0']
     
-    #integer time steps
-    dict['maxtime']=400000        #total time steps in simulation
-    dict['writemovietime']=1000   #interval to write data to arrays for plotting
-    
     #control the "constant" component of driving force
     dict['F_DC_max'] = 0.1        #"constant" driving force for most of simulation
+
+    #sweep the DC portion up from zero
     if 0:
         dict['F_DC'] = 0              #initial F_DC
         dict['F_DC_incr'] = 0.01      #amount to increase FDC at every drop step
-        dict['F_DC_max'] = 0.1        #"constant" driving force for most of simulation
+        dict['F_DC_max'] = 0.1        #"max DC driving force
         dict['drop'] = 4000           #integer timesteps to "ramp" the DC force
     else:
         dict['F_DC'] = dict['F_DC_max']  #initial F_DC
@@ -583,10 +585,9 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #Coded to make figures 2 to 8
-    make_fig = 2
+    make_fig = 9
 
     parameters['filename']="fig%d.pdf"%(make_fig)
-
 
     letter=["(a)","(b)","(c)","(d)","(e)","(f)","(g)"]
 
@@ -608,20 +609,20 @@ if __name__ == "__main__":
         elif make_fig == 8:
 
             #parameters['drop'] = 4000   
-            #parameters['maxtime'] = 5000
+            parameters['maxtime'] = 3000
             #parameters['decifactor'] = 1 #4000
 
-            parameters['F_AC'] = 0.2
-            parameters['freq'] = 0.01
+            #parameters['F_AC'] = 0.2
+            #parameters['freq'] = 0.01
             #parameters['F0'] = 0.05
-            parameters['y0'] = 0 #
+            parameters['y0'] = 0 #parameters['period']/2
 
             fig = plt.figure(figsize=(10,12))
             gs=gridspec.GridSpec(3,2)
 
             parameters['filename']="phase.pdf"
 
-            F0 = [0.0,0.05,0.1,0.2,0.25,0.3]
+            FDC = [0.05, 0.1,0.12, 0.15, 0.2, 0.3]
             k=0
             for i in range(3):
                 for j in range(2):
@@ -630,9 +631,9 @@ if __name__ == "__main__":
                             transform = ax.transAxes,
                             backgroundcolor="white",zorder=-10)
 
-                    parameters['F0'] = F0[k]
-                    if k == 5:
-                        parameters['y0'] = parameters['period']
+                    parameters['F_DC_max'] = FDC[k]
+                    #if k == 5:
+                    #    parameters['y0'] = parameters['period']
 
                 
                     y_data, avg_vy_data = single_particle(parameters,plot="phase")
@@ -649,41 +650,30 @@ if __name__ == "__main__":
     #this is the place to include the strictly DC force...
     #--------------------------------------------------------------
     if make_fig == 3 or make_fig == 7 or make_fig == 9: 
-        #reset some parameters for subsequent figures
-        #parameters['F_DC_incr'] = 0.01        #amount to increase FDC at every drop step
-        #parameters['drop'] = 2000            #integer timesteps to "ramp" the DC force
-        #parameters['decifactor'] = 2000      #integer timesteps to "ramp" the DC force
 
-        parameters['maxtime']=100000          #shorter and I don't get steps
 
+        parameters['maxtime']=10000       #shorter and I don't get steps
+
+        delta_Fdc = 0.001
         
         if make_fig == 3:
-            delta_Fdc = 0.001
-            Fdc_max=0.3+delta_Fdc
+
+            Fdc_max=0.2+delta_Fdc
             #parameters['filename']="fig3_sweep_FDC_vs_vx.pdf"
 
             F_AC = [0.0, 0.05] #, 0.1]
 
-            '''
-            elif make_fig == 7:
-            delta_Fdc = 0.001
-            parameters['drop'] = 10000    #integer timesteps to "ramp" the DC force
-            parameters['decifactor'] = 10000      #integer timesteps to "ramp" the DC force
-
-            parameters['F_AC'] = 0.4
-            Fdc_max=0.6+delta_Fdc
-            parameters['filename']="fig7_sweep_FDC_vs_vx.pdf"
-            '''
         
         elif make_fig == 9:
-            delta_Fdc = 0.001
-            parameters['drop'] = 10000    #integer timesteps to "ramp" the DC force
-            parameters['decifactor'] = 10000      #integer timesteps to "ramp" the DC force
 
-            F_AC = [0.0,0.4]
-            #parameters['F_AC'] = 0.0 #0.4
-            Fdc_max=0.6+delta_Fdc
-            parameters['filename']="fig9_sweep_FDC_vs_vx.pdf"
+            #IN EXPLORING THE HIGH FREQUENCY REGIME,
+            #I'M SEEING STEP HEIGHTS LIKE JUNIPER (but still fractional)
+            #parameters['drop'] = 10000    
+            parameters['freq'] = 0.1
+            delta_Fdc = 0.01
+            F_AC = [0.0,0.3]
+            Fdc_max=0.5+delta_Fdc
+
 
         max_value = int(np.ceil(Fdc_max/delta_Fdc))
         avg_vy_data = np.zeros(max_value)
@@ -713,6 +703,7 @@ if __name__ == "__main__":
                 #run a single MD simulation for a set of parameters
                 avg_vy_data[i] = single_particle(parameters,plot="y-velocity")            
 
+            avg_vy_data /= (parameters['freq']*parameters['period'])
             #plot_velocity_force(Fdc_data,avg_vy_data,parameters)
             ax1.plot(Fdc_data,avg_vy_data,label=r"%1.2f"%(F))
             ax1.set_xlim(0,Fdc_data[-1])
@@ -720,7 +711,7 @@ if __name__ == "__main__":
 
         #plt.xlim(155,157)
         ax1.set_xlabel("F$^{dc}$")
-        ax1.set_ylabel(r"$\langle$v$_y \rangle$")
+        ax1.set_ylabel(r"$\langle$v$_y \rangle / \lambda f $")
         ax1.legend(loc='best',fontsize=20,numpoints=3,borderpad=0.1,handletextpad=0.2,title="F$^{ac}$")
                     
         plt.tight_layout(pad=0.2)
