@@ -24,87 +24,77 @@ plt.rc('font', size=24)
 
 ##################################################################
 def brownian_distribution(parameters):
-    '''
+    '''calculates a series of normally distributed random numbers 
+
+    Required Parameters
+    parameters: dict
+    contains all constants of the simulation, notably the substrate period and barrier height AP
     '''
     mu, sigma = 0.0, 1.0 # mean and standard deviation
 
-    #temperature has units of force too, because of course it does
+    #scale the prefactor by 2 \eta kb T in simulation units    
+    #where 'temperature' has units of force
     kb_T = parameters['temperature']
 
+    #one force for every timestep
     timesteps = int(parameters['maxtime'])
     
     #use numpy's built-in function to generate a randomized force
     #do so in bulk for every timestep in the simulation
-    #scale the prefactor by 2 \eta kb T in simulation units    
     fy_rand = kb_T * np.random.normal(mu, sigma, timesteps)
 
     return fy_rand
     
-    #fx_rand = np.random.normal(mu, sigma, int(N_part*(N_part-1)))
     
 ##################################################################
 def landscape_force(y,parameters):
     '''landscape potential is equation (1) in the manuscript, 
+    U(y) = U0 cos(Np*2pi*y/L)
     while force is equation (5) - for now anyway
-
-    U(y) = U0 cos(Np*pi*y/L)
-
-    F_y = -dU/dy = -U0/period * sin(Np*2pi*y/L)
-
+    F_y  = -dU/dy = -U0/period * sin(Np*2pi*y/L)
     potential minima occur at U(y) = -U0, or cos(Np*2pi*y/L) = -1
     meaning Np*2pi*y/L = m pi, where m is odd
     
     Required Parameters
-    y: float
-    the location in the y-direction of the individual particle
+    y (float): location of particle
+    parameters (dict): all constants of the simulation, notably the substrate period and barrier height AP
 
-    parameters: dict
-    contains all constants of the simulation, notably the substrate period and barrier height F0
+    Optional arguments
+    none
     '''
 
     period = parameters['period']
-    F0 = parameters['F0']
+    AP = parameters['AP']
     
-    return -F0*np.sin(2*np.pi*y/period)
+    return -AP*np.sin(2*np.pi*y/period)
 
 ###################################################################
-def external_drive(F_DC,time, parameters):
-    '''
+def external_drive(time, parameters):
+    '''Apply the driving force
+
+    Required Parameters
+    time (float): 
+    parameters (dict): all constants of the simulation
+
+    Optional arguments
+    none
     '''
 
     F_AC = parameters['F_AC']
+    F_DC = parameters['F_DC']
     frequency = parameters['freq']
     
     F_ext = F_DC + F_AC*np.sin(2*np.pi*frequency*time) #
-
-    #if time % 1000:
-    #    print(time,F_ext)
     
     return F_ext
 
 
-####################################################################
-def ramp_dc_force(F_DC, time, parameters):
-    '''
-    '''
-    F_DC_max = parameters['F_DC_max']
-    drop = parameters['drop']
-    F_DC_incr = parameters['F_DC_incr']
-    
-    if time % drop == 0 and F_DC < F_DC_max:
-        F_DC += F_DC_incr
-
-    return F_DC
-
 #####################################################################
 def average_velocity(int_time, vy, avg_vy, parameters):
     '''calculate the average velocity over 
-    a range of time values for N particles.  
+    a range of N timesteps, where N=decifactor 
     Use all vy values, not just those 
-    saved during "writemovietime.  So far just "
-    written for the single particle case, 
-    where the code is not so interesting.  Subroutine 
-    generally sums all vxi and vyi values across n particles and averages
+    saved during "writemovietime.  
     '''
 
     decifactor = parameters['decifactor']
@@ -119,21 +109,22 @@ def average_velocity(int_time, vy, avg_vy, parameters):
 
 
 #####################################################################
-def md_step(y, int_time, F_DC, avg_vy, parameters, ft=0):
+def md_step(y, int_time, avg_vy, parameters, ft=0):
     '''
-    Required Arguments
-    y
-    int_time
-    F_DC
-    avg_vy
-    parameters
+    Required Arguments:
+    y (float): position of particle
+    int_time (int): count of MD steps
+    avg_vy (float): calculated value (why/how?)
+    parameters (dict): all the things
 
-    Optional Arguments
-    ft random kicks due to temperature affects
+    Optional Arguments:
+    ft (float) random kick due to temperature
     '''
 
     dt = parameters['dt']
     SY = parameters['Sy']
+    F_DC = parameters['F_DC']
+    
     temperature = parameters['temperature']
 
     time = int_time * dt
@@ -144,19 +135,19 @@ def md_step(y, int_time, F_DC, avg_vy, parameters, ft=0):
     vy = landscape_force(y, parameters)
 
     #driving force
-    vy += external_drive(F_DC, time, parameters)
+    vy += external_drive(time, parameters)
 
     if ft != 0:
         vy += ft
 
     #calculate the average velocity over all vy values
-    avg_vy = average_velocity(int_time, vy, avg_vy, parameters)
+    #if decifactor > 1, we are accumulating many values to
+    #create a smooth curve and smaller dataset
+    if parameters['decifactor'] > 1:
+        avg_vy = average_velocity(int_time, vy, avg_vy, parameters)
+    else:
+        avg_vy = vy
 
-    '''
-    decifactor = parameters['decifactor']
-    if int_time == decifactor:
-        print(int_time, avg_vy)
-    '''
     #calculate the new position
     y += vy*dt
 
@@ -213,7 +204,10 @@ def plot_position_vs_time(ax2,time_data,y_data,p):
 
 #####################################################################
 def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
-    '''Make Fig. 2 in AJP
+    '''Make Fig. 2 
+
+    panel (a) is driving force vs. time
+    panel (b) is y/period vs. time
     '''
 
     #for plot
@@ -222,7 +216,7 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     freq = p['freq']
     period = p['period']
     
-    fig = plt.figure(figsize=(8,7.25))
+    fig = plt.figure(figsize=(8,8)) #.25))
     gs=gridspec.GridSpec(2,1)
     ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
     ax2 = fig.add_subplot(gs[1,0]) #,sharex=ax1)  #scatter plot of particles
@@ -234,53 +228,37 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     # 2*np.pi*freq*time_data = m*pi/2, where m = 1, 5, 9, 13, ...
     # time = m/(4*freq)
 
-        #plot the data
+    #plot the force vs. time data
     #ax1.plot(time_data,FDC_data,label="F$^{dc}$")
     ax1.plot(time_data,F_drive,label="F$^d$(t)",lw=5)
-    #ax1.legend(loc=4,fontsize=20,borderaxespad=0.0,frameon=0,handlelength=1.5) #,labelspacing=0.2
+    
+    #plot normalized position by period vs. time
     ax2.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
-    #plt.xlim(155,157)
+
+    #set all the labels, ax1 and ax2 have the same time axes
+    ax1.set_ylabel(r"$F^d(t)$")
     ax2.set_xlabel(r"time ($\tau$)")
     ax2.set_ylabel(r"y/$\lambda$")
-    ax1.set_ylabel(r"F(t)")
 
-    ax1.set_xticks([])
-
+    #ax1.set_xticklabels([])
+    #ax1.xaxis.set_ticklabels([])
+    plt.setp(ax1.get_xticklabels(), visible=False)
+    
     ax1.set_xlim(0,time_data[-1]+1)
     ax2.set_xlim(0,time_data[-1]+1)
     #ax2.set_ylim(-0.1,y_data[-1]/period+0.2)
 
-    ax1.text(0.9,0.86,"(a)",transform = ax1.transAxes,backgroundcolor="white")
+    ax1.text(0.9,0.8,"(a)",transform = ax1.transAxes,backgroundcolor="white")
     ax2.text(0.9,0.06,"(b)",transform = ax2.transAxes,backgroundcolor="white")
 
-    if 0:
-        ax2.set_ylim(0.0,8.501)
-        ax2.set_yticks([1,3,5,7])
-    
-        #add horizontal lines for potential minima
-        '''
-        for i in range(1,10)[::2]:
-            #ax2.hline(i)
-            #, label = "U(y) = -U$_0$")
-            ax2.axhline(y=i, color = "black", linestyle = "--")
-         '''
-    '''
-    for i in [1,5,9,13]:
-        #peaks of the FD curve
-        ax2.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
-        ax1.axvline(x=i/(4*freq), color = "black", linestyle = "--") 
-
-    ax1.yaxis.set_minor_locator(AutoMinorLocator(1))
-    ax1.xaxis.set_minor_locator(AutoMinorLocator(1))
-    ax1.grid(axis='both',which='both')
-    '''
-    ax2.yaxis.set_minor_locator(AutoMinorLocator(2))
-    ax2.xaxis.set_minor_locator(AutoMinorLocator(1))
+    #ax2.yaxis.set_minor_locator(AutoMinorLocator(2))
+    #ax2.xaxis.set_minor_locator(AutoMinorLocator(1))
+    #ax1.xaxis.set_minor_locator(AutoMinorLocator(1))
     ax2.grid(axis='both',which='both')
-    #ax2.grid(axis='both') #,which='both')
+    ax1.grid(axis='both',which='both')
+
         
-    plt.tight_layout(pad=0.1,h_pad=-0.3)
-    #g.tight_layout(fig, rect=[0, 0, 1, 1], h_pad=p_val,w_pad=p_val,pad=0.0)
+    plt.tight_layout(pad=0.1) #,h_pad=-0.3)
     plt.savefig(parameters['filename'])
     
     return 
@@ -323,34 +301,6 @@ def plot_phase(ax,y_data,avg_vy_data,p):
     
     return 
 
-#####################################################################
-def plot_velocity_force(avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC_data,p):
-    '''Make Fig. 3 in AJP
-    '''
-
-    #for plot
-    #calculate the driving force from F_DC and time
-    #F_AC = p['F_AC']
-    #freq = p['freq']
-    #period = p['period']
-    
-    ax1 = parameters['ax']
-
-    #calculate from np.array rather than incrementally from subroutines
-    #F_drive = FDC_data + F_AC*np.sin(2*np.pi*freq*time_data)
-
-    #max occurs at
-    # 2*np.pi*freq*time_data = m*pi/2, where m = 1, 5, 9, 13, ...
-    # time = m/(4*freq)
-
-    #plot the data
-    #ax1.plot(FDC_data,vy_data) #,label="F$^{dc}$")
-    ax1.plot(avg_FDC_data,avg_vy_data,'.') #,label="F$^{dc}$")
-
-    #ax1.legend(loc=4,fontsize=20,borderaxespad=0.0,frameon=0,handlelength=1.5) #,labelspacing=0.2
-
-    return 
-
 #-------------------------------------------------------------------
 def single_particle(parameters,plot="y-position"):
     '''Run MD simulation for a single particle driven across a washboard potential with an oscillating driving force
@@ -369,9 +319,7 @@ def single_particle(parameters,plot="y-position"):
     y = parameters['y0']
 
     F_DC = parameters['F_DC']
-    F_DC_incr = parameters['F_DC_incr']
-    F_DC_max = parameters['F_DC_max']
-    
+
     #integer time steps
     maxtime=parameters['maxtime']
     writemovietime=parameters['writemovietime']
@@ -384,19 +332,16 @@ def single_particle(parameters,plot="y-position"):
     time_data = np.zeros(array_length)
 
     avg_vy_data = np.zeros(int(maxtime/parameters['decifactor']))
-    avg_FDC_data = np.zeros(int(maxtime/parameters['decifactor']))
+    #avg_FDC_data = np.zeros(int(maxtime/parameters['decifactor']))
 
     #loop through the integer time steps in the simulation
     for int_time in range(0,maxtime):
 
-        #increase F_DC if needed
-        if int_time > 0 and abs(F_DC - F_DC_max) > F_DC_incr: 
-             F_DC = ramp_dc_force(F_DC,int_time, parameters)
-
         #apply the force calculations for the current position/time
         #note vy is not necessary 
-        y, vy, avg_vy = md_step(y, int_time, F_DC, avg_vy, parameters)
-        
+        y, vy, avg_vy = md_step(y, int_time, avg_vy, parameters)
+
+        #collect up all the information to plot
         if int_time % writemovietime == 0:
             #print(int_time)
             #update the data
@@ -406,15 +351,17 @@ def single_particle(parameters,plot="y-position"):
             FDC_data[i] = F_DC
             time_data[i] = time
 
+        #if we're at the decimation factor
         if int_time % parameters['decifactor'] == 0:
+
+            #find the integer for the array
             j = int(int_time/parameters['decifactor'])
 
-            #print(int_time,len(avg_vy_data))
+            #save the running average 
             avg_vy_data[j] = avg_vy
 
-            #print(int_time,avg_vy_data[j])
-
-            avg_FDC_data[j] = F_DC
+            #this isn't the average, merely the value.  do i 
+            #avg_FDC_data[j] = F_DC
 
             #reset the running average
             avg_vy = 0
@@ -434,7 +381,8 @@ def single_particle(parameters,plot="y-position"):
         plot_position_vs_time(parameters['axis'], time_data,y_data,parameters)
         return
     
-    elif plot == "y-velocity":  
+    elif plot == "y-velocity":
+        #print(np.average(avg_vy_data), avg_vy_data)
         return np.average(avg_vy_data) #/decifactor
       
 
@@ -456,8 +404,6 @@ def brownian_particle(parameters,ax):
 
     #assume no applied force for now
     F_DC = 0.0 #parameters['F_DC']
-    F_DC_incr = 0.0 #parameters['F_DC_incr']
-    F_DC_max = 0.0 #parameters['F_DC_max']
     parameters['F_AC']=0.0
     
     #integer time steps
@@ -480,15 +426,12 @@ def brownian_particle(parameters,ax):
     #loop through the integer time steps in the simulation
     for int_time in range(0,maxtime):
 
-        #increase F_DC if needed
-        #if int_time > 0 and abs(F_DC - F_DC_max) > F_DC_incr: 
-        #     F_DC = ramp_dc_force(F_DC,int_time, parameters)
 
         #apply the force calculations for the current position/time
         #note vy is not necessary
 
         y, vy, avg_vy = md_step(y, int_time,
-                                F_DC, avg_vy, parameters, ft=fy_rand[int_time])
+                                avg_vy, parameters, ft=fy_rand[int_time])
         
         if int_time % writemovietime == 0:
             #print(int_time)
@@ -542,33 +485,22 @@ def set_parameters():
     dict['y0'] =  0 #dict['Sy']/2
 
     #landscape potential - Fig2 - 0.1
-    dict['F0'] = 0.1 #25 #parameters 0.1
+    dict['AP'] = 0.1 #
     dict['Np'] = 20         #number of troughs in the substrate
     dict['period'] = dict['Sy']/dict['Np']  #spatial period of substrate in y-direction
 
     #Brownian motion factor
-    dict['temperature'] = 5.7*dict['F0']
+    dict['temperature'] = 5.7*dict['AP']
     
-    #control the "constant" component of driving force
-    dict['F_DC_max'] = 0.1        #"constant" driving force for most of simulation
-
-    #sweep the DC portion up from zero
-    if 0:
-        dict['F_DC'] = 0              #initial F_DC
-        dict['F_DC_incr'] = 0.01      #amount to increase FDC at every drop step
-        dict['F_DC_max'] = 0.1        #"max DC driving force
-        dict['drop'] = 4000           #integer timesteps to "ramp" the DC force
-    else:
-        dict['F_DC'] = dict['F_DC_max']  #initial F_DC
-        dict['F_DC_incr'] = 0.0          #amount to increase FDC at every drop step
-        dict['drop'] = dict['maxtime']   #integer timesteps to "ramp" the DC force
+    dict['F_DC'] = 0.05 #0.1
+    dict['drop'] = dict['maxtime']   #integer timesteps to "ramp" the DC force
         
-    dict['decifactor'] = 5000     #decimation factor integer timesteps to average force
+    dict['decifactor'] = 1 #5000     #decimation factor integer timesteps to average force
 
     #control the oscillating component of driving force
 
     #fig2
-    dict['F_AC'] = 0.05              #amplitude of force oscillation
+    dict['F_AC'] = 0.07 #0.1              #amplitude of force oscillation
     dict['freq'] = 0.01              #frequence of force osillation
     
     #parameters
@@ -584,8 +516,8 @@ if __name__ == "__main__":
     parameters = set_parameters()
 
     #select which figure in the AJP you would like to make
-    #Coded to make figures 2 to 8
-    make_fig = 9
+    #figures 2 to 8
+    make_fig = 3
 
     parameters['filename']="fig%d.pdf"%(make_fig)
 
@@ -595,32 +527,24 @@ if __name__ == "__main__":
     #run a single particle at a single driving force
     #--------------------------------------------------------------
     if make_fig == 2 or make_fig == 8:
-        
-        parameters['dt'] = 0.1 #timestep in simulation units
-        parameters['maxtime']=4000        #total time steps in simulation
-        parameters['writemovietime']=1   #interval to write data to arrays for plotting
-        parameters['decifactor']=1   #interval to write data to arrays for plotting
 
         #run a single MD simulation for a set of parameters
         if make_fig == 2:
-            #parameters['filename']="single_particle_dt0.1.pdf"
             single_particle(parameters)
             
         elif make_fig == 8:
-
+            #phase figure!!!!
             #parameters['drop'] = 4000   
             parameters['maxtime'] = 3000
-            #parameters['decifactor'] = 1 #4000
+
 
             #parameters['F_AC'] = 0.2
             #parameters['freq'] = 0.01
-            #parameters['F0'] = 0.05
+            #parameters['AP'] = 0.05
             parameters['y0'] = 0 #parameters['period']/2
 
             fig = plt.figure(figsize=(10,12))
             gs=gridspec.GridSpec(3,2)
-
-            parameters['filename']="phase.pdf"
 
             FDC = [0.05, 0.1,0.12, 0.15, 0.2, 0.3]
             k=0
@@ -631,13 +555,11 @@ if __name__ == "__main__":
                             transform = ax.transAxes,
                             backgroundcolor="white",zorder=-10)
 
-                    parameters['F_DC_max'] = FDC[k]
+                    parameters['F_DC'] = FDC[k]
                     #if k == 5:
                     #    parameters['y0'] = parameters['period']
-
                 
                     y_data, avg_vy_data = single_particle(parameters,plot="phase")
-
                     plot_phase(ax, y_data,avg_vy_data,parameters)
                     k+=1
 
@@ -649,26 +571,29 @@ if __name__ == "__main__":
     #make shapiro steps with a range of F^{dc}
     #this is the place to include the strictly DC force...
     #--------------------------------------------------------------
-    if make_fig == 3 or make_fig == 7 or make_fig == 9: 
+    if make_fig == 3 or make_fig == 7: 
 
+        #parameters['maxtime']=10000
 
-        parameters['maxtime']=10000       #shorter and I don't get steps
+        #RULZ = watz bads
+        #if maxtime/decifactor not integer
+        #if decifactor too bigz
+        #parameters['decifactor'] = 2500 #parameters['maxtime']
 
         delta_Fdc = 0.001
         
         if make_fig == 3:
 
-            Fdc_max=0.2+delta_Fdc
-            #parameters['filename']="fig3_sweep_FDC_vs_vx.pdf"
+            Fdc_max=0.6+delta_Fdc
+            parameters['freq']=0.1
 
-            F_AC = [0.0, 0.05] #, 0.1]
+            F_AC = [0.0, 0.07, 0.2]
 
         
-        elif make_fig == 9:
+        elif make_fig == 7:
 
             #IN EXPLORING THE HIGH FREQUENCY REGIME,
-            #I'M SEEING STEP HEIGHTS LIKE JUNIPER (but still fractional)
-            #parameters['drop'] = 10000    
+            #I'M SEEING STEP HEIGHTS LIKE JUNIPER (but still fractional)  
             parameters['freq'] = 0.1
             delta_Fdc = 0.01
             F_AC = [0.0,0.3]
@@ -679,35 +604,34 @@ if __name__ == "__main__":
         avg_vy_data = np.zeros(max_value)
         Fdc_data = np.arange(0,Fdc_max,delta_Fdc)
 
-        #print(Fdc_data)
-        #sys.exit()
 
+        #make the figure 
         fig = plt.figure(figsize=(7,4))
         gs=gridspec.GridSpec(1,1)
         ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
-        parameters['ax'] = ax1
 
         for F in F_AC:
             parameters['F_AC'] = F
 
             for i in range(len(avg_vy_data)):
 
-                #reset - though I think unnecessary
-                parameters['F_DC'] = Fdc_data[i] #0              #initial F_DC
-
-                #"constant" driving force for most of simulation
-                parameters['F_DC_max'] = Fdc_data[i]
-
-                #parameters['y0'] = 5.0*parameters['period']
+                #sweep through a range of dc values
+                parameters['F_DC'] = Fdc_data[i] 
                 
                 #run a single MD simulation for a set of parameters
                 avg_vy_data[i] = single_particle(parameters,plot="y-velocity")            
 
+            #normalize <vy> so you can count step number
             avg_vy_data /= (parameters['freq']*parameters['period'])
-            #plot_velocity_force(Fdc_data,avg_vy_data,parameters)
+            print(avg_vy_data)
+            
+            #plot <vy> vs F_dc
             ax1.plot(Fdc_data,avg_vy_data,label=r"%1.2f"%(F))
-            ax1.set_xlim(0,Fdc_data[-1])
-            ax1.set_ylim(avg_vy_data[0]-0.001,avg_vy_data[-1])
+
+            
+            
+        ax1.set_xlim(0,Fdc_data[-1])
+        ax1.set_ylim(avg_vy_data[0]-0.001,avg_vy_data[-1])
 
         #plt.xlim(155,157)
         ax1.set_xlabel("F$^{dc}$")
@@ -722,17 +646,18 @@ if __name__ == "__main__":
     #--------------------------------------------------------------
     if make_fig == 4:
 
-        #place particle in center to remove hops across periodic boundary conditions
+        #place particle in center to reduce hops across PBC
         parameters['y0'] = parameters['Sy']/2
 
         #simulating for a long time, 
         parameters['dt'] = 0.1 #timestep in simulation units
-        parameters['maxtime']=300000        #total time 
-        parameters['writemovietime']=1000   #interval to write data 
-        parameters['decifactor']=1   #interval to write data to arrays for plotting
 
-        #save the figure in
-        #parameters['filename']="brownian_particle_dt0.1.pdf"
+        #run for a very long time to see the infrequent jumps
+        parameters['maxtime']=300000        #total time
+
+        #that's a lot of data!
+        parameters['writemovietime']=1000   #interval to write data 
+
 
         #make the figure
         fig = plt.figure(figsize=(10,12))
@@ -748,7 +673,7 @@ if __name__ == "__main__":
                     transform = ax.transAxes,backgroundcolor="white")
 
             #Brownian motion factor as a ratio of the Ap value
-            parameters['temperature'] = temp*parameters['F0']
+            parameters['temperature'] = temp*parameters['AP']
 
             #run a single MD simulation for a set of parameters,
             #will be plotted on subplot
@@ -767,31 +692,26 @@ if __name__ == "__main__":
         
         parameters['dt'] = 0.1 #timestep in simulation units
         parameters['writemovietime']=1   #interval to write data to arrays for plotting
-        parameters['decifactor']=1   #interval to write data to arrays for plotting
+
 
         if make_fig == 5:
             parameters['maxtime']=5000        #total time steps in simulation
 
-            #parameters['filename']="parameters_fig5.pdf"
-            frequency = [0.1, 0.05, 0.015, 0.005, 0.001]
-
             #we will sweep through the following independent variable
+
+            frequency = [0.1, 0.05, 0.015, 0.005, 0.001]
             ind_var = frequency
             str_iv=" f=%1.3f"
 
         else:
             parameters['maxtime']=3000        #total time steps in simulation
-            F_AC = [0.2, 0.3, 0.4]
 
+            #we will sweep through the following independent variable
+            F_AC = [0.2, 0.3, 0.4]
             ind_var = F_AC
             str_iv=" $F^{ac}$=%1.2f"
-            
-            #we will sweep through the following independent variable
-            parameters['filename']="parameters_fig6.pdf"
             parameters['freq'] = 0.01
-
-            #parameters['F0'] = 0.05              
-            #parameters['F_DC_max'] = 0.05        #"constant" driving force for most of simulation
+           
 
 
         #make the figure
@@ -832,14 +752,6 @@ if __name__ == "__main__":
 
 
     #--------------------------------------------------------------------------
-    #compare strictly DC drive to AC drive.
-    
-    if make_fig == 9:
-
-
-        print('tbd')
-
-    #--------------------------------------------------------------------------
     #animate this
 
     if make_fig == 10:
@@ -847,4 +759,33 @@ if __name__ == "__main__":
         print('animate')
 
     sys.exit()
+
+
+####################################################################
+def ramp_dc_force(F_DC, time, parameters):
+    '''Not used
+    '''
+    F_DC_max = parameters['F_DC_max']
+    drop = parameters['drop']
+    F_DC_incr = parameters['F_DC_incr']
+    
+    if time % drop == 0 and F_DC < F_DC_max:
+        F_DC += F_DC_incr
+
+    return F_DC
+
+#####################################################################
+def plot_velocity_force(avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC_data,p):
+    '''Make Fig. 3 in AJP
+    '''
+    
+    ax1 = parameters['ax']
+    ax1.plot(avg_FDC_data,avg_vy_data,'.') #,label="F$^{dc}$")
+
+
+    return 
+
+#sometimes convenient to start farther from the PBC
+#parameters['y0'] = 5.0*parameters['period']
+
 
