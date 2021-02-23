@@ -138,7 +138,7 @@ if __name__ == "__main__":
     ax1.annotate(r"$\mathrm{\vec{F}^{\ell}}$", xy=(xp+1, yp-6),ha="left",va="center")
     
     ax1.annotate("", xy=(xp, yp+8), xytext=(xp, yp), arrowprops=dict(color='gray', shrink=0.05), ha="center")
-    ax1.annotate(r"$\mathrm{\vec{F}^{D}(t)}$",  xy=(xp+1, yp+8),ha="left")
+    ax1.annotate(r"$\mathrm{\vec{F}^{d}(t)}$",  xy=(xp+1, yp+8),ha="left")
 
     ax1.text(0.03,0.94,"(a)",transform = ax1.transAxes)
     ax2.text(0.03,0.94,"(b)",transform = ax2.transAxes)
