@@ -90,25 +90,6 @@ def external_drive(time, parameters):
 
 
 #####################################################################
-def average_velocity(int_time, vy, avg_vy, parameters):
-    '''calculate the average velocity over 
-    a range of N timesteps, where N=decifactor 
-    Use all vy values, not just those 
-    saved during "writemovietime.  
-    '''
-
-    decifactor = parameters['decifactor']
-
-    avg_vy += vy
-            
-    if int_time % parameters['decifactor'] == 0: 
-        avg_vy /= decifactor
-        #print(int_time, avg_vy)
-        
-    return avg_vy
-
-
-#####################################################################
 def md_step(y, int_time, avg_vy, parameters, ft=0):
     '''
     Required Arguments:
@@ -471,9 +452,11 @@ def set_parameters():
     dict={}
 
     dict['dt'] = 0.1 #005 #timestep in simulation units
+
+    dict['freq'] = 0.01              #frequence of force osillation
     
     #integer time steps
-    dict['maxtime']=4000        #total time steps in simulation
+    dict['maxtime']=int(100/dict['freq'])        #total time steps in simulation
     dict['writemovietime']=1   #interval to write data to arrays for plotting
 
     dict['Sy']=36.5         #height of system
@@ -492,16 +475,15 @@ def set_parameters():
     #Brownian motion factor
     dict['temperature'] = 5.7*dict['AP']
     
-    dict['F_DC'] = 0.05 #0.1
+    dict['F_DC'] = 0.1
     dict['drop'] = dict['maxtime']   #integer timesteps to "ramp" the DC force
         
-    dict['decifactor'] = 1 #5000     #decimation factor integer timesteps to average force
+    dict['decifactor'] = 1      #decimation factor integer timesteps to average force - phasing out - overkill for this system
 
     #control the oscillating component of driving force
 
     #fig2
-    dict['F_AC'] = 0.07 #0.1              #amplitude of force oscillation
-    dict['freq'] = 0.01              #frequence of force osillation
+    dict['F_AC'] = 0.1 #0.1              #amplitude of force oscillation
     
     #parameters
     #dict['F_AC'] = 0.8              #amplitude of force oscillation
@@ -517,7 +499,7 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #figures 2 to 8
-    make_fig = 3
+    make_fig = 2
 
     parameters['filename']="fig%d.pdf"%(make_fig)
 
@@ -531,7 +513,8 @@ if __name__ == "__main__":
         #run a single MD simulation for a set of parameters
         if make_fig == 2:
             single_particle(parameters)
-            
+            parameters['maxtime'] = 40
+
         elif make_fig == 8:
             #phase figure!!!!
             #parameters['drop'] = 4000   
@@ -789,3 +772,20 @@ def plot_velocity_force(avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC
 #parameters['y0'] = 5.0*parameters['period']
 
 
+#####################################################################
+def average_velocity(int_time, vy, avg_vy, parameters):
+    '''calculate the average velocity over 
+    a range of N timesteps, where N=decifactor 
+    Use all vy values, not just those 
+    saved during "writemovietime.  
+    '''
+
+    decifactor = parameters['decifactor']
+
+    avg_vy += vy
+            
+    if int_time % parameters['decifactor'] == 0: 
+        avg_vy /= decifactor
+        #print(int_time, avg_vy)
+        
+    return avg_vy
