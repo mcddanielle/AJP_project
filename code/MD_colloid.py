@@ -14,13 +14,73 @@ import numpy as np
 import math, sys
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+import matplotlib.cm as cm
 
 from matplotlib.ticker import (MultipleLocator, FormatStrFormatter,
                                AutoMinorLocator)
+from mpl_toolkits.axes_grid.inset_locator import (inset_axes,
+                                                  InsetPosition,
+                                                  mark_inset)
+
 
 #set default font of plot
 plt.rc('font', size=24)
 
+##########################################################
+#ADD CONTOUR PLOT
+##########################################################
+def add_contour(ax,L,N): 
+    '''
+    Hardwired to color in the quasi1D potential to contain 
+    the particles in a trough.  
+    Can also add the washboard/corrugated substrate.
+
+    Required Arguments
+
+    Optional Arguments:
+
+    Adds the washboard in the y-direction.  
+    Hardwired for a single parameter set.    
+    '''
+
+    a_p = L/N
+
+    #assuming Tiare's trough system, so we won't want to cover the entire range
+    X = np.arange(0, 100, 0.1)
+    Y = np.arange(0, L, 0.1)
+    X, Y = np.meshgrid(X, Y)
+
+    Z_mag = 0.1 # set by what "looks good"
+
+    #create a narrow confining channel for multiparticle 2D systems
+    if 0:
+        Z = Z_mag*np.cos(2*np.pi*X/L)
+    
+        #create washboard
+
+    Z = Z_mag*np.cos(2*np.pi*(Y)/a_p) 
+
+    #blue are minima, red are maxima
+    cmap=cm.coolwarm #_r
+
+    #alpha is the degree of transparency, again, set by what looks good.
+
+    cset = ax.contourf(X, Y, Z, cmap=cmap,alpha=0.5)
+
+    '''
+    ax.set_xlim(0, L/2)
+    ax.set_ylim(0, L)
+
+    ax.set_xlabel(r"x",labelpad=-20)
+    ax.set_ylabel(r"y",rotation='horizontal',ha='right',labelpad=-15)
+
+    ax.set_xticks([0,L/2])
+    ax.set_yticks([0,L])
+
+    ax.set_xticklabels(['0','L/2'])
+    ax.set_yticklabels(['0','L'])
+    '''
+    return 
 
 ##################################################################
 def brownian_distribution(parameters):
@@ -202,6 +262,18 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
     ax2 = fig.add_subplot(gs[1,0]) #,sharex=ax1)  #scatter plot of particles
 
+
+    # Create a set of inset Axes:
+    #these should fill the bounding box allocated to
+    # them.
+    ax3 = plt.axes([0,0,1,1])
+    # Manually set the position and relative size of the inset axes within ax1
+    ip = InsetPosition(ax2, [0.59,0.01,0.4,0.4])
+    ax3.set_axes_locator(ip)
+    L=1.5
+    N=1
+    add_contour(ax3,L,N)
+    
     #calculate from np.array rather than incrementally from subroutines
     F_drive = FDC_data + F_AC*np.sin(2*np.pi*freq*time_data)
 
@@ -215,6 +287,7 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     
     #plot normalized position by period vs. time
     ax2.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
+    ax3.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
 
     #set all the labels, ax1 and ax2 have the same time axes
     ax1.set_ylabel(r"$F^d(t)$")
@@ -227,10 +300,13 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     
     ax1.set_xlim(0,time_data[-1]+1)
     ax2.set_xlim(0,time_data[-1]+1)
-    #ax2.set_ylim(-0.1,y_data[-1]/period+0.2)
+    ax3.set_xlim(0,100)
+    ax3.set_ylim(0.0,1.5)
+    ax3.set_xticks([])
+    ax3.set_yticks([])
 
-    ax1.text(0.9,0.8,"(a)",transform = ax1.transAxes,backgroundcolor="white")
-    ax2.text(0.9,0.06,"(b)",transform = ax2.transAxes,backgroundcolor="white")
+    ax1.text(-0.19,0.86,"(a)",transform = ax1.transAxes,backgroundcolor="white")
+    ax2.text(-0.19,0.86,"(b)",transform = ax2.transAxes) #,backgroundcolor="white")
 
     #ax2.yaxis.set_minor_locator(AutoMinorLocator(2))
     #ax2.xaxis.set_minor_locator(AutoMinorLocator(1))
@@ -248,7 +324,7 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
 #####################################################################
 
 def plot_phase(ax,y_data,avg_vy_data,p):
-    '''Make Fig. 8 in AJP
+    '''Make phase figure 
     '''
 
     #for plot
@@ -256,15 +332,16 @@ def plot_phase(ax,y_data,avg_vy_data,p):
 
     #plot the position within the period
     #y_data /= p['period']
-    vbar = np.average(avg_vy_data)
+    vbar = np.average(avg_vy_data[50:])
     time = np.arange(1,p['maxtime']+1,1)*p['dt']
-        
-    plot_delay = 100   
-    #no subtraction
+
+    #subtraction of initial transients
+    plot_delay = 0 #100   
+
     
     # driven phase variables
-    phi_y_data = 2*np.pi*(y_data - vbar*time)/(p['period'])
-    dot_phi_y_data = 2*np.pi*(avg_vy_data - vbar)/(p['period'])
+    phi_y_data = (y_data - vbar*time)/(p['period']) # 2*np.pi*
+    dot_phi_y_data = (avg_vy_data - vbar)/(p['period']) #2*np.pi*
 
     if 1:
         #plot the driven phase variables
@@ -278,7 +355,9 @@ def plot_phase(ax,y_data,avg_vy_data,p):
     #ax.yaxis.set_label_coords(-0.2, 0.5)
 
     #ax1.set_xticks([])
-    #ax1.set_xlim(0,time_data[-1]+1)
+    #ax.set_xlim(0.8,2.75) #time_data[-1]+1)
+
+    ax.set_ylim(-0.05,0.11) #time_data[-1]+1)
     
     return 
 
@@ -356,6 +435,7 @@ def single_particle(parameters,plot="y-position"):
 
     elif plot == "phase":
         #plot_phase(y_data,avg_vy_data,parameters)
+        #print(time)
         return y_data, avg_vy_data
     
     elif plot == "just_position":
@@ -453,14 +533,16 @@ def set_parameters():
 
     dict['dt'] = 0.1 #005 #timestep in simulation units
 
+    #control the oscillating component of driving force
+    dict['F_AC'] = 0.07 #0.1              #amplitude of force oscillation
     dict['freq'] = 0.01              #frequence of force osillation
     
     #integer time steps
-    dict['maxtime']=int(100/dict['freq'])        #total time steps in simulation
+    dict['maxtime']=int(40/dict['freq'])        #total time steps in simulation
     dict['writemovietime']=1   #interval to write data to arrays for plotting
 
-    dict['Sy']=36.5         #height of system
-    dict['Sx']=36.5         #width of system
+    dict['Sy']=46+2./3.         #height of system
+    #dict['Sx']=40               #width of system
     dict['vy0'] = 0.0       #initial velocity of particle
     dict['time0'] = 0       #initial time in integer timesteps
 
@@ -475,19 +557,13 @@ def set_parameters():
     #Brownian motion factor
     dict['temperature'] = 5.7*dict['AP']
     
-    dict['F_DC'] = 0.1
+    dict['F_DC'] = 0.07
     dict['drop'] = dict['maxtime']   #integer timesteps to "ramp" the DC force
         
     dict['decifactor'] = 1      #decimation factor integer timesteps to average force - phasing out - overkill for this system
 
-    #control the oscillating component of driving force
-
-    #fig2
-    dict['F_AC'] = 0.1 #0.1              #amplitude of force oscillation
+   
     
-    #parameters
-    #dict['F_AC'] = 0.8              #amplitude of force oscillation
-    #dict['freq'] = 0.006              #frequence of force osillation
     
 
     return dict
@@ -518,7 +594,7 @@ if __name__ == "__main__":
         elif make_fig == 8:
             #phase figure!!!!
             #parameters['drop'] = 4000   
-            parameters['maxtime'] = 3000
+            #parameters['maxtime'] = 3000
 
 
             #parameters['F_AC'] = 0.2
@@ -529,9 +605,9 @@ if __name__ == "__main__":
             fig = plt.figure(figsize=(10,12))
             gs=gridspec.GridSpec(3,2)
 
-            FDC = [0.05, 0.1,0.12, 0.15, 0.2, 0.3]
+            FDC = [0.04, 0.07, 0.1, 0.125] #, 0.2, 0.3]
             k=0
-            for i in range(3):
+            for i in range(2):
                 for j in range(2):
                     ax = fig.add_subplot(gs[i,j])  #scatter plot of particles
                     ax.text(0.02,0.9,letter[k],
@@ -539,11 +615,12 @@ if __name__ == "__main__":
                             backgroundcolor="white",zorder=-10)
 
                     parameters['F_DC'] = FDC[k]
-                    #if k == 5:
-                    #    parameters['y0'] = parameters['period']
+                    if k == 0:
+                        parameters['y0'] = parameters['period']
                 
                     y_data, avg_vy_data = single_particle(parameters,plot="phase")
                     plot_phase(ax, y_data,avg_vy_data,parameters)
+                    
                     k+=1
 
             
@@ -567,10 +644,10 @@ if __name__ == "__main__":
         
         if make_fig == 3:
 
-            Fdc_max=0.6+delta_Fdc
-            parameters['freq']=0.1
+            Fdc_max=0.2+delta_Fdc
+            #parameters['freq']=0.1
 
-            F_AC = [0.0, 0.07, 0.2]
+            F_AC = [0.0, 0.07]
 
         
         elif make_fig == 7:
@@ -589,7 +666,7 @@ if __name__ == "__main__":
 
 
         #make the figure 
-        fig = plt.figure(figsize=(7,4))
+        fig = plt.figure(figsize=(7,4.5))
         gs=gridspec.GridSpec(1,1)
         ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
 
@@ -606,15 +683,22 @@ if __name__ == "__main__":
 
             #normalize <vy> so you can count step number
             avg_vy_data /= (parameters['freq']*parameters['period'])
-            print(avg_vy_data)
+            #print(avg_vy_data)
             
             #plot <vy> vs F_dc
-            ax1.plot(Fdc_data,avg_vy_data,label=r"%1.2f"%(F))
+            ax1.plot(Fdc_data,avg_vy_data,linewidth=2,label=r"%1.2f"%(F))
+
+            #make the phase plot locations
+            if F > 0:
+                ax1.scatter(Fdc_data[40],avg_vy_data[40],c='k')
+                ax1.scatter(Fdc_data[70],avg_vy_data[70],c='k')
+                ax1.scatter(Fdc_data[100],avg_vy_data[100],c='k')
+                ax1.scatter(Fdc_data[125],avg_vy_data[125],c='k')
 
             
             
         ax1.set_xlim(0,Fdc_data[-1])
-        ax1.set_ylim(avg_vy_data[0]-0.001,avg_vy_data[-1])
+        ax1.set_ylim(avg_vy_data[0]-0.1,avg_vy_data[-1])
 
         #plt.xlim(155,157)
         ax1.set_xlabel("F$^{dc}$")
