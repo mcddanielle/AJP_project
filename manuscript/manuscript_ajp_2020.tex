@@ -159,7 +159,6 @@ times the length of another swings with twice the period.
 %of an integer number \cite{Bak1986}.
 %Dynamical mode locking
 %The phenomena
-
 %\section{Colloidal Models}
 %\label{sec:colloids}
 
@@ -265,10 +264,8 @@ a child on a swing.
  %This synchronization phenomena
  %is useful for understanding the complex dynamical 
  %systems.
-
-
-
- 
+ The model presented in this paper
+ resembles an overdamped driven pendulum. 
 %Numerical modeling of colloids can provide mechanistic insight
 %that can be difficult to achieve in experimental conditions
 %where Brownian motion and other sources of noise dominate.
@@ -316,10 +313,12 @@ a washboard shaped potential energy landscape.
 %an relevant
 %experimental analog of our simulations.
 We describe
-our molecular dynamics model for a single particle in Section~\ref{sec:MD}.
-We choose this model for its
-relevance to condensed matter systems
-and ease of simulation.
+our molecular dynamics model for a single particle in Section~\ref{sec:MD},
+The model
+closely resembles
+a damped driven pendulum,
+and is easy to simulate yet relevant
+to condensed matter systems.
 %In this section, we restrict our discussion to a single particle,
 %and include additional information
 %for multiple particles in Section~\ref{sec:sync}.
@@ -359,21 +358,16 @@ In Section~\ref{sec:conclusion}
 we describe how our results apply 
 to physical systems
 such as dusty plasmas, superconducting vortices and Josephson junctions.
-
-
-
-
 %Here we model the microscopic dynamics of phase locking in a colloidal model system using molecular dynamics (MD).
 
 \section{Molecular Dynamics Simulation}
 \label{sec:MD}
-
 We use a classical model for 
 studying the dynamics of $N$ interacting particles,
 using the net force on each particle to calculate
 its trajectory.
 Particles are confined in a two-dimensional (2D) 
-simulation of area $A = L \times L$ where $L=36.5 a_0$
+simulation of area $A = L \times L$ where $L=46.\bar{6} a_0$
 where $a_0$ is a dimensionless unit of length.
 An individual particle $i$ has
 position $\vec{r}_i = x_i \hat{x} + y_i \hat{y}$
@@ -431,11 +425,11 @@ with the periodic function
  %in the $y-$direction.
  
  Particles are subject an external time-dependent driving force
-$\vec{F}^{D}(t)$
+$\vec{F}^{d}(t)$
 applied parallel to the y-direction.
 We model this force as
 \begin{equation}
-  \vec{F}^{D}(t) = [F^{dc} + F^{ac} \sin(\omega t)] \hat{y},
+  \vec{F}^{d}(t) = [F^{dc} + F^{ac} \sin(\omega t)] \hat{y},
     \label{eq:drive}
 \end{equation}
 with %parameters including
@@ -449,96 +443,53 @@ and frequency $\omega = 2 \pi f$.
 %RAMP!!!
 %%%When $F^{dc}$ is non-zero,  we slowly increase $F^{dc}$ from zero to avoid transient behavior by ensuring the particle is subject to a smoothly varying force. We illustrate the increase of $F^{dc}$ in Fig.~\ref{fig:0}(a).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %because
 The inertia of 
 small particles is reduced by interactions
 with fluid particles \cite{Purcell1977}.
-In our model
-we assume 
+%In our model
+We assume 
 colloids are overdamped
--- i.e. colloids are suspended in a continuous viscous fluid
+-- suspended in a continuous viscous fluid
 that dissipates energy %at a rate
-such 
-that the particles do not accelerate.
-%that greatly impedes their motions.
-Energy dissipation from the fluid is modeled
-with a frictional force on particle with velocity $\vec{v}_i$ as
-%that removes energy from
-%the particles,
-%which we model as
-$\vec{F}^{drag}_i = -\eta \vec{v}_i$
-%proportional to the particle velocity 
-with a friction coefficient $\eta$
-proportional to the fluid viscosity.
-We discuss friction models for
-spheres moving through fluids in 
-%Section~\ref{sec:problems}
-Exercise~\ref{ex:reynolds}. %for more information
-%We model the particle dynamics  with an overdamped equation of motion. Models with inertia set to zero are appropriate for moving through a high viscosity fluid
-\begin{center}
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\columnwidth]{landscape.pdf}
-\caption{
-  Schematic of the simulation
-  of a single particle
-  driven across a washboard potential
-  energy landscape.
-  The period of the landscape is $\lambda = L/N_p$,  
-  %is marked in red,
-  where $N_p = 3$.  
-  The force due to the landscape %$\vec{F}^l$
-  is calculated from the gradient of the potential
-  energy 
-  $\vec{F}^l = -\nabla U(\vec{r})$.
-  (a) View of the $x-y$ plane. %of the simulation
-  The time-dependent applied driving force $\vec{F}^D$
-  is parallel to the y-axis.
-  The landscape is shown with a contour plot,
-  with maxima in the potential energy marked in red
-  and minima marked in blue.
-  A particle is shown in the region between minima and maxima
-  subject to competing forces of the landscape and applied driving force.
-  (b) The potential energy function
-  along the y-axis $U_l(y)$.  
-  The particle in (a) is shown at the same $y-$position.
-  The slope of $U_l(y)$ is the 
-  magnitude of force $\vec{F}^l$. %is calculated
-  %as the slope of this function,
-  %directed along the $y-$direction in panel (a).
-  }
-\label{fig:landscape0}
-\end{figure}
-\end{center}
+so the particles do not accelerate.
 Newton's second law for an individual particle
 %$m \vec{a}_i = \sum \vec{F}$
 is simplified
 by the assumption $\vec{a}_i$ is zero. % in the overdamped model.
 %Newton's second law can be rearranged %for the velocity
 %to
-The overdamped equation of motion for an isolated particle is
+The overdamped equation of motion for
+the velocity $\vec{v}_i$ of 
+an isolated particle is
 %solved for velocity 
 \begin{equation}
-  \eta \vec{v}_i = \vec{F}^l_{i}(\vec{r}_i) + \vec{F}^{D}(t).
+  \eta \vec{v}_i = \vec{F}^l_{i}(\vec{r}_i) + \vec{F}^{d}(t).
     \label{eq:motion}
 \end{equation}
-with  $\eta = 1$ in units of $v_0 / F_0$. 
-%(see Table~\ref{tab:1}).
-%and Exercise~\ref{ex:reynolds}.
-%In %Section~\ref{sec:problems}
-%Exercise~\ref{ex:n2l}
-%we invite the reader to confirm this result.
-The equation of motion provides a direct calculation of the velocity
-of an individual particle from its location $\vec{r}_i$ %in the simulation
-and the simulation time.
+with friction coefficient $\eta = 1$ in units of $v_0 / F_0$. 
+The term $-\eta \vec{v}_i$
+is a drag force used model 
+energy dissipation from the fluid. 
+%that greatly impedes their motions.
+%proportional to the particle velocity 
+%with a $\eta$
+%proportional to the fluid viscosity.
+We discuss friction models for
+spheres moving through fluids in 
+%Section~\ref{sec:problems}
+Exercise~\ref{ex:reynolds}. %for more information
+%We model the particle dynamics  with an overdamped equation of motion. Models with inertia set to zero are appropriate for moving through a high viscosity fluid
 
+The equation of motion provides a direct calculation of the velocity
+of an individual particle from location $\vec{r}_i$ %in the simulation
+and the simulation time.
 The molecular dynamics simulation is controlled by a $for()$ loop
 which runs from an initial to maximum integer number of time steps.
 %$t_i$.
-Each integer time step interval %$t_{i+1}-t_i$
-represents a simulation time of $\Delta t$ 
-simulation units $\tau$.  %as described in Table 1
+%Each integer time step interval %$t_{i+1}-t_i$
+%represents a simulation time of $\Delta t$.
+%simulation units $\tau$.  %as described in Table 1
 At each time step
 we evaluate the net force on each particle as a function of its position
 $\vec{r}_i(t)$
@@ -554,18 +505,128 @@ the Euler method
   \vec{r}_i(t+\Delta t) = \vec{v}_i(t) \Delta t + \vec{r}_i(t)
     \label{eq:euler}
 \end{equation}
-for a small time step $\Delta t = 0.01 \tau$.
+for a time step $\Delta t = 0.1 \tau$.
 In %Section~\ref{sec:problems}
 Exercise~\ref{ex:euler}
 we describe 
 the numerical methods for 
 solving differential equations.
 %
+%------------------------------------------------------------------
+\begin{figure} % [h!]
+\centering
+\includegraphics[width=\columnwidth]{landscape.pdf}
+\caption{
+  Schematic of the simulation of a single particle
+  driven across a washboard potential energy landscape.
+  %The period of the landscape is $\lambda = L/N_p$,  
+  %is marked in red,
+  %where $N_p = 3$.  
+  %The force due to the landscape %$\vec{F}^l$
+  %is calculated from the gradient of the potential energy 
+  %$\vec{F}^l = -\nabla U(\vec{r})$.
+  (a) View of the $x-y$ plane. %of the simulation
+  The time-dependent applied driving force $\vec{F}^d$
+  is parallel to the y-axis.
+  The landscape is shown with %a contour plot,
+  %with
+  maxima in the potential energy marked in red
+  and minima marked in blue.
+  A particle is %in the region between minima and maxima
+  subject to competing forces of the landscape and applied driving force.
+  (b) The potential energy function
+  along the y-axis $U_l(y)$.  
+  The particle in (a) is shown at the same $y-$position.
+  The slope of $U_l(y)$ is the 
+  magnitude of force $\vec{F}^l$. 
+  }
+\label{fig:landscape0}
+\end{figure}
+%\section{Results}
+%\label{sec:results}
+% We demonstrate how a single particle (Sec.~\ref{sec:one})
+% and many particles
+% move (Sec.~\ref{sec:sync})
+% in response to this applied force in a variety of environments.
+% In Sec.~\ref{sec:kink} we set $F^{dc}$
+% to zero and track the motion
+% of a high density area of a particle chain
+% (i.e. kink dynamics).
+ %The driving force does add energy into the system, and some of it is lost.
+%
+\section{Mode-locking of a single particle}
+% In subsection headings, only the first word is capitalized.
+\label{sec:one}
 
-\begin{table}[h!]
+Here we drive 
+a single particle %on this landscape
+%responds to the applied driving force
+%by moving
+across the landscape. %maxima
+%to explore the qualitative behavior
+%to characterize its motion.
+%synchronized with 
+%the period of $F^d(t)$.
+%applied driving force.
+%along the y-direction
+%({\it redundant, just refer back to eq. in Model?})
+%and $V_{0y}=0.2$.
+%This is illustrated in Fig.~\ref{fig:1}(a) where
+%the red (blue) regions show local maxima (minima).
+%
+The numerical implementation of the landscape 
+is calculated with Eq.~\ref{eq:ysubstrate} as 
+\begin{equation}
+  \label{eq:force}
+  F^l_y(y) = -A_{p} \sin{(2 \pi y / \lambda)} 
+\end{equation}
+where the force is scaled with parameter $A_{p} = 2\pi U_0/\lambda$.
+In this section we fix the landscape parameters
+to $A_{p} = 0.1 F_0$ %force units
+with $N_p=20$ minima %in the landscape
+corresponding to a spatial period $\lambda = 2.3 a_0$.
+The competition between the driving force and landscape potential
+can produce a variety of hopping patterns in the particle motion. 
+%In Fig.~\ref{fig:0}
+%reaching a minimum position
+%of $y/\lambda = 1$
+%over the total period $T = 100$.
+%In Fig. ~\ref{fig:0}
+%the average displacement during one time period is a single wavelength
+%of the substrate $y(t_0+T) - y(t_0) = \lambda$.
+%single dc case with figure
+%dc_current 0.01
+%ac_current 0.05
+%ac_frequency 0.01
+%fp_y 0.1
+%
+The relative values of $F^{ac}$, $F^{dc}$ and $A_p$
+control the rate and distance a  particle moves 
+forward and backward in the landscape.
+%Here we explore one case in the low frequency regime,
+When $F^d(t) > A_p$, a particle can 
+overcome the barrier height of the landscape,
+and 
+the particle hops between minima in the energy landscape.
+When the driving frequency is low,
+as in Fig.~\ref{fig:0},  
+the driven particle %adjusts
+moves %across %its motion to traverse
+%the periodic landscape
+in a pattern 
+with the same frequency 
+%with the same rhythm as 
+as the time-dependent force $F^d(t)$,
+yet is modulated by the landscape period.
+We explore changes in frequency and $F^{ac}$ 
+in Ex.~\ref{ex:parameters}.
+Here we vary $F^{dc}$ 
+while holding the remaining parameters fixed.
+%------------------------------------------------------------------------
+\begin{table} %[h!]
 \centering
 \caption{Simulation parameters and units with comparable
-  experimental values~\cite{Juniper2015}.}
+  experimental values~\cite{Juniper2015,Juniper2017}.}
   %Blanks indicate you are a moron
   %units, rather than parameters that
   %are not easily represented by a single value.}
@@ -582,20 +643,17 @@ energy & $E_0 = 1$ & \\ %$ < E_0 <$ \\
 %effective colloidal charge & $Z^*$ \\
 %solvent dielectric constant & $\epsilon \epsilon_0$\\
 force & $F_0 = E_0 / a_0$ & \\ %$<F_0<$\\
-time &  $ \tau = \eta a_0 / F_0 $ \\ %& $ < \tau <$\\
+time &  $ \tau = \eta a_0 / F_0 $ & $ \tau \sim 3 sec$\\
 velocity &  $ a_0 / \tau $ &  $v \sim 5 \mu m/s $\\
-driving period & $T = 100 \tau$ & $T \sim 1.3$ s \\ %frequency 0.75 Hz
-viscosity coefficient & $\eta = F_0 \tau / a_0 $ & $\eta \sim 10^{-3}$ Pa-s \\
+%driving period & $T = 100 \tau$ & $T \sim 1.3$ s \\ %frequency 0.75 Hz
 %juniper uses water–ethanol mixture
-substrate period & $\lambda = 1.825 a_0$ & $\lambda = 3.5 \mu m$ \\
-substrate amplitude & $U_0 = 0.058 E_0$ & $U_0 = 25 k_B T \sim 2 J$ \\
+substrate period & $\lambda = 2.3 a_0$ & $\lambda = 3.5 \mu m$ \\
+substrate amplitude\footnote{Our substrate is scaled by our force units, while an experimental landscape is scaled by the Brownian motion of particles.} & $A_p = 0.1 F_0$ & $U_0 = 25 k_B T \sim 1 J$ \\ %$U_0 = 0.037 E_0$ 
 %they have 75 k_B T as the bottom of -U_0
 %A_p = 0.1 = N_p pi U_0/L.  this is how calculated U_0
-temperature & $T_0 = 0$ \footnote{to learn more about the effects
-  of temperature on this simulation
-  see Ex.~\ref{ex:brownian} where we study the limit
-  $U_0 \sim k_B T$.} & $T \sim 300K $ \\
-
+temperature\footnote{To learn more about the effects
+  of temperature on this simulation see Ex.~\ref{ex:brownian} where we study 
+  $U_0 \sim k_B T$.} & $T_0 = 0$  & $T \sim 290K $ \\
 %FROM JUNIPER2015
 %l¼3.5 mm and a laser power per trap of WE0.75mW (trap stiffness: k=3.8\times10^7 kg /s^2; trap depth: V0 = 75 k_B T
 %ref51
@@ -617,195 +675,198 @@ temperature & $T_0 = 0$ \footnote{to learn more about the effects
 %thermofisher off the shelf paramagnetic beads
 %https://www.thermofisher.com/us/en/home/references/protocols/proteins-expression-isolation-and-analysis/protein-isolation-protocol/m-270-carboxylic-acid.html
 %~2\times10^9 beads per 30 mg -> 1.5 \times 10^-11 g, 15 ng
-
 \end{tabular}
 \end{ruledtabular}
 \label{tab:1}
 \end{table}
 
-%\section{Results}
-%\label{sec:results}
-% We demonstrate how a single particle (Sec.~\ref{sec:one})
-% and many particles
-% move (Sec.~\ref{sec:sync})
-% in response to this applied force in a variety of environments.
-% In Sec.~\ref{sec:kink} we set $F^{dc}$
-% to zero and track the motion
-% of a high density area of a particle chain
-% (i.e. kink dynamics).
- %The driving force does add energy into the system, and some of it is lost.
-%
-\section{Mode-locking of a single particle}
-% In subsection headings, only the first word is capitalized.
-\label{sec:one}
-
-Here we drive 
-a single particle %on this landscape
-%responds to the applied driving force
-%by moving
-across the landscape %maxima
-to characterize its motion.
-%synchronized with 
-%the period of $F^D(t)$.
-%applied driving force.
-%along the y-direction
-%({\it redundant, just refer back to eq. in Model?})
-%and $V_{0y}=0.2$.
-%This is illustrated in Fig.~\ref{fig:1}(a) where
-%the red (blue) regions show local maxima (minima).
-%
-The numerical implementation of the landscape 
-is calculated with Eq.~\ref{eq:ysubstrate} as 
-\begin{equation}
-  \label{eq:force}
-  F^l_y(y) = -A_{p} \sin{(2 \pi y / \lambda)} 
-\end{equation}
-where the force is scaled with parameter $A_{p} = 2\pi U_0/\lambda$.
-In this section we fix the landscape parameters
-to $A_{p} = 0.1 F_0$ %force units
-with $N_p=20$ minima %in the landscape
-corresponding to a spatial period $\lambda = 1.825 a_0$.
-The competition between the driving force and landscape potential
-can produce a variety of hopping patterns in the particle motion. 
-%In Fig.~\ref{fig:0}
-%reaching a minimum position
-%of $y/\lambda = 1$
-%over the total period $T = 100$.
-%In Fig. ~\ref{fig:0}
-%the average displacement during one time period is a single wavelength
-%of the substrate $y(t_0+T) - y(t_0) = \lambda$.
-%single dc case with figure
-%dc_current 0.01
-%ac_current 0.05
-%ac_frequency 0.01
-%fp_y 0.1
-%
-The relative values of $F^{ac}$, $F^{dc}$ and $A_p$
-control the rate and distance a  particle moves 
-forward and backward in the landscape.
-[edit and move:] The addition of an oscillating force
-can lead to interference effects
-that create stepped force-velocity curves.
-Useful model - essentially an overdamped driven pendulum -
-under certain parameters.
-The steps occur
-due to the phase locking between lattice substrate
-and applied driving force.
-Step widths depend on AC drive.
-Discrete modes.
-%Shapiro steps wash out to sloped regions at
-%high vortex numbers,
-%so what is the analog in my system?
-%need to sweep through more parameters to find and report the flat regions
-%not fully phase locked.
-
-
-
-%In Fig.~\ref{fig:0} 
-The driven particle %adjusts
-moves across %its motion to traverse
-the periodic landscape with the same rhythm as 
-the applied time-dependent force $F^D(t)$.
-When $F^D(t) > A_p$, a particle can 
-overcome the barrier height of the landscape,
-and 
-the particle hops between minima in the energy landscape.
-%
 In Fig.~\ref{fig:0}(a)
-we plot $F^D(t)$ %defined in Eq.~\ref{eq:drive}.
+we plot $F^d(t)$ %defined in Eq.~\ref{eq:drive}.
 as a function of time with
 %The time independent
-constants $F^{dc}=0.1$, 
-$F^{ac}=0.05$ and $f=0.01$ cycles per time unit $\tau$.
+constants $F^{dc}=0.07$, 
+$F^{ac}=0.07$ and $f=0.01$ cycles per time unit $\tau$.
 The temporal period of the driving force is
-$T = 1/f = 100 \tau$.
+$T = 1/f = 100 \tau$ and 
+the simulation has a maximum
+time of $400 \tau$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %RAMP
-%To avoid transient oscillations at early times, the dc driving force is initially zero and slowly increased %$F^{dc}$. at a rate of $\Delta F^{dc} = 0.01$ every $\Delta t = 4$ time units  to the constant value $F^{dc}=0.1$. In Fig.~\ref{fig:0}(a) we plot $F^{dc}$ in blue to show the increase in  $F^{dc}$ for the first $40$ time units In orange we show  the combined ac and dc drive $F^D(t)$ when the magnitude of the ac applied force is initially zero.
+%To avoid transient oscillations at early times, the dc driving force is initially zero and slowly increased %$F^{dc}$. at a rate of $\Delta F^{dc} = 0.01$ every $\Delta t = 4$ time units  to the constant value $F^{dc}=0.1$. In Fig.~\ref{fig:0}(a) we plot $F^{dc}$ in blue to show the increase in  $F^{dc}$ for the first $40$ time units In orange we show  the combined ac and dc drive $F^d(t)$ when the magnitude of the ac applied force is initially zero.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %since $\sin{(0)}=0$.
-We mark the maxima of $F^{ac}(t)$
-with the
-vertical dashed lines %in panels (a) and (b)
--- i.e. $\sin{(\omega t)} = 1$.
-%
-%
+%We mark the maxima of $F^{ac}(t)$
+%with the
+%vertical dashed lines %in panels (a) and (b)
+%-- i.e. $\sin{(\omega t)} = 1$.
 %with the initial driving force at is minimum value 
-%$F^D(0) = F^{dc}$. 
+%$F^d(0) = F^{dc}$. 
 %
 In Fig.~\ref{fig:0}(b) 
 we show the $y-$position of the particle
-as a function of time.
-We 
-normalize $y$ by $\lambda$ %, the spatial period of the potential
-to show  particle motion between substrate minima.  
+as a function of time,
+where we 
+normalize $y$ by $\lambda$.
+%to show  particle motion between substrate minima.  
 The initial particle position is $y = 0 $. %1 a_0$,
 %where the $F^l$ is negative.
-%JUST BECAUSE
 %causing the particle to move to
 %a landscape minima at the start of the simulation.
-As the driving force increases,
-%the effects of the landscape become less obvious,
-the motion of the particle
-synchronizes with the driving period $T$.
-We measure 
-average particle velocity $\langle{v}_y\rangle$
-as the displacement %$\Delta y = y(t_0+T) - y(t_0)$
-over the period of the driving force.
 The particle moves
 in the positive y-direction
-through $\Delta y = 2 \lambda$ over the time period $T$,
+through $\Delta y = \lambda$ over time $T$,
 with 
 the average velocity 
-$\langle {v}_y \rangle= 2 \lambda f$. % where $T = 1/f$.
-[TODO: update description!]
-The horizontal dashed lines
-coincide with the condition the particle is at a substrate minima
-where substrate force  $F^l = -A_p$,  
-i.e. $\sin{(\pi y / \lambda)} = 1$.
- %or $\pi y / \lambda = m \pi/2$, where $m = 1, 5, 7$, {\it etc.}
-%Once the particle motion
-%coincides with the applied drive,
-%indicating synchronization,
-The particle synchronizes its motion such that the 
-edriving force is maximum when the landscape 
+$\langle {v}_y \rangle = \lambda f$. % where $T = 1/f$.
+%For these parameters,
+The inset of Fig.~\ref{fig:0}(b)
+shows $y$ %vs. time
+over one period $100\tau < t < 200 \tau$
+with 
+the contour plot described
+in Fig.~\ref{fig:landscape0}(a).
+The motion is synchronized so the 
+driving force is maximum when the landscape 
 force is minimum,
-as indicated %with the coincidence of 
-with the intersection of
-vertical and horizontal lines.  
-%i.e. the particle position $y/\lambda$.  
-The slope of $y/\lambda$
-is proportional to the net force on the particle.
-This can be seen in 
-Fig.~\ref{fig:0} %we demonstrate this relationship,
-where local extrema appear in $y/\lambda$
-when $F_{D}(t) \approx 0 $. 
-\begin{center}
-\begin{figure}[h!]
+as shown by the coincidence of the
+steep slope in 
+$y/\lambda$ 
+and maxima in $F^d(t)$.
+When $F^d(t)$ is large 
+the particle moves across the substrate minima,
+shown in blue with the contour plot.
+The slope of $y/\lambda$ is zero twice
+during a driving period,
+indicating zero
+forward motion 
+due to a coincidence of negative
+driving force and motion over the landscape maxima.
+%------------------------------------------------------------------------
+%----------------------------------------------------------------
+\begin{figure} %[h!]
 \centering
 \includegraphics[width=\columnwidth]{fig2.pdf}
-\caption{(a) The applied driving force $F^D(t)$. % (Eq.~\ref{eq:drive}).
+\caption{(a) The applied driving force $F^d(t)$ % (Eq.~\ref{eq:drive}).
+  with parameters $F^{dc} = 0.07$, $F^{dc} = 0.07$ and $f=0.01$.
   %where the parameter $F^{dc}$ (blue) is slowly increased from zero %to a constant value %as described in the text.
   (b) 
   The $y-$position of the driven particle
   %of a single driven particle
   normalized by the period of the substrate $\lambda$.
+  The substrate strength is $A_p=0.1$.
   %as a function of time
+  The inset of (b) shows
+  the $y-$position
+  through the second period $100\tau<t<200\tau$
+  against the contour plot depicting
+  the landscape potential described in Fig.~\ref{fig:landscape0}(a).
   }
 \label{fig:0}
 \end{figure}
-\end{center}
 
+To explore the possible hopping patterns,
+we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$.
+%to illustrate
+%distinct oscillation modes. % as a function of $F^{dc}$.
+%as shown
+In Fig.~\ref{fig:1} 
+we increase $F^{dc}$ in increments of $0.001 F_0$
+%for $10^5$ simulation timesteps
+and 
+measure the average velocity $\langle v_y \rangle $ 
+as a function of $F^{dc}$.
+We perform the sweep for a non-oscillatory drive $F^{ac} = 0.0$.
+With no oscillating component of the driving force,
+  the force-velocity relationship is monotonically increasing
+  above the depinning threshold $F^c$ such that
+  \begin{equation}
+    \langle v_y \rangle \propto (F^{dc}-F^c)^{-\beta}.
+  \end{equation}
+  The critical force $F^c$ is equal to the maximum substrate force
+  $A_p$ so the applied driving
+  force can move a particle over a substrate barrier.
+  The addition of an $ac$ drive leads
+  to the formation of modes.
+  A mode is a periodic pattern of hops
+  with a constant average particle velocity, $\langle {v}_{y} \rangle$
+  over a range of driving forces $F^{dc}$.
+  In Fig.~\ref{fig:1}
+  we sweep $F^{dc}$
+  with $F^{ac} = 0.07$ and $f=0.01$.
+%the average velocity of the particle
+%is constant 
+%despite the overall magnitude
+%of $F^{dc}$.
+Each step represents a different pattern of hops
+between substrate minima
+performed by the particle
+due to the landscape confinement.  
+At %this occurs at 
+low $F^{dc}$ the average velocity $\langle v_y \rangle$ is zero.
+Since 
+$A_p$ is large compared to the extrema of $F^{d}(t)$,
+the particle oscillates back and forth
+in a single minima with no net velocity.
+%We plot the results in Fig.~\ref{fig:1} for 
+%  The modes appear as 
+%  discrete steps in $\langle v_y \rangle$ %occur because
+%  across a range of $F^{dc}$.
+%  On each of the first four modes,
+%  we mark a values of $F^{dc}$ to illustrate in Fig.~\ref{fig:phase}.
+At higher $F^{dc}$ the particle velocity 
+$\langle v_{y} \rangle$ increases in steps of uniform height,
+$\langle v_{y} \rangle = n \lambda f$,
+where $n$ is an integer.
+The step width is non-linear
+and depends on the strength of $F^{ac}$
+as a Bessel function 
+for this landscape potential \cite{Reichhardt2000,Juniper2017}.
+Known at Shapiro steps,
+these can have a variety of
+interesting patterns
+such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
+%We note the individual steps
+%are not strictly horizontal 
+%since particles move continuously
+%through the landscape, so changes in $F^{dc}$
+%will create linear changes in 
+%net particle displacement that are observable
+%within a single step.
+\begin{figure} %[h!]
+\centering
+\includegraphics[width=\columnwidth]{fig3.pdf}
+\caption{Average particle velocity  $\langle v_{y} \rangle$
+  as a function of $F^{dc}$, 
+  the constant parameter of $F^d(t)$ defined in Eq.~\ref{eq:drive}.
+  We fix
+  $F^{ac}=0.0$ (blue) and 
+  $F^{ac}=0.07$ (orange) with $f = 0.01$ 
+  as in Fig.~\ref{fig:0}.
+  Each of the first four steps
+  has a marked value of $F^{dc}$,
+  indicating a system
+  plotted in Fig.~\ref{fig:phase}.
+}
+\label{fig:1}
+\end{figure}
+%$\lambda = L/N_p = 36.5/20 = 1.825$ is the spatial period, or wavelength
+%of the landscape,
+%and $f = 0.01$ cycles per time unit.
+%This synchronization
+%of the particle velocity can be measured
+%in terms of the landscape period.
+%Phase locked steps occur for average displacements integer
+%multiples of the substrate period $n\lambda$.
+%\subsection{Phase plots}
+%  \label{ex:phase}
 
-%{\it NOTE: YOUR $A_P$ VALUES ARE TOO SMALL TO MAKE THIS A MEANINGFUL PHASE VARIALBE.  YOU NEED TO SCALE WITH THE DRIVE FORCE AMPLITUDES.  THIS CAN ALSO HELP YOU UNDERSTAND WHY YOU ARE GETTING BIG JUMPS IN POSITION COMPARED TO JUNIPER ET AL.  YOU ARE WORKING IN THE WEAK SUBSTRATE LIMIT.  also insert plots of $y/\lambda$ over a single period with the phase plots - like juniper}
-  It is useful to compare
+  To study synchronization patterns, 
+  it is useful to compare
   mode-locked quantities %periodic signals
-  in a two dimensional phase plot
-  to distinguish fully and partially synchronized
-  behavior.  
+  in a two dimensional phase plot. 
   In a non-driven system, an appropriate
   phase space is particle velocity $v_y$ versus position $y$.  
-  In a system driven parallel to the $y-$direction,
+  For a particle driven parallel to the $y-$direction,
   %the particle velocity and position increase
   %in time. % due to $F^{dc}$.
   %Since a system does not form
@@ -820,16 +881,21 @@ when $F_{D}(t) \approx 0 $.
   %We define a phase variable 
   \begin{equation}
     %(y mod \lambda) / \lambda
-    \phi(t) = 2\pi(y(t)-\langle v_y \rangle t)/\lambda
+    \phi(t) = (y(t)-\langle v_y \rangle t)/\lambda
   \end{equation}
-  centered about the average particle velocity $\langle v_y \rangle$
+  centered about the average particle displacement $\langle v_y \rangle t$
   and normalized by the substrate period $\lambda$ \cite{Juniper2015}.
-  In phase diagrams we plot $\phi(t)$ %phase
-  versus the phase velocity 
+  For clarity we have dropped a prefactor of $2\pi$ 
+  to compare $\phi(t)$ to $\lambda$.
+  %In phase diagrams we plot $\phi(t)$ %phase
+  %versus
+  The phase velocity is
   \begin{equation}
     %(y mod \lambda) / \lambda
-    \dot{\phi}(t) = 2\pi(v_y(t)-\langle v_y \rangle /\lambda.
+    \dot{\phi}(t) =(v_y(t)-\langle v_y \rangle) /\lambda.  % 2\pi
   \end{equation}
+  With no landscape force, 
+  the phase velocity will be zero when $F^d(t) = F^{dc}$.
   %Juniper %REF 53
   %and easily generated with a computer code 
   %or oscilloscope \cite{Tong1997}.
@@ -841,21 +907,30 @@ when $F_{D}(t) \approx 0 $.
   %between two periodic functions
   The pattern is determined by the mode,
   or frequency ratio,
-  so a 1:1 mode appears as a circle or oval.
-  Nodes appear in the oval 
+  so a 1:1 mode appears as a circle or oval. 
+  Nodes appear %in the oval 
   for higher modes,
   sometimes forming figure-eights
   or other recognizable patterns.
-  A system that is not fully phase locked
-  will apppear as an unclosed loop.
+  A system that is nearly phase locked
+  will appear as an unclosed loop.
   Such quasiperiodic systems are
-  not fully synchronized.
+  not fully synchronized
+  so the position-velocity relationship
+  shifts in time.
+  In Fig.~\ref{fig:phase}, 
+  all cases exhibit some line thickening, 
+  indicating the particle location and velocity
+  are not fully synchronized,
+  although this can be tuned by
+  calculating $\langle v_y \rangle$ over
+  shorter time ranges.
   %and the shifts in phase space represent
   %small changes in system behavior.
-  With a long simulation time,
-  a quasiperiodic phase diagram
-  fills the plotting region due to the gradual shift
-  in the velocity-position relationship.
+  %With a long simulation time,
+  %a quasiperiodic phase diagram
+  %fills the plotting region due to the gradual shift
+  %in the velocity-position relationship.
   %with a frequency generator,
   %where two combined frequencies at perpendicular orientations
   %\footnote{The term phase
@@ -869,175 +944,63 @@ when $F_{D}(t) \approx 0 $.
   %OKAY, WHY AREN'T MY AMPLITIDES \phi \pm 2\pi and \dot{\phi} \pm 4\pi.
   In Fig.~\ref{fig:phase}
   we plot $\dot{\phi}(t)$ versus $\phi(t)$
-  for increasing substrate amplitude $A_p$.
-  We fix the driving force with parameters
-  $F^{dc} = 0.1$ and frequency $f = 0.01$ and $F^{ac} = 0.2$.
-  In Fig.~\ref{fig:phase}(a)
-  there is no substrate ($A_p = 0.0$)
-  and the phase plot is a closed oval
+  for increasing %substrate amplitude $A_p$.
+  $F^{dc}$, % and frequency $f = 0.01$ and $F^{ac} = 0.2$.
+  with the remaining parameters fixed as in Fig.~\ref{fig:0}.
+  In Fig.~\ref{fig:phase}(a) with
+  $F^{dc} = 0.04$
+  the phase plot is a small closed oval
   centered at
-  $(\phi,\dot{\phi})=(10,0)$
-  with a semimajor axis of $\Delta \phi = 20$ %ANALYTIC
-  and semiminor axis of $\Delta \dot{\phi} = 2\pi v_{max} /\lambda$.
-  [insert analysis.]
-  As the force from the substrate
+  $(\phi,\dot{\phi})=(0.1,0)$.
+  A small tail appears
+  due to the initial transient
+  motion of the particle.
+  %with a semimajor axis of $\Delta \phi = 20$ %ANALYTIC
+  %and semiminor axis of $\Delta \dot{\phi} = 2\pi v_{max} /\lambda$.
+  The particle is confined in a single
+  substrate minima,
+  and has no net velocity.
+  In Fig.~\ref{fig:phase}(b)
+  with $F^{dc} = 0.07$
+  the phase loop is a symmetric trianglar shape,
+  indicating a 1:1 match between
+  particle motion and velocity consistent with 
+  Fig.~\ref{fig:0}(a).
+  The maximum $\dot{\phi}$ %with a 1:1 mode locking,
+  occurs at $\phi \sim 0.4$,
+  and maximum $\phi$ occurs
+  when $\dot{\phi} \sim 0$.
+
+  %The dynamical properties are asymmetric,
+  %with three nodes in the positive $\dot{\phi}$ values.
+  %[insert analysis.]
+  As $F^{dc}$ %the constant driving force 
   increases,
   nodes form in the phase diagram
-  and the motion becomes quasiperiodic
+  that occur due to repeated values
+  of $\dot{\phi}$ over multiple phase positions.
+  The motion becomes quasiperiodic
   so the loops in phase space do not fully overlap.
-  In Fig.~\ref{fig:phase}(b)
-  $A_p = 0.05$
-  the spatial properties are similar to
-  those in $A_p = 0.0$
-  with 
-  $(\phi,\dot{\phi})=(10,0)$
-  with a semimajor axis of $\Delta \phi = 20$.
-  The dynamical properties
-  are asymmetric,
-  with three nodes in the positive $\dot{\phi}$ values.
-  The thickening of the line
-  indicates the system is not fully synchronized.
-  [insert analysis.]
-  As the substrate
-  force becomes larger,
-  $\phi$ shifts to lower values
-  and $\dot{\phi}$ to positive values,
-  indicating
-  the particle can only move 
-  backward over a short distance.
   In Fig.~\ref{fig:phase}(c)
-  $A_p = 0.1$
-  the phase properties are similar to
-  those in $A_p = 0.05$,
-  the three nodes have 
-  increased asymmetry in both phase variables 
-  $(\phi,\dot{\phi})$.
-  The nodes deepen,
-  indicating [insert analysis.].
+  with $F^{dc} = 0.1$
+  two nodes form.
+  The particle moves across $2\lambda$
+  during one time period.
   In Fig.~\ref{fig:phase}(d)
-  $A_p = 0.2$
-  the pattern shifts
-  to two nodes,
-  [indicating change analysis].
-  In Fig.~\ref{fig:phase}(e)
-  $A_p = 0.25$
-  the system returns to a nodeless
-  orbit,
-  shaped like a triangle [because why?]
-  In Fig.~\ref{fig:phase}(f)
-  $A_p = 0.3$
-  the particle is trapped between substrate minima,
-  and traces out a small unclosed
-  orbit in phase space [because...]
-  The phase velocity is near zero
-  throughout the motion -
-  [comment on initial conditions]
-  \begin{center}
-    \begin{figure}[h!]
+  with $F^{dc} = 0.125$
+  three nodes form as the particle moves across $3\lambda$.
+    \begin{figure} %[h!]
       \centering
       \includegraphics[width=\columnwidth]{phase.pdf}
+      %\vspace*{-3cm}
       \caption{
-        Phase plot of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:0}.  $F^{ac} = 0.2$ and $A_p = $ (a) $0.0$, (b) $0.05$, (c) $0.1$, (d) $0.2$, (e) $0.25$ and (f) $0.3$.
-        [first 100 timesteps removed to reduce transients]
-      }
+        Phase plot of a particle with $F^{dc} = $ (a) $0.04$, (b) $0.07$, (c) $0.1$, (d) $0.125$.  These values are marked as black circles
+        in Fig.~\ref{fig:1}.%, (e) $0.25$ and (f) $0.3$.
+      The other parameters
+      are $F^{ac} = 0.07$, $f=0.01$, and $A_p = 0.1$
+      as Fig.~\ref{fig:0}.}
       \label{fig:phase}
     \end{figure}
-  \end{center}
-
-To explore the possible hopping patterns,
-we sweep through a range of $F^{dc}$ for fixed $F^{ac}$ and $A_p$
-to illustrate
-distinct oscillation modes. % as a function of $F^{dc}$.
-A mode is a periodic pattern of hops
-with a constant average particle velocity, $\langle {v}_{y} \rangle$
-over a range of driving forces $F^{dc}$.
-%as shown
-In Fig.~\ref{fig:1} 
-we keep $F^{dc}$ constant
-for $10^5$ simulation timesteps
-and 
-measure the average velocity $\langle v_y \rangle $ 
-as a function of $F^{dc}$,
-with $F^{ac} = 0.05$, $f=0.01$, and the landscape %force $\vec{F}^{l}$
-shown in Fig.~\ref{fig:0}.
-%We plot the results in Fig.~\ref{fig:1} for 
-The modes appear as 
-discrete steps in $\langle v_y \rangle$ %occur because
-across a range of $F^{dc}$,
-
-%the average velocity of the particle
-%is constant 
-%despite the overall magnitude
-%of $F^{dc}$.
-Each step represents a different pattern of hops
-between substrate minima
-performed by the particle
-due to the landscape confinement.  
-In Fig.~\ref{fig:1} at %this occurs at 
-low $F^{dc}$ the average velocity $\langle v_y \rangle$ is zero.
-Since 
-$A_p$ is large compared to the extrema of $F^{D}(t)$,
-the particle oscillates back and forth
-in a single minima with no net velocity.
-At higher $F^{dc}$ the particle velocity 
-$\langle v_{y} \rangle$ increases in steps of uniform height,
-$\langle v_{y} \rangle = n \lambda f$,
-where $n$ is an integer.
-The step width is non-linear 
-and can have a variety of
-interesting patterns
-such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
-We note the individual steps
-are not strictly horizontal 
-since particles move continuously
-through the landscape, so changes in $F^{dc}$
-will create linear changes in 
-net particle displacement that are observable
-within a single step.
-\begin{center}
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\columnwidth]{fig3.pdf}
-\caption{Average particle velocity  $\langle v_{y} \rangle$
-  as a function of $F^{dc}$, 
-  the constant parameter of $F^D(t)$ defined in Eq.~\ref{eq:drive}.
-  We fix
-  $F^{ac}=0.0$ (blue) and 
-  $F^{ac}=0.05$ (orange) with $f = 0.01$ 
-  as in Fig.~\ref{fig:0}.
-  {TODO: with these parameters, the steps are fractional!}
-}
-\label{fig:1}
-\end{figure}
-\end{center}
-%$\lambda = L/N_p = 36.5/20 = 1.825$ is the spatial period, or wavelength
-%of the landscape,
-%and $f = 0.01$ cycles per time unit.
-%This synchronization
-%of the particle velocity can be measured
-%in terms of the landscape period.
-%Phase locked steps occur for average displacements integer
-%multiples of the substrate period $n\lambda$.
-%\subsection{Phase plots}
-%  \label{ex:phase}
-
-We explore a range of parameters in Ex.~\ref{ex:parameters}
-where 
-we perform this sweep for several values
-of $F^{ac}$ including the limiting case that the applied force
-is a constant value.
-When $F^{ac} = 0$, no steps appear
-in the $\langle v_y \rangle $ vs $F^{dc}$ curve. 
-When $F^{dc} - F^{ac} < -A_p$ the particle
-moves in the negative y-direction 
-during part of the cycle.
-%We examine
-The period of the substrate
-can be used to control the
-net velocity of the dc driven particle,
-and the applied ac drive can cause mode-locking
-which appears as non-linear 
-steps in the force-velocity relationship.
 
 In Section ~\ref{sec:problems}
 we explore our model
@@ -1053,13 +1016,12 @@ to include finite temperature effects
 in Ex.~\ref{ex:brownian}.
 We explore changes in the particle motion
 with parameter changes in Ex.~\ref{ex:parameters}.
-Methods to visualize the dynamics of the particle motion
-are in Ex.~\ref{ex:animation}.
+%Methods to visualize the dynamics of the particle motion
+%are in Ex.~\ref{ex:animation}.
 %In the animation available in Ref.~\cite{supp1} the magenta dot represents the average velocity of the particle $\langle v_{y} \rangle$ at which the particle in Fig. 1(a) is moving.
 
 \section{Associated problems}
 \label{sec:problems}	% You can label sections for reference
-
 %\begin{enumerate}
 %\item
 \subsection{Drag Models and Reynolds Numbers.}
@@ -1090,6 +1052,9 @@ moving through a viscous liquid at velocity $\vec{v}$
   When $R$ is small, the quadratic and higher order terms
   may be ignored in favor of the linear drag term.
 
+  %viscosity coefficient & $\eta = F_0 \tau / {a_0}^2 $ & $\eta \sim 10^{-3}$ Pa-s \\
+  To first order the viscosity is $\eta \sim 10^{-3}$ Pa-s \cite{Volpe2013}.
+  %or $9 \times 10^{-8} kg/s$ \cite{Juniper2017}.
   {\bf Using reasonable values for the
   experimental analog of this system, 
   show that the Reynolds number is small.}
@@ -1098,15 +1063,15 @@ moving through a viscous liquid at velocity $\vec{v}$
  % a colloid size and speed
  % are $D = 1 \mu m$ and $v \sim 1 \mu m /s$.
  % %Likewise
- % To first order the viscosity is $\eta \sim 10^{-3}$ Pa-s 
  % since 
  % viscosity of water decreases with temperature
  % from $1.3 \times 10^{-3}$ Pa-s at $10^{\circ}$ C to 
  % from $0.31 \times 10^{-3}$ Pa-s at $90^{\circ}$ C,
  % where 1 Pascal is $1$ N/m$^2$.
   %Likewise
-  the liquid density $\rho$ varies with temperature
-  with $\rho \sim 10^3$ kg/cm$^3$ a reasonable
+  the liquid density %$\rho$ varies with temperature
+  %with
+  $\rho \sim 10^3$ kg/cm$^3$ is a reasonable
   first order approximation
   \cite{asce}.
   
@@ -1141,16 +1106,16 @@ moving through a viscous liquid at velocity $\vec{v}$
   known as the momentum relaxation time, %.
   and is small for
   particles with low Reynolds numbers.
-  The mass of the
-  typical experimental colloid particle is $15$ picograms,
+  The mass of a
+  typical colloid particle is $15$ picograms,
   leading to a momentum relaxation time
   % \tau = 15 nanograms/(3 pi D \eta)
   %$15*10^-12 / (3pi * 3*10^-6 meters * 0.001 Pa-s * 1000 g/kg)$  %1 Pa-s = 1 N s /m^2 = 1 kg /(m s)
   on the order of microseconds.
   %of $1.6 ~\mu$s.
   {\bf Confirm for the values listed in Table ~\ref{tab:1},
-  the momentum relaxation time is 
-  $m/\gamma \approx 0.5 ~\mu$s. }
+  the momentum relaxation time is }
+  $m/\gamma \approx 0.5 ~\mu s$. 
   
   When $m/\gamma$ is small,
   particle acceleration can be ignored
@@ -1158,7 +1123,7 @@ moving through a viscous liquid at velocity $\vec{v}$
   (a) Using Newton's Second Law for
   a small momentum relaxation time, 
   {\bf show that a particle confined to a landscape exerting force
-  $F^l(\vec{r}_i)$ subject to a time dependent drive $F^D(t)$
+  $F^l(\vec{r}_i)$ subject to a time dependent drive $F^d(t)$
   can be modeled with the equation of motion described in 
   Eq.~\ref{eq:motion}. }
 
@@ -1194,48 +1159,21 @@ moving through a viscous liquid at velocity $\vec{v}$
   of position of a particle
   $y_n$ at the $nth$ timestep (i.e. Eq.~\ref{eq:euler}).}
     
-  The Euler method can be applied to non-linear
-  equations effectively if the time step $\Delta t$
-  is kept sufficiently small \cite{Newman}.
-  In our simulations we use the timestep $\Delta t = 0.001$,
-  but we find for a single particle
-  we can just as easily used 
-  %examine 
-  %for
-  timesteps $\Delta t = 0.01$ and $\Delta t = 0.1$
-  over the same maximum time
-  (i.e. decrease the overall simulation time and sampling rate)
-  and reproduce the motions shown in Fig.~\ref{fig:0}(b).
-  This is due to the linear nature of the solution
-  for an isolated particle.
-  %How to the motions of the particle compare when the timestep
-  %becomes large?
-  %[UPDATE]
-  {\bf Demonstrate the simulation timestep 
-  can be large
-  with no change to the overall physics
-  in the motion of a single particle.}
-  You will need to modify the maximum
-  simulation time, and the frequency of data saved for plotting purposes.
-
-  Interaction with neighboring particles
-  makes a small timestep essential for molecular dynamics simulations.
-  Since particle-particle interactions are typically non-linear,
-  the interaction force changes significantly over small distances,
-  making this simulation a unique
-  exception to typical simulation timesteps.
-  %{\it small timesteps matter a great deal when particle interactions
-  %  are included in the model.  I have demonstrated that
-  %  without particle interactions we can increase the timestep
-  %with no penalty, so this isn't a very interesting problem.}
-  %FOLLOW UP WITH THIS!
-  %Because we are performing molecular dynamics
-  %for a single particle on a smooth potential energy landscape,
-  %we use a large simulation time step of 
-  %$\Delta t = 0.01$.  %In Sec.~\ref{sec:sync},
-  %we decrease the time step
-  %to treat multiple particle interactions.
-
+    The Euler method can be applied to
+    calculate reasonable numerical solutions to 
+    non-linear
+    equations if the time step $\Delta t$
+    is kept sufficiently small \cite{Newman}.
+    %but it is an uncommon choice.
+    In our simulations we use the timestep $\Delta t = 0.1$
+    and find no change in the solution
+    when we decrease the timestep to smaller values.
+    In simulations
+    including many interacting particles,
+    a small
+    timestep is essential for accurate models.
+    Particle-particle interactions are typically non-linear,
+    so the interparticle force changes significantly over small distances.
   Often molecular dynamics algorithms 
   are solved with higher order methods
   such as the Verlet or Runge-Kutta methods.
@@ -1267,7 +1205,8 @@ moving through a viscous liquid at velocity $\vec{v}$
   %to demonstrate that synchronization in this model
   %does not depend on a particular set of conditions.
   %but is a direct consequence of the simplicity of the model.
-%\item
+  %\item
+  
   \subsection{Brownian motion}
   \label{ex:brownian}
   Brownian motion is a phenomena in which 
@@ -1347,17 +1286,10 @@ moving through a viscous liquid at velocity $\vec{v}$
   move along the $y-$direction,
   include Brownian motion 
   in the model.
-  In Fig.~\ref{fig:brownian},
-  we demonstrate the transition
-  from pinned to hopping
-  in 
-  %Measure the position vs. time
-  a non-driven colloid for $T/A_p = 3.0$, $3.5$, and $4.0$.
   %The crossover
   %to a hopping regime occurs at $T/A_p \approx 5.6$.
   %Reproduce these results.  
-  \begin{center}
-    \begin{figure}[h!]
+    \begin{figure} %[h!]
       \centering
       \includegraphics[width=\columnwidth]{{fig4}.pdf}
       \caption{
@@ -1377,7 +1309,7 @@ moving through a viscous liquid at velocity $\vec{v}$
       }
       \label{fig:brownian}
     \end{figure}
-  \end{center}
+  
   In Fig.~\ref{fig:brownian}
   we show the position versus time of a particle
   confined to a sinusoidal landscape
@@ -1456,7 +1388,7 @@ moving through a viscous liquid at velocity $\vec{v}$
   Brownian motion does affect 
   the formation of mode-locked steps
   and can be observed in experiments.
-  [explore]
+  %[explore]
   %and could be included
   %to emulate noise seen in some 
   %How does Brownian motion affect
@@ -1513,7 +1445,7 @@ moving through a viscous liquid at velocity $\vec{v}$
   but in each case the particle
   hops across two substrate periods as in Fig.~\ref{fig:0}.
   In Fig.~\ref{fig:hops}(a-b) the particle hopping rate
-  do not match the temporal period of $F^D(t)$
+  do not match the temporal period of $F^d(t)$
   due to the high frequency.
   In Fig.~\ref{fig:hops}(a) the high frequency $f= 0.1$
   is apparent in the undulations of the particle
@@ -1544,8 +1476,7 @@ moving through a viscous liquid at velocity $\vec{v}$
   and wraps back to $y=0$.
   Given a simulation time of the period length $1000 \tau$,
   the particle would cease forward motion.
-  \begin{center}
-    \begin{figure}[h!]
+    \begin{figure} %[h!]
       \centering
       \includegraphics[width=\columnwidth]{{parameters_fig5}.pdf}
       \caption{
@@ -1555,7 +1486,6 @@ moving through a viscous liquid at velocity $\vec{v}$
       }
       \label{fig:hops}
     \end{figure}
-  \end{center}
   %In Fig.~\ref{fig:hops}
 
   Hopping patterns with backward steps are more difficult
@@ -1587,7 +1517,7 @@ moving through a viscous liquid at velocity $\vec{v}$
   the amplitude of $F^{ac}$,
   which causes the number of backwards steps to increase.
   The number of forward steps also increases
-  due to the increased total positive amplitude of $F^D(t)$.
+  due to the increased total positive amplitude of $F^d(t)$.
   In Fig.~\ref{fig:hops_back}(a) 
   $F^{ac} = 0.2$. %, $0.3$ and $0.4$.
   %of the system for our original parameters.
@@ -1600,8 +1530,7 @@ moving through a viscous liquid at velocity $\vec{v}$
   In each case the average velocity %net displacement
   is $\langle v_y \rangle = 6\lambda/T$.
 
-  \begin{center}
-    \begin{figure}[h!]
+    \begin{figure} %[h!]
       \centering
       \includegraphics[width=\columnwidth]{{parameters_fig6}.pdf}
       \caption{
@@ -1612,23 +1541,14 @@ moving through a viscous liquid at velocity $\vec{v}$
       }
       \label{fig:hops_back}
     \end{figure}
-  \end{center}
 
   In Fig.~\ref{fig:shapiro}
   we sweep the constant driving force $F^{dc}$
   for a fixed amplitude $F^{ac}$ and frequency.
   Fig.~\ref{fig:shapiro}(a) shows $F^{ac}= 0.0$ and (b) shows $F^{ac}=0.4$
   with frequency $f=0.01$.
-  With no oscillating component of the driving force,
-  the force-velocity relationship is monotonically increasing
-  above the depinning threshold $F^c$ such that
-  \begin{equation}
-    \langle v_y \rangle \propto (F^{dc}-F^c)^{-\beta}.
-  \end{equation}
-  The critical force $F^c$ is equal to the maximum substrate force
-  $A_p$ so the applied driving
-  force can move a particle over a substrate barrier.
-  The particle does not phase lock since there is no periodicity to $F^D(t)$,
+  
+  The particle does not phase lock since there is no periodicity to $F^d(t)$,
   but does exhibit undulations in $\langle v_y \rangle$
   due to the corregations in the substrate.
   %WAIT, THAT DOESN'T MAKE SENSE!
@@ -1638,20 +1558,20 @@ moving through a viscous liquid at velocity $\vec{v}$
   At low values of $F^{dc}$ the particle may move backwards,
   distorting the steps, as seen below $F^{dc}<0.3$
   Between $0.3< F^{dc}<0.5$ the system exhibits phase locked steps.
-    \begin{center}
-    \begin{figure}[h!]
+    \begin{figure} %[h!]
       \centering
-      \includegraphics[width=\columnwidth]{{fig9_sweep_FDC_vs_vx}.pdf}
+      \includegraphics[width=\columnwidth]{{fig7}.pdf}
       %\includegraphics[width=\columnwidth]{{fig7_sweep_FDC_vs_vx}.pdf}
       \caption{
         $\langle v_y \rangle$ vs. $F^{dc}$ of a particle with
-        $F^{ac}=0.0$ (blue) and $F^{ac}=0.4$ (orange) with frequency $f=0.01$.
+        $F^{ac}=0.1$ (blue), $F^{ac}=0.2$ (orange),
+        $F^{ac}=0.1$ (green) and $F^{ac}=0.2$ (red)
+        with frequency $f=0.01$.
         The substrate is as in Fig.~\ref{fig:0}
         with $A_p = 0.1$.
       }
       \label{fig:shapiro}
     \end{figure}
-  \end{center}
   %In Fig.~\ref{fig:hops}
 %\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
 %  \item The Fokker-Planck Equation
@@ -1660,25 +1580,19 @@ moving through a viscous liquid at velocity $\vec{v}$
  %   kink motion
  %   Vanossi et al J.Phys.: Condens. Matter 19 (2007)
   %\item
-  
-  
-  \subsection{Visualizing motion}
-  \label{ex:animation}
-  
-  Drawing the contour 
-
-  The code for generating
-  a two dimensional colored plot
-  of the potential landscape
-  is calculated by evaluating
-  the analytic function in Eq.~\ref{eq:ysubstrate}
-  for a grid of values $(x_n,y_n)$.
+  %\subsection{Visualizing motion}
+  %\label{ex:animation}
+  %Drawing the contour 
+  %The code for generating
+  %a two dimensional colored plot
+  %of the potential landscape
+  %is calculated by evaluating
+  %the analytic function in Eq.~\ref{eq:ysubstrate}
+  %for a grid of values $(x_n,y_n)$.
   %is included in the supplementary material,
-
-  {\it I have python code that does all of this, but I don't have it
-    set up to play nice with my new python MD code}
-  
-  Also the animation library in python...
+  %{\it I have python code that does all of this, but I don't have it
+  %  set up to play nice with my new python MD code} 
+  %Also the animation library in python...
 
 \section{Conclusion}
 \label{sec:conclusion}	% You can label sections for reference
@@ -1696,8 +1610,8 @@ synchronizes its motion %to study synchronization dynamics
 to environmental and external forces,
 a phenomena known as mode-locking.  
 %due to interactions between particles.
-Our simulations reproduce experiments presented in 
-Juniper {\it et al.} \cite{Juniper2015} %, Juniper2018}
+Our simulations reproduce experiments and simulations presented in 
+Juniper {\it et al.} \cite{Juniper2015, Juniper2017}
 of 
 mode locking in
 %experiments and simulations of 
@@ -1857,7 +1771,7 @@ and the charge and spin of atomic systems.
       
     \bibitem{Shapiro1963} S. Shapiro, Josephson currents in superconducting tunneling: the effect of microwaves and other observations, Phys. Rev. Lett. 11, 80 (1963).
 
-    \bibitem{Benz1990}  S. P. Benz, M. S. Rzchowski, M. Tinkham, and C. J. Lobb, Fractional giant Shapiro steps and spatially correlated phase motion in 2D Josephson arrays, Phys. Rev. Lett. 64, 693 (1990); D. Dom´ınguez and J. V. Jos´e, Giant Shapiro steps with screening currents, Phys. Rev. Lett. 69,
+    \bibitem{Benz1990}  S. P. Benz, M. S. Rzchowski, M. Tinkham, and C. J. Lobb, Fractional giant Shapiro steps and spatially correlated phase motion in 2D Josephson arrays, Phys. Rev. Lett. 64, 693 (1990); D. Dom{\'i}nguez and J. V. Jos{\'e}, Giant Shapiro steps with screening currents, Phys. Rev. Lett. 69,
 514 (1992).
 
 \bibitem{Reichhardt2000} C. Reichhardt, R. T. Scalettar, G. T., Zim{\'a}nyi, N. Gr{\o}nbech-Jensen,  Phase-locking of vortex lattices interacting with periodic pinning.  Phys. Rev. B {\bf 61}, R11914 (2000).
@@ -1874,12 +1788,13 @@ and the charge and spin of atomic systems.
     \bibitem{Reichhardt2015} C. Reichhardt, and C. J. O. Reichhardt,  Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Phys. Rev. B {\bf 92}, (22). (2015).
       
     \bibitem{Juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015); 
-    %\bibitem{Juniper2018}
-      Juniper, M. P. N., Zimmermann, U., Straube, A. V., Besseling, R., Aarts, D. G. A. L., Löwen, H., and Dullens, R. P. A.  Dynamic mode locking in a driven colloidal system: Experiments and theory. New Journal of Physics, 19(1). (2017).  %https://doi.org/10.1088/1367-2630/aa53cd
+      %\bibitem{Juniper2018}
       
-    \bibitem{Herrera-Velarde2008} S. Herrera-Velarde and R. Castañeda-Priego, Superparamagnetic colloids confined in narrow corrugated substrates, Phys. Rev. E {\bf 77}, 041407 (2008).
+      \bibitem{Juniper2017} Juniper, M. P. N., Zimmermann, U., Straube, A. V., Besseling, R., Aarts, D. G. A. L., L{\"o}wen, H., and Dullens, R. P. A.  Dynamic mode locking in a driven colloidal system: Experiments and theory. New Journal of Physics, 19(1). (2017).  %https://doi.org/10.1088/1367-2630/aa53cd
+      
+    \bibitem{Herrera-Velarde2008} S. Herrera-Velarde and R. Casta{\~n}eda-Priego, Superparamagnetic colloids confined in narrow corrugated substrates, Phys. Rev. E {\bf 77}, 041407 (2008).
 
-    \bibitem{Herrera-Velarde2007} S. Herrera-Velarde and R. Castañeda-Priego, J. Phys.: Condens. Matter 19, 226215 (2007).
+    \bibitem{Herrera-Velarde2007} S. Herrera-Velarde and R. Casta{\~n}eda-Priego, J. Phys.: Condens. Matter 19, 226215 (2007).
 
     \bibitem{Grier2003} D. G. Grier, A revolution in optical manipulation. Nature {\bf 424}, 810 (2003).
 
@@ -1921,7 +1836,7 @@ and the charge and spin of atomic systems.
 
   \bibitem{Einstein1905} A Einstein, Investigations on the Theory of the Brownian Movement,  Dover Publications (1956).
 
-    \bibitem{numpy} Harris, C.R., Millman, K.J., van der Walt, S.J. et al. Array programming with NumPy. Nature {\bf 585}, 357 (2020). %DOI: 0.1038/s41586-020-2649-2. (Publisher link).
+    \bibitem{numpy} C.R. Harris, K.J. Millman, S.J. van der Walt, et al. Array programming with NumPy. Nature {\bf 585}, 357 (2020). %DOI: 0.1038/s41586-020-2649-2. (Publisher link).
     
 %\bibitem{latexsite} \LaTeX\ Project Web Site, \url{<http://www.latex-project.org/>}.
 
@@ -2315,10 +2230,114 @@ When a single particle is driven, the neighboring particles act similarly to a p
 \caption{\textbf{(a)} A single particle (colored orange - mark in some manner for non-color views) is driven with a constant amplitude $F^{ac}$ and frequency $\omega$ through 19 neighboring particles (colored green - mark differently) confined by a quasi one-dimensional channel. The landscape is colored as in Fig.~\ref{fig1}(a). \textbf{(b)} Average $\langle {v}_{y} \rangle $ versus $F^{dc}$, where $\langle {v}_{y} \rangle$ is the average particle velocity of the driven particle in the y-direction.}
 \label{fig:2}
 \end{figure}
-\end{center}
 
 \section{Kinked system}
 \label{sec:kink}	% You can label sections for reference
 We confine $N$ particles to $N-1$ troughs to create a
 local high density region.
 $F^{dc}/F^{ac} = 1$ [CHECK!]
+
+The addition of an oscillating force
+can lead to interference effects
+that create stepped force-velocity curves.
+Useful model - essentially an -
+under certain parameters.
+The steps occur
+due to the phase locking between lattice substrate
+and applied driving force.
+Step widths depend on AC drive.
+Discrete modes.
+
+  In Fig.~\ref{fig:phase}(b)
+  $A_p = 0.05$
+  the spatial properties are similar to
+  those in $A_p = 0.0$
+  with 
+  $(\phi,\dot{\phi})=(10,0)$
+  with a semimajor axis of $\Delta \phi = 20$.
+  The dynamical properties
+  are asymmetric,
+  with three nodes in the positive $\dot{\phi}$ values.
+  The thickening of the line
+  indicates the system is not fully synchronized.
+  [insert analysis.]
+  As the substrate
+  force becomes larger,
+  $\phi$ shifts to lower values
+  and $\dot{\phi}$ to positive values,
+  indicating
+  the particle can only move 
+  backward over a short distance.
+  In Fig.~\ref{fig:phase}(c)
+  $A_p = 0.1$
+  the phase properties are similar to
+  those in $A_p = 0.05$,
+  the three nodes have 
+  increased asymmetry in both phase variables 
+  $(\phi,\dot{\phi})$.
+  The nodes deepen,
+  indicating [insert analysis.].
+  In Fig.~\ref{fig:phase}(d)
+  $A_p = 0.2$
+  the pattern shifts
+  to two nodes,
+  [indicating change analysis].
+  In Fig.~\ref{fig:phase}(e)
+  $A_p = 0.25$
+  the system returns to a nodeless
+  orbit,
+  shaped like a triangle [because why?]
+  In Fig.~\ref{fig:phase}(f)
+  $A_p = 0.3$
+  the particle is trapped between substrate minima,
+  and traces out a small unclosed
+  orbit in phase space [because...]
+  The phase velocity is near zero
+  throughout the motion -
+  [comment on initial conditions]
+
+  %------------------------------------
+  We explore a range of parameters in Ex.~\ref{ex:parameters}
+where 
+we perform this sweep for several values
+of $F^{ac}$ including the limiting case that the applied force
+is a constant value.
+%When $F^{ac} = 0$, no steps appear
+%in the $\langle v_y \rangle $ vs $F^{dc}$ curve. 
+When $F^{dc} - F^{ac} < -A_p$ the particle
+moves in the negative y-direction 
+during part of the cycle.
+%We examine
+The period of the substrate
+can be used to control the
+net velocity of the dc driven particle,
+and the applied ac drive can cause mode-locking
+which appears as non-linear 
+steps in the force-velocity relationship.
+
+ we can easily use 
+  %examine 
+  %for
+  timesteps $\Delta t = 0.01$ and $\Delta t = 0.1$
+  over the same maximum time
+  (i.e. decrease the overall simulation time and sampling rate)
+  and reproduce the motions shown in Fig.~\ref{fig:0}(b).
+  This is due to the linear nature of the solution
+  for an isolated particle.
+  %How to the motions of the particle compare when the timestep
+  %becomes large?
+  %[UPDATE]
+  {\bf Demonstrate the simulation timestep 
+  can be large
+  with no change to the overall physics
+  in the motion of a single particle.}
+  You will need to modify the maximum
+  simulation time, and the frequency of data saved for plotting purposes.
+
+  %--------------------------------------------------------
+    In Fig.~\ref{fig:brownian},
+  we demonstrate the transition
+  from pinned to hopping
+  in 
+  %Measure the position vs. time
+  a non-driven colloid for $T/A_p = 3.0$, $3.5$, and $4.0$.
