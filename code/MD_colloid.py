@@ -43,11 +43,11 @@ def add_contour(ax,L,N):
     Hardwired for a single parameter set.    
     '''
 
-    a_p = L/N
+    a_p = 1
 
     #assuming Tiare's trough system, so we won't want to cover the entire range
-    X = np.arange(0, 100, 0.1)
-    Y = np.arange(0, L, 0.1)
+    X = np.arange(100, 200, 0.1)
+    Y = np.arange(L[0], L[1]+0.1, 0.1)
     X, Y = np.meshgrid(X, Y)
 
     Z_mag = 0.1 # set by what "looks good"
@@ -268,9 +268,9 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     # them.
     ax3 = plt.axes([0,0,1,1])
     # Manually set the position and relative size of the inset axes within ax1
-    ip = InsetPosition(ax2, [0.59,0.01,0.4,0.4])
+    ip = InsetPosition(ax2, [0.64,0.18,0.3,0.4])
     ax3.set_axes_locator(ip)
-    L=1.5
+    L=[0.9,2.3]
     N=1
     add_contour(ax3,L,N)
     
@@ -293,17 +293,20 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     ax1.set_ylabel(r"$F^d(t)$")
     ax2.set_xlabel(r"time ($\tau$)")
     ax2.set_ylabel(r"y/$\lambda$")
-
+    ax3.set_xlabel(r"time",backgroundcolor="white") #,y=10)
+    ax3.set_ylabel(r"y/$\lambda$")
+    ax3.xaxis.set_label_coords(0.5,-0.05)
+    
     #ax1.set_xticklabels([])
     #ax1.xaxis.set_ticklabels([])
     plt.setp(ax1.get_xticklabels(), visible=False)
     
     ax1.set_xlim(0,time_data[-1]+1)
     ax2.set_xlim(0,time_data[-1]+1)
-    ax3.set_xlim(0,100)
-    ax3.set_ylim(0.0,1.5)
-    ax3.set_xticks([])
-    ax3.set_yticks([])
+    ax3.set_xlim(100,200)
+    ax3.set_ylim(0.9,2.3)
+    #ax3.set_xticks([])
+    #ax3.set_yticks([])
 
     ax1.text(-0.19,0.86,"(a)",transform = ax1.transAxes,backgroundcolor="white")
     ax2.text(-0.19,0.86,"(b)",transform = ax2.transAxes) #,backgroundcolor="white")
@@ -332,15 +335,19 @@ def plot_phase(ax,y_data,avg_vy_data,p):
 
     #plot the position within the period
     #y_data /= p['period']
+
+    #calculate the average velocity without any initial transients
     vbar = np.average(avg_vy_data[50:])
-    time = np.arange(1,p['maxtime']+1,1)*p['dt']
+
+    #calculate all times
+    time = np.arange(0,p['maxtime'],1)*p['dt']
 
     #subtraction of initial transients
     plot_delay = 0 #100   
 
-    
+
     # driven phase variables
-    phi_y_data = (y_data - vbar*time)/(p['period']) # 2*np.pi*
+    phi_y_data = (y_data - (vbar*time+p['y0']))/(p['period']) # 2*np.pi*
     dot_phi_y_data = (avg_vy_data - vbar)/(p['period']) #2*np.pi*
 
     if 1:
@@ -357,7 +364,7 @@ def plot_phase(ax,y_data,avg_vy_data,p):
     #ax1.set_xticks([])
     #ax.set_xlim(0.8,2.75) #time_data[-1]+1)
 
-    ax.set_ylim(-0.05,0.11) #time_data[-1]+1)
+    ax.set_ylim(-0.04,0.1) #time_data[-1]+1)
     
     return 
 
@@ -575,7 +582,7 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #figures 2 to 8
-    make_fig = 2
+    make_fig = 7
 
     parameters['filename']="fig%d.pdf"%(make_fig)
 
@@ -588,24 +595,32 @@ if __name__ == "__main__":
 
         #run a single MD simulation for a set of parameters
         if make_fig == 2:
-            single_particle(parameters)
-            parameters['maxtime'] = 40
 
+            #parameters['maxtime'] = 40
+            #parameters['F_DC'] = 0.125 #FDC[k]
+
+            single_particle(parameters)
+            
         elif make_fig == 8:
             #phase figure!!!!
             #parameters['drop'] = 4000   
-            #parameters['maxtime'] = 3000
+            parameters['maxtime'] = 2000
 
+            parameters['y0'] = 2*parameters['period'] #*5/4
 
-            #parameters['F_AC'] = 0.2
-            #parameters['freq'] = 0.01
-            #parameters['AP'] = 0.05
-            parameters['y0'] = 0 #parameters['period']/2
+            #should be as in Fig. 2
+            parameters['F_AC'] = 0.07 
+            parameters['freq'] = 0.01
+            parameters['AP'] = 0.1
 
-            fig = plt.figure(figsize=(10,12))
-            gs=gridspec.GridSpec(3,2)
+            fig = plt.figure(figsize=(8,8*1.2))
+            gs=gridspec.GridSpec(2,2)
 
-            FDC = [0.04, 0.07, 0.1, 0.125] #, 0.2, 0.3]
+            if 1:
+                FDC = [0.04, 0.07, 0.1, 0.125] #, 0.2, 0.3]
+            else:
+                FDC = [0.01, 0.05, 0.09, 0.1]
+                
             k=0
             for i in range(2):
                 for j in range(2):
@@ -615,16 +630,22 @@ if __name__ == "__main__":
                             backgroundcolor="white",zorder=-10)
 
                     parameters['F_DC'] = FDC[k]
-                    if k == 0:
-                        parameters['y0'] = parameters['period']
+                    #if k == 0:
                 
                     y_data, avg_vy_data = single_particle(parameters,plot="phase")
+
                     plot_phase(ax, y_data,avg_vy_data,parameters)
-                    
+
+                    if j>0:
+                        plt.setp(ax.get_yticklabels(), visible=False)
+                        ax.set_ylabel("")
+                    else:
+                        ax.yaxis.set_label_coords(-0.2,0.5)
+
                     k+=1
 
             
-            plt.tight_layout(pad=0.1,h_pad=-0.3) #,v_pad=-0.3)
+            plt.tight_layout(pad=0.25,h_pad=-0.3,w_pad=-0.3)
             plt.savefig(parameters['filename'])
 
     #--------------------------------------------------------------
@@ -656,8 +677,8 @@ if __name__ == "__main__":
             #I'M SEEING STEP HEIGHTS LIKE JUNIPER (but still fractional)  
             parameters['freq'] = 0.1
             delta_Fdc = 0.01
-            F_AC = [0.0,0.3]
-            Fdc_max=0.5+delta_Fdc
+            F_AC = [0.1,0.2,0.3,0.4]
+            Fdc_max=0.6+delta_Fdc
 
 
         max_value = int(np.ceil(Fdc_max/delta_Fdc))
@@ -689,7 +710,7 @@ if __name__ == "__main__":
             ax1.plot(Fdc_data,avg_vy_data,linewidth=2,label=r"%1.2f"%(F))
 
             #make the phase plot locations
-            if F > 0:
+            if make_fig == 3: #F > 0:
                 ax1.scatter(Fdc_data[40],avg_vy_data[40],c='k')
                 ax1.scatter(Fdc_data[70],avg_vy_data[70],c='k')
                 ax1.scatter(Fdc_data[100],avg_vy_data[100],c='k')

@@ -41,6 +41,8 @@ f = 0.01
 dt = 0.1
 maxtime = 4000
 
+It this frequency and driving regime the steps are fractional.
+
 #-----------------------------------------------------------------
 Figure 3 - phase variables
 
