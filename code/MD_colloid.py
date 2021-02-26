@@ -357,7 +357,7 @@ def plot_phase(ax,y_data,avg_vy_data,p):
     #ax1.set_xticks([])
     #ax.set_xlim(0.8,2.75) #time_data[-1]+1)
 
-    #ax.set_ylim(-0.04,0.1) #time_data[-1]+1)
+    ax.set_ylim(-0.04,0.1) #time_data[-1]+1)
     
     return 
 
@@ -575,7 +575,7 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #figures 2 to 8
-    make_fig = 8
+    make_fig = 6
 
     parameters['filename']="fig%d.pdf"%(make_fig)
 
@@ -773,11 +773,11 @@ if __name__ == "__main__":
 
 
         if make_fig == 5:
-            parameters['maxtime']=5000        #total time steps in simulation
+            parameters['maxtime']=4500        #total time steps in simulation
 
             #we will sweep through the following independent variable
 
-            frequency = [0.1, 0.05, 0.015, 0.005, 0.001]
+            frequency = [0.05,0.022, 0.005, 0.001]
             ind_var = frequency
             str_iv=" f=%1.3f"
 
@@ -785,12 +785,11 @@ if __name__ == "__main__":
             parameters['maxtime']=3000        #total time steps in simulation
 
             #we will sweep through the following independent variable
-            F_AC = [0.2, 0.3, 0.4]
+            F_AC = [0.2, 0.4]
             ind_var = F_AC
             str_iv=" $F^{ac}$=%1.2f"
-            parameters['freq'] = 0.01
-           
-
+            #parameters['freq'] = 0.1
+            #parameters['F_DC'] = 0.1
 
         #make the figure
         n_plots = len(ind_var)
@@ -802,7 +801,7 @@ if __name__ == "__main__":
 
             #make the subplot
             ax = fig.add_subplot(gs[i,0])
-            ax.text(0.02,0.8,letter[i]+str_iv%(ind_var[i]),
+            ax.text(0.7,0.08,letter[i]+str_iv%(ind_var[i]),
                     transform = ax.transAxes,backgroundcolor="white")
             parameters['axis'] = ax
 
@@ -813,8 +812,8 @@ if __name__ == "__main__":
                 parameters['F_AC'] = F_AC[i]
 
                 #horizontal grid so we can count hops
-                ax.set_ylim(-0.9,20.9)
-                ax.yaxis.set_minor_locator(AutoMinorLocator(5))
+                #ax.set_ylim(-0.9,20.9)
+                ax.yaxis.set_minor_locator(AutoMinorLocator(1))
                 ax.grid(axis='y',which='both')
 
             #run the MD simulation    
@@ -825,7 +824,7 @@ if __name__ == "__main__":
                 ax.set_xlabel("")
 
         #save the figure
-        plt.tight_layout(pad=0.1,h_pad=-0.3)
+        plt.tight_layout(pad=0.1,h_pad=-0.05)
         plt.savefig(parameters['filename'])
 
 
