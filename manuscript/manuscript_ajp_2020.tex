@@ -881,18 +881,18 @@ such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
   %We define a phase variable 
   \begin{equation}
     %(y mod \lambda) / \lambda
-    \phi(t) = (y(t)-\langle v_y \rangle t)/\lambda
+    \phi(t) = 2\pi (y(t)-\langle v_y \rangle t)/\lambda
   \end{equation}
   centered about the average particle displacement $\langle v_y \rangle t$
   and normalized by the substrate period $\lambda$ \cite{Juniper2015}.
-  For clarity we have dropped a prefactor of $2\pi$ 
-  to compare $\phi(t)$ to $\lambda$.
+  For clarity our plots are normalized by the prefactor $2\pi$. 
+  %to compare $\phi(t)$ to $\lambda$.
   %In phase diagrams we plot $\phi(t)$ %phase
   %versus
   The phase velocity is
   \begin{equation}
     %(y mod \lambda) / \lambda
-    \dot{\phi}(t) =(v_y(t)-\langle v_y \rangle) /\lambda.  % 2\pi
+    \dot{\phi}(t) =2\pi (v_y(t)-\langle v_y \rangle) /\lambda.  % 
   \end{equation}
   With no landscape force, 
   the phase velocity will be zero when $F^d(t) = F^{dc}$.
@@ -1544,7 +1544,11 @@ moving through a viscous liquid at velocity $\vec{v}$
 
   In Fig.~\ref{fig:shapiro}
   we sweep the constant driving force $F^{dc}$
-  for a fixed amplitude $F^{ac}$ and frequency.
+  for a fixed amplitude $F^{ac}$ and frequency $f=0.1$.
+  In the high frequency limit,
+  the steps are separated
+  by linearly increasing regions.
+  
   Fig.~\ref{fig:shapiro}(a) shows $F^{ac}= 0.0$ and (b) shows $F^{ac}=0.4$
   with frequency $f=0.01$.
   
@@ -1566,7 +1570,7 @@ moving through a viscous liquid at velocity $\vec{v}$
         $\langle v_y \rangle$ vs. $F^{dc}$ of a particle with
         $F^{ac}=0.1$ (blue), $F^{ac}=0.2$ (orange),
         $F^{ac}=0.1$ (green) and $F^{ac}=0.2$ (red)
-        with frequency $f=0.01$.
+        with frequency $f=0.0$.
         The substrate is as in Fig.~\ref{fig:0}
         with $A_p = 0.1$.
       }

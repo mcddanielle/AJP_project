@@ -67,19 +67,7 @@ def add_contour(ax,L,N):
 
     cset = ax.contourf(X, Y, Z, cmap=cmap,alpha=0.5)
 
-    '''
-    ax.set_xlim(0, L/2)
-    ax.set_ylim(0, L)
 
-    ax.set_xlabel(r"x",labelpad=-20)
-    ax.set_ylabel(r"y",rotation='horizontal',ha='right',labelpad=-15)
-
-    ax.set_xticks([0,L/2])
-    ax.set_yticks([0,L])
-
-    ax.set_xticklabels(['0','L/2'])
-    ax.set_yticklabels(['0','L'])
-    '''
     return 
 
 ##################################################################
@@ -188,6 +176,7 @@ def md_step(y, int_time, avg_vy, parameters, ft=0):
         avg_vy = average_velocity(int_time, vy, avg_vy, parameters)
     else:
         avg_vy = vy
+        print(vy, avg_vy)
 
     #calculate the new position
     y += vy*dt
@@ -347,7 +336,11 @@ def plot_phase(ax,y_data,avg_vy_data,p):
 
 
     # driven phase variables
-    phi_y_data = (y_data - (vbar*time+p['y0']))/(p['period']) # 2*np.pi*
+    # 2*np.pi*
+
+    phi_y_data = (y_data - (vbar*time+p['y0']))/(p['period'])
+    phi0=np.average(phi_y_data)
+    phi_y_data-=phi0
     dot_phi_y_data = (avg_vy_data - vbar)/(p['period']) #2*np.pi*
 
     if 1:
@@ -357,14 +350,14 @@ def plot_phase(ax,y_data,avg_vy_data,p):
         #non-driven phase variables
         ax.scatter(y_data[plot_delay:],avg_vy_data[plot_delay:]) #,lw=5)
 
-    ax.set_xlabel(r"$\phi_y(t)$")
-    ax.set_ylabel(r"$\dot{\phi}_y(t)$")
+    ax.set_xlabel(r"$\phi_y(t) / (2\pi)$")
+    ax.set_ylabel(r"$\dot{\phi}_y(t) / (2\pi)$")
     #ax.yaxis.set_label_coords(-0.2, 0.5)
 
     #ax1.set_xticks([])
     #ax.set_xlim(0.8,2.75) #time_data[-1]+1)
 
-    ax.set_ylim(-0.04,0.1) #time_data[-1]+1)
+    #ax.set_ylim(-0.04,0.1) #time_data[-1]+1)
     
     return 
 
@@ -582,7 +575,7 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #figures 2 to 8
-    make_fig = 7
+    make_fig = 8
 
     parameters['filename']="fig%d.pdf"%(make_fig)
 
@@ -619,7 +612,7 @@ if __name__ == "__main__":
             if 1:
                 FDC = [0.04, 0.07, 0.1, 0.125] #, 0.2, 0.3]
             else:
-                FDC = [0.01, 0.05, 0.09, 0.1]
+                FDC = [0.0, 0.1, 0.2, 0.3]
                 
             k=0
             for i in range(2):
@@ -639,8 +632,8 @@ if __name__ == "__main__":
                     if j>0:
                         plt.setp(ax.get_yticklabels(), visible=False)
                         ax.set_ylabel("")
-                    else:
-                        ax.yaxis.set_label_coords(-0.2,0.5)
+                    #else:
+                    #    ax.yaxis.set_label_coords(-0.2,0.5)
 
                     k+=1
 
@@ -710,12 +703,9 @@ if __name__ == "__main__":
             ax1.plot(Fdc_data,avg_vy_data,linewidth=2,label=r"%1.2f"%(F))
 
             #make the phase plot locations
-            if make_fig == 3: #F > 0:
-                ax1.scatter(Fdc_data[40],avg_vy_data[40],c='k')
-                ax1.scatter(Fdc_data[70],avg_vy_data[70],c='k')
-                ax1.scatter(Fdc_data[100],avg_vy_data[100],c='k')
-                ax1.scatter(Fdc_data[125],avg_vy_data[125],c='k')
-
+            if make_fig == 3 and F > 0:
+                for i in [40,70,100,125]:
+                    ax1.scatter(Fdc_data[i],avg_vy_data[i],c='k',zorder=10)
             
             
         ax1.set_xlim(0,Fdc_data[-1])
