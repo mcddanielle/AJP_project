@@ -919,7 +919,7 @@ such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
   so the position-velocity relationship
   shifts in time.
   In Fig.~\ref{fig:phase}, 
-  all cases exhibit some line thickening, 
+  all cases exhibit some phase shifts %line thickening, 
   indicating the particle location and velocity
   are not fully synchronized,
   although this can be tuned by
@@ -949,10 +949,10 @@ such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
   with the remaining parameters fixed as in Fig.~\ref{fig:0}.
   In Fig.~\ref{fig:phase}(a) with
   $F^{dc} = 0.04$
-  the phase plot is a small closed oval
-  centered at
-  $(\phi,\dot{\phi})=(0.1,0)$.
-  A small tail appears
+  the phase plot is a small asymmetric curve.
+  %centered at
+  %$(\phi,\dot{\phi})=(0.1,0)$.
+  A tail appears
   due to the initial transient
   motion of the particle.
   %with a semimajor axis of $\Delta \phi = 20$ %ANALYTIC
@@ -960,17 +960,18 @@ such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
   The particle is confined in a single
   substrate minima,
   and has no net velocity.
+  The asymmetry is caused by bias induced by $F^{dc}$.
   In Fig.~\ref{fig:phase}(b)
   with $F^{dc} = 0.07$
   the phase loop is a symmetric trianglar shape,
   indicating a 1:1 match between
   particle motion and velocity consistent with 
   Fig.~\ref{fig:0}(a).
-  The maximum $\dot{\phi}$ %with a 1:1 mode locking,
-  occurs at $\phi \sim 0.4$,
-  and maximum $\phi$ occurs
-  when $\dot{\phi} \sim 0$.
-
+  %The maximum $\dot{\phi}$ %with a 1:1 mode locking,
+  %occurs at $\phi \sim 0.4$,
+  %and maximum $\phi$ occurs
+  %when $\dot{\phi} \sim 0$.
+  %
   %The dynamical properties are asymmetric,
   %with three nodes in the positive $\dot{\phi}$ values.
   %[insert analysis.]
@@ -979,8 +980,8 @@ such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
   nodes form in the phase diagram
   that occur due to repeated values
   of $\dot{\phi}$ over multiple phase positions.
-  The motion becomes quasiperiodic
-  so the loops in phase space do not fully overlap.
+  %The motion becomes quasiperiodic
+  %so the loops in phase space do not fully overlap.
   In Fig.~\ref{fig:phase}(c)
   with $F^{dc} = 0.1$
   two nodes form.
@@ -994,8 +995,9 @@ such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
       \includegraphics[width=\columnwidth]{phase.pdf}
       %\vspace*{-3cm}
       \caption{
-        Phase plot of a particle with $F^{dc} = $ (a) $0.04$, (b) $0.07$, (c) $0.1$, (d) $0.125$.  These values are marked as black circles
-        in Fig.~\ref{fig:1}.%, (e) $0.25$ and (f) $0.3$.
+        Phase plot of $\dot{\phi(t)}/(2\pi)$ vs. $\phi(t)/(2\pi)$.
+        The particle is driven with $F^{dc} = $ (a) $0.04$, (b) $0.07$, (c) $0.1$, (d) $0.125$.  These values are marked as black circles
+        in Fig.~\ref{fig:1}. %, (e) $0.25$ and (f) $0.3$.
       The other parameters
       are $F^{ac} = 0.07$, $f=0.01$, and $A_p = 0.1$
       as Fig.~\ref{fig:0}.}
@@ -1005,6 +1007,8 @@ such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
 In Section ~\ref{sec:problems}
 we explore our model
 with suggested exercises for interested readers.
+We explore changes in the particle motion
+with parameter changes in Ex.~\ref{ex:parameters}.
 We include analytic exercises to examine the 
 to linear drag equation in Ex.~\ref{ex:reynolds}, 
 the equation of motion in Ex.~\ref{ex:n2l},
@@ -1014,8 +1018,6 @@ We extend the model with
 numerical exercises %extend the model
 to include finite temperature effects
 in Ex.~\ref{ex:brownian}.
-We explore changes in the particle motion
-with parameter changes in Ex.~\ref{ex:parameters}.
 %Methods to visualize the dynamics of the particle motion
 %are in Ex.~\ref{ex:animation}.
 %In the animation available in Ref.~\cite{supp1} the magenta dot represents the average velocity of the particle $\langle v_{y} \rangle$ at which the particle in Fig. 1(a) is moving.
@@ -1024,6 +1026,194 @@ with parameter changes in Ex.~\ref{ex:parameters}.
 \label{sec:problems}	% You can label sections for reference
 %\begin{enumerate}
 %\item
+
+%\item
+  \subsection{Exploring Parameters of the Model}
+  \label{ex:parameters}
+
+  A range of oscillation behaviors
+  can be explored by varying the
+  relative strength of the confining landscape
+  and external driving force.
+  For the single driven particle,
+  the hopping patterns are typically characterized
+  by $n_f$ the number of steps forward
+  versus $n_b$ the number of steps backward within a single
+  time period.
+  The total displacement of $(n_f - n_b) \lambda$ %integer steps of
+  is the net hop length.  
+  %the substrate period $$ characterize
+  In Fig.~\ref{fig:0},
+  the particle moves forward through two minima ($n_f = 2$),
+  and does not move backward a full minima ($n_b = 0$).  
+  %such that the pattern
+  %is characterized as $2(2,0)$.
+  In order to achieve
+  backwards hops,
+  the driving parameters must have
+  a ratio of $F^{ac}/F^{dc} > 1$ 
+  and a difference $|F^{ac} - F^{dc}| > A_p$.
+  %which can also produce large forward hops.
+  %INSERT figure with a range of hopping patterns for a run
+  The frequency must be sufficiently low so that 
+  the applied force is large
+  over a sustained time interval,
+  allowing a particle to hop a substrate maxima.
+  {\bf Explore the effect changing the driving frequency on the hopping pattern.}
+
+  Fig.~\ref{fig:hops}
+  shows the effects of lowering the frequency
+  of applied driving force
+  We hold the remaining parameters fixed 
+  to 
+  $F^{dc}=0.1$, $F^{ac}=0.05$, and $A_p = 0.1$.
+  We observe no backward steps 
+  ($n_b = 0$) 
+  across a broad range of frequencies
+  since $F^{dc} - F^{ac}= 0.0$.
+  %is too small to overcome $A_p$.
+  The rate of forward hops 
+  increases as frequency decreases,
+  but in each case the particle
+  hops across one substrate periods as in Fig.~\ref{fig:0}.
+  In Fig.~\ref{fig:hops}(a-b) the particle hopping rate
+  do not match the temporal period of $F^d(t)$
+  due to the high frequency.
+  In Fig.~\ref{fig:hops}(a) the high frequency $f= 0.05$
+  is apparent in the undulations of the particle
+  with a period of $20\tau$.
+  %Due to the high frequency,
+  The particle is trapped between substrate minima.
+  %$y \approx \lambda/2 $ for
+  %a time interval of $400 \tau$.
+  In Fig.~\ref{fig:hops}(b) the frequency $f= 0.022$
+  with a period of $45\tau$
+  arrests the particle between minima,
+  with a hopping rate of seven periods ($320\tau$).
+  At intermediate frequencies 
+  such as $f=0.01$
+  the particles are synchronized so that 
+  the hopping rate matches the driving frequency,
+  as in Fig.~\ref{fig:2}
+  In Fig.~\ref{fig:hops}(c) $f=0.005$
+  the particle hops forward two minima every period of $200\tau$.
+  Low frequencies
+  result in sustained positive motion of a particle.
+  In Fig.~\ref{fig:hops}(e) $f=0.001$
+  the hopping is continuous
+  over the time $100 \tau < t < 400 \tau$,
+  with the cycle repeating 
+  over the period length $1000 \tau$.
+    \begin{figure} %[h!]
+      \centering
+      \includegraphics[width=\columnwidth]{{fig5}.pdf}
+      \caption{
+        Motion of a particle with the same values of $F^{dc} = 0.07$ and $F^{ac} = 0.07$ as Fig.~\ref{fig:0} and decreasing frequency $f=$ (a) $0.05$, 
+        (b) $0.022$, (c) $0.005$ and (d) $0.001$. %where  
+        %the particle wraps the periodic boundary conditions.
+      }
+      \label{fig:hops}
+    \end{figure}
+  %In Fig.~\ref{fig:hops}
+
+  Hopping patterns with backward steps are more difficult
+  to achieve than forward.
+  In Ref.~\cite{Juniper2015}
+  experiments with single colloids 
+  produce 
+  the following
+  combinations of forward and backwards steps:
+  $n_f = 0$ to $6$ for $n_b = 0$,
+  $n_f = 0$ to $5$ for $n_b = -1$,
+  and
+  $n_f = 2$ to $3$ for $n_b = -2$
+  %were realized 
+  by sweeping through
+  a variety of applied forces parameters $F^{dc}$ and $F^{ac}$.
+  %{\bf Find the parameters
+  %that create hopping patterns similar to those in Ref.~\cite{Juniper2015}}.
+  %[well, go on...]
+  
+  In Fig.~\ref{fig:hops_back}
+  we fix $f=0.01$, $F^{dc}=0.07$, and $A_p = 0.1$
+  and increase
+  the amplitude of $F^{ac}$.
+  This causes the number of backwards steps to increase.
+  The number of forward steps also increases
+  due to the increased total positive amplitude of $F^d(t)$.
+  In Fig.~\ref{fig:hops_back}(a) 
+  $F^{ac} = 0.2$ %, $0.3$ and $0.4$.
+  %of the system for our original parameters.
+  the number of backwards steps
+  $n_b = 0$ with $n_f = 4$.
+  In Fig.~\ref{fig:hops_back}(b) $F^{ac} = 0.4$
+  $n_b = 2$ and $n_f = 6$.
+  %In Fig.~\ref{fig:hops_back}(c) 
+  %$n_b = 4$ and $n_f = 10$.
+  In each case the average velocity %net displacement
+  is $\langle v_y \rangle = 4\lambda f$,
+  which can be reproduced over a variety of $F^{ac}$ values.
+
+    \begin{figure} %[h!]
+      \centering
+      \includegraphics[width=\columnwidth]{{fig6}.pdf}
+      \caption{
+        Motion of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:0} and increasing $F^{ac} = $
+        (a) $0.2$ and
+        (b) $0.4$.
+      }
+      \label{fig:hops_back}
+    \end{figure}
+
+    In Fig.~\ref{fig:shapiro}
+    we sweep the constant driving force $F^{dc}$
+    for a fixed amplitude $F^{ac}$ and frequency $f=0.01$.
+    In the high frequency limit,
+    the regions of phase locking
+    are separated by regions of $F^{dc}$
+    that do not phase lock,
+    and appear to increase linearly with increasing $F^{dc}$.
+    The width of the phase locked steps
+    grows with increasing $F^{ac}$,
+    since 
+    the particle may move backwards
+    over a broader range of $F^{dc}$.
+    \begin{figure} %[h!]
+      \centering
+      \includegraphics[width=\columnwidth]{{fig7}.pdf}
+      %\includegraphics[width=\columnwidth]{{fig7_sweep_FDC_vs_vx}.pdf}
+      \caption{
+        $\langle v_y \rangle$ vs. $F^{dc}$ of a particle with
+        $F^{ac}=0.1$ (blue), $F^{ac}=0.2$ (orange),
+        $F^{ac}=0.1$ (green) and $F^{ac}=0.2$ (red)
+        with frequency $f=0.0$.
+        The substrate is as in Fig.~\ref{fig:0}
+        with $A_p = 0.1$.
+      }
+      \label{fig:shapiro}
+    \end{figure}
+  %In Fig.~\ref{fig:hops}
+%\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
+%  \item The Fokker-Planck Equation
+%  \item Aubrey-Kontorova + commensurability
+%  \item nanotribology
+ %   kink motion
+ %   Vanossi et al J.Phys.: Condens. Matter 19 (2007)
+  %\item
+  %\subsection{Visualizing motion}
+  %\label{ex:animation}
+  %Drawing the contour 
+  %The code for generating
+  %a two dimensional colored plot
+  %of the potential landscape
+  %is calculated by evaluating
+  %the analytic function in Eq.~\ref{eq:ysubstrate}
+  %for a grid of values $(x_n,y_n)$.
+  %is included in the supplementary material,
+  %{\it I have python code that does all of this, but I don't have it
+  %  set up to play nice with my new python MD code} 
+    %Also the animation library in python...
+    
 \subsection{Drag Models and Reynolds Numbers.}
 Stokes' law describes the drag force
 $\vec{F}^{lin} = -3 \pi \eta D \vec{v}$ 
@@ -1394,209 +1584,6 @@ moving through a viscous liquid at velocity $\vec{v}$
   %How does Brownian motion affect
   %With driving force reproduce the paper figures...
   %%[there is no way I want to run this with python...]
-
-%\item
-  \subsection{Exploring Parameters of the Model}
-  \label{ex:parameters}
-
-  A range of oscillation behaviors
-  can be explored by varying the
-  relative strength of the confining landscape
-  and external driving force.
-  For the single driven particle,
-  the hopping patterns are typically characterized
-  by $n_f$ the number of steps forward
-  versus $n_b$ the number of steps backward within a single
-  time period.
-  The total displacement of $(n_f - n_b) \lambda$ %integer steps of
-  is the net hop length.  
-  %the substrate period $$ characterize
-  In Fig.~\ref{fig:0},
-  the particle moves forward through two minima ($n_f = 2$),
-  and does not move backward a full minima ($n_b = 0$).  
-  %such that the pattern
-  %is characterized as $2(2,0)$.
-  In order to achieve
-  backwards hops,
-  the driving parameters must have
-  a ratio of $F^{ac}/F^{dc} > 1$ 
-  and a difference $|F^{ac} - F^{dc}| > A_p$.
-  %which can also produce large forward hops.
-  %INSERT figure with a range of hopping patterns for a run
-  The frequency must be sufficiently low so that 
-  the applied force is large
-  over a sustained time interval,
-  allowing a particle to hop a substrate maxima.
-  {\bf Explore the effect changing the driving frequency on the hopping pattern.}
-
-  Fig.~\ref{fig:hops}
-  shows the effects of lowering the frequency
-  of applied driving force
-  We hold the remaining parameters fixed 
-  to 
-  $F^{dc}=0.1$, $F^{ac}=0.05$, and $A_p = 0.1$.
-  We observe no backward steps 
-  ($n_b = 0$) 
-  across a broad range of frequencies
-  since $F^{dc} - F^{ac}= 0.05$
-  is too small to overcome $A_p$.
-  The rate of forward hops 
-  increases as frequency decreases,
-  but in each case the particle
-  hops across two substrate periods as in Fig.~\ref{fig:0}.
-  In Fig.~\ref{fig:hops}(a-b) the particle hopping rate
-  do not match the temporal period of $F^d(t)$
-  due to the high frequency.
-  In Fig.~\ref{fig:hops}(a) the high frequency $f= 0.1$
-  is apparent in the undulations of the particle
-  with a period of $10\tau$.
-  %Due to the high frequency,
-  The particle is trapped between substrate minima $y \approx \lambda/2 $ for
-  a time interval of $400 \tau$.
-  In Fig.~\ref{fig:hops}(b) the frequency $f= 0.05$
-  with a period of $20\tau$
-  arrests the particle between minima,
-  with a hopping rate of $200 \tau$.
-  At intermediate frequencies 
-  such as $f=0.01$
-  the particles are synchronized so that 
-  the hopping rate matches the driving frequency.
-  In Fig.~\ref{fig:hops}(c) $f=0.015$
-  the particle hops forward two minima every $67\tau$.
-  Low frequencies
-  result in sustained positive motion of a particle.
-  In Fig.~\ref{fig:hops}(d) $f=0.005$
-  the particle executes two subsequent forward hops
-  before becoming trapped
-  for the remainder of the period $200 \tau$.
-  In Fig.~\ref{fig:hops}(e) $f=0.001$
-  the hopping is continuous
-  over the simulation time.
-  Here the particle reaches the top edge of the system
-  and wraps back to $y=0$.
-  Given a simulation time of the period length $1000 \tau$,
-  the particle would cease forward motion.
-    \begin{figure} %[h!]
-      \centering
-      \includegraphics[width=\columnwidth]{{parameters_fig5}.pdf}
-      \caption{
-        Motion of a particle with the same values of $F^{dc} = 0.1$ and $F^{ac} = 0.05$ as Fig.~\ref{fig:0} and decreasing frequency $f=$ (a) $0.1$,
-        (b) $0.05$, (c) $0.015$, (d) $0.005$ and (e) $0.001$ where  
-        the particle wraps the periodic boundary conditions.
-      }
-      \label{fig:hops}
-    \end{figure}
-  %In Fig.~\ref{fig:hops}
-
-  Hopping patterns with backward steps are more difficult
-  to achieve than forward.
-  In Ref.\cite{Juniper2015}
-  experiments with single colloids 
-  produce 
-  the following
-  combinations of forward and backwards steps:
-  $n_f = 0$ to $6$ for $n_b = 0$,
-  $n_f = 0$ to $5$ for $n_b = -1$,
-  and
-  $n_f = 2$ to $3$ for $n_b = -2$
-  %were realized 
-  by sweeping through
-  a variety of applied forces parameters $F^{dc}$ and $F^{ac}$.
-  {\bf Find the parameters
-  that create hopping patterns similar to those in Ref.~\cite{Juniper2015}}.
-  %[well, go on...]
-  
-  In Fig.~\ref{fig:hops_back}
-  we explore a hopping pattern not
-  observed in Ref.~\cite{Juniper2015}.
-  This is possible in simulation because
-  our particle readily hops through
-  $2\lambda$.
-  We fix $f=0.01$, $F^{dc}=0.1$, and $A_p = 0.1$
-  and increase
-  the amplitude of $F^{ac}$,
-  which causes the number of backwards steps to increase.
-  The number of forward steps also increases
-  due to the increased total positive amplitude of $F^d(t)$.
-  In Fig.~\ref{fig:hops_back}(a) 
-  $F^{ac} = 0.2$. %, $0.3$ and $0.4$.
-  %of the system for our original parameters.
-  the number of backwards steps
-  $n_b = 0$ with $n_f = 6$.
-  In Fig.~\ref{fig:hops_back}(b) 
-  $n_b = 2$ and $n_f = 8$.
-  In Fig.~\ref{fig:hops_back}(c) 
-  $n_b = 4$ and $n_f = 10$.
-  In each case the average velocity %net displacement
-  is $\langle v_y \rangle = 6\lambda/T$.
-
-    \begin{figure} %[h!]
-      \centering
-      \includegraphics[width=\columnwidth]{{parameters_fig6}.pdf}
-      \caption{
-        Motion of a particle with the same values of $F^{dc}$ and frequency as Fig.~\ref{fig:0} and increasing $F^{ac}$.
-        (a) The particle moves forward six minima with no steps backward.
-        (b) The particle moves forward eight minima with two steps backward.
-        (c) The particle moves forward nine minima with four steps backward.
-      }
-      \label{fig:hops_back}
-    \end{figure}
-
-  In Fig.~\ref{fig:shapiro}
-  we sweep the constant driving force $F^{dc}$
-  for a fixed amplitude $F^{ac}$ and frequency $f=0.1$.
-  In the high frequency limit,
-  the steps are separated
-  by linearly increasing regions.
-  
-  Fig.~\ref{fig:shapiro}(a) shows $F^{ac}= 0.0$ and (b) shows $F^{ac}=0.4$
-  with frequency $f=0.01$.
-  
-  The particle does not phase lock since there is no periodicity to $F^d(t)$,
-  but does exhibit undulations in $\langle v_y \rangle$
-  due to the corregations in the substrate.
-  %WAIT, THAT DOESN'T MAKE SENSE!
-  %WHAT IS WRONG WITH YOUR MD SIMULATION?
-  When $F^{ac}=0.4$, 
-  mode-locked steps appear in $\langle v_y \rangle$ vs. $F^{dc}$.
-  At low values of $F^{dc}$ the particle may move backwards,
-  distorting the steps, as seen below $F^{dc}<0.3$
-  Between $0.3< F^{dc}<0.5$ the system exhibits phase locked steps.
-    \begin{figure} %[h!]
-      \centering
-      \includegraphics[width=\columnwidth]{{fig7}.pdf}
-      %\includegraphics[width=\columnwidth]{{fig7_sweep_FDC_vs_vx}.pdf}
-      \caption{
-        $\langle v_y \rangle$ vs. $F^{dc}$ of a particle with
-        $F^{ac}=0.1$ (blue), $F^{ac}=0.2$ (orange),
-        $F^{ac}=0.1$ (green) and $F^{ac}=0.2$ (red)
-        with frequency $f=0.0$.
-        The substrate is as in Fig.~\ref{fig:0}
-        with $A_p = 0.1$.
-      }
-      \label{fig:shapiro}
-    \end{figure}
-  %In Fig.~\ref{fig:hops}
-%\item Frenkel-Kontorova and competing length scales for low temperature systems where thermal fluctuations are negligible
-%  \item The Fokker-Planck Equation
-%  \item Aubrey-Kontorova + commensurability
-%  \item nanotribology
- %   kink motion
- %   Vanossi et al J.Phys.: Condens. Matter 19 (2007)
-  %\item
-  %\subsection{Visualizing motion}
-  %\label{ex:animation}
-  %Drawing the contour 
-  %The code for generating
-  %a two dimensional colored plot
-  %of the potential landscape
-  %is calculated by evaluating
-  %the analytic function in Eq.~\ref{eq:ysubstrate}
-  %for a grid of values $(x_n,y_n)$.
-  %is included in the supplementary material,
-  %{\it I have python code that does all of this, but I don't have it
-  %  set up to play nice with my new python MD code} 
-  %Also the animation library in python...
 
 \section{Conclusion}
 \label{sec:conclusion}	% You can label sections for reference
