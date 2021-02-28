@@ -179,7 +179,7 @@ Experimental measurements of
 step-by-step dynamics of 
 colloids performing phase-locked motions
 are useful for
-understanding synchronization at a single particle level \cite{Juniper2015}. 
+understanding synchronization at a single particle level \cite{Juniper2015,Juniper2017}. 
 %due to the large size and slow speed of the particles.
 %Individual colloids exhibit 
 %Brownian motion,
@@ -247,7 +247,7 @@ a child on a swing.
  a phenomena referred to as pinning \cite{Reichhardt2017}.
  Above the pinning threshold,
  a particle subject to a constant
- drive force will increase its speed at a rate propotional
+ drive force will increase its speed at a rate proportional
  to the external drive.  
  %and dissipating energy from the system at all driving forces.
  When the applied force varies periodically,
@@ -963,7 +963,7 @@ such as a devil's staircase related to chaotic dynamics \cite{Bak1986}.
   The asymmetry is caused by bias induced by $F^{dc}$.
   In Fig.~\ref{fig:phase}(b)
   with $F^{dc} = 0.07$
-  the phase loop is a symmetric trianglar shape,
+  the phase loop is a symmetric triangular shape,
   indicating a 1:1 match between
   particle motion and velocity consistent with 
   Fig.~\ref{fig:0}(a).
@@ -1094,7 +1094,7 @@ in Ex.~\ref{ex:brownian}.
   such as $f=0.01$
   the particles are synchronized so that 
   the hopping rate matches the driving frequency,
-  as in Fig.~\ref{fig:2}
+  as in Fig.~\ref{fig:0}.
   In Fig.~\ref{fig:hops}(c) $f=0.005$
   the particle hops forward two minima every period of $200\tau$.
   Low frequencies
@@ -1186,7 +1186,7 @@ in Ex.~\ref{ex:brownian}.
         $\langle v_y \rangle$ vs. $F^{dc}$ of a particle with
         $F^{ac}=0.1$ (blue), $F^{ac}=0.2$ (orange),
         $F^{ac}=0.1$ (green) and $F^{ac}=0.2$ (red)
-        with frequency $f=0.0$.
+        with frequency $f=0.01$.
         The substrate is as in Fig.~\ref{fig:0}
         with $A_p = 0.1$.
       }
@@ -1404,7 +1404,7 @@ moving through a viscous liquid at velocity $\vec{v}$
   apparently at random, 
   due to collisions with invisible fluid particles.
   The rate of collisions depends on the temperature, viscosity
-  amd density of 
+  and density of 
   the suspending fluid.
   At higher temperatures
   the increased kinetic energy of particles
@@ -1424,7 +1424,7 @@ moving through a viscous liquid at velocity $\vec{v}$
   can be modeled by applying randomized forces $f^T$
   to the visible particles.
   %\footnote{%In our simulations %np.random.normal
-  We use the normal distristribution from the NumPy random module
+  We use the normal distribution from the NumPy random module
   to generate a series of $f^T_n$ values for
   each integer timestep $n$ \cite{numpy}.
   A normalized random distribution of forces
@@ -1559,7 +1559,7 @@ moving through a viscous liquid at velocity $\vec{v}$
   %as shown in Fig.~\ref{fig:brownian}.
   %Compare your result to the
   %substrate free RMSD.
-  %%[INSERT EXPECTED RESULTS.  presumbably for sufficiently large $T/A_p$ the result collapsed back to standard diffusion.]
+  %%[INSERT EXPECTED RESULTS.  presumably for sufficiently large $T/A_p$ the result collapsed back to standard diffusion.]
 
   %(b)
   For a driven particle,
@@ -1714,8 +1714,6 @@ and the charge and spin of atomic systems.
   %intro to oscillators
 \bibitem{Pikovsky2003} A. Pikovsky, M. Rosenblum, and J. Kurths, {\it Synchronization: A Universal Concept in Nonlinear Sciences} (Cambridge Univ. Press, Cambridge, 2003).
   
-\bibitem{Bennett2002} M. Bennett, M.F. Schatz, H. Rockwood, and K. Wiesenfeld, Huygens' clocks, Proc. Roy. Soc. A {\bf 458}, 563 (2002).
-  
 \bibitem{Okamoto2016} K. Okamoto, A. Kijima, Y. Umeno, and H. Shima. Synchronization in flickering of three-coupled candle flames. Sci Rep {\bf 6}, 36145 (2016)
 
 \bibitem{Arane2009} T. Arane, A. K. R. Musalem and M. Fridman, Coupling between two singing wineglasses, Am. J. Phys. {\bf 77}, 1066 (2009). %; https://doi.org/10.1119/1.3119175
@@ -1738,96 +1736,77 @@ and the charge and spin of atomic systems.
 
   \bibitem{Singer1999} W. Singer. Striving for coherence. Nature, {\bf 397} 391, 1999.
 
-    %technological applications
-    \bibitem{Dutta2019} Dutta, S., Parihar, A., Khanna, A. et al. Programmable coupled oscillators for synchronized locomotion. Nat Commun {\bf 10}, 3299 (2019).
-    
-    %condensed matter intro
-    \bibitem{Bak1986} P. Bak. The Devil's Staircase. Physics Today {\bf 39}, 12, 38 (1986).
+    \bibitem{Bennett2002} M. Bennett, M.F. Schatz, H. Rockwood, and K. Wiesenfeld, Huygens' clocks, Proc. Roy. Soc. A {\bf 458}, 563 (2002).
 
-    \bibitem{Lissajous1857} J. A. Lissajous.  "Mémoire sur l'Etude optique des mouvements vibratoires,"  Annales de chimie et de physique, 3rd series, 51 (1857) 147-232
 
-    \bibitem{Tong1997} E. Y. C. Tong, Lissajous figures, The Physics Teacher {\bf 35}, 491 (1997).
+    \bibitem{Pertsinidis2001} A. Pertsinidis, and X. Ling,  Equilibrium Configurations and Energetics of Point Defects in Two-Dimensional Colloidal Crystals. {\it Phys Rev Lett}, {\bf 87}, 098303 (2001). %https://doi.org/10.1103/PhysRevLett.87.098303
 
-      \bibitem{Pertsinidis2001} A. Pertsinidis, and X. Ling,  Equilibrium Configurations and Energetics of Point Defects in Two-Dimensional Colloidal Crystals. {\it Phys Rev Lett}, {\bf 87}, 098303 (2001). %https://doi.org/10.1103/PhysRevLett.87.098303
+    \bibitem{Juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015); 
+      %\bibitem{Juniper2018}
       
-    \bibitem{Purcell1977} E. M. Purcell, Life at low Reynolds numbers, Am. J. Phys. {\bf 45}, 3–11 (1977).
+    \bibitem{Juniper2017} M. P. N. Juniper,  U. Zimmermann, A. V. Straube, R. Besseling, D. G. A. L. Aarts, H. L{\"o}wen, and R. P. A. Dullens,  Dynamic mode locking in a driven colloidal system: Experiments and theory. New Journal of Physics, 19(1). (2017).  %https://doi.org/10.1088/1367-2630/aa53cd
 
-      %PRACTICAL APPLICATION
-    %\bibitem{Agrawal2013} D. K. Agrawal, J. Woodhouse, and A. A. Seshia, Observation of locked phase dynamics and enhanced frequency stability in synchronized micromechanical oscillators, Physical Review Letters {\bf 111}, 084101 (2013).
+    \bibitem{Ashkin1997} A. Ashkin, Optical trapping and manipulation of neutral particles using lasers, Proc. Natl. Acad. Sci. U.S.A. 94, 4853–4860 (1997).
 
-    \bibitem{Josephson1962} B. D. Josephson, Phys. Letters {\bf 16}, 25 (1962). 
-    \bibitem{Josephson1965} B. D. Josephson, Advan. Phys. {\bf 14}, 419 (1965).
-
-    \bibitem{Stewart1968}  W. C. Stewart, Current-Voltage Characteristics of Josephson Junctions, Appl. Phys. Lett. 12, 277 (1968).
-      
-    \bibitem{Shapiro1963} S. Shapiro, Josephson currents in superconducting tunneling: the effect of microwaves and other observations, Phys. Rev. Lett. 11, 80 (1963).
-
-    \bibitem{Benz1990}  S. P. Benz, M. S. Rzchowski, M. Tinkham, and C. J. Lobb, Fractional giant Shapiro steps and spatially correlated phase motion in 2D Josephson arrays, Phys. Rev. Lett. 64, 693 (1990); D. Dom{\'i}nguez and J. V. Jos{\'e}, Giant Shapiro steps with screening currents, Phys. Rev. Lett. 69,
-514 (1992).
-
-\bibitem{Reichhardt2000} C. Reichhardt, R. T. Scalettar, G. T., Zim{\'a}nyi, N. Gr{\o}nbech-Jensen,  Phase-locking of vortex lattices interacting with periodic pinning.  Phys. Rev. B {\bf 61}, R11914 (2000).
-  
-    \bibitem{Golubov2004} A. A. Golubov, M. Yu. Kupriyanov, and E. Il{\`i}chev. The current-phase relation in Josephson junctions, Rev. Mod. Phys. {\bf 76}, 411 (2004).
-
-      %quote: Phase engineering techniques are used to control the dynamics of long-bosonic Josephson-junction arrays built by linearly coupling Bose-Einstein condensates.
-      
-    \bibitem{Zhang2020} Dengling Zhang, Haibo Qiu, and Antonio Mu{\~n}oz Mateo, Unlocked-relative-phase states in arrays of Bose-Einstein condensates, Phys. Rev. A {\bf 101}, 063623 (2020).
+    \bibitem{Grier2003} D. G. Grier, A revolution in optical manipulation. Nature {\bf 424}, 810 (2003).
 
       %reichhardt review
     \bibitem{Reichhardt2017} C. Reichhardt and C. J. Olson Reichhardt, “Depinning and nonequilibrium dynamic phases of particle assemblies driven over random and ordered substrates: a review,” Rep. Prog. Phys. 80, 026501 (2017).
 
-    \bibitem{Reichhardt2015} C. Reichhardt, and C. J. O. Reichhardt,  Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Phys. Rev. B {\bf 92}, (22). (2015).
+    \bibitem{Reichhardt2015} C. Reichhardt, and C. J. O. Reichhardt,  Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives. Phys. Rev. B {\bf 92}, (22). (2015).      
       
-    \bibitem{Juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, Microscopic dynamics of synchronization in driven colloids. Nat. Commun. 6, 7187 (2015); 
-      %\bibitem{Juniper2018}
-      
-      \bibitem{Juniper2017} Juniper, M. P. N., Zimmermann, U., Straube, A. V., Besseling, R., Aarts, D. G. A. L., L{\"o}wen, H., and Dullens, R. P. A.  Dynamic mode locking in a driven colloidal system: Experiments and theory. New Journal of Physics, 19(1). (2017).  %https://doi.org/10.1088/1367-2630/aa53cd
-      
-    \bibitem{Herrera-Velarde2008} S. Herrera-Velarde and R. Casta{\~n}eda-Priego, Superparamagnetic colloids confined in narrow corrugated substrates, Phys. Rev. E {\bf 77}, 041407 (2008).
+    \bibitem{Purcell1977} E. M. Purcell, Life at low Reynolds numbers, Am. J. Phys. {\bf 45}, 3–11 (1977).
 
-    \bibitem{Herrera-Velarde2007} S. Herrera-Velarde and R. Casta{\~n}eda-Priego, J. Phys.: Condens. Matter 19, 226215 (2007).
-
-    \bibitem{Grier2003} D. G. Grier, A revolution in optical manipulation. Nature {\bf 424}, 810 (2003).
-
-     \bibitem{Ashkin1997} Arthur Ashkin, Optical trapping and manipulation of neutral particles using lasers, Proc. Natl. Acad. Sci. U.S.A. 94, 4853–4860 (1997).
-        
-      \bibitem{Volpe2013} G. Volpe and G. Volpe, Simulation of a Brownian particle in an optical trap, Am. J. Phys. 81 (3), March 2013
-        
-%Lutz  created 1D circular channels by means of scanning optical tweezers in order to avoid the presence of lateral confinement walls
-    \bibitem{Lutz2004} C. Lutz, M. Kollmann, and C. Bechinger, Phys. Rev. Lett. {\bf 93}, 026001 (2004); C. Lutz, M. Kollmann, C. Bechinger, and P. Leiderer, J. Phys.: Condens. Matter {\bf 16}, S4075 (2004).
-
-    \bibitem{Tarucha1995}  S. Tarucha, T. Honda,  T. Saku, Solid State Commun. 1995, 94, 413.
-
-    \bibitem{Gholami2015} A. Gholami, O. Steinbock, V. Zykov, and E. Bodenschatz, Flow-Driven Waves and Phase-Locked Self-Organization in Quasi-One-Dimensional Colonies of Dictyostelium discoideum, Phys. Rev. Lett. {\bf 114}, 018103 (2015).
-
-      %Molecular dynamics references
-
-    \bibitem{Frenkel2001} D. Frenkel and B. Smit, Understanding Molecular Simulation: From Algorithms to Applications (Academic Press, London, 2001).
-      
-    \bibitem{Allen2017} M. P. Allen and D. J. Tildesley, Computer Simulation of Liquids.  Second Edition. Oxford University Press (2017).
+    
+    %condensed matter intro
+    \bibitem{Bak1986} P. Bak. The Devil's Staircase. Physics Today {\bf 39}, 12, 38 (1986).
 
     \bibitem{Taylor2005} J. Taylor,  Classical mechanics. University Science Books (2005).
 
+    \bibitem{Volpe2013} G. Volpe and G. Volpe, Simulation of a Brownian particle in an optical trap, Am. J. Phys. 81 (3), March 2013
+
+    \bibitem{asce}
+      %Non-fundamental constants for water viscosity are available
+      %in several databases including 
+      %  (1) https://ascelibrary.org/doi/pdf/10.1061/9780784408230.ap02
+      IAPWS R12-08, 
+      Release on the IAPWS Formulation 2008 for the Viscosity of Ordinary Water Substance,  September 2008.
+      %IAPWS 2008 -
+      \url{http://www.iapws.org/relguide/viscosity.html}
+      %[citation for these values better than wikipedia] \cite{} %CONFIRM!
+      %density $\rho = 0.9982 g/cm^3$
+
       \bibitem{Newman} M. Newman, Computational Physics, CreateSpace Independent Publishing Platform. (2012).
       
-      \bibitem{supp1} Supplementary videos coming soon.
+   %   \bibitem{supp1} Supplementary videos coming soon.
         %See Figure1.mp4 in appropriate %\url{}
-
-\bibitem{asce}
-  %Non-fundamental constants for water viscosity are available
-  %in several databases including 
-  %  (1) https://ascelibrary.org/doi/pdf/10.1061/9780784408230.ap02
-  IAPWS R12-08, 
-  Release on the IAPWS Formulation 2008 for the Viscosity of Ordinary Water Substance, 
-  September 2008, 
-  %IAPWS 2008 -
-  http://www.iapws.org/relguide/viscosity.html
-  %[citation for these values better than wikipedia] \cite{} %CONFIRM!
-  %density $\rho = 0.9982 g/cm^3$
 
   \bibitem{Einstein1905} A Einstein, Investigations on the Theory of the Brownian Movement,  Dover Publications (1956).
 
     \bibitem{numpy} C.R. Harris, K.J. Millman, S.J. van der Walt, et al. Array programming with NumPy. Nature {\bf 585}, 357 (2020). %DOI: 0.1038/s41586-020-2649-2. (Publisher link).
+      
+           %PRACTICAL APPLICATION
+    %\bibitem{Agrawal2013} D. K. Agrawal, J. Woodhouse, and A. A. Seshia, Observation of locked phase dynamics and enhanced frequency stability in synchronized micromechanical oscillators, Physical Review Letters {\bf 111}, 084101 (2013).
+
+          %technological applications
+    %\bibitem{Dutta2019} Dutta, S., Parihar, A., Khanna, A. et al. Programmable coupled oscillators for synchronized locomotion. Nat Commun {\bf 10}, 3299 (2019).
+
+    %\bibitem{Lissajous1857} J. A. Lissajous.  "Mémoire sur l'Etude optique des mouvements vibratoires,"  Annales de chimie et de physique, 3rd series, 51 (1857) 147-232
+
+    %\bibitem{Tong1997} E. Y. C. Tong, Lissajous figures, The Physics Teacher {\bf 35}, 491 (1997).
+
+    \bibitem{Shapiro1963} S. Shapiro, Josephson currents in superconducting tunneling: the effect of microwaves and other observations, Phys. Rev. Lett. 11, 80 (1963).
+
+    \bibitem{Golubov2004} A. A. Golubov, M. Yu. Kupriyanov, and E. Il{\`i}chev. The current-phase relation in Josephson junctions, Rev. Mod. Phys. {\bf 76}, 411 (2004).
+
+    \bibitem{Benz1990}  S. P. Benz, M. S. Rzchowski, M. Tinkham, and C. J. Lobb, Fractional giant Shapiro steps and spatially correlated phase motion in 2D Josephson arrays, Phys. Rev. Lett. 64, 693 (1990); D. Dom{\'i}nguez and J. V. Jos{\'e}, Giant Shapiro steps with screening currents, Phys. Rev. Lett. 69, 514 (1992).
+
+    \bibitem{Reichhardt2000} C. Reichhardt, R. T. Scalettar, G. T., Zim{\'a}nyi, N. Gr{\o}nbech-Jensen,  Phase-locking of vortex lattices interacting with periodic pinning.  Phys. Rev. B {\bf 61}, R11914 (2000).
+     
+
+      %quote: Phase engineering techniques are used to control the dynamics of long-bosonic Josephson-junction arrays built by linearly coupling Bose-Einstein condensates.
+      
+
     
 %\bibitem{latexsite} \LaTeX\ Project Web Site, \url{<http://www.latex-project.org/>}.
 
@@ -2332,3 +2311,38 @@ steps in the force-velocity relationship.
   in 
   %Measure the position vs. time
   a non-driven colloid for $T/A_p = 3.0$, $3.5$, and $4.0$.
+
+  \bibitem{Josephson1962} B. D. Josephson, Phys. Letters {\bf 16}, 25 (1962). 
+    \bibitem{Josephson1965} B. D. Josephson, Advan. Phys. {\bf 14}, 419 (1965).
+
+    \bibitem{Stewart1968}  W. C. Stewart, Current-Voltage Characteristics of Josephson Junctions, Appl. Phys. Lett. 12, 277 (1968).
+      
+
+
+
+
+    \bibitem{Zhang2020} Dengling Zhang, Haibo Qiu, and Antonio Mu{\~n}oz Mateo, Unlocked-relative-phase states in arrays of Bose-Einstein condensates, Phys. Rev. A {\bf 101}, 063623 (2020).
+      
+      
+    \bibitem{Herrera-Velarde2008} S. Herrera-Velarde and R. Casta{\~n}eda-Priego, Superparamagnetic colloids confined in narrow corrugated substrates, Phys. Rev. E {\bf 77}, 041407 (2008).
+
+    \bibitem{Herrera-Velarde2007} S. Herrera-Velarde and R. Casta{\~n}eda-Priego, J. Phys.: Condens. Matter 19, 226215 (2007).
+
+
+
+    
+        
+
+        
+%Lutz  created 1D circular channels by means of scanning optical tweezers in order to avoid the presence of lateral confinement walls
+    \bibitem{Lutz2004} C. Lutz, M. Kollmann, and C. Bechinger, Phys. Rev. Lett. {\bf 93}, 026001 (2004); C. Lutz, M. Kollmann, C. Bechinger, and P. Leiderer, J. Phys.: Condens. Matter {\bf 16}, S4075 (2004).
+
+    \bibitem{Tarucha1995}  S. Tarucha, T. Honda,  T. Saku, Solid State Commun. 1995, 94, 413.
+
+    \bibitem{Gholami2015} A. Gholami, O. Steinbock, V. Zykov, and E. Bodenschatz, Flow-Driven Waves and Phase-Locked Self-Organization in Quasi-One-Dimensional Colonies of Dictyostelium discoideum, Phys. Rev. Lett. {\bf 114}, 018103 (2015).
+
+      %Molecular dynamics references
+
+    \bibitem{Frenkel2001} D. Frenkel and B. Smit, Understanding Molecular Simulation: From Algorithms to Applications (Academic Press, London, 2001).
+      
+    \bibitem{Allen2017} M. P. Allen and D. J. Tildesley, Computer Simulation of Liquids.  Second Edition. Oxford University Press (2017).
