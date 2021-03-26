@@ -66,7 +66,8 @@ individual oscillators change frequency due
 to external stimuli.\cite{Pikovsky2003}
 The
 flickering patterns of
-candle flames ]xx is a flame an oscillator? xx] mediated by temperature fluctuations,\cite{Okamoto2016}
+candle flames %[DM - the air molecules are oscillating I think xx is a flame an oscillator? xx]
+mediated by temperature fluctuations,\cite{Okamoto2016}
 the vibrations of singing wine glasses interacting 
 through sound waves,\cite{Arane2009}
 and metronomes vibrating through a supporting platform\cite{Jia2015}
@@ -251,7 +252,7 @@ and $U_0$ is a parameter
 The confining force on the particle %[DM removed subscripts] $i$
  is given by
  \begin{equation}
- \vec{F}^{\ell}(\vec{r}) = - \vec \nabla U^{\ell}(\vec{r}).
+ \vec{F}^{\ell}(\vec{r}) = - \vec \nabla U(\vec{r}). %DM removed ^{\ell}
  \label{eq:dudr}
  \end{equation}
  %[xx what does the superscript $\ell$ mean? xx]
@@ -343,9 +344,9 @@ Schematic of the simulation of a single particle
   A particle is 
   subject to competing forces of the landscape and applied driving force.
   (b) The potential energy function
-  along the $y$-axis $U^{\ell}(y)$.  
+  along the $y$-axis $U(y)$.  %DM removed ^{\ell}
   The particle in (a) is shown at the same $y$-position.
-  The slope of $U^{\ell}(y)$ %[DM use the subscripts with the potential, but will move to superscript xx used subscript here xx]
+  The slope of $U(y)$ %[DM removed ^{\ell} use the subscripts with the potential, but will move to superscript xx used subscript here xx]
   is the 
   magnitude of force $\vec{F}^{\ell}$. 
   }
@@ -584,11 +585,17 @@ such as a devil's staircase related to chaotic dynamics.\cite{Bak1986}
   \end{equation}
   For zero landscape force, 
   the phase velocity  is zero when $F^{\rm d}(t) = F^{\rm dc}$.
-  If the velocity
-  is mode-locked to 
-  a spatial location, [xx don't understand meaning of the velocity
-  is mode-locked to 
-  a spatial location xx]
+  %[DM rewrite]
+  If the system
+  is strictly mode-locked,
+  the particle velocity
+  recurs at a particular spatial location, and 
+  %If the velocity
+  %is mode-locked to 
+  %a spatial location,
+  %[xx don't understand meaning of the velocity
+  %is mode-locked to 
+  %a spatial location xx]
   a closed loop appears in  
   phase space. 
   A 1:1 mode appears as a circle or oval. 
@@ -608,10 +615,12 @@ such as a devil's staircase related to chaotic dynamics.\cite{Bak1986}
   for increasing 
   $F^{\rm dc}$, 
   with the remaining parameters fixed as in Fig.~\ref{fig:2_Fd_vy_time}.
- [xx this sentence not helpful, what is plotted is clear: For clarity the plots are normalized by the prefactor $2\pi$.  xx]
-For
+ %[xx this sentence not helpful, what is plotted is clear: For clarity the plots are normalized by the prefactor $2\pi$.  xx]
+  For
   $F^{\rm dc} = 0.04$
-  the phase plot   in Fig.~\ref{fig:4_phase}(a) with is a small [xx not clear what small means? can we eliminate this word? xx] asymmetric curve.
+  the phase plot   in Fig.~\ref{fig:4_phase}(a) with is an
+  % small [xx not clear what small means? can we eliminate this word? xx]
+  asymmetric curve.
   A tail appears
   due to the initial transient
   motion of the particle.
@@ -774,7 +783,8 @@ In Ref.~\onlinecite{Juniper2015}
   $n_b = 2$ and $n_f = 6$.
   In each case the average velocity 
   is $\langle v_y \rangle = 4\lambda f$,
-  which can be reproduced over a variety of $F^{\rm ac}$ values. [xx what is the question? leave something to the reader! xx]
+  which can be reproduced over a variety of $F^{\rm ac}$ values.
+  %[xx what is the question? leave something to the reader! xx]
 
   %----------------------------------------------------------
   \begin{figure} %[h!]
@@ -831,7 +841,8 @@ The motion of a particle with the same values of $F^{\rm dc}$ and frequency as i
   the hopping is continuous
   over the time $100\,\tau < t < 400\,\tau$,
   with the cycle repeating 
-  over the period length $1000\,\tau$. [xx same comment. too much information xx]
+  over the period length $1000\,\tau$.
+  %[xx same comment. too much information xx]
 
   \begin{figure} %[h!]
     \centering
@@ -917,17 +928,17 @@ that the Reynolds number is small.
   is proportional to 
   the sum of the forces on the particle 
   \begin{equation}
-  m_i \vec{a}_i = \sum \vec{F}_i,
+  m \vec{a} = \sum \vec{F},
   \label{eq:n2l}
   \end{equation}
-  where $m_i$ is the
+  where $m$ is the
   inertial mass.  
   The addition of a dissipative force to a dynamical equation 
   of colloid motion 
   is typically modeled
   by a drag force proportional to the particle's velocity
   in the opposite direction of motion 
-  $\vec{F}^{\rm drag} = - \gamma \vec{v}_i$,
+  $\vec{F}^{\rm drag} = - \gamma \vec{v}$,
   where $\gamma = 3 \pi \eta D$ is the drag coefficient
   described in Problem~\ref{ex:reynolds}.
   The ratio of $m/\gamma$ is 
@@ -951,7 +962,7 @@ that the Reynolds number is small.
 Using Newton's second law for
   a small momentum relaxation time, 
   show that a particle confined to a landscape exerting force
-  $F^\ell(\vec{r}_i)$ subject to a time dependent drive $F^{\rm d}(t)$
+  $F^\ell(\vec{r})$ subject to a time dependent drive $F^{\rm d}(t)$
   can be modeled by the equation of motion described in 
   Eq.~\eqref{eq:motion}.
   \end{enumerate}
@@ -959,12 +970,12 @@ Using Newton's second law for
 
 \begin{problem}{Integration methods}
   \label{ex:euler}
-[xx you didn't really discuss other integration algorithms, you just mentioned some names That's OK. Instead you might want to make this problem 1 and guide  readers to write their own program. Then mention that a program is available, which you only mention in the abstract xx]
+%[xx you didn't really discuss other integration algorithms, you just mentioned some names That's OK. Instead you might want to make this problem 1 and guide  readers to write their own program. Then mention that a program is available, which you only mention in the abstract xx]
 
 To calculate the position of the particle we
   numerically integrate the equation of motion using
   the standard definition of velocity
-  $\vec{v}_i = d\vec{r}_i/dt$ 
+  $\vec{v} = d\vec{r}/dt$ 
   using the 
   Euler method. 
   The equation of motion provides
@@ -980,9 +991,11 @@ The Euler method is effective for solving linear ordinary differential  equation
   value for $y$ is calculated as a  solution of a map using
   discrete times 
   $y_{n+1} = y_n + f(t_n,y_n)$.
- Apply the Euler method to our equation
-  of motion [xx refer to specific equation by label xx] to determine  the analytic expression
-for the position of a particle
+  Apply the Euler method to %our equation of motion
+  Eq.~\ref{eq:motion}
+  %[xx refer to specific equation by label xx]
+  to determine  the analytic expression
+  for the position of a particle
   $y_n$ at the $nth$ time step.
     
   The Euler algorithm can be applied to
@@ -1135,28 +1148,26 @@ sometimes exhibiting several hops for $T/A_p = 3.5$.
 
 \end{acknowledgments}
 
-[xx AJP requires last page numbers for papers xx] 
+%%[xx AJP requires last page numbers for papers xx] 
 \begin{thebibliography}{99}
 
-  
   %intro to oscillators
 \bibitem{Pikovsky2003} A. Pikovsky, M. Rosenblum, and J. Kurths, {\it Synchronization: A Universal Concept in Nonlinear Sciences} (Cambridge University Press, Cambridge, 2003).
   
-\bibitem{Okamoto2016} K. Okamoto, A. Kijima, Y. Umeno, and H. Shima, ``Synchronization in flickering of three-coupled candle flames," Sci. Rep. {\bf 6}, 36145--xx (2016).
+\bibitem{Okamoto2016} K. Okamoto, A. Kijima, Y. Umeno, and H. Shima, ``Synchronization in flickering of three-coupled candle flames," Sci. Rep. {\bf 6}, 36145--36155 (2016).
 
-\bibitem{Arane2009} T. Arane, A. K. R. Musalem and M. Fridman, ``Coupling between two singing wineglasses," Am. J. Phys. {\bf 77}, 1066--xx (2009). %; https://doi.org/10.1119/1.3119175
+\bibitem{Arane2009} T. Arane, A. K. R. Musalem and M. Fridman, ``Coupling between two singing wineglasses," Am. J. Phys. {\bf 77}, 1066--1067 (2009). %; https://doi.org/10.1119/1.3119175
   
-\bibitem{Jia2015}  J. Jia, Z. Song, W. Liu, J. Kurths, and J. Xiao, ``Experimental study of the triplet synchronization of coupled nonidentical mechanical metronomes," Sci. Rep. {\bf 5}, 17008--xx (2015).
+\bibitem{Jia2015}  J. Jia, Z. Song, W. Liu, J. Kurths, and J. Xiao, ``Experimental study of the triplet synchronization of coupled nonidentical mechanical metronomes," Sci. Rep. {\bf 5}, 17008--17020 (2015).
 
 %Synchronization of a thermoacoustic oscillator by an external sound source
 %G. Penelet and T. Biwa
 %American Journal of Physics 81, 290 (2013); https://doi.org/10.1119/1.4776189
-  
   %biological examples
   
 \bibitem{Portugal2014} S. Portugal, T. Hubel, J. Fritz, S. Heese, D. Trobe, B. Voelkl, S. Hailes, A. M. Wilson and J. R. Usherwood,   ``Upwash exploitation and downwash avoidance by flap phasing in ibis formation flight," Nature {\bf 505}, 399--402 (2014).
 
-  \bibitem{Aihara2014} I. Aihara, T. Mizumoto, T. Otsuka, H. Awano, K. Nagira, H. G. Okuno and K. Aihara, ``Spatio-temporal dynamics in collective frog choruses examined by mathematical modeling and field observations," Sci. Rep. {\bf 4}, 3891--xx (2014). 
+  \bibitem{Aihara2014} I. Aihara, T. Mizumoto, T. Otsuka, H. Awano, K. Nagira, H. G. Okuno and K. Aihara, ``Spatio-temporal dynamics in collective frog choruses examined by mathematical modeling and field observations," Sci. Rep. {\bf 4}, 3891--3899 (2014). 
 
   \bibitem{Tranchant2016} P. Tranchant, D. T. Vuvan, and I. Peretz, ``Keeping the beat: A Large sample study of bouncing and clapping to music," PLoS ONE 11(7): e0160178. (2016).
 
@@ -1165,13 +1176,13 @@ sometimes exhibiting several hops for $T/A_p = 3.5$.
     %huygens clocks
   \bibitem{Singer1999} W. Singer, ``Striving for coherence,"  Nature {\bf 397} 391--393 (1999).
 
-  \bibitem{Bennett2002} M. Bennett, M. F. Schatz, H. Rockwood, and K. Wiesenfeld, ``Huygens' clocks," Proc. Roy. Soc. A {\bf 458}, 563--xx (2002).
+  \bibitem{Bennett2002} M. Bennett, M. F. Schatz, H. Rockwood, and K. Wiesenfeld, ``Huygens' clocks," Proc. Roy. Soc. A {\bf 458}, 563–579 (2002).
 
     
   %colloids
-  \bibitem{Pertsinidis2001} A. Pertsinidis and X. Ling,  ``Equilibrium configurations and energetics of point defects in two-dimensional colloidal crystals," Phys Rev. Lett.  {\bf 87}, 098303-1--xx (2001). %https://doi.org/10.1103/PhysRevLett.87.098303
+  \bibitem{Pertsinidis2001} A. Pertsinidis and X. Ling,  ``Equilibrium configurations and energetics of point defects in two-dimensional colloidal crystals," Phys Rev. Lett.  {\bf 87}, 098303-1--4 (2001). %https://doi.org/10.1103/PhysRevLett.87.098303
 
-  \bibitem{Juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, ``Microscopic dynamics of synchronization in driven colloids," Nat. Commun. 6, 7187--xx (2015); 
+  \bibitem{Juniper2015} M. P. N. Juniper, A. V. Straube, R. Besseling, D. G. A. L. Aarts, and R. P. A. Dullens, ``Microscopic dynamics of synchronization in driven colloids," Nat. Commun. 6, 7187--7194 (2015); 
       %\bibitem{Juniper2018}
       
   \bibitem{Juniper2017} M. P. N. Juniper,  U. Zimmermann, A. V. Straube, R. Besseling, D. G. A. L. Aarts, H. L{\"o}wen, and R. P. A. Dullens,  ``Dynamic mode locking in a driven colloidal system: Experiments and theory," New J. Phys.{\bf 19} (1), 013010-1--14 (2017).  %https://doi.org/10.1088/1367-2630/aa53cd
@@ -1183,13 +1194,13 @@ sometimes exhibiting several hops for $T/A_p = 3.5$.
   %general particle on washboard
   \bibitem{Reichhardt2017} C. Reichhardt and C. J. Olson Reichhardt, ``Depinning and nonequilibrium dynamic phases of particle assemblies driven over random and ordered substrates: a review," Rep. Prog. Phys. {\bf 80}, 026501 (2017).
 
-  \bibitem{Reichhardt2015} C. Reichhardt, and C. J. O. Reichhardt,  ``Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives," Phys. Rev. B {\bf 92} (22), 224432-1--xx (2015).      
+  \bibitem{Reichhardt2015} C. Reichhardt, and C. J. O. Reichhardt,  ``Shapiro steps for skyrmion motion on a washboard potential with longitudinal and transverse ac drives," Phys. Rev. B {\bf 92} (22), 224432-1--12 (2015).      
 
   %overdamped justification
   \bibitem{Purcell1977} E. M. Purcell, ``Life at low Reynolds numbers,"  Am. J. Phys. {\bf 45}, 3--11 (1977).
   
   %chaos!
-  \bibitem{Bak1986} P. Bak. ``The Devil's staircase," Physics Today {\bf 39}(12), 38--xx (1986).
+  \bibitem{Bak1986} P. Bak. ``The Devil's staircase," Physics Today {\bf 39}(12), 38--45 (1986).
 
   %overdamped justification
   \bibitem{Taylor2005} J. Taylor,  {\it Classical Mechanics} (University Science Books, 2005).
@@ -1215,14 +1226,14 @@ sometimes exhibiting several hops for $T/A_p = 3.5$.
     %Brownian motion!
   \bibitem{Einstein1905} A. Einstein, {\it Investigations on the Theory of the Brownian Movement}  (Dover Publications, 1956).
 
-    \bibitem{numpy} C. R. Harris, K. J. Millman, S. J. van der Walt et al.. ``Array programming with NumPy,"  Nature {\bf 585}, 357--xx (2020). %DOI: 0.1038/s41586-020-2649-2. (Publisher link).
+    \bibitem{numpy} C. R. Harris, K. J. Millman, S. J. van der Walt et al.. ``Array programming with NumPy,"  Nature {\bf 585}, 357--362 (2020). %DOI: 0.1038/s41586-020-2649-2. (Publisher link).
       
    %Josephson Junctions and other condensed matter applications
-    \bibitem{Shapiro1963} S. Shapiro, ``Josephson currents in superconducting tunneling: The effect of microwaves and other observations," Phys. Rev. Lett. {\bf 11}, 80--xx (1963).
+    \bibitem{Shapiro1963} S. Shapiro, ``Josephson currents in superconducting tunneling: The effect of microwaves and other observations," Phys. Rev. Lett. {\bf 11}, 80--82 (1963).
 
-    \bibitem{Golubov2004} A. A. Golubov, M. Yu. Kupriyanov, and E. Il{\`i}chev, ``The current-phase relation in Josephson junctions," Rev. Mod. Phys. {\bf 76}, 411--xx (2004).
+    \bibitem{Golubov2004} A. A. Golubov, M. Yu. Kupriyanov, and E. Il{\`i}chev, ``The current-phase relation in Josephson junctions," Rev. Mod. Phys. {\bf 76}, 411--469 (2004).
 
-    \bibitem{Benz1990}  S. P. Benz, M. S. Rzchowski, M. Tinkham, and C. J. Lobb, ``Fractional giant Shapiro steps and spatially correlated phase motion in 2D Josephson arrays," Phys. Rev. Lett. {\bf 64}, 693--xx (1990); D. Dom{\'i}nguez and J. V. Jos{\'e}, ``Giant Shapiro steps with screening currents," Phys. Rev. Lett. {\bf 69}, 514--xx (1992).
+    \bibitem{Benz1990}  S. P. Benz, M. S. Rzchowski, M. Tinkham, and C. J. Lobb, ``Fractional giant Shapiro steps and spatially correlated phase motion in 2D Josephson arrays," Phys. Rev. Lett. {\bf 64}, 693--696 (1990); D. Dom{\'i}nguez and J. V. Jos{\'e}, ``Giant Shapiro steps with screening currents," Phys. Rev. Lett. {\bf 69}, 514--517 (1992).
 
     \bibitem{Reichhardt2000} C. Reichhardt, R. T. Scalettar, G. T. Zim{\'a}nyi, and N. Gr{\o}nbech-Jensen,  ``Phase-locking of vortex lattices interacting with periodic pinning,"  Phys. Rev. B {\bf 61}, R11914 (2000).
      
