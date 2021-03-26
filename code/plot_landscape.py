@@ -48,7 +48,7 @@ def add_contour(ax,ax2,L,N):
     Z = Z_mag*np.cos(2*np.pi*(Y)/a_p) 
 
     #blue are minima, red are maxima
-    cmap=cm.coolwarm #_r
+    cmap=cm.Greys #warm #_r
 
     #alpha is the degree of transparency, again, set by what looks good.
 
@@ -118,8 +118,8 @@ if __name__ == "__main__":
     scatter1=ax1.scatter(xp,yp,edgecolor='k',s=200)
     scatter2=ax2.scatter(zp,yp,edgecolor='k',s=200)
 
-    ax2.annotate("", xytext=(zp, yp), xy=(zf, yf), arrowprops=dict(shrink=0.05,color='magenta')) #arrowstyle="<-",
-    ax2.annotate(r"$|\mathrm{\vec{F}^{\ell}}|$", xy=(0+0.02, Sy/2), ha='center', va='center',color='black') 
+    ax2.annotate("", xytext=(zp, yp), xy=(zf, yf), arrowprops=dict(shrink=0.05,color='black')) #arrowstyle="<-",
+    ax2.annotate(r"$|\mathrm{\vec{F}_{\ell}}|$", xy=(0+0.02, Sy/2), ha='center', va='center',color='black') 
 
     #add annotation showing period
     ax2.annotate(r'$\lambda$', xy=(-0.9*Z_mag,2*Sy/3), ha='center', va='center')
@@ -134,11 +134,11 @@ if __name__ == "__main__":
                  xycoords='data', textcoords='data',
                  arrowprops={'arrowstyle': '<|-|>','color':"black"})
     
-    ax1.annotate("", xy=(xp, yp-4), xytext=(xp, yp), arrowprops=dict(color='magenta', shrink=0.05),ha="center")
-    ax1.annotate(r"$\mathrm{\vec{F}^{\ell}}$", xy=(xp+1, yp-6),ha="left",va="center")
+    ax1.annotate("", xy=(xp, yp-4), xytext=(xp, yp), arrowprops=dict(color='black', shrink=0.05),ha="center")
+    ax1.annotate(r"$\mathrm{\vec{F}_{\ell}}$", xy=(xp+1, yp-6),ha="left",va="center")
     
-    ax1.annotate("", xy=(xp, yp+8), xytext=(xp, yp), arrowprops=dict(color='gray', shrink=0.05), ha="center")
-    ax1.annotate(r"$\mathrm{\vec{F}^{d}(t)}$",  xy=(xp+1, yp+8),ha="left")
+    ax1.annotate("", xy=(xp, yp+8), xytext=(xp, yp), arrowprops=dict(color='black', shrink=0.05), ha="center")
+    ax1.annotate(r"$\mathrm{\vec{F}_{d}(t)}$",  xy=(xp+1, yp+8),ha="left")
 
     ax1.text(0.03,0.94,"(a)",transform = ax1.transAxes)
     ax2.text(0.03,0.94,"(b)",transform = ax2.transAxes)
@@ -151,7 +151,7 @@ if __name__ == "__main__":
 
     #configure and save the image
     fig.tight_layout(pad=0.5) #h_pad=-0.5,w_pad=1.0,pad=0.5)
-    image_test_name = "landscape.pdf"
+    image_test_name = "fig1.pdf"
     plt.savefig(image_test_name)
 
     #sys.exit()
