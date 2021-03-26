@@ -54,7 +54,7 @@ def add_contour(ax,ax2,L,N):
 
     cset = ax.contourf(X, Y, Z, cmap=cmap,alpha=0.5)
 
-    ax2.plot(Z,Y)
+    ax2.plot(Z,Y,"k")
     ax2.set_xlabel(r"U(y)",labelpad=-20)
     #ax2.set_ylabel(r"y",rotation='horizontal',ha='right')
 
@@ -115,8 +115,8 @@ if __name__ == "__main__":
     yf=yp - slope*Z_mag/1.8 - 0.6
     
 
-    scatter1=ax1.scatter(xp,yp,edgecolor='k',s=200)
-    scatter2=ax2.scatter(zp,yp,edgecolor='k',s=200)
+    scatter1=ax1.scatter(xp,yp,edgecolor='k',c='k',s=200)
+    scatter2=ax2.scatter(zp,yp,edgecolor='k',c='k',s=200)
 
     ax2.annotate("", xytext=(zp, yp), xy=(zf, yf), arrowprops=dict(shrink=0.05,color='black')) #arrowstyle="<-",
     ax2.annotate(r"$|\mathrm{\vec{F}_{\ell}}|$", xy=(0+0.02, Sy/2), ha='center', va='center',color='black') 
