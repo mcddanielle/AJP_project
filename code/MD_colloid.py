@@ -6,6 +6,8 @@ Supplementary Material for
 Molecular dynamics simulation of synchronization in driven particles
 American Journal of Physics
 
+Makes Figures 2-9 using a flag to select
+
 Danielle McDermott
 Tiare Guerrero
 '''
@@ -42,10 +44,11 @@ def add_contour(ax,L,N):
     Adds the washboard in the y-direction.  
     Hardwired for a single parameter set.    
     '''
-
+    
+    #locally the period is 1 since the y-axis is normalized by lambda
     a_p = 1
 
-    #assuming Tiare's trough system, so we won't want to cover the entire range
+    #assuming a trough system, so we won't want to cover the entire range
     X = np.arange(100, 200, 0.1)
     Y = np.arange(L[0], L[1]+0.1, 0.1)
     X, Y = np.meshgrid(X, Y)
@@ -61,7 +64,7 @@ def add_contour(ax,L,N):
     Z = Z_mag*np.cos(2*np.pi*(Y)/a_p) 
 
     #blue are minima, red are maxima
-    cmap=cm.coolwarm #_r
+    cmap=cm.Greys #warm #_r
 
     #alpha is the degree of transparency, again, set by what looks good.
 
@@ -114,7 +117,7 @@ def landscape_force(y,parameters):
     period = parameters['period']
     AP = parameters['AP']
     
-    return -AP*np.sin(2*np.pi*y/period)
+    return AP*np.sin(2*np.pi*y/period)
 
 ###################################################################
 def external_drive(time, parameters):
@@ -176,7 +179,7 @@ def md_step(y, int_time, avg_vy, parameters, ft=0):
         avg_vy = average_velocity(int_time, vy, avg_vy, parameters)
     else:
         avg_vy = vy
-        print(vy, avg_vy)
+        #print(vy, avg_vy)
 
     #calculate the new position
     y += vy*dt
@@ -257,9 +260,9 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
     # them.
     ax3 = plt.axes([0,0,1,1])
     # Manually set the position and relative size of the inset axes within ax1
-    ip = InsetPosition(ax2, [0.64,0.18,0.3,0.4])
+    ip = InsetPosition(ax2, [0.62,0.18,0.33,0.42])
     ax3.set_axes_locator(ip)
-    L=[0.9,2.3]
+    L=[1.4,2.75]
     N=1
     add_contour(ax3,L,N)
     
@@ -272,40 +275,32 @@ def plot_force_position_vs_time(time_data,FDC_data,y_data,p):
 
     #plot the force vs. time data
     #ax1.plot(time_data,FDC_data,label="F$^{dc}$")
-    ax1.plot(time_data,F_drive,label="F$^d$(t)",lw=5)
+    ax1.plot(time_data,F_drive,label="F$_d$(t)",lw=5)
     
     #plot normalized position by period vs. time
     ax2.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
     ax3.plot(time_data,y_data/period,lw=5) #,'o--') #,markevery=100)
 
     #set all the labels, ax1 and ax2 have the same time axes
-    ax1.set_ylabel(r"$F^d(t)$")
+    ax1.set_ylabel(r"$F_d(t)$")
     ax2.set_xlabel(r"time ($\tau$)")
     ax2.set_ylabel(r"y/$\lambda$")
     ax3.set_xlabel(r"time",backgroundcolor="white") #,y=10)
     ax3.set_ylabel(r"y/$\lambda$")
     ax3.xaxis.set_label_coords(0.5,-0.05)
     
-    #ax1.set_xticklabels([])
-    #ax1.xaxis.set_ticklabels([])
     plt.setp(ax1.get_xticklabels(), visible=False)
     
     ax1.set_xlim(0,time_data[-1]+1)
     ax2.set_xlim(0,time_data[-1]+1)
     ax3.set_xlim(100,200)
-    ax3.set_ylim(0.9,2.3)
-    #ax3.set_xticks([])
-    #ax3.set_yticks([])
+    ax3.set_ylim(*L) #1.5,2.9)
 
     ax1.text(-0.19,0.86,"(a)",transform = ax1.transAxes,backgroundcolor="white")
-    ax2.text(-0.19,0.86,"(b)",transform = ax2.transAxes) #,backgroundcolor="white")
+    ax2.text(-0.19,0.86,"(b)",transform = ax2.transAxes) 
 
-    #ax2.yaxis.set_minor_locator(AutoMinorLocator(2))
-    #ax2.xaxis.set_minor_locator(AutoMinorLocator(1))
-    #ax1.xaxis.set_minor_locator(AutoMinorLocator(1))
     ax2.grid(axis='both',which='both')
     ax1.grid(axis='both',which='both')
-
         
     plt.tight_layout(pad=0.1) #,h_pad=-0.3)
     plt.savefig(parameters['filename'])
@@ -352,10 +347,6 @@ def plot_phase(ax,y_data,avg_vy_data,p):
 
     ax.set_xlabel(r"$\phi_y(t) / (2\pi)$")
     ax.set_ylabel(r"$\dot{\phi}_y(t) / (2\pi)$")
-    #ax.yaxis.set_label_coords(-0.2, 0.5)
-
-    #ax1.set_xticks([])
-    #ax.set_xlim(0.8,2.75) #time_data[-1]+1)
 
     ax.set_ylim(-0.04,0.1) #time_data[-1]+1)
     
@@ -525,10 +516,13 @@ def brownian_particle(parameters,ax):
     
 #########################################################################
 def set_parameters():
-    '''Hardcode simulation parameters here.  In a compiled language like C this would be in a separate file that would be read into the code at execution time, so you wouldn't need to recompile to change the parameters
+    '''set simulation parameters here.  
+
+    use a python dict (i.e. a hash to organize the parameters).
+    In a compiled language like C this would be in a separate file that would be read into the code at execution time, so you wouldn't need to recompile to change the parameters
     '''
 
-    #use a python dict (i.e. a hash to organize the parameters)
+    #declare the dictionary
     dict={}
 
     dict['dt'] = 0.1 #005 #timestep in simulation units
@@ -542,7 +536,7 @@ def set_parameters():
     dict['writemovietime']=1   #interval to write data to arrays for plotting
 
     dict['Sy']=46+2./3.         #height of system
-    #dict['Sx']=40               #width of system
+    #dict['Sx']=40              #width of system
     dict['vy0'] = 0.0       #initial velocity of particle
     dict['time0'] = 0       #initial time in integer timesteps
 
@@ -559,13 +553,12 @@ def set_parameters():
     
     dict['F_DC'] = 0.07
     dict['drop'] = dict['maxtime']   #integer timesteps to "ramp" the DC force
-        
-    dict['decifactor'] = 1      #decimation factor integer timesteps to average force - phasing out - overkill for this system
+
+    #decimation factor integer timesteps to average force 
+    #phasing out - overkill for this system
+    dict['decifactor'] = 1      
 
    
-    
-    
-
     return dict
 
 #-------------------------------------------------------------------
@@ -575,7 +568,7 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #figures 2 to 8
-    make_fig = 6
+    make_fig = 2
 
     parameters['filename']="fig%d.pdf"%(make_fig)
 
@@ -662,7 +655,6 @@ if __name__ == "__main__":
             #parameters['freq']=0.1
 
             F_AC = [0.0, 0.07]
-
         
         elif make_fig == 7:
 
@@ -694,13 +686,15 @@ if __name__ == "__main__":
                 
                 #run a single MD simulation for a set of parameters
                 avg_vy_data[i] = single_particle(parameters,plot="y-velocity")            
-
             #normalize <vy> so you can count step number
             avg_vy_data /= (parameters['freq']*parameters['period'])
             #print(avg_vy_data)
             
             #plot <vy> vs F_dc
-            ax1.plot(Fdc_data,avg_vy_data,linewidth=2,label=r"%1.2f"%(F))
+            if F == 0.0:
+                ax1.plot(Fdc_data,avg_vy_data,"--",linewidth=2,label=r"%1.2f"%(F))
+            else:
+                ax1.plot(Fdc_data,avg_vy_data,linewidth=2,label=r"%1.2f"%(F))
 
             #make the phase plot locations
             if make_fig == 3 and F > 0:
@@ -712,9 +706,9 @@ if __name__ == "__main__":
         ax1.set_ylim(avg_vy_data[0]-0.1,avg_vy_data[-1])
 
         #plt.xlim(155,157)
-        ax1.set_xlabel("F$^{dc}$")
+        ax1.set_xlabel("F$_{dc}$")
         ax1.set_ylabel(r"$\langle$v$_y \rangle / \lambda f $")
-        ax1.legend(loc='best',fontsize=20,numpoints=3,borderpad=0.1,handletextpad=0.2,title="F$^{ac}$")
+        ax1.legend(loc='best',fontsize=20,numpoints=3,borderpad=0.1,handletextpad=0.2,title="F$_{ac}$")
                     
         plt.tight_layout(pad=0.2)
         plt.savefig(parameters['filename'])
@@ -787,7 +781,7 @@ if __name__ == "__main__":
             #we will sweep through the following independent variable
             F_AC = [0.2, 0.4]
             ind_var = F_AC
-            str_iv=" $F^{ac}$=%1.2f"
+            str_iv=" $F_{ac}$=%1.2f"
             #parameters['freq'] = 0.1
             #parameters['F_DC'] = 0.1
 
@@ -857,7 +851,7 @@ def plot_velocity_force(avg_FDC_data,avg_vy_data,parameters): #velocity_data,FDC
     '''
     
     ax1 = parameters['ax']
-    ax1.plot(avg_FDC_data,avg_vy_data,'.') #,label="F$^{dc}$")
+    ax1.plot(avg_FDC_data,avg_vy_data,'.') #,label="F$_{dc}$")
 
 
     return 
