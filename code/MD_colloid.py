@@ -142,7 +142,8 @@ def external_drive(time, parameters):
 
 #####################################################################
 def md_step(y, int_time, avg_vy, parameters, ft=0):
-    '''
+    '''Calculate net force and integrate eq. of motion.
+
     Required Arguments:
     y (float): position of particle
     int_time (int): count of MD steps
@@ -357,7 +358,12 @@ def single_particle(parameters,plot="y-position"):
     '''Run MD simulation for a single particle driven across a washboard potential with an oscillating driving force
 
     Required argument(s): 
-    p type: dictionary
+    parameters - all constants of the simulation 
+    type: dictionary
+
+    Optional arguments(s):
+    plot - flag to select data handling/plotting scheme
+    type: string
     '''
 
     #define the constants (parameters and initial conditions)
@@ -516,7 +522,7 @@ def brownian_particle(parameters,ax):
     
 #########################################################################
 def set_parameters():
-    '''set simulation parameters here.  
+    '''set simulation parameters .  
 
     use a python dict (i.e. a hash to organize the parameters).
     In a compiled language like C this would be in a separate file that would be read into the code at execution time, so you wouldn't need to recompile to change the parameters
@@ -525,11 +531,11 @@ def set_parameters():
     #declare the dictionary
     dict={}
 
-    dict['dt'] = 0.1 #005 #timestep in simulation units
+    dict['dt'] = 0.1 #timestep in simulation units
 
     #control the oscillating component of driving force
-    dict['F_AC'] = 0.07 #0.1              #amplitude of force oscillation
-    dict['freq'] = 0.01              #frequence of force osillation
+    dict['F_AC'] = 0.07 #amplitude of force oscillation
+    dict['freq'] = 0.01 #frequency of force oscillation
     
     #integer time steps
     dict['maxtime']=int(40/dict['freq'])        #total time steps in simulation
@@ -564,6 +570,7 @@ def set_parameters():
 #-------------------------------------------------------------------
 if __name__ == "__main__":
 
+    #will pass the parameters dict to subroutines to read constants
     parameters = set_parameters()
 
     #select which figure in the AJP you would like to make
@@ -582,14 +589,10 @@ if __name__ == "__main__":
         #run a single MD simulation for a set of parameters
         if make_fig == 2:
 
-            #parameters['maxtime'] = 40
-            #parameters['F_DC'] = 0.125 #FDC[k]
-
             single_particle(parameters)
             
         elif make_fig == 4:
             #phase figure!!!!
-            #parameters['drop'] = 4000   
             parameters['maxtime'] = 2000
 
             #place in a minima away from the PBC wrap
@@ -608,6 +611,8 @@ if __name__ == "__main__":
 
             #k counts up with # of panels
             k=0
+
+            #loop through FDC values on a 2x2 grid
             for i in range(2):
                 for j in range(2):
                     ax = fig.add_subplot(gs[i,j])  #scatter plot of particles
@@ -630,7 +635,6 @@ if __name__ == "__main__":
 
                     k+=1
 
-            
             plt.tight_layout(pad=0.25,h_pad=-0.3,w_pad=-0.3)
             plt.savefig(parameters['filename'])
 
