@@ -26,25 +26,32 @@ This flag will choose simulation settings.  Then simply run
 
 ```python3 MD_colloid.py```
 
-#-------------------------------------------------------------------
-plot_landscape.py
-creates Figure 1 (fig1.pdf), which is a schematic birds eye view of the system.
+### About figures in manuscript (and codes)
+----------
+```plot_landscape.py```
+
+#### Figure 1
+
+(fig1.pdf) which is a schematic birds eye view of the system.
 
 two panels, side by side
 (a) birds eye view of Sy by Sx for a substrate period of Sy/3
 (b) U(y) for the same period, calculation of force Fp = -grad(U)
 
-to fix - could downgrade the "D" to "d" in F^D(t) (and all in text)
-
 the magnitude of U0 / Ap is scaled for viewing rather than simulation.
 
-#-------------------------------------------------------------------
-MD_colloid.py performs the simulations discussed in Section IIIA of the paper.  the A single colloid on a corrugated or washboard potential/substrate is subject to a periodic applied driving force.  An animation of the motion and the system properties are plotted.
+-------------
 
-#-----------------------------------------------------------------
-Figure 2 - basic dynamics
+```MD_colloid.py```
+
+performs the simulations discussed in the paper.  A single colloid on a corrugated or washboard potential/substrate is subject to a periodic applied driving force.  System properties are plotted.
+
+-------------
+#### Figure 2
+
+(fig2.pdf) basic dynamics
 (a) driving force versus time
-(b) y/lambda versus time
+(b) y/lambda versus time, where y is the particle position and lambda is the substrate period
 
 parameters
 AP  = 0.1
@@ -53,12 +60,14 @@ FDC = 0.1
 f = 0.01
 
 dt = 0.1
-maxtime = 4000
+maxtime = 4000 (integer timesteps)
 
 It this frequency and driving regime the steps are fractional.
 
-#-----------------------------------------------------------------
-Figure 3 - sweep FDC for fixed FAC
+---------------
+#### Figure 3 
+
+(fig3.pdf) sweep FDC for fixed FAC
 
 parameters
 AP  = 0.1
@@ -67,42 +76,42 @@ AP  = 0.1
 FDC = 0.0 - 0.3
 f = 0.01
 
-#-----------------------------------------------------------------
-Figures 4 - phase variables
+---------------
+#### Figures 4 
+
+(fig4.pdf) phase variables
 
 parameters
-(a)
+
 AP  = 0.1
 FAC = 0.05
-FDC = 0.1
 f = 0.01
-
-(b) ...
-
 dt = 0.1
 maxtime = 400
 
-#-----------------------------------------------------------------
+(a) FDC = 0.04
+(b) FDC = 0.07
+(c) FDC = 0.1
+(d) FDC = 0.125
 
-Solutions to Exercises
+----------------
 
-Exercise 1
+### About solutions to exercises
 
-refers to the complete MD code contained within MD_colloid.py
+#### Problem 1 - Write your own MD code
 
-#-----------------------------------------------------------------
-Fig 5 - Brownian
+refers to the complete MD code contained within ```MD_colloid.py```
 
-AP  = 0.1
-FAC = 0.0
-FDC = 0.0
-T/Ap = 3, 3.5, 4
+--------------
+#### Problem 2 - Exploring model parameters
 
-maxtime = 
-writemovietime =
+refers to Figures 5-7 (fig5.pdf, fig6.pdf, fig7.pdf) which may be generated with line 578 in MD_colloid,py
 
-#-----------------------------------------------------------------
-Figures 6 - variable frequency
+---------------
+##### Figure 5 - variable FAC
+
+---------------
+##### Figure 6 - variable frequency
 
 parameters
 AP  = 0.1
@@ -114,12 +123,33 @@ f = 0.1, 0.05, 0.015, 0.005, 0.001
 dt = 0.1
 maxtime = 400
 
-#-----------------------------------------------------------------
-Figure 7 - variable FAC
+------------------
+##### Figure 7 - variable FAC
 
-#-----------------------------------------------------------------
-Figure 8 - variable FAC vs. FDC - as in juniper?
 
-#-----------------------------------------------------------------
-Figure 9 - step width?
+---------------
+#### Problem 3 - Drag models and Reynolds numbers
+
+simple analytical calculation.  see ```calc_Reynolds.py``` for solution.
+
+---------------
+#### Problem 4 - Equation of motion
+
+simple analytical calculation.
+
+------------------
+#### Problem 5 - Brownian motion
+
+##### Figure 8 
+
+AP  = 0.1
+FAC = 0.0
+FDC = 0.0
+T/Ap = 3, 3.5, 4
+
+maxtime = 
+writemovietime =
+
+-------------------
+
 
