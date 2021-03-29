@@ -1,15 +1,16 @@
 
-## Molecular dynamics simulation of synchronization in driven particles
+## Molecular dynamics simulation of a driven synchronized particle
 ### American Journal of Physics
 
 Danielle McDermott
 Tiare Guerrero
 
-The goal of this project is to explore the rudimentary mechanism of synchronization for a single particle moving across a corrugated landscape.  The particle is subject to an applied driving force with controllable magitude and frequency parameters.  The response of the particle to the applied drive depends on the height and spacing of the corrugations.
+A repo with supplementary material for a manuscript cited above.  The goal of this project is to explore the rudimentary mechanism of synchronization for a single particle moving across a corrugated landscape.  The particle is subject to an applied driving force with controllable magitude and frequency parameters.  The response of the particle to the applied drive depends on the height and spacing of the corrugations.
 
 manuscript:
 
 A detailed description of the physics suitable for publication in AJP
+(replace directory with link to published article and reconfigure directory structure)
 
 code:
 

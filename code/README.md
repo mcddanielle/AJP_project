@@ -1,5 +1,5 @@
 
-## Molecular dynamics simulation of synchronization in driven particles
+## Molecular dynamics simulation of a driven synchronized particle
 ### American Journal of Physics
 
 Danielle McDermott
@@ -12,9 +12,23 @@ https://www.anaconda.com/
 
 The programs use common Python packages including numpy and matplotlib.  These come preinstalled in the Anaconda interpreter, but may need to be installed with another interpreter.
 
+### Getting started
+
+To create Figure 1 (fig1.pdf), simply run the following command
+
+```python3 plot_landscape.py```
+
+To create Figures 2-4, set line 578 in MD_colloid.py
+
+```make_fig = 4```
+
+This flag will choose simulation settings.  Then simply run 
+
+```python3 MD_colloid.py```
+
 #-------------------------------------------------------------------
 plot_landscape.py
-creates Figure 1, which is a schematic birds eye view of the system.
+creates Figure 1 (fig1.pdf), which is a schematic birds eye view of the system.
 
 two panels, side by side
 (a) birds eye view of Sy by Sx for a substrate period of Sy/3
@@ -44,7 +58,17 @@ maxtime = 4000
 It this frequency and driving regime the steps are fractional.
 
 #-----------------------------------------------------------------
-Figure 3 - phase variables
+Figure 3 - sweep FDC for fixed FAC
+
+parameters
+AP  = 0.1
+(a) FAC = 0.0
+(b) FAC = 0.05
+FDC = 0.0 - 0.3
+f = 0.01
+
+#-----------------------------------------------------------------
+Figures 4 - phase variables
 
 parameters
 (a)
@@ -59,14 +83,12 @@ dt = 0.1
 maxtime = 400
 
 #-----------------------------------------------------------------
-Figures 4 - sweep FDC for fixed FAC
 
-parameters
-AP  = 0.1
-(a) FAC = 0.0
-(b) FAC = 0.05
-FDC = 0.0 - 0.3
-f = 0.01
+Solutions to Exercises
+
+Exercise 1
+
+refers to the complete MD code contained within MD_colloid.py
 
 #-----------------------------------------------------------------
 Fig 5 - Brownian
