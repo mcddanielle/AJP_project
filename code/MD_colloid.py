@@ -554,7 +554,7 @@ def set_parameters():
     dict['Np'] = 20         #number of troughs in the substrate
     dict['period'] = dict['Sy']/dict['Np']  #spatial period of substrate in y-direction
 
-    #Brownian motion factor
+    #Brownian motion factor - for solution to problem X in AJP
     dict['temperature'] = 5.7*dict['AP']
     
     dict['F_DC'] = 0.07
@@ -642,32 +642,17 @@ if __name__ == "__main__":
     #make shapiro steps with a range of F^{dc}
     #this is the place to include the strictly DC force...
     #--------------------------------------------------------------
-    if make_fig == 3 or make_fig == 6: 
+    if make_fig == 3: 
 
         #sweep through a variety of dc values
         delta_Fdc = 0.001
+        Fdc_max=0.2+delta_Fdc
+        #parameters['freq']=0.1
+        F_AC = [0.0, 0.07]
         
-        if make_fig == 3:
-
-            Fdc_max=0.2+delta_Fdc
-            #parameters['freq']=0.1
-
-            F_AC = [0.0, 0.07]
-        
-        elif make_fig == 6:
-
-            #IN EXPLORING THE HIGH FREQUENCY REGIME,
-            #I'M SEEING STEP HEIGHTS LIKE JUNIPER (but still fractional)  
-            parameters['freq'] = 0.1
-            delta_Fdc = 0.01
-            F_AC = [0.1,0.2,0.3,0.4]
-            Fdc_max=0.6+delta_Fdc
-
-
         max_value = int(np.ceil(Fdc_max/delta_Fdc))
         avg_vy_data = np.zeros(max_value)
         Fdc_data = np.arange(0,Fdc_max,delta_Fdc)
-
 
         #make the figure 
         fig = plt.figure(figsize=(7,4.5))
@@ -712,114 +697,8 @@ if __name__ == "__main__":
         plt.tight_layout(pad=0.2)
         plt.savefig(parameters['filename'])
         
-    #--------------------------------------------------------------
-    #modify either frequency (fig5) or F^ac amplitude (fig6) or F^ac = 0
-    #--------------------------------------------------------------
-    if make_fig == 5 or make_fig == 6:
-        
-        parameters['dt'] = 0.1 #timestep in simulation units
-        parameters['writemovietime']=1   #interval to write data to arrays for plotting
 
 
-        if make_fig == 5:
-            parameters['maxtime']=4500        #total time steps in simulation
-
-            #we will sweep through the following independent variable
-
-            frequency = [0.1,0.015,0.01, 0.005, 0.002, 0.001]
-            ind_var = frequency
-            str_iv=" f=%1.3f"
-
-        else:
-            parameters['maxtime']=3000        #total time steps in simulation
-
-            #we will sweep through the following independent variable
-            F_AC = [0.2, 0.4]
-            ind_var = F_AC
-            str_iv=" $F_{\mathrm{ac}}$=%1.2f"
-            #parameters['freq'] = 0.1
-            #parameters['F_DC'] = 0.1
-
-        #make the figure
-        n_plots = len(ind_var)
-        fig = plt.figure(figsize=(10,3*n_plots))
-        gs=gridspec.GridSpec(n_plots,1)
-        
-        #run a single MD simulation for a set of parameters in independent variable
-        for i in range(n_plots):
-
-            #make the subplot
-            ax = fig.add_subplot(gs[i,0])
-            ax.text(0.7,0.08,letter[i]+str_iv%(ind_var[i]),
-                    transform = ax.transAxes,backgroundcolor="white")
-            parameters['axis'] = ax
-
-            #select the independent variable
-            if make_fig == 5:
-                parameters['freq'] = frequency[i]
-            else:
-                parameters['F_AC'] = F_AC[i]
-
-                #horizontal grid so we can count hops
-                #ax.set_ylim(-0.9,20.9)
-                ax.yaxis.set_minor_locator(AutoMinorLocator(1))
-                ax.grid(axis='y',which='both')
-
-            #run the MD simulation    
-            single_particle(parameters,plot="just_position")
-
-            if i < n_plots-1:
-                ax.tick_params(labelbottom=False)
-                ax.set_xlabel("")
-
-        #save the figure
-        plt.tight_layout(pad=0.1,h_pad=-0.05)
-        plt.savefig(parameters['filename'])
-
-    #--------------------------------------------------------------
-    #study Brownian motion for increasing temperature
-    #--------------------------------------------------------------
-    if make_fig == 8:
-
-        #place particle in center to reduce hops across PBC
-        parameters['y0'] = parameters['Sy']/2
-
-        #simulating for a long time, 
-        parameters['dt'] = 0.1 #timestep in simulation units
-
-        #run for a very long time to see the infrequent jumps
-        parameters['maxtime']=300000        #total time
-
-        #that's a lot of data!
-        parameters['writemovietime']=1000   #interval to write data 
-
-
-        #make the figure
-        fig = plt.figure(figsize=(10,12))
-        gs=gridspec.GridSpec(3,1)
-        i=0
-
-        #sweep through temperatures
-        for temp in [3.0, 3.5, 4.0]:
-
-            #create and label the subplot
-            ax = fig.add_subplot(gs[i,0])
-            ax.text(0.02,0.05,letter[i],
-                    transform = ax.transAxes,backgroundcolor="white")
-
-            #Brownian motion factor as a ratio of the Ap value
-            parameters['temperature'] = temp*parameters['AP']
-
-            #run a single MD simulation for a set of parameters,
-            #will be plotted on subplot
-            brownian_particle(parameters,ax)
-
-            i+=1
-
-        #save fig 7
-        plt.tight_layout(pad=0.1,h_pad=-0.3)
-        plt.savefig(parameters['filename'])
-        
     #--------------------------------------------------------------------------
 
     sys.exit()
