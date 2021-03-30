@@ -130,7 +130,7 @@ F_AC = [0.2, 0.3, 0.4]
 ---------------
 ##### Problem 2b - variable frequency
 
-parameters['maxtime']=4500        #total time steps in simulation
+parameters['maxtime']=4500        
 frequency = [0.1, 0.015, 0.01, 0.005, 0.002, 0.001]
 ------------------
 ##### Problem 2c - variable FAC - sweep FDC - produce Shapiro steps
