@@ -724,34 +724,69 @@ with suggested problems for interested readers.
 We discuss the molecular dynamics algorithm
 and
 numerical integration techniques in Problem~\ref{ex:euler}.
-We explore changes in the particle motion
-with parameter changes in Problem~\ref{ex:parameters}.
+%DM slight rewrite to remove the redundant ``we'' tense
+Changes to the parameters are described in 
+%We explore changes in the particle motion
+%with parameter changes in
+Problem~\ref{ex:parameters}.
 We include analytic solutions to  the 
 linear drag equation in Problem~\ref{ex:reynolds}, 
 the equation of motion in Problem~\ref{ex:n2l}.
-%[xx see comment below xx]
-We extend the model with
-numerical problems 
+%[DM working on it xx see comment below xx]
+%DM rewrite of the following sentence - unclear as written/edited
+We extend the numerical model %with
+%numerical problems 
 to include finite temperature effects
 in Problem~\ref{ex:brownian}.
 
 \begin{problem}{Write your own MD code}
   \label{ex:euler}
+  
   %[xx you didn't really discuss other integration algorithms, you just mentioned some names That's OK. Instead you might want to make this problem 1 and guide readers to write their own program. Then mention that a program is available, which you only mention in the abstract xx]
+  To calculate the position of the particle
+  %DM add
+  as a function of time
+  %DM end
+  we
+  numerically integrate the equation of motion
+  %DM add
+  (Eq.~\ref{eq:motion})
+  %DM end
+  using
+  the standard definition of velocity
+  $\vec{v} = d\vec{r}/dt$ 
+  using the 
+  Euler method.
+  %DM substituted direct reference for ``The equation of motion...''
+  Eq.~\ref{eq:motion} provides
+  a direct calculation for the particle velocity
+  from the net force on the particle,
+  as demonstrated in Problem~\ref{ex:n2l}.
 
-  A working example of this code is available
+    A working example of this code is available
   in Ref.~\cite{supplemental}
   If you would like to write your own,
   the following guide
   will walk you through our choices.
   In the code excerpts below,
   most comments and optional details are removed for clarity.
+    %The molecular dynamics
+  %described above
+  %is available in Ref.~\cite{supplemental}
+  We use the Python programming
+  language
+  for educational purposes.
+  To model additional particles,
+  the authors recommend a more traditional 
+  compiled coding language
+  to perform the many operations associated
+  with neighbor lists to compute particle interactions.
   
   \begin{enumerate}
     
-  \item[(a)] {\bf Initialization}
+  \item[(a)] {\bf Initialization.}
     For convenience,
-    we defined a Python dictionary
+    we define a Python dictionary
     to contain the simulation constants
     that could easily be passed by reference
     to subroutines.
@@ -786,29 +821,47 @@ def set_parameters():
 \end{verbatim}
 
     
-  \item[(b)]
-    A key decision for any MD algorithm
-    is how much information to save during and after
-    the simulation.
-    We define the following constants
-    to manage the length of arrays
-    containing data.
-    
-\begin{verbatim}
-#integer time steps
-dict[`maxtime']=int(40/dict['freq'])   #total time steps 
-dict[`writemovietime']=1   #write data to arrays for plotting
-\end{verbatim}
-%dict['decifactor'] = 1     #decimation factor - when to average values 
-    
-    In the subroutine {\bf single\_particle()}
-    calculate the array lengths to hold
-    position, velocity, and time data.
-    Define a loop to 
-    calculate the particle position and velocity through each
-    molecular dynamics time step,
-    calculated in the subroutine {\bf md\_step()}
-    (which will be described in more detail in (c)).
+   \item[(b)] {\bf Time loop.}
+     The Euler method is effective
+     for solving linear ordinary differential  equations
+     of the form
+     $dy/dt = f(t,y(t))$ with the initial condition $y(t_0) = y_0$.
+     The solution is calculated algorithmically
+     by stepping in time through $n$ integer steps
+     $t_n = t_0 + n \Delta t$.
+     At each subsequent step the new
+     value for $y$ is calculated as a  solution of a map using
+     discrete times 
+     $y_{n+1} = y_n + f(t_n,y_n)$.
+     Apply the Euler method to %our equation of motion
+     Eq.~\ref{eq:motion}
+     %[DM - resolved xx refer to specific equation by label xx]
+     to determine  the analytic expression
+     for the position of a particle
+     $y_n$ at the $nth$ time step.
+  
+     Add a $for$ loop
+     to step through each integer timestep.
+     With this loop, 
+     control
+     the flow of the program
+     and retain information for the particle position and other
+     properties
+     as a function of time.
+     Assume this information
+     will be calculated a subroutine.
+        
+     We used the subroutine {\bf single\_particle()}
+     calculate the array lengths to hold
+     position, velocity, and time data.
+     The lengths of these arrays will be affected by
+     how much data you choice to save
+     (see comment following sample code).
+     Define a loop to 
+     calculate the particle position and velocity through each
+     molecular dynamics time step,
+     calculated in the subroutine {\bf md\_step()}
+     which will be described in more detail in (c).
 
 \begin{verbatim}
 def single_particle(parameters,plot="y-position"):
@@ -823,34 +876,29 @@ def single_particle(parameters,plot="y-position"):
       
 \end{verbatim}
 
-\item[(c)]
+{\it Comment:}     
+     A key decision for any MD algorithm
+     is how much information to save during and after
+     the simulation.
+     %DM if going to emphasize this, have the reader do something with it
+     %cut out - and make a comment rather than a statement going nowhere
+     We define the following constants
+     to manage the length of arrays
+     containing data.
+     We found in practice that for 
+     short simulations times
+     we could save all data.
 
-  To calculate the position of the particle we
-  numerically integrate the equation of motion using
-  the standard definition of velocity
-  $\vec{v} = d\vec{r}/dt$ 
-  using the 
-  Euler method. 
-  The equation of motion provides
-  a direct calculation for the particle velocity,
-  as demonstrated in Problem~\ref{ex:n2l}.  
-  The Euler method is effective for solving linear ordinary differential  equations
-  of the form
-  $dy/dt = f(t,y(t))$ with the initial condition $y(t_0) = y_0$.
-  The solution is calculated algorithmically
-  by stepping in time through $n$ integer steps
-  $t_n = t_0 + n \Delta t$.
-  At each subsequent step the new
-  value for $y$ is calculated as a  solution of a map using
-  discrete times 
-  $y_{n+1} = y_n + f(t_n,y_n)$.
-  Apply the Euler method to %our equation of motion
-  Eq.~\ref{eq:motion}
-  %[DM - resolved xx refer to specific equation by label xx]
-  to determine  the analytic expression
-  for the position of a particle
-  $y_n$ at the $nth$ time step.
+\begin{verbatim}
+#integer time steps
+dict[`maxtime']=int(40/dict['freq'])   #total time steps 
+dict[`writemovietime']=1   #write data to arrays for plotting
+\end{verbatim}
+%dict['decifactor'] = 1     #decimation factor - when to average values 
 
+\item[(c)] {\bf Position and force calculations.}
+  %[DM moved sentences about general numerical solution to beginning
+  %and those about time to (b)]
   In our implementation,
   we created a subroutine to consider each
   type of force in the system (external drive, landscape, etc).
@@ -871,10 +919,10 @@ def single_particle(parameters,plot="y-position"):
     vy = 0 
 
     #calculate the net force on the particle
-    #(left as an exercise to the reader)
+    vy = #(left as an exercise to the reader)
 
     #calculate the new position
-    #(left as an exercise to the reader)
+    y += #(left as an exercise to the reader)
 
     #check periodic boundary conditions
     #(left as an exercise to the reader)
@@ -901,18 +949,6 @@ def single_particle(parameters,plot="y-position"):
   time step is essential for accurate results.
   Particle-particle interactions are typically nonlinear,
   so that the interparticle force changes significantly over small distances and the simple Euler algorithm is insufficient.
-
-  %The molecular dynamics
-  %described above
-  %is available in Ref.~\cite{supplemental}
-  We use the Python programming
-  language
-  for educational purposes.
-  To model additional particles,
-  the authors recommend a more traditional 
-  compiled coding language
-  to perform the many operations associated
-  with neighbor lists to compute particle interactions.
   
 \end{problem}
 
@@ -1125,14 +1161,20 @@ can be explored by varying the
   If $R$ is small, the quadratic and higher order terms
   may be ignored.
 
-To first order the viscosity is $\eta \sim 10^{-3}$\,Pa-s.\cite{Volpe2013}
+ %DM moved to end of paragraph
+%To first order the viscosity is $\eta \sim 10^{-3}$\,Pa-s.\cite{Volpe2013}
 Use reasonable values for the
   experimental analog of this system and show 
 that the Reynolds number is small.
-  In addition to the values listed in Table~\ref{tab:1}, 
-  the liquid density 
-  $\rho \sim 10^3$ kg/cm$^3$ is a reasonable
-  first order approximation.\cite{asce}
+In addition to the values listed in Table~\ref{tab:1},
+to first order
+the viscosity is $\eta \sim 10^{-3}$\,Pa-s.\cite{Volpe2013}
+and 
+the liquid density 
+$\rho \sim 10^3$ kg/cm$^3$.\cite{asce}
+%DM removed
+%is a reasonable
+%first order approximation
   \end{problem}
 
 
@@ -1403,6 +1445,9 @@ Using Newton's second law for
   \bibitem{Newman} M. Newman, {\it Computational Physics} (CreateSpace Independent Publishing Platform, 2012).
 
   \bibitem{supplemental}
+    %not sure if the manuscript can remain in the repo - that probably violate AIP rules https://publishing.aip.org/resources/researchers/rights-and-permissions/author-licenses/
+    %will make a DOI for the repo
+    %https://guides.github.com/activities/citable-code/
     \url{<https://github.com/mcddanielle/AJP_project/>}.
 
     %Brownian motion!
