@@ -68,7 +68,7 @@ individual oscillators change frequency due
 to external stimuli.\cite{Pikovsky2003}
 The
 flickering patterns of
-candle flames %[DM - the air molecules are oscillating I think xx is a flame an oscillator? xx]
+candle flames [DM - the air molecules are oscillating xx is a flame an oscillator? xx]
 mediated by temperature fluctuations,\cite{Okamoto2016}
 the vibrations of singing wine glasses interacting 
 through sound waves,\cite{Arane2009}
@@ -162,7 +162,8 @@ When
 a constant or 
 dc drive is applied,
 the particle velocity is modulated by 
-the potential energy landscape exerted on the particle.  %seen by the particle. [DM swapped ``seen by'' for ``exerted on'' xx check added wording xx] 
+the potential energy landscape exerted on the particle.  %seen by the particle.
+[DM swapped ``seen by'' for ``exerted on'' xx check added wording xx] 
 Below some threshold  
 the dc force is not strong enough to push the particle
 across a potential maximum so the average velocity is zero,
@@ -201,9 +202,10 @@ we describe how our results apply
 to physical systems,
 such as optically trapped colloids
 %charge density waves in dusty plasma
-%[DM rewrote to better align with conclusion xx added words is this correct? xx]
+[DM rewrote to better align with conclusion xx added words is this correct? xx]
 and superconducting vortices in the presence of periodic pinning arrays.
-% and Josephson junctions. %[DM resolved xx Josephson junctions not explicitly mentioned in conclusion, xx] 
+% and Josephson junctions.
+[DM resolved xx Josephson junctions not explicitly mentioned in conclusion, xx] 
 We include problems for interested readers 
 in Sec.~\ref{sec:problems}.
 
@@ -213,11 +215,12 @@ We use a classical model for
 studying the dynamics, %xx you only use single particles xx]
 using the net force on a particle to calculate
 its trajectory.
-The particle is confined in a two-dimensional (2D) %[DM singlular]
+The particle is confined in a two-dimensional (2D) [DM singular]
 simulation of area $A = L \times L$, where $L=46.\bar{6}\,a_0$
 where $a_0$ is a dimensionless unit of length.
-%[DM - yes.  in the simulation we just use L=46.6 and the a_0 is to satisfy readers unfamiliar with simulation units xx confused about the role of $a_0$ because it and hence $L$ are dimensionless, Is it really the size of a colloid particle, which in the simulation you set to unity?  xx]
-The particle %Particle $i$ %[DM resolved xx since we are doing non-interacting particles and thus only one particle is moving can we eliminate the subscript $i$? xx]
+[DM - yes.  in the simulation we just use $L=46.6$ and the $a_0$ is to satisfy readers unfamiliar with simulation units xx confused about the role of $a_0$ because it and hence $L$ are dimensionless, Is it really the size of a colloid particle, which in the simulation you set to unity?  xx]
+The particle %Particle $i$
+[DM resolved xx since we are doing non-interacting particles and thus only one particle is moving can we eliminate the subscript $i$? xx]
 has
 position $\vec{r} = x \hat{x} + y \hat{y}$
 and velocity $\vec{v} = d\vec{r}/dt$.
@@ -249,12 +252,12 @@ and $U_0$ is a parameter
  to illustrate
  the 2D potential energy landscape;
  the maxima are colored gray and the minima colored white.
- %[DM - switch from red/blue to white/gray - xx make sure that all your figures make sense when printed in b/w xx]
+ [DM - switch from red/blue to gray/white - xx make sure that all your figures make sense when printed in b/w xx]
 
-The confining force on the particle %[DM removed subscripts] $i$
+The confining force on the particle [DM removed subscripts] $i$
  is given by
  \begin{equation}
- \vec{F}_{\ell}(\vec{r}) = - \vec \nabla U(\vec{r}). %DM removed ^{\ell}
+ \vec{F}_{\ell}(\vec{r}) = - \vec \nabla U(\vec{r}). [DM removed ^{\ell}]
  \label{eq:dudr}
  \end{equation}
  %[xx what does the superscript $\ell$ mean? xx]
@@ -262,7 +265,7 @@ The confining force on the particle %[DM removed subscripts] $i$
  In Fig.~\ref{fig:1_landscape}(b) we plot  
  $U(y)$ to illustrate how the magnitude
  $|\vec{F}_{\ell}|$ is calculated from the particle position $y$.
- %[DM - begrudingly changed - My collaborators and I consistently use superscripts for these equations to separate the force superscripts from the particle index subscripts.  This is consistent with the textbook I teach from.  xx suggest that you use subscripts instead of superscripts. We can easily make that change in the next iteration of your manuscript. However, you would need to change the figures, e.g., $\vec{F}_{\rm d}$ $F_{\rm dc}$ $F_{\rm ac}$. One of us didn't like superscripts where he was an undergraduate!  xx]
+ [DM - begrudingly changed - My collaborators and I usually use superscripts for these equations to separate the force superscripts from the particle index subscripts.  This is consistent with the textbook I teach from.  xx suggest that you use subscripts instead of superscripts. We can easily make that change in the next iteration of your manuscript. However, you would need to change the figures, e.g., $\vec{F}_{\rm d}$ $F_{\rm dc}$ $F_{\rm ac}$. One of us didn't like superscripts where he was an undergraduate!  xx]
  
 Particles are subject to an external time-dependent driving force
 $\vec{F}_{\rm d}(t)$
@@ -341,15 +344,15 @@ Schematic of the simulation of a single particle
   The time-dependent applied driving force $\vec{F}_{\rm d}$
   is parallel to the $y$-axis.
   The landscape is shown with
-  %[DM changed color scheme from red/blue to gray/white for better BW conversion]
+  [DM changed color scheme from red/blue to gray/white for better BW conversion]
   maxima in the potential energy are gray %#red
   and minima are white %.
   A particle is 
   subject to competing forces of the landscape and applied driving force.
   (b) The potential energy function
-  along the $y$-axis $U(y)$.  %DM removed _{\ell}
+  along the $y$-axis $U(y)$.  [DM removed $_{\ell}$]
   The particle in (a) is shown at the same $y$-position.
-  The slope of $U(y)$ %[DM removed _{\ell} use the subscripts with the potential, but will move to superscript xx used subscript here xx]
+  The slope of $U(y)$ [DM removed $_{\ell}$ use the subscripts with the potential, but will move to superscript xx used subscript here xx]
   is the 
   magnitude of force $\vec{F}_{\ell}$. 
   }
@@ -363,7 +366,7 @@ Here we drive
 a single particle 
 across the landscape. 
 The numerical implementation of the landscape 
-is calculated with Eqs.~\eqref{eq:ysubstrate} and \eqref{eq:dudr}  %[DM - right, two negative signs, one from the derivative, the other from the definition of force.  I found the ``mistaken'' dropped minus sign in the depths of january and added it.  xx but you should get a + sign not a minus sign xx] 
+is calculated with Eqs.~\eqref{eq:ysubstrate} and \eqref{eq:dudr}  [DM - right, two negative signs, one from the derivative, the other from the definition of force.  I found the ``mistakenly'' dropped minus sign in the depths of january and added it.  xx but you should get a + sign not a minus sign xx] 
 \begin{equation}
   \label{eq:force}
   {F_{\ell}}_y(y) = A_{p} \sin{(2 \pi y / \lambda)},
@@ -458,7 +461,7 @@ $y/\lambda$
 and the maxima in $F_{\rm d}(t)$.
 When $F_{\rm d}(t)$ is large,
 the particle moves across the substrate maxima,
-%[DM - color change]
+[DM - color change]
 shown in gray with the contour plot.
 %DM commented out - too much detail
 %The slope of $y/\lambda$ equals zero twice
@@ -557,12 +560,12 @@ such as a devil's staircase related to chaotic dynamics.\cite{Bak1986}
   as in Fig.~\ref{fig:2_Fd_vy_time}.
   The value of $F_{\rm dc}$ for the first four steps
   %is given,
-  correspond with the
-  panels (a-d) 
+  correspond with the fixed value of $F_{\rm dc}$
+  in each of the phase plots
   %indicating a system
-  plotted in Fig.~\ref{fig:4_phase}.
-  %[DM - clarified?  xx don't understand meaning of indicating a system
-  %plotted in Fig.~\ref{fig:4_phase} xx]
+  in Fig.~\ref{fig:4_phase}(a-d).
+  [DM - clarified?  xx don't understand meaning of indicating a system
+  plotted in Fig.~\ref{fig:4_phase} xx]
 }
 \label{fig:3_sweep_vyFDC}
 \end{figure}
@@ -590,7 +593,7 @@ such as a devil's staircase related to chaotic dynamics.\cite{Bak1986}
   \end{equation}
   For zero landscape force, 
   the phase velocity  is zero when $F_{\rm d}(t) = F_{\rm dc}$.
-  %[DM rewrite]
+  [DM rewrite following sentence]
   If the system
   is strictly mode-locked,
   the particle velocity
@@ -724,7 +727,7 @@ with suggested problems for interested readers.
 We discuss the molecular dynamics algorithm
 and
 numerical integration techniques in Problem~\ref{ex:euler}.
-%DM slight rewrite to remove the redundant ``we'' tense
+[DM slight rewrite to remove the redundant ``we'' active voice construction]
 Changes to the parameters are described in 
 %We explore changes in the particle motion
 %with parameter changes in
@@ -741,7 +744,6 @@ in Problem~\ref{ex:brownian}.
 
 \begin{problem}{Write your own MD code}
   \label{ex:euler}
-  
   %[xx you didn't really discuss other integration algorithms, you just mentioned some names That's OK. Instead you might want to make this problem 1 and guide readers to write their own program. Then mention that a program is available, which you only mention in the abstract xx]
   To calculate the position of the particle
   %DM add
@@ -835,7 +837,7 @@ def set_parameters():
      $y_{n+1} = y_n + f(t_n,y_n)$.
      Apply the Euler method to %our equation of motion
      Eq.~\ref{eq:motion}
-     %[DM - resolved xx refer to specific equation by label xx]
+     [DM - resolved xx refer to specific equation by label xx]
      to determine  the analytic expression
      for the position of a particle
      $y_n$ at the $nth$ time step.
@@ -1286,8 +1288,9 @@ Using Newton's second law for
   include Brownian motion 
   in the model.
   Appropriate temperatures to explore
-  are $T/A_p = 3.0, 3.5$, and $4.0$.
-  Plot the $y-position$ versus time
+  are $3.0 < T/A_p = 7.0$.
+  %DM moved position out of math mode
+  Plot the $y-$ position versus time
   for this particle.
   %----------------------------------------------------
   %  \begin{figure} %[h!]
@@ -1339,11 +1342,12 @@ Using Newton's second law for
  % what appears to be 
  % a random walk of hops atop the substrate. %[xx what is the question? xx]
 
-  {\it Comment: } For a driven particle,
+  %{\it Comment: }
+  For a driven particle,
   we ignore 
   the effects of temperature 
   in these simulations.  
-  We note that even for $T/A_p = 4.0$ 
+  We note that even for $T/A_p = 6.0$ 
   the hopping rate
   is much less than the
   frequency of the applied drive. %, as

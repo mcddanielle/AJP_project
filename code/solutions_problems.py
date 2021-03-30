@@ -40,22 +40,31 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #figures 2a, 2b, 2c, 5
-    solve_exercise = "2c"
+    solve_problem = "5"
 
-    parameters['filename']="exercise_%s.pdf"%(solve_exercise)
+    parameters['filename']="problem_%s.pdf"%(solve_problem)
 
     letter=["(a)","(b)","(c)","(d)","(e)","(f)","(g)"]
         
     #--------------------------------------------------------------
-    #modify either frequency (fig5) or F^ac amplitude (fig6) or F^ac = 0
+    #modify either frequency (2b) or F^ac amplitude (2a) or F^ac = 0
     #--------------------------------------------------------------
-    if solve_exercise == "2a" or solve_exercise == "2b":
+    if solve_problem == "2a" or solve_problem == "2b":
         
         parameters['dt'] = 0.1 #timestep in simulation units
         parameters['writemovietime']=1   #interval to write data to arrays for plotting
 
+        if solve_problem == "2a":
+            parameters['maxtime']=3000        #total time steps in simulation
 
-        if solve_exercise == "2a":
+            #we will sweep through the following independent variable
+            F_AC = [0.2, 0.3, 0.4]
+            ind_var = F_AC
+            str_iv=" $F_{\mathrm{ac}}$=%1.2f"
+            #parameters['freq'] = 0.1
+            #parameters['F_DC'] = 0.1
+            
+        else:
             parameters['maxtime']=4500        #total time steps in simulation
 
             #we will sweep through the following independent variable
@@ -63,16 +72,6 @@ if __name__ == "__main__":
             frequency = [0.1,0.015,0.01, 0.005, 0.002, 0.001]
             ind_var = frequency
             str_iv=" f=%1.3f"
-
-        else:
-            parameters['maxtime']=3000        #total time steps in simulation
-
-            #we will sweep through the following independent variable
-            F_AC = [0.2, 0.4]
-            ind_var = F_AC
-            str_iv=" $F_{\mathrm{ac}}$=%1.2f"
-            #parameters['freq'] = 0.1
-            #parameters['F_DC'] = 0.1
 
         #make the figure
         n_plots = len(ind_var)
@@ -89,7 +88,7 @@ if __name__ == "__main__":
             parameters['axis'] = ax
 
             #select the independent variable
-            if solve_exercise == "2a":
+            if solve_problem == "2b":
                 parameters['freq'] = frequency[i]
             else:
                 parameters['F_AC'] = F_AC[i]
@@ -114,10 +113,9 @@ if __name__ == "__main__":
     #make shapiro steps with a range of F^{dc}
     #this is the place to include the strictly DC force...
     #--------------------------------------------------------------
-    if solve_exercise == "2c": 
+    if solve_problem == "2c": 
 
         #sweep through a variety of dc values
-        delta_Fdc = 0.001
 
         #IN EXPLORING THE HIGH FREQUENCY REGIME,
         #I'M SEEING STEP HEIGHTS LIKE JUNIPER (but still fractional)  
@@ -170,7 +168,7 @@ if __name__ == "__main__":
     #--------------------------------------------------------------
     #study Brownian motion for increasing temperature
     #--------------------------------------------------------------
-    if solve_exercise == "5":
+    if solve_problem == "5":
 
         #place particle in center to reduce hops across PBC
         parameters['y0'] = parameters['Sy']/2
@@ -194,7 +192,7 @@ if __name__ == "__main__":
         i=0
 
         #sweep through temperatures
-        for temp in [3.0, 4.0, 5.0]:
+        for temp in [4.0, 5.0, 6.0]:
 
             #create and label the subplot
             ax = fig.add_subplot(gs[i,0])

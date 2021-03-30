@@ -555,7 +555,7 @@ def set_parameters():
     dict['period'] = dict['Sy']/dict['Np']  #spatial period of substrate in y-direction
 
     #Brownian motion factor - for solution to problem X in AJP
-    dict['temperature'] = 5.7*dict['AP']
+    dict['temperature'] = 0.0 
     
     dict['F_DC'] = 0.07
     dict['drop'] = dict['maxtime']   #integer timesteps to "ramp" the DC force

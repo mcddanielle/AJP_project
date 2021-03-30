@@ -26,6 +26,14 @@ This flag will choose simulation settings.  Then simply run
 
 ```python3 MD_colloid.py```
 
+To see the authors solutions to exercises 2 and 5, set line 43 in solutions_exercises.py
+
+```solve_exercise = "2a"```
+
+This flag will choose simulation settings.  Then simply run 
+
+```python3 solve_exercise.py```
+
 ### About figures in manuscript (and codes)
 ----------
 ```plot_landscape.py```
@@ -45,6 +53,12 @@ the magnitude of U0 / Ap is scaled for viewing rather than simulation.
 ```MD_colloid.py```
 
 performs the simulations discussed in the paper.  A single colloid on a corrugated or washboard potential/substrate is subject to a periodic applied driving force.  System properties are plotted.
+
+-------------
+
+```solutions_exercises.py```
+
+performs the simulations discussed in the problems section using calls to the ```MD_colloid``` module
 
 -------------
 #### Figure 2
@@ -96,7 +110,7 @@ maxtime = 400
 
 ----------------
 
-### About solutions to exercises
+### About solutions to problems
 
 #### Problem 1 - Write your own MD code
 
@@ -105,50 +119,51 @@ refers to the complete MD code contained within ```MD_colloid.py```
 --------------
 #### Problem 2 - Exploring model parameters
 
-refers to Figures 5-7 (fig5.pdf, fig6.pdf, fig7.pdf) which may be generated with line 578 in MD_colloid,py
+refers to Problem 2a-c (fig5.pdf, fig6.pdf, fig7.pdf) which may be generated with line 43 in solutions_problems,py
 
 ---------------
-##### Figure 5 - variable FAC
+##### Problem 2a - variable FAC
+
+parameters['maxtime']=3000        
+F_AC = [0.2, 0.3, 0.4]
 
 ---------------
-##### Figure 6 - variable frequency
+##### Problem 2b - variable frequency
 
-parameters
-AP  = 0.1
-(a) FAC = 0.0
-(b) FAC = 0.05
-FDC = 0.0 - 0.3
-f = 0.1, 0.05, 0.015, 0.005, 0.001
+parameters['maxtime']=4500        #total time steps in simulation
 
-dt = 0.1
-maxtime = 400
-
+#sweep through the following independent variable
+frequency = [0.1, 0.015, 0.01, 0.005, 0.002, 0.001]
 ------------------
-##### Figure 7 - variable FAC
+##### Problem 2c - variable FAC - sweep FDC - produce Shapiro steps
 
+parameters['freq'] = 0.1
+delta_Fdc = 0.01
+#sweep through the following independent variable
+F_AC = [0.1,0.2,0.3,0.4]
+Fdc_max=0.6+delta_Fdc
 
 ---------------
 #### Problem 3 - Drag models and Reynolds numbers
 
-simple analytical calculation.  see ```calc_Reynolds.py``` for solution.
+Simple analytical calculation.  See ```calc_Reynolds.py``` for solution.
+No figure produced.
 
 ---------------
 #### Problem 4 - Equation of motion
 
-simple analytical calculation.
+Simple analytical calculation.  No figure produced.
 
 ------------------
 #### Problem 5 - Brownian motion
 
-##### Figure 8 
-
 AP  = 0.1
 FAC = 0.0
 FDC = 0.0
-T/Ap = 3, 3.5, 4
+T/Ap = 4.0, 5.0, 6.0
 
-maxtime = 
-writemovietime =
+maxtime = 300000
+writemovietime = 1000 
 
 -------------------
 
