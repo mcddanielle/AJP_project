@@ -40,73 +40,11 @@ if __name__ == "__main__":
 
     #select which figure in the AJP you would like to make
     #figures 2a, 2b, 2c, 5
-    solve_exercise = "5"
+    solve_exercise = "2c"
 
     parameters['filename']="exercise_%s.pdf"%(solve_exercise)
 
     letter=["(a)","(b)","(c)","(d)","(e)","(f)","(g)"]
-
-    #--------------------------------------------------------------
-    #make shapiro steps with a range of F^{dc}
-    #this is the place to include the strictly DC force...
-    #--------------------------------------------------------------
-    if solve_exercise == "3c": 
-
-        #sweep through a variety of dc values
-        delta_Fdc = 0.001
-
-        #IN EXPLORING THE HIGH FREQUENCY REGIME,
-        #I'M SEEING STEP HEIGHTS LIKE JUNIPER (but still fractional)  
-        parameters['freq'] = 0.1
-        delta_Fdc = 0.01
-        F_AC = [0.1,0.2,0.3,0.4]
-        Fdc_max=0.6+delta_Fdc
-
-        max_value = int(np.ceil(Fdc_max/delta_Fdc))
-        avg_vy_data = np.zeros(max_value)
-        Fdc_data = np.arange(0,Fdc_max,delta_Fdc)
-
-        #make the figure 
-        fig = plt.figure(figsize=(7,4.5))
-        gs=gridspec.GridSpec(1,1)
-        ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
-
-        for F in F_AC:
-            parameters['F_AC'] = F
-
-            #run the MD sim for each value of FD, this takes a while...
-            for i in range(len(avg_vy_data)):
-
-                #sweep through a range of dc values
-                parameters['F_DC'] = Fdc_data[i] 
-                
-                #run a single MD simulation for a set of parameters
-                avg_vy_data[i] = MD_colloid.single_particle(parameters,plot="y-velocity")
-                
-            #normalize <vy> so you can count step number
-            avg_vy_data /= (parameters['freq']*parameters['period'])
-            
-            #plot <vy> vs F_dc
-            if F == 0.0:
-                ax1.plot(Fdc_data,avg_vy_data,"--",linewidth=2,label=r"%1.2f"%(F))
-            else:
-                ax1.plot(Fdc_data,avg_vy_data,linewidth=2,label=r"%1.2f"%(F))
-
-            #make the phase plot locations
-            if make_fig == 3 and F > 0:
-                for i in [40,70,100,125]:
-                    ax1.scatter(Fdc_data[i],avg_vy_data[i],c='k',zorder=10)
-            
-        ax1.set_xlim(0,Fdc_data[-1])
-        ax1.set_ylim(avg_vy_data[0]-0.1,avg_vy_data[-1])
-
-        #plt.xlim(155,157)
-        ax1.set_xlabel("F$_{\mathrm{dc}}$")
-        ax1.set_ylabel(r"$\langle$v$_y \rangle / \lambda f $")
-        ax1.legend(loc='best',fontsize=20,numpoints=3,borderpad=0.1,handletextpad=0.2,title="F$_{\mathrm{ac}}$")
-                    
-        plt.tight_layout(pad=0.2)
-        plt.savefig(parameters['filename'])
         
     #--------------------------------------------------------------
     #modify either frequency (fig5) or F^ac amplitude (fig6) or F^ac = 0
@@ -151,7 +89,7 @@ if __name__ == "__main__":
             parameters['axis'] = ax
 
             #select the independent variable
-            if make_fig == 5:
+            if solve_exercise == "2a":
                 parameters['freq'] = frequency[i]
             else:
                 parameters['F_AC'] = F_AC[i]
@@ -172,6 +110,63 @@ if __name__ == "__main__":
         plt.tight_layout(pad=0.1,h_pad=-0.05)
         plt.savefig(parameters['filename'])
 
+    #--------------------------------------------------------------
+    #make shapiro steps with a range of F^{dc}
+    #this is the place to include the strictly DC force...
+    #--------------------------------------------------------------
+    if solve_exercise == "2c": 
+
+        #sweep through a variety of dc values
+        delta_Fdc = 0.001
+
+        #IN EXPLORING THE HIGH FREQUENCY REGIME,
+        #I'M SEEING STEP HEIGHTS LIKE JUNIPER (but still fractional)  
+        parameters['freq'] = 0.1
+        delta_Fdc = 0.01
+        F_AC = [0.1,0.2,0.3,0.4]
+        Fdc_max=0.6+delta_Fdc
+
+        max_value = int(np.ceil(Fdc_max/delta_Fdc))
+        avg_vy_data = np.zeros(max_value)
+        Fdc_data = np.arange(0,Fdc_max,delta_Fdc)
+
+        #make the figure 
+        fig = plt.figure(figsize=(7,4.5))
+        gs=gridspec.GridSpec(1,1)
+        ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
+
+        for F in F_AC:
+            parameters['F_AC'] = F
+
+            #run the MD sim for each value of FD, this takes a while...
+            for i in range(len(avg_vy_data)):
+
+                #sweep through a range of dc values
+                parameters['F_DC'] = Fdc_data[i] 
+                
+                #run a single MD simulation for a set of parameters
+                avg_vy_data[i] = MD_colloid.single_particle(parameters,plot="y-velocity")
+                
+            #normalize <vy> so you can count step number
+            avg_vy_data /= (parameters['freq']*parameters['period'])
+            
+            #plot <vy> vs F_dc
+            if F == 0.0:
+                ax1.plot(Fdc_data,avg_vy_data,"--",linewidth=2,label=r"%1.2f"%(F))
+            else:
+                ax1.plot(Fdc_data,avg_vy_data,linewidth=2,label=r"%1.2f"%(F))
+
+        ax1.set_xlim(0,Fdc_data[-1])
+        ax1.set_ylim(avg_vy_data[0]-0.1,avg_vy_data[-1])
+
+        #plt.xlim(155,157)
+        ax1.set_xlabel("F$_{\mathrm{dc}}$")
+        ax1.set_ylabel(r"$\langle$v$_y \rangle / \lambda f $")
+        ax1.legend(loc='best',fontsize=20,numpoints=3,borderpad=0.1,handletextpad=0.2,title="F$_{\mathrm{ac}}$")
+                    
+        plt.tight_layout(pad=0.2)
+        plt.savefig(parameters['filename'])
+        
     #--------------------------------------------------------------
     #study Brownian motion for increasing temperature
     #--------------------------------------------------------------
@@ -199,7 +194,7 @@ if __name__ == "__main__":
         i=0
 
         #sweep through temperatures
-        for temp in [3.0, 3.5, 4.0]:
+        for temp in [3.0, 4.0, 5.0]:
 
             #create and label the subplot
             ax = fig.add_subplot(gs[i,0])
