@@ -77,7 +77,7 @@ and metronomes vibrating through a supporting platform\cite{Jia2015}
 are examples of in-phase coupled oscillations. 
 Biological systems benefit from cooperative
 synchronization --
-birds  coordinate their wing flaps
+birds  coordinate wing flaps
 to optimize energy use during flight,\cite{Portugal2014}
 frogs alternate croaking patterns,\cite{Aihara2014}
 humans clap in time with music,\cite{Tranchant2016}
@@ -85,16 +85,44 @@ and
 at a cellular level, 
 neurons simultaneously fire in cardiac muscle\cite{MartinHall1999}
 and brain tissue.\cite{Singer1999}
-%DM ended paragraph with fewer examples, added transition sentence
-Mechanisms of synchronization
-can be WHAT
+%DM ended paragraph with fewer examples, 
+%Environmental conditions
+%DM add add transition sentence
+%
+External forcing
+can cause or regulate synchronization.
+%where external forces
+%add or remove energy from the system.
+For example, 
+an electrical pacemaker 
+regulates a heart beat and
+a pulsed light modifies the
+flashing pattern of fireflies.
 
+The model discussed in this paper
+resembles an externally forced pendulum.
+%damping
+%transition
+%%DM - focus more on single particle with environment
+A single pendulum 
+may swing in time with an %be driven or damped by
+driving force
+like  %a skateboarder in a half-pipe or
+a pushed child on a swing,
+and may be damped
+by mechanical friction.
+%of gravity to return
+%to an equilibrium position,
+%or  to decreasing amplitude
+% or air resistance.
 Synchronized phase-locking or mode-locking 
 first appeared in the scientific literature
 in 1665 with 
 Huygens'  experiments on the
 motions of synchronized 
 pendula in wall-mounted clocks.\cite{Bennett2002}
+Clock pendula swing in phase
+when coupled through shared vibrations.
 A locked-mode is an integer frequency ratio.
 In Huygens clocks,
 the pendula were observed to swing at the same rate
@@ -103,41 +131,29 @@ opposite directions ($-1$:1 mode).
 A 2:1 mode occurs when a simple pendulum four
 times the length of another swings with twice the period.
 %DM transition sentence
-Simulations and laboratory experiments
-of mode-locked synchronization
-can help provide insights to a diverse range of 
+Many subsequent 
+simulations and laboratory experiments
+have revealed 
+mode-locked synchronization
+in a diverse range of 
 oscillation phenomena.
 
-%DM better main topic
-Experiments with colloids
-
-Complex dynamics such as synchronized mode-locking
-can be studied with
-colloid particles.
+%Single oscillators 
+%can demonstrate a variety of synchronized behaviors.
+Colloid particles in complex environments are an excellent
+model system to explore %these 
+the dynamics of mode-locking. %synchronization.
 In experiments %DM moved the ``in experiments'' to second sentence
 typical colloids are   
 plastic spheres suspended in
 de-ionized water or silica beads suspended in organic solvent.
-Because 
-colloids are large 
-and move slowly, the
-particle positions 
-can be measured in real time 
-with an optical camera.\cite{Pertsinidis2001}
-Experimental measurements of the
-step-by-step dynamics of 
-colloids performing phase-locked motions
-are useful for
-understanding synchronization
-at a single particle level.\cite{Juniper2015,Juniper2017}
-
-Light is a
-tool for manipulating the colloidal environment
-to alter synchronization patterns.
 Colloids can be trapped
 with 
 radiation pressure from 
-a laser beam.\cite{Ashkin1997}
+a laser beam.\cite{Ashkin1997} 
+A colloid in such a confining region,
+an optical trap, oscillates
+about a equilibrium point.
 A colloid centered in an optical trap is 
 uniformly bombarded by photons. 
 Off-center colloids 
@@ -148,47 +164,50 @@ Depending on the
 location of the particle in the trap,
 the radiation pressure either moves colloids toward the center 
 or ejects it from the trap.
+
+% such as synchronized mode-locking can be studied with
+%An advantage of colloid studies
+While many systems oscillate,
+trapped colloids are useful for 
+providing controlled 
+measurements of the
+step-by-step dynamics of particle motion.
+Colloids are large 
+and move slowly so
+%colloids are considered model systems
+particle positions 
+can be measured in real time 
+with an optical camera.\cite{Pertsinidis2001}
+Colloids have been
+shown to 
+provide an ideal system to 
+control and study
+phase-locked motions
+%are useful for
+%understanding synchronization
+at a single particle level.\cite{Juniper2015,Juniper2017}
+%Light is a
+%tool for manipulating the colloidal environment,
+%which can alter synchronization patterns.
+%Synchronization patterns can be altered
+%using light to manipulate
+%the colloidal environment.
 Diffraction gratings can create
 more complex light environments, 
 such as periodic patterns of minima
 suitable for synchronization studies.\cite{Grier2003}
+In the following study,
+we assume the colloids are confined
+to move along a periodic light pattern
+with minima and maxima defined by a sine wave.
 
-%new topic - DM this sentence appeared toward the end of the intro
-The model discussed in this paper
-resembles a damped driven pendulum 
-where external forces
-add or remove energy from the system.
-A single pendulum is driven by
-the external force of gravity to return
-to an equilibrium position,
-and may be damped to decreasing amplitude
-by mechanical friction or air resistance.
-Multiple pendula may swing in phase
-when coupled through shared vibrations.
-
-
-
-External forcing
-can cause or regulate synchronization.
-For example, 
-an electrical pacemaker 
-regulates a heart beat 
-and 
-a pulsed light modifies the
-flashing pattern of fireflies. 
-%damping
-%transition
-
-A single particle oscillator
-in a potential well is 
-like a skateboarder in a half-pipe or
-a child on a swing.
-A confined oscillator may 
+A colloid driven across a periodic
+substrate may 
 synchronize its location
-to the periodic pattern of the external drive,
-moving back and forth in time with
-the beat,
-or moving between substrate minima.
+to the pattern of the external drive.
+%moving back and forth in time with
+%the beat, or
+%moving between substrate minima.
 When 
 a constant or 
 dc drive is applied,
@@ -199,37 +218,39 @@ the dc force is not strong enough to push the particle
 across a potential maximum so the average velocity is zero,
 a phenomena referred to as pinning.\cite{Reichhardt2017}
 Above the pinning threshold,
-a particle subject to a constant
-drive force  increases its speed at a rate proportional
+a dc driven particle
+%a particle subject to a constant
+%drive force
+increases its speed at a rate proportional
 to the external drive.  
 When the applied force varies periodically,
-the ac drive can 
-cause the particle to hop back and forth across
+an ac drive,
+%cause
+the particle can hop back and forth across
 the landscape minima.
 Many synchronized patterns occur,
-controlled by the substrate period,
-leading to 
-mode-locking,
-where the average particle velocity
+controlled by the substrate pattern and driving force.
+When a particle is driven by combined 
+ac and dc forces,
+mode-locking appears 
+where 
+the average particle velocity
+%of an  driven particle 
 is fixed for a range of dc drive forces.\cite{Reichhardt2015}
 
 In this paper we discuss numerical simulations 
-of the synchronized dynamics
+of the mode-locked dynamics
 of a confined particle driven over
 a washboard shaped potential energy landscape.
-We describe
-our   model  in Sec.~\ref{sec:MD}.
-The model
-is easy to simulate yet relevant
-to condensed matter systems.
-We summarize our results 
-including the synchronized motion of a single confined particle
-driven across a periodic landscape in 
+The numerical model is presented in Sec.~\ref{sec:MD} and 
+our results are summarized in
+%including the synchronized motion of a single confined particle
+%driven across a periodic landscape in 
 Sec.~\ref{sec:results}. In Sec.~\ref{sec:conclusion}
-we describe how our results apply 
-to physical systems,
-such as optically trapped colloids
-and superconducting vortices in the presence of periodic pinning arrays.
+we relate  our results 
+to a broad variety of physical systems beyond 
+optically trapped colloids.
+%and superconducting vortices in the presence of periodic pinning arrays.
 We include problems for interested readers 
 in Sec.~\ref{sec:problems}.
 
@@ -668,6 +689,9 @@ of
 mode locking in
 driven colloids on a
 periodic optical landscape.
+The model
+is easy to simulate yet relevant
+to a broad range of condensed matter systems.
 Colloids are 
 relatively easy to 
 manipulate and image in experiments,
