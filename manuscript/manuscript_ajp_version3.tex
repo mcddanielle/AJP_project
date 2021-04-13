@@ -26,7 +26,9 @@
 \date{\today}
 
 \begin{abstract}
-  We discuss a 
+  Synchronization
+  plays an important role in many physical processes.
+  We discuss synchronization in a 
   molecular dynamics simulation
   of a single particle
   moving through
@@ -47,14 +49,15 @@
   %DM removed first sentence,
   %which was strong and clear, but isolated in the abstract
   %put those ideas in this final sentence, making it a mouthful [26 words]
-  Isolating
+  By 
+  isolating
   synchronized motion
   in 
   simulations and table-top experiments,
-  can be used to study %DM replaced isolate with study
+  we 
+  can study %DM replaced isolate with study
   complex natural behaviors
-  which
-  play an important role in many physical processes.
+  important to many physical processes.
  %[suggest omitting this sentence. Code not in text. We include molecular dynamics code
  % to simulate and characterize the
   %particle dynamics.] 
@@ -74,7 +77,7 @@ mediated by temperature fluctuations,\cite{Okamoto2016}
 the vibrations of singing wine glasses interacting 
 through sound waves,\cite{Arane2009}
 and metronomes vibrating through a supporting platform\cite{Jia2015}
-are examples of in-phase coupled oscillations. 
+are examples of in-phase environmentally coupled oscillations. 
 Biological systems benefit from cooperative
 synchronization --
 birds  coordinate wing flaps
@@ -105,7 +108,7 @@ resembles an externally forced pendulum.
 %transition
 %%DM - focus more on single particle with environment
 A single pendulum 
-may swing in time with an %be driven or damped by
+can swing in time with an %be driven or damped by
 driving force
 like  %a skateboarder in a half-pipe or
 a pushed child on a swing,
@@ -115,24 +118,29 @@ by mechanical friction.
 %to an equilibrium position,
 %or  to decreasing amplitude
 % or air resistance.
-Synchronized phase-locking or mode-locking 
+We focus on 
+synchronized phase-locking or mode-locking,
+which 
 first appeared in the scientific literature
 in 1665 with 
 Huygens'  experiments on the
-motions of synchronized 
+motions of %synchronized 
 pendula in wall-mounted clocks.\cite{Bennett2002}
-Clock pendula swing in phase
-when coupled through shared vibrations.
-A locked-mode is an integer frequency ratio.
-In Huygens clocks,
-the pendula were observed to swing at the same rate
+A locked-mode is an integer frequency ratio
+in coupled oscillators. %Clock pendula swing in phase
+%when coupled through shared vibrations.
+In Huygens' clocks,
+the mode-locked pendula were observed to swing at the same rate
 in the same direction (1:1 mode) or
 opposite directions ($-1$:1 mode).
-A 2:1 mode occurs when a simple pendulum four
-times the length of another swings with twice the period.
+Higher modes might be achieved
+by altering the pendula lengths - 
+a 2:1 mode occurs when a simple pendulum
+swings with twice the period
+of another one quarter the length.
 %DM transition sentence
-Many subsequent 
-simulations and laboratory experiments
+%Many subsequent 
+Simulations and laboratory experiments
 have revealed 
 mode-locked synchronization
 in a diverse range of 
@@ -168,11 +176,6 @@ Diffraction gratings can create
 more complex light environments, 
 such as periodic patterns of minima
 suitable for synchronization studies.\cite{Grier2003}
-A driven colloid
-can demonstrate
-synchronized
-motion within one trap,
-or synchronized hopping between multiple traps. 
 
 Colloids have been
 shown to 
@@ -184,6 +187,11 @@ phase-locked motions
 at a single particle level.\cite{Juniper2015,Juniper2017}
 % such as synchronized mode-locking can be studied with
 %An advantage of colloid studies
+A driven colloid
+can demonstrate
+synchronized
+motion within one trap,
+or synchronized hopping between multiple traps. 
 While many systems oscillate,
 trapped colloids are useful for 
 providing controlled 
@@ -241,15 +249,22 @@ an ac drive,
 %cause
 the particle can hop back and forth across
 the landscape minima.
-Many synchronized patterns occur,
-controlled by the substrate pattern and driving force.
-When a particle is driven by combined 
+When a particle is driven across a substrate
+by combined 
 ac and dc forces,
-mode-locking appears 
-where 
-the average particle velocity
+it is possible for the particle to demonstrate 
+mode-locking.
+In these modes,  
+%Due to the combination of external drive
+%and substrate minima,
+the particle hops at a controlled rate such that 
+the average particle velocity is 
 %of an  driven particle 
-is fixed for a range of dc drive forces.\cite{Reichhardt2015}
+fixed for a range of dc drive forces
+with a magnitude proportional to the
+landscape period and driving frequency.\cite{Reichhardt2015}
+%Many synchronized patterns occur,
+%controlled by the substrate pattern and driving force.
 
 In this paper we discuss numerical simulations 
 of the mode-locked dynamics
@@ -273,18 +288,19 @@ We use a classical model for
 studying the dynamics, 
 using the net force on a particle to calculate
 its trajectory.
-The particle is confined in a two-dimensional 
-simulation of area $A = L \times L$, where $L=46.\bar{6}\,a_0$
-and $a_0$ is a dimensionless unit of length. (In the simulations we   set $a_0 = 1$.)
+The particle is confined in a one-dimensional %DM reduced to 1D
+simulation of length $L=46.\bar{6}\,a_0$, %DM 1D
+where $a_0$ is a dimensionless unit of length.
+(In the simulations we set $a_0 = 1$.)
 The particle 
 has
-position $\vec{r} = x \hat{x} + y \hat{y}$
+position $\vec{r} = y \hat{y}$ %DM 1D
 and velocity $\vec{v} = d\vec{r}/dt$.
 The edges of the system are treated by
 periodic boundary conditions,
 such that a particle leaving the edge of the system is mapped
 back to a position within the simulation boundaries 
-by the transformation $x+L \rightarrow x$ and $y+L \rightarrow y$.
+by the transformation $y+L \rightarrow y$. %DM 1D
 We show a schematic of the system in Fig.~\ref{fig:1_landscape}(a).
 The units of the simulated variables are summarized in Table~\ref{tab:1}.
 
@@ -693,28 +709,38 @@ For $F_{\rm dc} = 0.125$ as in Fig.~\ref{fig:4_phase}(d),
 
 \section{Conclusion}
 \label{sec:conclusion}	
-A single particle driven across a periodic potential landscape 
-synchronizes its motion 
-to environmental and external forces.  
+
+
 Our simulations reproduce the experiments and simulations presented in 
 Juniper {\it et al.} \cite{Juniper2015, Juniper2017}
 of 
 mode locking in
 driven colloids on a
 periodic optical landscape.
-The model
-is easy to simulate yet relevant
-to a broad range of condensed matter systems.
+A single particle driven across a periodic potential landscape 
+synchronizes its motion 
+to environmental and external forces. 
+%The model
+%is easy to simulate yet relevant
+%to a broad range of condensed matter systems.
+Our results are relevant 
+to synchronization effects
+in a broad range of experimental systems
+including optically confined colloids,
+superconductors with periodic pinning arrays, 
+and the charge and spin of atomic systems.
+
 Colloids are 
 relatively easy to 
 manipulate and image in experiments,
 making ideal proxies 
 for systems 
 such as cold atoms or electron gases.\cite{Grier2003}
+%DM FIX FOLLOWING SENTENCE
 Dynamical mode-locking 
 is 
-observed in  technologies such as 
- quantum electronic
+observed in technologies such as 
+quantum electronic
 devices as 
 stepped regions in the relation between current and voltage,
 where the voltage is the analog of the external driving force
@@ -737,17 +763,11 @@ including
 charge density waves, spin density waves
 and superconducting vortices in landscapes 
 engineered with periodic patterns of pinning sites.\cite{Reichhardt2000}
-
 Mode-locking is a useful probe 
 of complex quantum mechanical systems
 because the motions of individual particles can  be inferred only
 from other measurements.
-Our results are relevant 
-to synchronization effects
-in a broad range of experimental systems
-including optically confined colloids,
-superconductors with periodic pinning arrays, 
-and the charge and spin of atomic systems.
+%insert final sentence summarizing all the things.
 
 \section{Suggested problems}
 \label{sec:problems}	
