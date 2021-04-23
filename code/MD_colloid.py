@@ -346,10 +346,11 @@ def plot_phase(ax,y_data,avg_vy_data,p):
         #non-driven phase variables
         ax.scatter(y_data[plot_delay:],avg_vy_data[plot_delay:]) #,lw=5)
 
-    ax.set_xlabel(r"$\phi_y(t) / (2\pi)$")
-    ax.set_ylabel(r"$\dot{\phi}_y(t) / (2\pi)$")
+    ax.set_xlabel(r"$\phi(t) / (2\pi)$")
+    ax.set_ylabel(r"$\dot{\phi}(t) / (2\pi)$")
 
-    ax.set_ylim(-0.04,0.1) #time_data[-1]+1)
+    if 1:
+        ax.set_ylim(-0.04,0.1) #time_data[-1]+1)
     
     return 
 
@@ -600,7 +601,7 @@ if __name__ == "__main__":
 
             #should be as in Fig. 2
             parameters['F_AC'] = 0.07 
-            parameters['freq'] = 0.01
+            parameters['freq'] = 0.01 # 0.01
             parameters['AP'] = 0.1
 
             fig = plt.figure(figsize=(8,8*1.2))
