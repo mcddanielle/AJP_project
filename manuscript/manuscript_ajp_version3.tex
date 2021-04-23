@@ -145,37 +145,12 @@ have revealed
 mode-locked synchronization
 in a diverse range of 
 oscillation phenomena.
-
 %Single oscillators 
 %can demonstrate a variety of synchronized behaviors.
-Colloid particles in complex environments are an excellent
-model system to explore %these 
-the dynamics of mode-locking. %synchronization.
-In experiments %DM moved the ``in experiments'' to second sentence
-typical colloids are   
-plastic spheres suspended in
-de-ionized water or silica beads suspended in organic solvent.
-Colloids can be trapped
-with 
-radiation pressure from 
-a laser beam.\cite{Ashkin1997} 
-A colloid in such a confining region,
-an optical trap, oscillates
-about a equilibrium point.
-A colloid centered in an optical trap is 
-uniformly bombarded by photons. 
-Off-center colloids 
-experience a net force
-due to uneven photon collisions across
-the particle surface.
-Depending on the 
-location of the particle in the trap,
-the radiation pressure either moves colloids toward the center 
-or ejects it from the trap.
-Diffraction gratings can create
-more complex light environments, 
-such as periodic patterns of minima
-suitable for synchronization studies.\cite{Grier2003}
+%Colloid particles in optical traps are an excellent
+%model system to explore %these 
+%the dynamics of mode-locking. %synchronization.
+
 
 Colloids have been
 shown to 
@@ -187,6 +162,32 @@ phase-locked motions
 at a single particle level.\cite{Juniper2015,Juniper2017}
 % such as synchronized mode-locking can be studied with
 %An advantage of colloid studies
+In experiments %DM moved the ``in experiments'' to second sentence
+typical colloids are   
+plastic spheres suspended in
+de-ionized water or silica beads suspended in organic solvent.
+Colloids can be trapped
+with 
+radiation pressure from 
+a laser beam.\cite{Ashkin1997} 
+%A colloid in such a confining region,
+%an optical trap,
+A colloid centered in an optical trap is 
+uniformly bombarded by photons
+and oscillates
+about a equilibrium point.
+Off-center colloids 
+experience a net force
+due to uneven photon collisions across
+the particle surface.
+%Depending on the 
+%location of the particle in the trap,
+%the radiation pressure either moves colloids toward the center 
+%or ejects it from the trap.
+Diffraction gratings can be used to create
+more complex light environments, 
+such as periodic patterns of minima
+suitable for synchronization studies.\cite{Grier2003}  
 A driven colloid
 can demonstrate
 synchronized
@@ -218,9 +219,9 @@ the many oscillation patterns.
 %the dynamics from external
 In the following study,
 we confine colloids  
-to move along a periodic light pattern
-with minima and maxima defined by a sine wave,
-a washboard potential energy substrate.
+to move along a periodic pattern
+with minima and maxima defined by a sine wave.
+%a washboard potential energy substrate.
 
 A colloid driven across a periodic
 substrate may 
@@ -324,7 +325,7 @@ and $U_0$ is a parameter
  the 2D potential energy landscape;
  the maxima are colored gray and the minima colored white.
 
-The confining force on the particle $i$
+The confining force on the particle %$i$ DM removed
  is given by
  \begin{equation}
  \vec{F}_{\ell}(\vec{r}) = - \vec \nabla U(\vec{r}),
@@ -349,7 +350,8 @@ and a time dependent component with amplitude $F_{\rm ac}$
 and angular frequency $\omega = 2 \pi f$.
 
 The inertia of the 
-small particle is reduced by interactions
+%small
+particle is reduced by interactions
 with the fluid particles.\cite{Purcell1977}
 We assume 
 colloids are
@@ -639,8 +641,9 @@ such as a devil's staircase related to chaotic dynamics.\cite{Bak1986}
   \begin{equation}
     \dot{\phi}(t) =2\pi [v_y(t)-\langle v_y \rangle] /\lambda.  
   \end{equation}
-For a zero landscape force, 
-  the phase velocity  is zero when $F_{\rm d}(t) = F_{\rm dc}$.
+  %DM removed
+  %For a zero landscape force, 
+  %the phase velocity  is zero when $F_{\rm d}(t) = F_{\rm dc}$.
 If the system
   is strictly mode-locked,
   the particle velocity
@@ -664,7 +667,13 @@ a closed loop appears in
   for increasing 
   $F_{\rm dc}$, 
   with the remaining parameters fixed as in Fig.~\ref{fig:2_Fd_vy_time}.
-For
+  %DM add
+  We choose values of $F_{\rm dc}$
+  corresponding to the first four modes in
+  Fig.~\ref{fig:3_sweep_vyFDC},
+  as marked with black circles.
+  %DM end add
+  For
   $F_{\rm dc} = 0.04$
   the phase plot   in Fig.~\ref{fig:4_phase}(a)  is an
   asymmetric curve.
@@ -692,7 +701,18 @@ For
   The particle moves a distance $2\lambda$
   during one time period.
 For $F_{\rm dc} = 0.125$ as in Fig.~\ref{fig:4_phase}(d),
-  three nodes form as the particle moves across $3\lambda$.
+three nodes form as the particle moves across $3\lambda$.
+%DM add
+It is possible to create
+more patterns in phase diagrams are possible
+by changing the driving parameters.
+At higher values of $F_{\rm dc}$
+additional nodes appear.
+When the values of $F_{\rm ac}$ and $f$
+are tuned to produce backwards hops in the substrate,
+as suggested in Problem~\ref{ex:parameters}, 
+negative nodes appear in $\phi_y(t)$.
+%DM end add
   
     \begin{figure}[h!]
       \centering
@@ -710,36 +730,48 @@ For $F_{\rm dc} = 0.125$ as in Fig.~\ref{fig:4_phase}(d),
 \section{Conclusion}
 \label{sec:conclusion}	
 
-
-Our simulations reproduce the experiments and simulations presented in 
+A single particle driven across a periodic potential landscape 
+can synchronize its motion 
+to environmental and external forces. 
+The simulations described above
+reproduce the experiments and simulations presented in 
 Juniper {\it et al.} \cite{Juniper2015, Juniper2017}
-of 
+of dynamical 
 mode locking in
 driven colloids on a
 periodic optical landscape.
-A single particle driven across a periodic potential landscape 
-synchronizes its motion 
-to environmental and external forces. 
+Further simulations can be extended
+to include multiple particles
+and more complex environments,
+leading to
+synchronization effects relevant 
+to a broad range of experimental systems.
 %The model
 %is easy to simulate yet relevant
 %to a broad range of condensed matter systems.
-Our results are relevant 
-to synchronization effects
-in a broad range of experimental systems
-including optically confined colloids,
-superconductors with periodic pinning arrays, 
-and the charge and spin of atomic systems.
 
+The study of motions of particles 
+sliding across periodic and aperiodic surfaces 
+is relevant 
+to a broad range of condensed matter systems.
+%beyond optically confined colloids.
 Colloids are 
 relatively easy to 
 manipulate and image in experiments,
 making ideal proxies 
-for systems 
+for systems
+more difficult to access experimentally 
 such as cold atoms or electron gases.\cite{Grier2003}
+Many systems can be modeled
+as particles moving across a surface
+including 
+the propagation of patterns
+in charge and spin properties of atomic systems.
+%superconductors with periodic pinning arrays, and 
 %DM FIX FOLLOWING SENTENCE
 Dynamical mode-locking 
 is 
-observed in technologies such as 
+observed in %technologies such as 
 quantum electronic
 devices as 
 stepped regions in the relation between current and voltage,
@@ -758,16 +790,20 @@ Shapiro steps vary in width depending on the strength of the
 applied ac forces,
 and are observed in a variety of ac and dc driven systems
 displaying
-non-Ohmic behavior in voltage-current curves,
+non-Ohmic behavior in voltage-current curves.
+The study of 
+mode-locking in colloids provides insights
+into 
+%is a useful probe of
+complex %quantum mechanical
+systems in which 
+the motions of individual particles can  be inferred only
+from other measurements, 
+%insert final sentence summarizing all the things.
 including
 charge density waves, spin density waves
 and superconducting vortices in landscapes 
 engineered with periodic patterns of pinning sites.\cite{Reichhardt2000}
-Mode-locking is a useful probe 
-of complex quantum mechanical systems
-because the motions of individual particles can  be inferred only
-from other measurements.
-%insert final sentence summarizing all the things.
 
 \section{Suggested problems}
 \label{sec:problems}	
@@ -798,9 +834,10 @@ in Problem~\ref{ex:brownian}.
   using
   the standard definition of velocity
   $\vec{v} = d\vec{r}/dt$ 
-  using the 
+  with the %DM sub ``with'' for using
   Euler method.
-  Equation~(\ref{eq:motion}) provides
+  %DM - fix Equation/Eq. discontinuity
+  Eq.~(\ref{eq:motion}) provides
   a direct calculation for the particle velocity
   from the net force on the particle,
   as demonstrated in Problem~\ref{ex:n2l}.
@@ -829,8 +866,10 @@ we recommend a
     to contain the simulation constants
     that could easily be passed by reference
     to subroutines.
-    We have left as an exercise  the addition
-    of the remaining parameters of the system.
+    %DM - more clearly defined task in active / command tense
+    %We have left as an exercise  the addition
+    Define 
+    the remaining parameters of the system using the dictionary outlined below.
     \begin{verbatim}
 def set_parameters():           
     ```set simulation parameters...'''
