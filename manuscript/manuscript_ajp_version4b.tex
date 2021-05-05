@@ -547,6 +547,9 @@ With no oscillating component of the driving force,
   be used to identify the universality class.\cite{Reichhardt2017} 
   The critical force $F_c$ is equal to the maximum substrate force
   $A_p$.
+  %DM ADD
+  We demonstrate how to fit our data to this model in Problem~\ref{ex:critical}.
+  %DM end
   % [xx would be good to follow up on your mention of universality class in a problem. The exponent beta is usually associated with the decrease of the order parameter, not a divergence xx]
   %DM - in my experience, we use beta for this parameter.  For example
   %Dynamic regimes for driven colloidal particles on a periodic substrate at commensurate and incommensurate fillings D McDermott, J Amelang, CJO Reichhardt, C Reichhardt, Physical Review E 88 (6), 062301
@@ -815,7 +818,7 @@ in Problem~\ref{ex:brownian}.
   from the net force on the particle,
   as demonstrated in Problem~\ref{ex:n2l}.
 
-    A working example of this code is available
+  A working example of this code is available
   in Ref.~\onlinecite{supplemental}.
   If you would like to write your own code,
   the following guide
@@ -1198,23 +1201,35 @@ Plot the $y$ position versus time
    \label{ex:critical}
  
    \noindent
-   With no oscillating component of the driving force,
-  the force-velocity relation increases monotonically 
-  above the depinning threshold $F_c$ such that
-  \begin{equation}
-    \langle v_y \rangle \propto (F_{\rm dc}-F_c)^{-\beta},
-  \end{equation}
-  where the power $\beta$ varies with the
-  type of phase transition and 
-  %can
-  may 
-  be used to identify the universality class.\cite{Reichhardt2017} 
-  The critical force $F_c$ is equal to the maximum substrate force
-  $A_p$.
-   % [xx would be good to follow up on your mention of universality class in a problem. The exponent beta is usually associated with the decrease of the order parameter, not a divergence xx]
-  %DM - in my experience, we use beta for this parameter.  For example
-  %Dynamic regimes for driven colloidal particles on a periodic substrate at commensurate and incommensurate fillings D McDermott, J Amelang, CJO Reichhardt, C Reichhardt, Physical Review E 88 (6), 062301
-
+   In Fig.~\ref{fig:3_sweep_vyFDC}
+   we show the force-velocity relation when
+   the driving force has 
+   no oscillating component.
+   The data can be fit with a model 
+   \begin{equation}
+     \langle v_y \rangle \propto (F_{\rm dc}-F_c)^{-\beta},
+   \end{equation}
+   where
+   the critical force is $F_c$ and 
+   the power $\beta$ varies with the
+   type of phase transition.
+   For elastic depinning, a
+   typical value of $\beta$ is
+   approximately $\beta = 2/3$.\cite{Reichhardt2017} 
+   
+   Given the data generated in 
+   a non-oscillatory drive $F_{\rm ac} = 0$,
+   fit the data and find the critical exponent $\beta$.
+   The Python SciPy optimize package has curve fit routine
+   suitable for this purpose.  
+   %For the data in Fig.~\ref{fig:3_sweep_vyFDC}, 
+   %we obtained $\beta = 0.625 \pm 0.003$ 
+   %and $F_c = 0.0980 \pm 0.0001$.
+   %is equal to the maximum substrate force
+   %$A_p = 0.1$.
+   Explore how $\beta$ and $F_c$ vary as $A_p$
+   is tuned to higher and lower values.
+   
   \end{problem}
 
 \begin{acknowledgments}
