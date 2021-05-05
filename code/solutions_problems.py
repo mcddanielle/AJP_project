@@ -6,7 +6,7 @@ Supplementary Material for
 Molecular dynamics simulation of synchronization in driven particles
 American Journal of Physics
 
-Makes Figures 2-9 using a flag to select
+Solutions to Problems 1-6
 
 Danielle McDermott
 Tiare Guerrero
@@ -17,6 +17,8 @@ import math, sys
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import matplotlib.cm as cm
+
+from scipy.optimize import curve_fit
 
 from matplotlib.ticker import (MultipleLocator, FormatStrFormatter,
                                AutoMinorLocator)
@@ -31,16 +33,33 @@ plt.rc('font', size=24)
 #main MD routines
 import MD_colloid
 
+#############################################################
+#function that curve_fit will call/fit for problem 6
+#############################################################
+def func(x, a, b, c):
+    '''
+    function to use in scipy optimize curve_fit call
 
+    required arguments
+    x is an independent variable
+    a,b,c are fit parameters which are returned by value
+    
+    returns:
+    popt : array, Optimal values for the parameters so that the sum of the squared residuals of f(xdata, *popt) - ydata is minimized
+    pcov : 2d array, The estimated covariance of popt.
+    '''
+    
+    return a*((x+c)**(-b))
 #-------------------------------------------------------------------
+
 if __name__ == "__main__":
 
     #will pass the parameters dict to subroutines to read constants
     parameters = MD_colloid.set_parameters()
 
     #select which figure in the AJP you would like to make
-    #figures 2a, 2b, 2c, 5
-    solve_problem = "5"
+    #figures 2a, 2b, 2c, 5, 6
+    solve_problem = "6"
 
     parameters['filename']="problem_%s.pdf"%(solve_problem)
 
@@ -212,8 +231,75 @@ if __name__ == "__main__":
         plt.tight_layout(pad=0.1,h_pad=-0.3)
         plt.savefig(parameters['filename'])
         
-    #--------------------------------------------------------------------------
+    #--------------------------------------------------------------
+    #Problem 6
+    #Fit depinning exponent using data from Fig. 3
+    #--------------------------------------------------------------
+    if solve_problem == "6":
 
+        #substrate height
+        parameters['AP'] = 0.1
+
+        #sweep through a variety of dc values
+        delta_Fdc = 0.001
+        Fdc_max=0.2+delta_Fdc
+
+        #DC signal
+        parameters['F_AC'] = 0.0
+
+        #set up arrays
+        max_value = int(np.ceil(Fdc_max/delta_Fdc))
+        avg_vy_data = np.zeros(max_value)
+        Fdc_data = np.arange(0,Fdc_max,delta_Fdc)
+
+        #make the figure 
+        fig = plt.figure(figsize=(7,4.5))
+        gs=gridspec.GridSpec(1,1)
+        ax1 = fig.add_subplot(gs[0,0])  #scatter plot of particles
+
+        #use m to find the integer range of fit values
+        #above the critical force
+        m=0
+        
+        #run the MD sim for each value of FD, this takes a while...
+        for i in range(len(avg_vy_data)):
+
+            #sweep through a range of dc values
+            parameters['F_DC'] = Fdc_data[i] 
+                
+            #run a single MD simulation for a set of parameters
+            avg_vy_data[i] = MD_colloid.single_particle(parameters,plot="y-velocity")
+
+            #identify depinning to select the data to fit
+            #where the vy is non-zero
+            if m == 0 and (avg_vy_data[i])/(parameters['freq']*parameters['period']) > 0.18:
+                #step back to the last step before depinning
+                m = i-1
+                print("fitting arrays for Fdc > ",Fdc_data[i])
+                
+        #normalize <vy> so you can count step number
+        avg_vy_data /= (parameters['freq']*parameters['period'])
+            
+        #plot <vy> vs F_dc
+        ax1.plot(Fdc_data,avg_vy_data,"o",linewidth=2,label="MD data")
+
+        #curve fit
+        popt, pcov = curve_fit(func, Fdc_data[m:-1], avg_vy_data[m:-1])
+        perr = np.sqrt(np.diag(pcov))
+
+        #plot curve fit
+        ax1.plot(Fdc_data[m:-1], func(Fdc_data[m:-1], *popt), 'r-',
+                 label=r'fit: $\beta$=%5.3f$\pm$%5.3f, F$_c$=%6.4f$\pm$%6.4f' % (-popt[1],perr[1],-popt[2],perr[2]))
+
+        #make a nice plot
+        ax1.set_xlim(0,Fdc_data[-1])
+        ax1.set_ylim(avg_vy_data[0]-0.1,avg_vy_data[-1])
+        ax1.set_xlabel("F$_{\mathrm{dc}}$")
+        ax1.set_ylabel(r"$\langle$v$_y \rangle / \lambda f $")
+        ax1.legend(loc=2,fontsize=16,numpoints=3,borderpad=0.1,handletextpad=0.2)                    
+        plt.tight_layout(pad=0.2)
+        plt.savefig(parameters['filename'])
+        
     sys.exit()
 
 
